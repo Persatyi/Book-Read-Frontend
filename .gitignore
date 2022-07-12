@@ -128,3 +128,6 @@ yarn-error.log*
 
 #Yarn
 yarn.lock
+
+#NPM
+package-lock.json
