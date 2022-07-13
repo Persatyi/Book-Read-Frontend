@@ -11,8 +11,8 @@ import {
   REGISTER,
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
-import sliceBooks from "./books";
-import sliceAuth from "./auth";
+import { booksReducer } from "./books";
+import { sessionReducer } from "./auth";
 
 const authConfig = {
   key: "bookReader/token",
@@ -20,11 +20,11 @@ const authConfig = {
   whitelist: ["token"],
 };
 
-const persistedReducer = persistReducer(authConfig, sliceAuth);
+const persistedReducer = persistReducer(authConfig, sessionReducer);
 
 const store = configureStore({
   reducer: {
-    books: sliceBooks,
+    books: booksReducer,
     auth: persistedReducer,
   },
   middleware: (getDefaultMiddleware) => [
