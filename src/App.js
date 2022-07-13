@@ -1,11 +1,11 @@
-// import { Fragment, useEffect } from "react";
+import React from "react";
 import { Route, Routes } from "react-router-dom";
 
 import Container from "components/Container";
 import Header from "components/Header";
 
 import Info from "pages/Info";
-import Library from "pages/Library";
+import LibraryPage from "pages/LibraryPage";
 import Training from "pages/Training";
 
 function App() {
@@ -14,7 +14,7 @@ function App() {
       <Header />
       <Routes>
         <Route path="/" element={<Info />} />
-        <Route path="/library" element={<Library />} />
+        <Route path="/library" element={<LibraryPage />} />
         <Route path="/training" element={<Training />} />
       </Routes>
     </Container>
