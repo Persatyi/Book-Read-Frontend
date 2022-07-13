@@ -11,8 +11,8 @@ import {
   REGISTER,
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
-import sliceBooks from "./books";
-import sliceAuth from "./auth";
+import { sliceBooks } from "./books";
+import { sliceAuth } from "./auth";
 
 const authConfig = {
   key: "bookReader/token",
