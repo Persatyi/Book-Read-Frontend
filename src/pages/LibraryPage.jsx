@@ -7,6 +7,7 @@ import globalSelectors from '../redux/global/global-selectors';
 import { toggleModal } from 'redux/global/global-slice';
 import Plus from 'assets/images/library/Plus';
 import Back from '../assets/images/library/Back';
+import BookList from 'components/BookList/BookList';
 
 export default function LibraryPage() {
   const [openLibrary, setOpenLibrary] = useState(false);
@@ -37,6 +38,7 @@ export default function LibraryPage() {
       {size.width > 768 && (
         <>
         <Library />
+        <BookList />
         </>
       )}
       {modalOpen && <LibraryModal />}

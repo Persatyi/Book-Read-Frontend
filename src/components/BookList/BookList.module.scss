@@ -1,0 +1,34 @@
+@import "stylesheet/shared.scss";
+.books{
+   &Wrapper{
+      padding-top: 40px;
+   }
+   &Title {
+      font-family: 'Montserrat';
+      font-weight: 600;
+      font-size: 19px;
+      line-height: 1.2;
+      margin-bottom: 24px;
+   }
+}
+.read{
+   &List{
+   }
+   &Item{
+
+   }
+   &Book{
+      &List{
+
+      }
+      &Item{
+         display: flex;
+      }
+      &Img{
+
+      }
+      &Button{
+
+      }
+   }
+}

@@ -1,0 +1,24 @@
+.titleList{
+   display: flex;
+   margin-bottom: 8px;
+   &Item{
+      font-family: 'Montserrat';
+      font-style: normal;
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 1.2;
+      color: var(--secondary-text-cl);
+      &:nth-child(1){
+         margin-right: 292px;
+      }
+      &:nth-child(2){
+         margin-right: 218px;
+      }
+      &:nth-child(3){
+         margin-right: 65px;
+      }
+      &:nth-child(4){
+         margin-right: 102px;
+      }
+   }
+}
