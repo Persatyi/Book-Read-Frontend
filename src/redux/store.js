@@ -13,7 +13,7 @@ import {
 import storage from "redux-persist/lib/storage";
 import { booksReducer } from "./books";
 import { sessionReducer } from "./auth";
-
+import { globalReducer } from './global/global-slice'
 const authConfig = {
   key: "bookReader/token",
   storage,
@@ -26,7 +26,9 @@ const store = configureStore({
   reducer: {
     books: booksReducer,
     auth: persistedReducer,
+    global:globalReducer
   },
+
   middleware: (getDefaultMiddleware) => [
     ...getDefaultMiddleware({
       serializableCheck: {

@@ -1,5 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
+import { toggleModal } from 'redux/global/global-slice';
 import s from './LibraryModal.module.scss';
 import library from '../../assets/images/library/libraryIcon.svg'
 import flag from '../../assets/images/library/flagIcon.svg';
@@ -9,8 +10,7 @@ import Modal from '../Modal/Modal';
 export default function LibraryEmpty() {
    const dispatch = useDispatch();
    const isCloseModal = () => {
-      // dispatch(toggleModal())
-      console.log(dispatch);
+      dispatch(toggleModal())
    }
    return (
       <Modal
