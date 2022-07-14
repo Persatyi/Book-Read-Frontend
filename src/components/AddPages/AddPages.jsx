@@ -22,7 +22,7 @@ const AddPages = () => {
       onSubmit={onSubmit}
       validationSchema={schema}
     >
-      {({ values, handleSubmit, handleChange }) => (
+      {({ values, handleSubmit, handleChange, isValid, dirty }) => (
         <Form onSubmit={handleSubmit} className={s.form}>
           <h2 className={s.title}>Results</h2>
           <div className={s.wrapper}>
@@ -49,7 +49,20 @@ const AddPages = () => {
               </span>
             </div>
           </div>
-          <Button className={s.button} text="Add result" />
+          <Button
+            disabled={!isValid && !dirty}
+            type="submit"
+            className={s.button}
+            text="Add result"
+          />
+          <h2 className={s.statisticsTitle}>STATISTICS</h2>
+          <ul className={s.statistics}>
+            <li className={s.item}>
+              <span className={s.day}>10.10.2019</span>
+              <span className={s.data}>08:10:23</span>
+              <span className={s.pages}>322 pages</span>
+            </li>
+          </ul>
         </Form>
       )}
     </Formik>

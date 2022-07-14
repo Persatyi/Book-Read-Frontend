@@ -1,6 +1,7 @@
 @import "stylesheet/mixin.scss";
 
 .form {
+  position: relative;
   display: block;
   padding: 22px 24px 20px 24px;
   width: 280px;
@@ -94,4 +95,69 @@
   width: 100%;
   height: 40px;
   background-color: var(--btn-cl);
+  margin-bottom: 24px;
+}
+
+.statisticsTitle {
+  font-family: "Montserrat";
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 1.25;
+  text-align: center;
+  text-transform: uppercase;
+  color: #242a37;
+}
+
+.statisticsTitle::before {
+  content: "";
+  position: absolute;
+  top: calc(100% / 2 + 39px);
+  left: calc(100% / 2 - 115px);
+  display: block;
+  width: 71px;
+  border-bottom: 1px solid #e0e5eb;
+  background-color: #e0e5eb;
+}
+
+.statisticsTitle::after {
+  content: "";
+  position: absolute;
+  top: calc(100% / 2 + 39px);
+  right: calc(100% / 2 - 115px);
+  display: block;
+  width: 71px;
+  border-bottom: 1px solid #e0e5eb;
+  background-color: #e0e5eb;
+}
+
+.statistics {
+  margin-top: 4px;
+  height: 100px;
+  overflow-x: hidden;
+}
+
+.item {
+  display: flex;
+  justify-content: space-between;
+  height: 20px;
+}
+
+.data {
+  font-family: "Montserrat";
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.21;
+  text-align: center;
+  color: #242a37;
+  width: 75px;
+}
+
+.day {
+  composes: data;
+  text-align: left;
+}
+
+.pages {
+  composes: data;
+  text-align: right;
 }
