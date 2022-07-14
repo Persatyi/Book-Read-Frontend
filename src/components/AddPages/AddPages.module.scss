@@ -1,31 +1,97 @@
+@import "stylesheet/mixin.scss";
+
 .form {
+  display: block;
   padding: 22px 24px 20px 24px;
   width: 280px;
   height: 340px;
-  background-color: #ffffff;
+  background-color: var(--main-bg-cl);
   box-shadow: 0px 2px 3px rgba(9, 30, 63, 0.1);
+}
+
+.title {
+  font-family: "Montserrat";
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 1.25;
+  text-align: center;
+  text-transform: uppercase;
+  color: var(--main-text-cl);
 }
 
 .wrapper {
   display: flex;
   justify-content: space-between;
-  width: 100%;
+  margin-top: 12px;
+  margin-bottom: 30px;
 }
 
-.amountWrapper {
-  margin-left: 20px;
+.name {
+  font-family: "Montserrat";
+  font-weight: 500;
+  font-size: 11px;
+  line-height: 1.18;
+  color: var(--secondary-text-cl);
+}
+
+.date {
+  position: relative;
+  display: block;
+  margin-top: 4px;
+  padding: 12px 22px 12px 8px;
+  width: 110px;
+  height: 42px;
+  background: var(--secondary-bg-cl);
+  border: 1px solid var(--placeholder-cl);
+  outline: none;
+
+  font-family: "Montserrat";
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.21;
+  color: var(--main-text-cl);
+}
+
+.iconSvg {
+  position: absolute;
+  display: block;
+  top: 35px;
+  right: 4px;
+  width: 13px;
+  height: 7px;
+  pointer-events: none;
+}
+
+.fieldWrapper {
+  position: relative;
 }
 
 .input {
   display: block;
+  margin-top: 4px;
   padding: 10px;
   width: 110px;
   height: 42px;
   background: #f6f7fb;
   border: 1px solid #a6abb9;
+  outline: none;
+}
+
+.error {
+  composes: name;
+  position: absolute;
+  bottom: -28px;
+  left: 0;
+  color: #ff6596;
 }
 
 .input::-webkit-inner-spin-button,
 .input::-webkit-outer-spin-button {
   -webkit-appearance: none;
+}
+
+.button {
+  width: 100%;
+  height: 40px;
+  background-color: var(--btn-cl);
 }
