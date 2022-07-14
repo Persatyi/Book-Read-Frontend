@@ -1,0 +1,14 @@
+@import "stylesheet/_mixin.scss";
+
+.userBar {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    top: 50%;
+    right: 54px;
+    transform: translateY(-50%);
+    @include mq(tablet) {
+            right: 50%;
+            transform: translate(-50%, -50%);
+        }
+}

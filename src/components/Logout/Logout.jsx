@@ -5,10 +5,10 @@ import s from "./Logout.module.scss";
 
 const Logout = () => {
     const dispatch = useDispatch();
-    const [logout] = useLogoutQuery();
+    // const [logout] = useLogoutQuery();
 
     const onClickFunc = async () => {
-        await logout();
+        // await logout();
         dispatch(loggedOff);
     }
     

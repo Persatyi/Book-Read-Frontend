@@ -9,15 +9,17 @@ import Library from "pages/Library";
 import Training from "pages/Training";
 
 function App() {
-  return (
+  return (<div>
+    <Header />
     <Container>
-      <Header />
+      
       <Routes>
         <Route path="/" element={<Info />} />
         <Route path="/library" element={<Library />} />
         <Route path="/training" element={<Training />} />
       </Routes>
     </Container>
+  </div>
   );
 }
 

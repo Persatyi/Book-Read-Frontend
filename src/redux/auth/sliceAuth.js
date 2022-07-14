@@ -31,9 +31,6 @@ const sessionSlice = createSlice({
       token.set(payload);
       state.token = payload;
     },
-  },
-  extraReducers: {
-    
   }
 });
 
