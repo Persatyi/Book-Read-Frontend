@@ -9,7 +9,7 @@ import s from "./Header.module.scss";
 const Header = () => {
   const isLoggedIn = useSelector(getAuth);
 
-  const headerCls = [s.container];
+  const headerCls = [s.container, s.loggedIn];
   if (isLoggedIn) {
     headerCls.push(s.loggedIn);
   }
@@ -18,6 +18,10 @@ const Header = () => {
     <section className={s.header }>
       <div className={headerCls.join(" ")}>
         <span className={s.logo}>BR</span>
+
+        <Logout />
+        <UserBar />
+        <Navigation />
 
         {isLoggedIn && <>
           <UserBar />

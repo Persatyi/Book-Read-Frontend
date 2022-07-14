@@ -22,9 +22,21 @@ export const bookApi = createApi({
       query: (data) => ({ url: "/users/login", method: "POST", body: data }),
       invalidatesTags: ["User"],
     }),
+    logout: build.mutation({
+      query: () => ({ url: "/users/logout", method: "DELETE" }),
+    }),
+    current: build.query({
+      query: () => "/users/current",
+      providesTags: ["User"],
+    }),
   }),
 });
 // refetchOnFocus: true,
 // refetchOnReconnect: true,
 
-export const { useRegisterMutation, useLoginMutation } = bookApi;
+export const {
+  useRegisterMutation,
+  useLoginMutation,
+  useLogoutMutation,
+  useCurrentQuery,
+} = bookApi;

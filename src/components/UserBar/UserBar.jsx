@@ -1,16 +1,25 @@
 import { useSelector } from "react-redux";
-import { getUserName } from "redux/auth";
+import { getAuth } from "redux/auth";
+import { useCurrentQuery } from "redux/api/bookAPI";
 import s from "./UserBar.module.scss";
 
 const UserBar = () => {
-    const name = useSelector(getUserName);
-    const [firstName] = name.split(" ");
+    const isAuth = useSelector(getAuth);
+    const { data, isFetching } = useCurrentQuery(null, { skip: !isAuth });
+    
+    let userName = "Mark Hunt";
+    if (data) {
+        userName = data.name;
+    }
+    
+    const [firstName] = userName.split(" ");
     const [leter] = firstName.split("");
 
-    return <div className={s.userBar}>
+    return (
+    <div className={s.userBar}>
         <span className={s.firstLeter}>{`${leter}`}</span>
-        <span className={s.userName}>{`${name}`}</span>
+        <span className={s.userName}>{`${userName}`}</span>
     </div>
-}
+)}
 
 export default UserBar;

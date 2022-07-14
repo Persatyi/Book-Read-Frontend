@@ -27,9 +27,20 @@
     width: 33px;
     height: 33px;
     margin-right: 5px;
+    border-radius: 50%;
+    outline: none;
     &:first-child {
         margin-right: 7px;
     }
+    &:hover,
+    &:focus {
+        background-color: var(--input-bg-cl);
+    }
+}
+
+.activeLink {
+    border-radius: 50%;
+    background-color: var(--input-bg-cl);
 }
 
 .navSvg {

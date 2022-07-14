@@ -9,6 +9,38 @@
     transform: translateY(-50%);
     @include mq(tablet) {
             right: 50%;
-            transform: translate(-50%, -50%);
+            transform: translate(50%, -50%);
         }
+}
+
+.firstLeter {
+    font-family: 'Montserrat';
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 2.71;
+    text-transform:capitalize;
+    color: var(--main-text-cl);
+
+    width: 33px;
+    height: 33px;
+    background-color: #F5F7FA;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    @include mq(tablet) {
+        margin-right: 11px;
+    }
+}
+
+.userName {
+    font-family: 'Montserrat';
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 2.71;
+    color: var(--main-text-cl);
+    display: none;
+    @include mq(tablet) {
+        display:inline;
+    }
 }
