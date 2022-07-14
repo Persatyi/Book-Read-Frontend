@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import s from './LibraryEmpty.module.scss';
+import s from './LibraryModal.module.scss';
 import library from '../../assets/images/library/libraryIcon.svg'
 import flag from '../../assets/images/library/flagIcon.svg';
 import arrow from '../../assets/images/library/arrowIcon.svg';
