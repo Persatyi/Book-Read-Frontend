@@ -15,10 +15,6 @@ const token = {
 const sessionSlice = createSlice({
   name: "auth",
   initialState: {
-    user: {
-      name: "",
-      emeil: ""
-    },
     isAuth: false,
     token: null,
   },
@@ -30,7 +26,6 @@ const sessionSlice = createSlice({
     loggedOff(state) {
       state.isAuth = false;
       state.token = null;
-      token.unset();
     },
     setToken(state, { payload }) {
       token.set(payload);
