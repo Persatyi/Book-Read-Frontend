@@ -4,7 +4,7 @@ import s from "./UserBar.module.scss";
 
 const UserBar = () => {
     const name = useSelector(getUserName);
-    const [firstName, other] = name.split(" ");
+    const [firstName] = name.split(" ");
     const [leter] = firstName.split("");
 
     return <div className={s.userBar}>
