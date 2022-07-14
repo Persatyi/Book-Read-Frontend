@@ -1,0 +1,113 @@
+@import "stylesheet/shared.scss";
+.library {
+   padding: 40px;
+   background-color: white;
+   &Title{
+   color: var(--main-text-cl);
+   font-family: 'Montserrat';
+   font-weight: 600;
+   font-size: 18px;
+   line-height: 1.22;
+   margin-bottom: 8px;
+   @include mq(mobile){
+      font-family: 'Montserrat';
+      font-weight: 600;
+      font-size: 19px;
+      line-height: 1.2;
+      margin-bottom: 16px;
+   }
+   }
+   &Button{
+      margin: 0 auto;
+      display: block;
+      font-family: 'Montserrat';
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 1.2;
+      margin-top: 16px;
+      padding: 11px 52px 12px 52px;
+      background: var(--btn-cl);
+      color: var(--main-bg-cl);
+      box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+      border: none;
+   @include mq(tablet) {
+      display: none;
+   }
+   }
+}
+.name{
+   color: var(--main-text-cl);
+   font-family: 'Montserrat';
+   font-weight: 600;
+   font-size: 14px;
+   line-height: 17px;
+@include mq(mobile){
+   font-family: 'Montserrat';
+   font-weight: 600;
+   font-size: 16px;
+   line-height: 1.2;
+}
+   &Wrapper{
+      display: flex;
+      margin-bottom: 8px;
+      align-items: flex-start;
+   }
+   &Icon{
+      margin-right: 12px;
+   }
+}
+.text{
+   color: var(--secondary-text-cl);
+   font-family: 'Montserrat';
+   font-weight: 400;
+   font-size: 14px;
+   line-height: 1.2;
+   @include mq(mobile){
+      font-family: 'Montserrat';
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 1.2;
+   }
+   &Wrapper{
+      display: flex;
+      margin-left: 27px;
+      margin-bottom: 24px;
+      align-items: flex-start;
+      @include mq(tablet){
+         align-items: flex-end;
+      }
+      &:first-child{
+         margin-bottom: 24px;
+      }
+      &:last-child{
+         margin-bottom: 0px;
+      }
+   }
+   &Icon{
+      margin-right: 12px;
+   }
+}
+
+div .overlayLibrary {
+   height: 73vh ;
+   width: 100%;
+   background-color: transparent;
+   @include mq(mobile){
+   height: 67vh;
+   }
+   @include mq(tablet){
+   height: 130vh;
+   }
+   @include mq(desktop){
+   height: 70vh;
+   }
+}
+div .modalLibrary  {
+   max-width: 280px;
+   @include mq(mobile){
+      max-width:440px;
+   }
+   @include mq(tablet){
+      max-width: 608px;
+   }
+}
