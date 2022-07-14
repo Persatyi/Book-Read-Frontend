@@ -3,7 +3,7 @@ import s from "./Navigation.module.scss";
 
 const Navigation = () => {
     
-    return <nav className={s}>
+    return <nav className={s.nav}>
         <NavLink exact to="/library" className={s.link} activeClassName={s.activeLink}>1</NavLink>
 
         <NavLink to="/training" className={s.link} activeClassName={s.activeLink}>2</NavLink>

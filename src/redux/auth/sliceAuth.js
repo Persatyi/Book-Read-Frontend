@@ -15,6 +15,10 @@ const token = {
 const sessionSlice = createSlice({
   name: "auth",
   initialState: {
+    user: {
+      name: "",
+      emeil: ""
+    },
     isAuth: false,
     token: null,
   },
@@ -33,6 +37,9 @@ const sessionSlice = createSlice({
       state.token = payload;
     },
   },
+  extraReducers: {
+    
+  }
 });
 
 export const { loggedIn, loggedOff, setToken } = sessionSlice.actions;

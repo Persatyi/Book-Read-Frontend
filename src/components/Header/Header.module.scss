@@ -1,0 +1,19 @@
+@import "stylesheet/_mixin.scss";
+
+.container {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 270px;
+
+    @include mq(mobile) {
+        max-width: 430px;
+    }
+
+    @include mq(tablet) {
+        max-width: 718px;
+    }
+
+    @include mq(desktop) {
+        max-width: 1230px;
+    }
+}
