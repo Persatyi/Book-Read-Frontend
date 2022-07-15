@@ -3,7 +3,6 @@ import spriteSvg from "assets/images/sprite.svg";
 import Button from "components/Button";
 import { useAddPageMutation, useGetResultsQuery } from "redux/api/bookAPI";
 
-// import { useEffect } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import DatePickerField from "components/DatePickerField";
 import * as yup from "yup";
@@ -16,7 +15,7 @@ const schema = yup.object().shape({
 
 const AddPages = () => {
   const [addPage] = useAddPageMutation();
-  const { data } = useGetResultsQuery();
+  const { data = {} } = useGetResultsQuery();
 
   const onSubmit = (values) => {
     addPage(values);
@@ -30,7 +29,7 @@ const AddPages = () => {
     >
       {({ values, handleSubmit, handleChange, isValid, dirty }) => (
         <Form onSubmit={handleSubmit} className={s.form}>
-          <h2 className={s.title}>Results</h2>
+          <h2 className={s.title}>Result</h2>
           <div className={s.wrapper}>
             <div className={s.fieldWrapper}>
               <p className={s.name}>Date</p>
@@ -62,9 +61,9 @@ const AddPages = () => {
             text="Add result"
           />
           <h2 className={s.statisticsTitle}>STATISTICS</h2>
-          {data && (
+          {data.data && (
             <ul className={s.statistics}>
-              {data
+              {data.data
                 .slice(0)
                 .reverse()
                 .map(({ _id: id, pages, date }) => (
