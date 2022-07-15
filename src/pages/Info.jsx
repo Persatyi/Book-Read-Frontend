@@ -4,8 +4,8 @@ const Info = () => {
   return (
     <div>
       Info
-      <AuthForm type="register" />
-      <AuthForm type="login" />
+      <AuthForm type="registration" />
+      {/* <AuthForm type="login" /> */}
     </div>
   );
 };

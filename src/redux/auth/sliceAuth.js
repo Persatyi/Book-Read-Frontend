@@ -19,18 +19,14 @@ const sessionSlice = createSlice({
     token: null,
   },
   reducers: {
-    loggedIn(state) {
-      // token.set(state.token);
+    loggedIn(state, { payload }) {
+      state.token = payload;
       state.isAuth = true;
     },
     loggedOff(state) {
       state.isAuth = false;
       state.token = null;
       // token.unset();
-    },
-    setToken(state, { payload }) {
-      // token.set(payload);
-      state.token = payload;
     },
   },
 });

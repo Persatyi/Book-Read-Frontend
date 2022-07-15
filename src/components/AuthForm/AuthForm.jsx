@@ -1,14 +1,23 @@
+import { useDispatch } from "react-redux";
+import { useEffect } from "react";
+// import { Link } from "react-router-dom";
 import { Formik } from "formik";
+import { toast } from "react-toastify";
 
 import s from "./AuthForm.module.scss";
+import { validationSchema } from "assets/schemas/authFormValidation";
 import { useRegisterMutation, useLoginMutation } from "redux/api/bookAPI.js";
+import { loggedIn } from "redux/auth/sliceAuth";
 
-export const authType = {
+import Button from "components/Button";
+
+const authType = {
   login: "login",
   registration: "registration",
 };
 
 const AuthForm = ({ type }) => {
+  const dispatch = useDispatch();
   const isRegister = type === authType.registration;
   const initialValues = isRegister
     ? {
@@ -22,8 +31,42 @@ const AuthForm = ({ type }) => {
         password: "",
       };
 
+  const [registerUser] = useRegisterMutation();
+  const [loginUser] = useLoginMutation();
+
   return (
-    <Formik initialValues={initialValues} validateOnBlur>
+    <Formik
+      initialValues={initialValues}
+      validationSchema={validationSchema(type)}
+      validateOnBlur
+      onSubmit={async (values) => {
+        try {
+          const { name, email, password } = values;
+          const data = isRegister
+            ? { name, email, password }
+            : { email, password };
+
+          const callFunction = isRegister ? registerUser : loginUser;
+          const response = await callFunction(data).unwrap();
+
+          dispatch(loggedIn(response.token));
+        } catch (error) {
+          let message = "";
+          switch (error.status) {
+            case 409:
+              message = "There is an account with this email";
+              break;
+            case 400:
+              message =
+                "Something went wrong. Please check your data and try again.";
+              break;
+            default:
+              message = "Something went wrong. Please try again.";
+          }
+          toast.error(message);
+        }
+      }}
+    >
       {({
         values,
         errors,
@@ -128,13 +171,12 @@ const AuthForm = ({ type }) => {
             </>
           ) : null}
 
-          <button
+          <Button
             className={s.enterBtn}
             type="submit"
             disabled={!isValid && !dirty}
-          >
-            {isRegister ? "Register" : "Login"}
-          </button>
+            text={isRegister ? "Register" : "Login"}
+          />
         </form>
       )}
     </Formik>
