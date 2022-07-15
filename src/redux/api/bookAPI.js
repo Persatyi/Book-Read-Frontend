@@ -12,7 +12,7 @@ export const bookApi = createApi({
       return headers;
     },
   }),
-  tagTypes: ["User"],
+  tagTypes: ["User", "Results"],
   endpoints: (build) => ({
     register: build.mutation({
       query: (data) => ({ url: "/users/register", method: "POST", body: data }),
@@ -21,6 +21,14 @@ export const bookApi = createApi({
     login: build.mutation({
       query: (data) => ({ url: "/users/login", method: "POST", body: data }),
       invalidatesTags: ["User"],
+    }),
+    addPage: build.mutation({
+      query: (data) => ({ url: "/results", method: "PATCH", body: data }),
+      invalidatesTags: ["Results"],
+    }),
+    getResults: build.query({
+      query: () => "/results",
+      providesTags: ["Results"],
     }),
     logout: build.mutation({
       query: () => ({ url: "/users/logout", method: "POST" }),
@@ -37,6 +45,8 @@ export const bookApi = createApi({
 export const {
   useRegisterMutation,
   useLoginMutation,
+  useAddPageMutation,
   useLogoutMutation,
   useCurrentQuery,
+  useGetResultsQuery,
 } = bookApi;
