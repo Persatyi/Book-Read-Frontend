@@ -1,5 +1,4 @@
 import * as yup from "yup";
-import { authType } from "components/AuthForm";
 
 const registerFormValidation = yup.object().shape({
   name: yup
@@ -61,3 +60,8 @@ export function validationSchema(type) {
     return loginFormValidation;
   }
 }
+
+export const authType = {
+  login: "login",
+  registration: "registration",
+};

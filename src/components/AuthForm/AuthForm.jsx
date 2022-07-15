@@ -1,20 +1,14 @@
 import { useDispatch } from "react-redux";
-import { useEffect } from "react";
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Formik } from "formik";
 import { toast } from "react-toastify";
 
 import s from "./AuthForm.module.scss";
-import { validationSchema } from "assets/schemas/authFormValidation";
+import { validationSchema, authType } from "assets/schemas/authFormValidation";
 import { useRegisterMutation, useLoginMutation } from "redux/api/bookAPI.js";
 import { loggedIn } from "redux/auth/sliceAuth";
 
 import Button from "components/Button";
-
-const authType = {
-  login: "login",
-  registration: "registration",
-};
 
 const AuthForm = ({ type }) => {
   const dispatch = useDispatch();
@@ -177,6 +171,18 @@ const AuthForm = ({ type }) => {
             disabled={!isValid && !dirty}
             text={isRegister ? "Register" : "Login"}
           />
+          {isRegister ? (
+            <>
+              <span>Already have an account?</span>
+              <Link className={s.link} to="/login">
+                Log in
+              </Link>
+            </>
+          ) : (
+            <Link className={s.link} to="/register">
+              Register
+            </Link>
+          )}
         </form>
       )}
     </Formik>

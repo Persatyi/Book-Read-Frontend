@@ -1,11 +1,10 @@
-import AuthForm from "components/AuthForm";
+import LoginPage from "components/LoginPage";
 
 const Info = () => {
   return (
     <div>
       Info
-      <AuthForm type="registration" />
-      {/* <AuthForm type="login" /> */}
+      <LoginPage />
     </div>
   );
 };
