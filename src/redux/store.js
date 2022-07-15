@@ -11,21 +11,20 @@ import {
   REGISTER,
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
-import { booksReducer } from "./books";
 import { sessionReducer } from "./auth";
+import { bookApi } from "./api/bookAPI";
 
 const authConfig = {
   key: "bookReader/token",
   storage,
-  whitelist: ["token"],
 };
 
 const persistedReducer = persistReducer(authConfig, sessionReducer);
 
 const store = configureStore({
   reducer: {
-    books: booksReducer,
     auth: persistedReducer,
+    [bookApi.reducerPath]: bookApi.reducer,
   },
   middleware: (getDefaultMiddleware) => [
     ...getDefaultMiddleware({
@@ -33,6 +32,7 @@ const store = configureStore({
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
     }),
+    bookApi.middleware,
   ],
   devTools: process.env.NODE_ENV === "development",
 });

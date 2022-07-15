@@ -38,5 +38,8 @@
 <symbol id="icon-star" viewBox="0 0 34 32">
 <path fill="none" stroke="#a6abb9" style="stroke: var(--color2, #a6abb9)" stroke-linejoin="miter" stroke-linecap="butt" stroke-miterlimit="4" stroke-width="2" d="M17 3.236l3.090 9.51h10l-8.090 5.878 0.224 0.692 2.866 8.82-8.090-5.878-0.588 0.426-7.502 5.452 3.090-9.512-0.588-0.424-7.502-5.454h10l0.224-0.69 2.866-8.82z"></path>
 </symbol>
+<symbol id="icon-polygon" viewBox="0 0 52 32">
+<path fill="#939393" style="fill: var(--color1, #939393)" d="M26 32l-25.981-30h51.962l-25.981 30z"></path>
+</symbol>
 </defs>
 </svg>
