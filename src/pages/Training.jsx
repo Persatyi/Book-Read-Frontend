@@ -1,5 +1,11 @@
+import AddPages from "components/AddPages";
+
 const Training = () => {
-  return <div>Training</div>;
+  return (
+    <>
+      <AddPages />
+    </>
+  );
 };
 
 export default Training;
