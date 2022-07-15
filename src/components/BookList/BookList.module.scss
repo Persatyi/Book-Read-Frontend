@@ -12,23 +12,61 @@
    }
 }
 .read{
-   &List{
-   }
    &Item{
-
+      padding: 0px 20px;
+      height: 62px;
+      background-color: var(--main-bg-cl);
+      display: flex;
+      align-items: center;
+      margin-bottom: 8px;
    }
    &Book{
       &List{
-
+         display: flex;
+         align-items: center;
       }
       &Item{
-         display: flex;
+         font-family: 'Montserrat';
+         font-weight: 500;
+         font-size: 14px;
+         line-height: 1.2;
+         color: var(--main-text-cl);
+         &:nth-child(1){
+            display: flex;
+            width: 197px;
+            & span {
+               text-overflow: ellipsis;
+               overflow: hidden;
+               white-space: nowrap;
+            }
+         }
+         &:nth-child(2){
+            width: 266px;
+            margin-left: 144px;
+         }
+         &:nth-child(3){
+            width: 117px;
+         }
+         &:nth-child(4){
+            width: 133px;
+         }
+         &:nth-child(5){
+            width: 161px;
+         }
       }
       &Img{
-
+         margin-right: 18px;
       }
       &Button{
-
+         padding: 11px 35px 12px 36px;
+         font-family: 'Montserrat';
+         font-weight: 500;
+         font-size: 14px;
+         line-height: 1.2;
+         color: var(--main-bg-cl);
+         background: var(--library-btn-cl);
+         box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+         cursor: pointer;
       }
    }
 }

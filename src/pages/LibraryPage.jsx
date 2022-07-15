@@ -35,10 +35,10 @@ export default function LibraryPage() {
           )}
       </>
       )}
-      {size.width > 768 && (
+      {size.width > 768 &&  (
         <>
         <Library />
-        <BookList />
+          <BookList onClick={isOpenModal} />
         </>
       )}
       {modalOpen && <LibraryModal />}

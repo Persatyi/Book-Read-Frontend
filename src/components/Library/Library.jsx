@@ -2,12 +2,14 @@ import React from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import s from './Library.module.scss';
 import librarySchema from './librarySchema';
+import Container from 'components/Container';
 
 export default function Library() {
 const disp = (values) => (
 console.log(values)
 );
    return (
+         <Container>
          <Formik
       initialValues={{
          title: '',
@@ -47,6 +49,7 @@ console.log(values)
                   <button type='submit' disabled={!isValid} className={s.form__button}>Add</button>
       </Form>
       )}
-      </Formik>
+            </Formik>
+         </Container>
    )
 };
