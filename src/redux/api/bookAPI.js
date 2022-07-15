@@ -26,10 +26,22 @@ export const bookApi = createApi({
       query: (data) => ({ url: "/results", method: "PATCH", body: data }),
       invalidatesTags: ["User", "Results"],
     }),
+    logout: build.mutation({
+      query: () => ({ url: "/users/logout", method: "POST" }),
+    }),
+    current: build.query({
+      query: () => "/users/current",
+      providesTags: ["User"],
+    }),
   }),
 });
 // refetchOnFocus: true,
 // refetchOnReconnect: true,
 
-export const { useRegisterMutation, useLoginMutation, useAddPageMutation } =
-  bookApi;
+export const {
+  useRegisterMutation,
+  useLoginMutation,
+  useAddPageMutation,
+  useLogoutMutation,
+  useCurrentQuery,
+} = bookApi;
