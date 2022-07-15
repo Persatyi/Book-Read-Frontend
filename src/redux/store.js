@@ -31,7 +31,8 @@ const store = configureStore({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
-    }).concat(bookApi.middleware),
+    }),
+    bookApi.middleware,
   ],
   devTools: process.env.NODE_ENV === "development",
 });

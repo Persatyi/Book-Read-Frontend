@@ -71,7 +71,7 @@ const AuthForm = ({ type }) => {
         handleBlur,
         handleSubmit,
       }) => (
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className={s.form}>
           {isRegister ? (
             <>
               <div className={s.inputWrapper}>
