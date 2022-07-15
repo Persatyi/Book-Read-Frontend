@@ -16,7 +16,6 @@ const schema = yup.object().shape({
 
 const AddPages = () => {
   const [addPage, { data }] = useAddPageMutation();
-  console.log("🚀 ~ data", data);
 
   const onSubmit = (values) => {
     addPage(values);
@@ -64,15 +63,20 @@ const AddPages = () => {
           <h2 className={s.statisticsTitle}>STATISTICS</h2>
           {data && (
             <ul className={s.statistics}>
-              <li className={s.item} key={data.id}>
-                <span className={s.day}>
-                  {dayjs(data.date).format("DD.MM.YYYY")}
-                </span>
-                <span className={s.data}>
-                  {dayjs(data.date).format("HH:mm:ss")}
-                </span>
-                <span className={s.pages}>{data.pages} pages</span>
-              </li>
+              {data
+                .slice(0)
+                .reverse()
+                .map(({ _id: id, pages, date }) => (
+                  <li className={s.item} key={id}>
+                    <span className={s.day}>
+                      {dayjs(date).format("DD.MM.YYYY")}
+                    </span>
+                    <span className={s.data}>
+                      {dayjs(date).format("HH:mm:ss")}
+                    </span>
+                    <span className={s.pages}>{pages} pages</span>
+                  </li>
+                ))}
             </ul>
           )}
         </Form>
