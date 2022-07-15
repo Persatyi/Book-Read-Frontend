@@ -20,10 +20,6 @@ const Header = () => {
       <div className={headerCls.join(" ")}>
         <span className={s.logo}>BR</span>
 
-        <Logout />
-        <UserBar />
-        <Navigation />
-
         {isLoggedIn && <>
           <UserBar />
           <Navigation />
