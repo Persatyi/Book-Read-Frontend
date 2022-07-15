@@ -1,18 +1,31 @@
+import { useEffect } from "react";
 import { useLogoutMutation } from "redux/api/bookAPI";
 import { useDispatch } from "react-redux";
 import { loggedOff } from "redux/auth";
+import { toast } from "react-toastify";
 import s from "./Logout.module.scss";
+
 
 const Logout = () => {
     const dispatch = useDispatch();
-    const [logout] = useLogoutMutation();
+    const [logout, {isSuccess, isError}] = useLogoutMutation();
+    console.log(useLogoutMutation())
 
-    const onClickFunc = async () => {
-        await logout();
-        dispatch(loggedOff());
-    }
+    useEffect(() => {
+        if (isSuccess) {
+            dispatch(loggedOff());
+        }
+    }, [isSuccess, dispatch]);
+
+    useEffect(() => {
+        if (isError) {
+            toast.error(
+                'Something wrong wrong. Please try again or reload the page.'
+            );
+        }
+    }, [isError]);
     
-    return <button type="button" className={s.logoutBtn} onClick= {onClickFunc}>
+    return <button type="button" className={s.logoutBtn} onClick= {() => logout()}>
         Вихід
     </button>
 };
