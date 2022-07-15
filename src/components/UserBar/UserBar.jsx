@@ -7,7 +7,7 @@ const UserBar = () => {
     const auth = useSelector(isAuth);
     const { data } = useCurrentQuery(null, { skip: !auth });
     
-    let userName = "Mark Hunt";
+    let userName = "Somename";
     if (data) {
         userName = data.name;
     }

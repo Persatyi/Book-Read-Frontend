@@ -17,7 +17,7 @@ const Logout = () => {
 
   useEffect(() => {
     if (isError) {
-      toast.error("Oops! Error! Try again!");
+      toast.error("Something went wrong! Try again!");
     }
   }, [isError]);
 

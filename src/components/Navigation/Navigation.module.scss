@@ -34,6 +34,7 @@
     }
     &:hover,
     &:focus {
+        transition: background-color 500ms cubic-bezier(.61, .36, .46, .9);
         background-color: var(--input-bg-cl);
     }
 }

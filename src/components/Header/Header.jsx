@@ -10,7 +10,7 @@ import s from "./Header.module.scss";
 const Header = () => {
   const isLoggedIn = useSelector(isAuth);
 
-  const headerCls = [s.container, s.loggedIn];
+  const headerCls = [s.container];
   if (isLoggedIn) {
     headerCls.push(s.loggedIn);
   }
