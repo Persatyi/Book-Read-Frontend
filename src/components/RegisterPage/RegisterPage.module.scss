@@ -1,8 +1,93 @@
+@import "stylesheet/_mixin.scss";
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  @include mq(desktop) {
+    flex-direction: row;
+    height: calc(100vh - 60px);
+  }
+}
+
 .formWrapper {
-  width: 42vw;
-  height: 100%;
+  width: 100vw;
+  // height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: rgba(9, 30, 63, 0.8);
+  @include mq(tablet-only) {
+    padding-top: 64px;
+    padding-bottom: 64px;
+  }
+  @include mq(desktop) {
+    width: 42vw;
+    height: 100%;
+  }
+
+  background-image: linear-gradient(
+      to bottom,
+      var(--pic-overlay),
+      var(--pic-overlay)
+    ),
+    url("../../assets/images/auth/bg-reg-sm-min.jpeg");
+
+  @include mq(retina) {
+    background-image: linear-gradient(
+        to bottom,
+        var(--pic-overlay),
+        var(--pic-overlay)
+      ),
+      url("../../assets/images/auth/bg-reg-sm-2x-min.jpeg");
+  }
+  @include mq(tablet) {
+    background-image: linear-gradient(
+        to bottom,
+        var(--pic-overlay),
+        var(--pic-overlay)
+      ),
+      url("../../assets/images/auth/bg-reg-md-min.jpeg");
+
+    @include mq(retina) {
+      background-image: linear-gradient(
+          to bottom,
+          var(--pic-overlay),
+          var(--pic-overlay)
+        ),
+        url("../../assets/images/auth/bg-reg-md-2x-min.jpeg");
+    }
+  }
+  @include mq(desktop) {
+    background-image: linear-gradient(
+        to bottom,
+        var(--pic-overlay),
+        var(--pic-overlay)
+      ),
+      url("../../assets/images/auth/bg-log-lg-min.jpeg");
+    @include mq(retina) {
+      background-image: linear-gradient(
+          to bottom,
+          var(--pic-overlay),
+          var(--pic-overlay)
+        ),
+        url("../../assets/images/auth/bg-log-lg-2x-min.jpeg");
+    }
+  }
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.textWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  @include mq(tablet) {
+    height: 100%;
+    padding-top: 64px;
+    padding-bottom: 64px;
+  }
+
+  @include mq(desktop) {
+    width: 58vw;
+    padding: unset;
+  }
 }

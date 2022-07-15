@@ -1,0 +1,50 @@
+.title {
+  margin-bottom: 48px;
+  text-align: center;
+  font-family: "Abril Fatface";
+  font-weight: 400;
+  font-size: 34px;
+  line-height: 1.12;
+  color: var(--main-text-cl);
+}
+
+.listWrapper:not(:last-child) {
+  margin-bottom: 32px;
+}
+
+.list {
+  font-family: "Montserrat";
+  font-weight: 500;
+}
+
+.listTitle {
+  margin-bottom: 14px;
+  font-size: 20px;
+  line-height: 1.9;
+  color: var(--main-text-cl);
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  line-height: 1.21;
+  color: var(--secondary-text-cl);
+  &:not(:last-child) {
+    margin-bottom: 12px;
+  }
+}
+
+.itemSvg {
+  width: 4px;
+  height: 8px;
+  margin-right: 12px;
+}
+
+// .itemText::before {
+//   content: "";
+//   background-image: url("../../assets/images/auth/arrow.png");
+//   width: 4px;
+//   height: 8px;
+//   margin-right: 12px;
+// }
