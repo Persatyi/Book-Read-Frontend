@@ -1,10 +1,13 @@
 import s from "./AddPages.module.scss";
 import spriteSvg from "assets/images/sprite.svg";
 import Button from "components/Button";
+import { useAddPageMutation } from "redux/api/bookAPI";
 
+// import { useEffect } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import DatePickerField from "components/DatePickerField";
 import * as yup from "yup";
+import dayjs from "dayjs";
 
 const schema = yup.object().shape({
   date: yup.date(),
@@ -12,10 +15,13 @@ const schema = yup.object().shape({
 });
 
 const AddPages = () => {
+  const [addPage, { data }] = useAddPageMutation();
+  console.log("🚀 ~ data", data);
+
   const onSubmit = (values) => {
-    console.log("🚀 ~ values", values);
-    // const { date, pages } = values;
+    addPage(values);
   };
+
   return (
     <Formik
       initialValues={{ date: new Date(), pages: "" }}
@@ -56,13 +62,19 @@ const AddPages = () => {
             text="Add result"
           />
           <h2 className={s.statisticsTitle}>STATISTICS</h2>
-          <ul className={s.statistics}>
-            <li className={s.item}>
-              <span className={s.day}>10.10.2019</span>
-              <span className={s.data}>08:10:23</span>
-              <span className={s.pages}>322 pages</span>
-            </li>
-          </ul>
+          {data && (
+            <ul className={s.statistics}>
+              <li className={s.item} key={data.id}>
+                <span className={s.day}>
+                  {dayjs(data.date).format("DD.MM.YYYY")}
+                </span>
+                <span className={s.data}>
+                  {dayjs(data.date).format("HH:mm:ss")}
+                </span>
+                <span className={s.pages}>{data.pages} pages</span>
+              </li>
+            </ul>
+          )}
         </Form>
       )}
     </Formik>
