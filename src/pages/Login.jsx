@@ -1,13 +1,12 @@
 import AuthForm from "components/AuthForm";
 
-const Info = () => {
+const Login = () => {
   return (
     <div>
-      Info
-      <AuthForm type="register" />
+      Login
       <AuthForm type="login" />
     </div>
   );
 };
 
-export default Info;
+export default Login;
