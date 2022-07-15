@@ -1,11 +1,11 @@
 import { useSelector } from "react-redux";
-import { getAuth } from "redux/auth";
+import { isAuth } from "redux/auth";
 import { useCurrentQuery } from "redux/api/bookAPI";
 import s from "./UserBar.module.scss";
 
 const UserBar = () => {
-    const isAuth = useSelector(getAuth);
-    const { data, isFetching } = useCurrentQuery(null, { skip: !isAuth });
+    const auth = useSelector(isAuth);
+    const { data } = useCurrentQuery(null, { skip: !auth });
     
     let userName = "Mark Hunt";
     if (data) {

@@ -9,7 +9,7 @@ import Library from "pages/Library";
 import Training from "pages/Training";
 
 function App() {
-  return (<div>
+  return (<>
     <Header />
     <Container>
       
@@ -19,7 +19,7 @@ function App() {
         <Route path="/training" element={<Training />} />
       </Routes>
     </Container>
-  </div>
+  </>
   );
 }
 

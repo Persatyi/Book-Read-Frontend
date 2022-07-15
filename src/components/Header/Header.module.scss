@@ -11,7 +11,7 @@
 .container {
     margin-left: auto;
     margin-right: auto;
-    width: 270px;
+    // width: 280px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -26,16 +26,17 @@
     }
 
     @include mq(tablet) {
-        width: 718px;
+        width: 704px;
         justify-content: flex-start;
     }
 
     @include mq(desktop) {
-        width: 1230px;
+        width: 1248px;
     }
 }
 
 .logo {
+    flex-grow: 1;
     font-family: 'Abril Fatface';
     font-weight: 400;
     font-size: 20px;

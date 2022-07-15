@@ -1,1 +1,1 @@
-import {_default} from "./Logout";
+export {default} from "./Logout";
