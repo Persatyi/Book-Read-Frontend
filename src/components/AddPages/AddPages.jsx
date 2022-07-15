@@ -1,7 +1,7 @@
 import s from "./AddPages.module.scss";
 import spriteSvg from "assets/images/sprite.svg";
 import Button from "components/Button";
-import { useAddPageMutation } from "redux/api/bookAPI";
+import { useAddPageMutation, useGetResultsQuery } from "redux/api/bookAPI";
 
 // import { useEffect } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
@@ -15,7 +15,8 @@ const schema = yup.object().shape({
 });
 
 const AddPages = () => {
-  const [addPage, { data }] = useAddPageMutation();
+  const [addPage] = useAddPageMutation();
+  const { data } = useGetResultsQuery();
 
   const onSubmit = (values) => {
     addPage(values);

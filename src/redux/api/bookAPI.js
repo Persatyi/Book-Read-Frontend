@@ -24,7 +24,11 @@ export const bookApi = createApi({
     }),
     addPage: build.mutation({
       query: (data) => ({ url: "/results", method: "PATCH", body: data }),
-      invalidatesTags: ["User", "Results"],
+      invalidatesTags: ["Results"],
+    }),
+    getResults: build.query({
+      query: () => "/results",
+      providesTags: ["Results"],
     }),
     logout: build.mutation({
       query: () => ({ url: "/users/logout", method: "POST" }),
@@ -44,4 +48,5 @@ export const {
   useAddPageMutation,
   useLogoutMutation,
   useCurrentQuery,
+  useGetResultsQuery,
 } = bookApi;
