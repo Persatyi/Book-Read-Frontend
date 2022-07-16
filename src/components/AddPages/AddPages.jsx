@@ -1,17 +1,12 @@
 import s from "./AddPages.module.scss";
 import spriteSvg from "assets/images/sprite.svg";
+import { schema } from "assets/schemas/addPagesValidation";
 import Button from "components/Button";
 import { useAddPageMutation, useGetResultsQuery } from "redux/api/bookAPI";
 
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import DatePickerField from "components/DatePickerField";
-import * as yup from "yup";
 import dayjs from "dayjs";
-
-const schema = yup.object().shape({
-  date: yup.date(),
-  pages: yup.number().min(1, "Can't be empty").required(),
-});
 
 const AddPages = () => {
   const [addPage] = useAddPageMutation();

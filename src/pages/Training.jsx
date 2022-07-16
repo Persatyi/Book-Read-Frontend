@@ -1,11 +1,11 @@
-// import AddPages from "components/AddPages";
-import Chart from "components/Chart/Chart";
+import AddPages from "components/AddPages";
+import LineChart from "components/Chart/LineChart";
 
 const Training = () => {
   return (
     <>
-      <Chart />
-      {/* <AddPages /> */}
+      <LineChart />
+      <AddPages />
     </>
   );
 };
