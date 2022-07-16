@@ -1,0 +1,17 @@
+@import "stylesheet/_mixin.scss";
+
+.form {
+  width: 100%;
+  padding-top: 32px;
+  padding-bottom: 32px;
+  background-color: aquamarine;
+  @include mq(tablet) {
+    width: 400px;
+    padding: 40px;
+  }
+}
+
+.link {
+  text-decoration: underline;
+  color: var(--btn-cl);
+}

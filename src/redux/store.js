@@ -35,6 +35,7 @@ const store = configureStore({
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
     }),
+    bookApi.middleware,
   ],
   devTools: process.env.NODE_ENV === "development",
 });

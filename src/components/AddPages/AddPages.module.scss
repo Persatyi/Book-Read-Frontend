@@ -8,6 +8,18 @@
   height: 340px;
   background-color: var(--main-bg-cl);
   box-shadow: 0px 2px 3px rgba(9, 30, 63, 0.1);
+
+  @include mq(tablet) {
+    padding: 28px 96px 32px 96px;
+    width: 704px;
+    height: 309px;
+  }
+
+  @include mq(desktop) {
+    padding: 20px 24px 22px 24px;
+    width: 288px;
+    height: 340px;
+  }
 }
 
 .title {
@@ -18,6 +30,14 @@
   text-align: center;
   text-transform: uppercase;
   color: var(--main-text-cl);
+
+  @include mq(tablet) {
+    font-size: 14px;
+  }
+
+  @include mq(desktop) {
+    font-size: 12px;
+  }
 }
 
 .wrapper {
@@ -25,6 +45,17 @@
   justify-content: space-between;
   margin-top: 12px;
   margin-bottom: 30px;
+
+  @include mq(tablet) {
+    width: 240px;
+    margin-top: 27px;
+    margin-bottom: 20px;
+  }
+
+  @include mq(desktop) {
+    margin-top: 12px;
+    margin-bottom: 30px;
+  }
 }
 
 .name {
@@ -76,6 +107,12 @@
   background: #f6f7fb;
   border: 1px solid #a6abb9;
   outline: none;
+
+  font-family: "Montserrat";
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.21;
+  color: var(--main-text-cl);
 }
 
 .error {
@@ -86,16 +123,31 @@
   color: #ff6596;
 }
 
-.input::-webkit-inner-spin-button,
-.input::-webkit-outer-spin-button {
-  -webkit-appearance: none;
-}
+// .input::-webkit-inner-spin-button,
+// .input::-webkit-outer-spin-button {
+//   -webkit-appearance: none;
+// }
 
 .button {
   width: 100%;
   height: 40px;
   background-color: var(--btn-cl);
   margin-bottom: 24px;
+
+  @include mq(tablet) {
+    position: absolute;
+    top: 89px;
+    right: 96px;
+    width: 240px;
+    height: 42px;
+    margin-bottom: unset;
+  }
+
+  @include mq(desktop) {
+    position: unset;
+    height: 40px;
+    margin-bottom: 24px;
+  }
 }
 
 .statisticsTitle {
@@ -106,34 +158,72 @@
   text-align: center;
   text-transform: uppercase;
   color: #242a37;
+
+  @include mq(tablet) {
+    text-align: left;
+  }
+
+  @include mq(desktop) {
+    text-align: center;
+  }
 }
 
 .statisticsTitle::before {
   content: "";
   position: absolute;
   top: calc(100% / 2 + 39px);
-  left: calc(100% / 2 - 115px);
+  left: calc(100% / 2 - 119px);
   display: block;
   width: 71px;
   border-bottom: 1px solid #e0e5eb;
   background-color: #e0e5eb;
+
+  @include mq(tablet) {
+    display: none;
+  }
+
+  @include mq(desktop) {
+    display: block;
+  }
 }
 
 .statisticsTitle::after {
   content: "";
   position: absolute;
   top: calc(100% / 2 + 39px);
-  right: calc(100% / 2 - 115px);
+  right: calc(100% / 2 - 120px);
   display: block;
   width: 71px;
   border-bottom: 1px solid #e0e5eb;
   background-color: #e0e5eb;
+
+  @include mq(tablet) {
+    width: 159px;
+    top: calc(100% / 2 + 8px);
+    left: calc(100% / 2 - 174px);
+  }
+
+  @include mq(desktop) {
+    left: unset;
+    top: calc(100% / 2 + 39px);
+    right: calc(100% / 2 - 120px);
+    width: 71px;
+  }
 }
 
 .statistics {
   margin-top: 4px;
   height: 100px;
   overflow-x: hidden;
+
+  @include mq(tablet) {
+    margin-top: 6px;
+    width: 240px;
+  }
+
+  @include mq(desktop) {
+    margin-top: 4px;
+  }
 }
 
 .item {
