@@ -1,4 +1,4 @@
-@import "stylesheet/shared.scss";
+@import "stylesheet/mixin.scss";
 .library {
    padding: 40px;
    background-color: white;
@@ -53,7 +53,16 @@
       align-items: flex-start;
    }
    &Icon{
-      margin-right: 12px;
+      &Flat{
+         margin-right: 12px;
+         height: 17px;
+         width: 22px;
+      }
+      &Flag{
+         margin-right: 12px;
+         height: 17px;
+         width: 15px;
+      }
    }
 }
 .text{
@@ -84,22 +93,24 @@
       }
    }
    &Icon{
+      width: 10px;
+      height: 12px;
       margin-right: 12px;
    }
 }
 
 div .overlayLibrary {
-   height: 73vh ;
+   height: 92vh ;
    width: 100%;
    background-color: transparent;
    @include mq(mobile){
-   height: 67vh;
+   height: 85vh;
    }
    @include mq(tablet){
-   height: 130vh;
+   height: 160vh;
    }
    @include mq(desktop){
-   height: 70vh;
+   height: 85vh;
    }
 }
 div .modalLibrary  {

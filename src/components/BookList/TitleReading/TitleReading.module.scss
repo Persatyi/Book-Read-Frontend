@@ -1,6 +1,10 @@
+@import "stylesheet/mixin.scss";
 .titleList{
-   display: flex;
-   margin-bottom: 8px;
+   display: none;
+   @include mq(tablet){
+      display: flex;
+      margin-bottom: 8px;
+   }
    &Item{
       font-family: 'Montserrat';
       font-style: normal;
@@ -9,13 +13,28 @@
       line-height: 1.2;
       color: var(--secondary-text-cl);
       &:nth-child(1){
-         margin-right: 571px;
+         @include mq(tablet){
+            margin-right: 299px;
+         }
+         @include mq(desktop){
+            margin-right: 571px;
+         }
       }
       &:nth-child(2){
-         margin-right: 339px;
+         @include mq(tablet){
+            margin-right: 164px;
+         }
+         @include mq(desktop){
+            margin-right: 339px;
+         }
       }
       &:nth-child(3){
-         margin-right: 72px;
+         @include mq(tablet){
+            margin-right: 25px;
+         }
+         @include mq(desktop){
+            margin-right: 72px;
+         }
       }
    }
 }

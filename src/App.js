@@ -7,7 +7,7 @@ import Header from "components/Header";
 import Register from "pages/Register";
 import Login from "pages/Login";
 import Info from "pages/Info";
-import LibraryPage from "pages/LibraryPage";
+import Library from "pages/Library";
 import Training from "pages/Training";
 import PublicRoute from "components/PublicRoute";
 import PrivateRoute from "components/PrivateRoute";

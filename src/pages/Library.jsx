@@ -5,9 +5,26 @@ import Library from "components/Library/Library"
 import LibraryModal from 'components/LibraryModal/LibraryModal';
 import globalSelectors from '../redux/global/global-selectors';
 import { toggleModal } from 'redux/global/global-slice';
-import Plus from 'assets/images/library/Plus';
-import Back from '../assets/images/library/Back';
+import spriteSvg from "assets/images/sprite.svg";
 import BookList from 'components/BookList/BookList';
+import Container from '../components/Container/Container';
+
+const moreIcon = {
+  width: "52px",
+  height: "52px",
+  position: 'fixed',
+  bottom: '12px',
+  cursor: 'pointer',
+  marginLeft: 'auto',
+  marginRight: 'auto',
+  left: 0,
+  right: 0,
+}
+const backIcon = {
+  marginTop: "24px",
+  width: "24px",
+  height: "12px"
+}
 
 export default function LibraryPage() {
   const [openLibrary, setOpenLibrary] = useState(false);
@@ -23,13 +40,23 @@ export default function LibraryPage() {
     setPlus(!plus)
   }
   return (
-    <>
+    <div style={{
+      backgroundColor: 'var(--secondary-bg-cl)',
+      minHeight: '92vh'
+    }}>
+      <Container>
       {size.width < 768 && (
         <>
-          {plus && <Plus onClick={isLibraryToggle} />}
+          {plus &&
+          <><svg onClick={isLibraryToggle} style={moreIcon}>
+                <use href={`${spriteSvg}#icon-more`} />
+              </svg><BookList onClick={isOpenModal} /></>
+          }
           {openLibrary && (
             <>
-              <Back onClick={isLibraryToggle} />
+          <svg onClick={isLibraryToggle} style={backIcon}>
+            <use href={`${spriteSvg}#icon-back`}/>
+          </svg>
               <Library />
             </>
           )}
@@ -42,7 +69,8 @@ export default function LibraryPage() {
         </>
       )}
       {modalOpen && <LibraryModal />}
-    </>
+    </Container>
+      </div>
   )
 };
 

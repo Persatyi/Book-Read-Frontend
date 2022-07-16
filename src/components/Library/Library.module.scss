@@ -1,4 +1,4 @@
-@import "stylesheet/shared.scss";
+@import "stylesheet/mixin.scss";
 .form{
     transition: all 250ms ease;
     padding-top: 32px;
@@ -89,17 +89,23 @@
     &__error{
         color: red;
         position: absolute;
+        margin-top: 67px;
         @include mq(tablet){
-        top: 220px;
+        margin-top: 0px;
+        top: 260px;
         }
         @include mq(desktop){
-        top: 130px;
-        max-width: 150px;
+        top: 170px;
+        max-width: 190px;
         }
         &_title{
-        top: 120px;
+        top: 200px;
+        margin-top: 0px;
+        @include mq(tablet){
+            top: 160px;
+        }
         @include mq(desktop){
-            top:130px;
+            top:170px;
         }
         }
     }
