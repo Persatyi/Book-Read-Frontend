@@ -1,7 +1,13 @@
-import LoginPage from "components/LoginPage";
+import AuthPage from "components/AuthPage";
+import { authType } from "assets/schemas/authFormValidation";
+import Quote from "components/Quote";
 
 const Login = () => {
-  return <LoginPage />;
+  return (
+    <AuthPage type={authType.login}>
+      <Quote />
+    </AuthPage>
+  );
 };
 
 export default Login;

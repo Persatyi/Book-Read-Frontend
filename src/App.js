@@ -6,7 +6,7 @@ import "react-toastify/dist/ReactToastify.css";
 import Header from "components/Header";
 import Register from "pages/Register";
 import Login from "pages/Login";
-import Info from "pages/Info";
+import Home from "pages/Home";
 import Library from "pages/Library";
 import Training from "pages/Training";
 import PublicRoute from "components/PublicRoute";
@@ -18,7 +18,7 @@ function App() {
       <Header />
       <Routes>
         <Route element={<PublicRoute />}>
-          <Route path="/" element={<Info />} />
+          <Route path="/" element={<Home />} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
         </Route>
