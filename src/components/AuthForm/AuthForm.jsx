@@ -54,6 +54,10 @@ const AuthForm = ({ type }) => {
               message =
                 "Something went wrong. Please check your data and try again.";
               break;
+            case 401:
+              message =
+                "Invalid credentials. Please check your data and try again.";
+              break;
             default:
               message = "Something went wrong. Please try again.";
           }
@@ -75,8 +79,8 @@ const AuthForm = ({ type }) => {
           {isRegister ? (
             <>
               <div className={s.inputWrapper}>
-                <label htmlFor="name">
-                  Name <span>*</span>
+                <label className={s.label} htmlFor="name">
+                  Name <span className={s.required}>*</span>
                 </label>
                 <input
                   className={s.input}
@@ -89,17 +93,17 @@ const AuthForm = ({ type }) => {
                   value={values.name}
                   autoComplete="name"
                 />
+                {touched.name && errors.name && (
+                  <div className={s.errorWrapper}>
+                    <p className={s.error}>{errors.name}</p>
+                  </div>
+                )}
               </div>
-              {touched.name && errors.name && (
-                <div className={s.errorWrapper}>
-                  <p className={s.error}>{errors.name}</p>
-                </div>
-              )}
             </>
           ) : null}
           <div className={s.inputWrapper}>
-            <label htmlFor="email">
-              Email <span>*</span>
+            <label className={s.label} htmlFor="email">
+              Email <span className={s.required}>*</span>
             </label>
             <input
               className={s.input}
@@ -112,15 +116,16 @@ const AuthForm = ({ type }) => {
               value={values.email}
               autoComplete="email"
             />
+
+            {touched.email && errors.email && (
+              <div className={s.errorWrapper}>
+                <p className={s.error}>{errors.email}</p>
+              </div>
+            )}
           </div>
-          {touched.email && errors.email && (
-            <div className={s.errorWrapper}>
-              <p className={s.error}>{errors.email}</p>
-            </div>
-          )}
           <div className={s.inputWrapper}>
-            <label htmlFor="password">
-              Password <span>*</span>
+            <label className={s.label} htmlFor="password">
+              Password <span className={s.required}>*</span>
             </label>
             <input
               className={s.input}
@@ -133,17 +138,18 @@ const AuthForm = ({ type }) => {
               value={values.password}
               autoComplete="off"
             />
+
+            {touched.password && errors.password && (
+              <div className={s.errorWrapper}>
+                <p className={s.error}>{errors.password}</p>
+              </div>
+            )}
           </div>
-          {touched.password && errors.password && (
-            <div className={s.errorWrapper}>
-              <p className={s.error}>{errors.password}</p>
-            </div>
-          )}
           {isRegister ? (
             <>
               <div className={s.inputWrapper}>
-                <label htmlFor="confirmPassword">
-                  Confirm Password <span>*</span>
+                <label className={s.label} htmlFor="confirmPassword">
+                  Confirm Password <span className={s.required}>*</span>
                 </label>
                 <input
                   className={s.input}
@@ -156,33 +162,34 @@ const AuthForm = ({ type }) => {
                   value={values.confirmPassword}
                   autoComplete="off"
                 />
+
+                {touched.confirmPassword && errors.confirmPassword && (
+                  <div className={s.errorWrapper}>
+                    <p className={s.error}>{errors.confirmPassword}</p>
+                  </div>
+                )}
               </div>
-              {touched.confirmPassword && errors.confirmPassword && (
-                <div className={s.errorWrapper}>
-                  <p className={s.error}>{errors.confirmPassword}</p>
-                </div>
-              )}
             </>
           ) : null}
 
           <Button
-            className={s.enterBtn}
+            className={s.authBtn}
             type="submit"
-            disabled={!isValid && !dirty}
+            disabled={!(isValid && dirty)}
             text={isRegister ? "Register" : "Login"}
           />
-          {isRegister ? (
-            <>
-              <span>Already have an account?</span>
+          <p className={s.navigate}>
+            {isRegister && "Already have an account? "}
+            {isRegister ? (
               <Link className={s.link} to="/login">
                 Log in
               </Link>
-            </>
-          ) : (
-            <Link className={s.link} to="/register">
-              Register
-            </Link>
-          )}
+            ) : (
+              <Link className={s.link} to="/register">
+                Register
+              </Link>
+            )}
+          </p>
         </form>
       )}
     </Formik>
