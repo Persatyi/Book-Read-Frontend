@@ -1,4 +1,5 @@
 import { useMediaQuery } from "react-responsive";
+import Container from "components/Container";
 import Goal from "components/Goal";
 import AddTraining from "components/AddTraining";
 import TrainingList from "components/TrainingList";
@@ -6,18 +7,20 @@ import TrainingList from "components/TrainingList";
 
 import { MOBILE_ONLY } from "assets/constants/MEDIA";
 
-// import s from "./Training.module.scss";
+import s from "./Training.module.scss";
 
 const Training = () => {
   const isMobile = useMediaQuery(MOBILE_ONLY);
   return (
-    <>
-      <Goal />
-      {!isMobile && <AddTraining />}
-      <TrainingList />
-      {/* {isMobile && <IconButton/>} */}
-      {/* <Statistics/> */}
-    </>
+    <section className={s.section}>
+      <Container>
+        <Goal />
+        {!isMobile && <AddTraining />}
+        <TrainingList />
+        {/* {isMobile && <IconButton/>} */}
+        {/* <Statistics/> */}
+      </Container>
+    </section>
   );
 };
 

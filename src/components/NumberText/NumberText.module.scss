@@ -1,0 +1,27 @@
+.wrapper {
+    display: grid;
+    gap: 14px;
+}
+
+.number {
+    width: 100px;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Open Sans';
+    font-weight: 700;
+    font-size: 45px;
+    line-height: 0.84;
+    color: var(--numbers-cl);
+    background: var(--input-bg-cl);
+    box-shadow: 4px 4px 8px rgba(36, 42, 55, 0.15);
+}
+
+.text {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 1.21;
+    text-align: center;
+    color: var(--secondary-text-cl);
+}
