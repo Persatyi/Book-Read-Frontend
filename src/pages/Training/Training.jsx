@@ -2,7 +2,7 @@ import { useMediaQuery } from "react-responsive";
 import Container from "components/Container";
 import Goal from "components/Goal";
 import AddTraining from "components/AddTraining";
-import TrainingList from "components/TrainingList";
+import TrainingList from "components/BookList";
 // import Statistics from "components/Statistics";
 
 import { MOBILE_ONLY } from "assets/constants/MEDIA";
