@@ -54,6 +54,10 @@ const AuthForm = ({ type }) => {
               message =
                 "Something went wrong. Please check your data and try again.";
               break;
+            case 401:
+              message =
+                "Invalid credentials. Please check your data and try again.";
+              break;
             default:
               message = "Something went wrong. Please try again.";
           }
@@ -171,7 +175,7 @@ const AuthForm = ({ type }) => {
           <Button
             className={s.authBtn}
             type="submit"
-            disabled={!isValid && !dirty}
+            disabled={!(isValid && dirty)}
             text={isRegister ? "Register" : "Login"}
           />
           <p className={s.navigate}>

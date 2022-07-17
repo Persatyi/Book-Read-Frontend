@@ -8,18 +8,29 @@
     height: calc(100vh - 60px);
   }
 }
+.container {
+  @include mq(mobile-only) {
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 20px;
+    padding-right: 20px;
+    width: 320px;
+  }
+}
 
 .formWrapper {
   width: 100vw;
-  // height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  @include mq(tablet-only) {
+  margin: 0 auto;
+
+  @include mq(tablet) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     padding-top: 64px;
     padding-bottom: 64px;
   }
   @include mq(desktop) {
+    padding: 0;
     width: 42vw;
     height: 100%;
   }
@@ -74,12 +85,18 @@
   }
   background-repeat: no-repeat;
   background-size: cover;
+  &.registrationMobile {
+    height: calc(100vh - 60px);
+    padding-bottom: 0;
+  }
 }
 
 .textWrapper {
+  // position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
+  padding-top: 4px;
   @include mq(tablet) {
     height: 100%;
     padding-top: 64px;
@@ -88,6 +105,6 @@
 
   @include mq(desktop) {
     width: 58vw;
-    padding: unset;
+    padding: 0;
   }
 }

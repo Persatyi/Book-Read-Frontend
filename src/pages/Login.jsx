@@ -1,7 +1,8 @@
-import LoginPage from "components/LoginPage";
+import AuthPage from "components/AuthPage";
+import { authType } from "assets/schemas/authFormValidation";
 
 const Login = () => {
-  return <LoginPage />;
+  return <AuthPage type={authType.login} />;
 };
 
 export default Login;
