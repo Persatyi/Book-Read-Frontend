@@ -1,5 +1,8 @@
 import PropTypes from "prop-types";
-// import s from "./BookItem.module.scss";
+
+import sprite from "assets/images/sprite.svg";
+
+import s from "./BookItem.module.scss";
 
 function BookItem({ book = {} }) {
   const {
@@ -7,15 +10,27 @@ function BookItem({ book = {} }) {
     author = "...",
     year = "...",
     pages = "...",
-    status,
+    // status,
   } = book;
   return (
-    <>
+    <li className={s.item}>
+      <svg className={s.bookIcon} width="22" height="17">
+        <use href={`${sprite}#icon-flat`}></use>
+      </svg>
       <p>{title}</p>
-      <p>Автор:{author}</p>
-      <p>Рік:{year}</p>
-      <p>Стор.:{pages}</p>
-    </>
+      <p>
+        <span className={s.subtitle}>Автор:</span>
+        {author}
+      </p>
+      <p>
+        <span className={s.subtitle}>Рік:</span>
+        {year}
+      </p>
+      <p>
+        <span className={s.subtitle}>Стор.:</span>
+        {pages}
+      </p>
+    </li>
   );
 }
 BookItem.propTypes = {

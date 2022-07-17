@@ -1,0 +1,25 @@
+.item {
+    position: relative;
+    padding: 20px 40px;
+    display: grid;
+    gap: 15px;
+    font-weight: 500;
+    color: var(--main-text-cl);
+    border-bottom: 1px solid var(--auth-bg-cl);
+
+    &:first-child {
+        border-top: 1px solid var(--auth-bg-cl);
+    }
+}
+
+.bookIcon {
+    position: absolute;
+    left: 0;
+    top: 20px;
+}
+
+.subtitle {
+    display: inline-block;
+    width: 70px;
+    color: var(--secondary-text-cl);
+}

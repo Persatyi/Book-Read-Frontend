@@ -14,9 +14,9 @@ const Training = () => {
   return (
     <section className={s.section}>
       <Container>
-        <Goal />
+        <Goal training={{}} />
         {!isMobile && <AddTraining />}
-        <BookList />
+        <BookList books={[{}]} className={s.books} />
         {/* {isMobile && <IconButton/>} */}
         {/* <Statistics/> */}
       </Container>
