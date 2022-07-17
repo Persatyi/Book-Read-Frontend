@@ -1,16 +1,12 @@
 import s from "./AuthPage.module.scss";
 import AuthForm from "components/AuthForm";
-import Info from "components/Info";
-import Quote from "components/Quote";
+import PropTypes from "prop-types";
+
 import { useWindowSize } from "hooks/useWindowSize";
 import { authType } from "assets/schemas/authFormValidation";
 
-const AuthPage = ({ type }) => {
+const AuthPage = ({ type, children }) => {
   const size = useWindowSize();
-
-  const showInfo = () => {
-    return size.width >= 768 ? <Info /> : null;
-  };
 
   const adjustClassName = () => {
     const classNames = [s.formWrapper];
@@ -27,13 +23,18 @@ const AuthPage = ({ type }) => {
           <AuthForm type={type} />
         </div>
       </div>
-      <div className={s.textWrapper}>
-        <div className={s.container}>
-          {type === authType.registration ? showInfo() : <Quote />}
+      {type === authType.registration && size.width < 768 ? null : (
+        <div className={s.textWrapper}>
+          <div className={s.container}>{children}</div>
         </div>
-      </div>
+      )}
     </div>
   );
+};
+
+AuthPage.propTypes = {
+  type: PropTypes.string.isRequired,
+  children: PropTypes.node.isRequired,
 };
 
 export default AuthPage;

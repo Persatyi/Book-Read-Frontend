@@ -1,8 +1,13 @@
-import AuthPagePage from "components/AuthPage";
+import AuthPage from "components/AuthPage";
 import { authType } from "assets/schemas/authFormValidation";
+import Info from "components/Info";
 
 const Register = () => {
-  return <AuthPagePage type={authType.registration} />;
+  return (
+    <AuthPage type={authType.registration}>
+      <Info />
+    </AuthPage>
+  );
 };
 
 export default Register;
