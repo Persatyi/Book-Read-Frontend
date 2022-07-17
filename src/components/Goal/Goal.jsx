@@ -1,4 +1,6 @@
 import NumberText from "components/NumberText";
+import Title from "components/Title";
+
 import s from "./Goal.module.scss";
 
 function Goal({ training }) {
@@ -6,7 +8,7 @@ function Goal({ training }) {
   const daysNumber = training?.end ? training?.end - training?.start : 0;
   return (
     <div className={s.container}>
-      <p className={s.title}>Моя мета прочитати</p>
+      <Title text="Моя мета прочитати" />
       <ul className={s.numbers}>
         <li>
           <NumberText number={booksNumber} text="Кількість книжок" />

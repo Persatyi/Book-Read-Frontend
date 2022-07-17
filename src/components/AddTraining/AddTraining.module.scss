@@ -1,0 +1,34 @@
+.title {
+    margin-bottom: 20px;
+}
+
+.form {
+    display: grid;
+    gap: 20px;
+}
+
+.date {
+    padding-left: 41px;
+    height: 42px;
+    width: 100%;
+}
+
+.select {
+    box-shadow: inset 0px 1px 2px rgba(29, 29, 27, 0.15);
+}
+
+.button {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 12px;
+    max-width: 141px;
+    color: var(--main-text-cl);
+    background-color: var(--secondary-bg-cl);
+    transition: color 250ms linear, background-color 250ms linear, scale 250ms linear, box-shadow 250ms linear;
+
+    &:hover:not(:disabled),
+    &:focus:not(:disabled) {
+        color: var(--main-bg-cl);
+        background-color: var(--btn-cl);
+    }
+}
