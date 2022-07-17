@@ -2,16 +2,95 @@
 
 .form {
   width: 100%;
-  padding-top: 32px;
-  padding-bottom: 32px;
-  background-color: aquamarine;
+  margin: 0 auto;
+  padding: 32px 0;
+  font-family: "Montserrat";
+  font-size: 14px;
+  line-height: 1.21;
+
   @include mq(tablet) {
     width: 400px;
     padding: 40px;
+    background-color: var(--main-bg-cl);
   }
 }
 
+.inputWrapper {
+  position: relative;
+  margin-bottom: 25px;
+  &:last-of-type {
+    margin-bottom: 35px;
+  }
+}
+
+.label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 500;
+  color: var(--main-bg-cl);
+
+  @include mq(tablet) {
+    color: var(--secondary-text-cl);
+  }
+}
+.required {
+  color: #f25137;
+}
+.input {
+  box-sizing: border-box;
+  width: 100%;
+  font-weight: 400;
+  color: var(--secondary-text-cl);
+  padding: 12px;
+  background-color: #f5f7fa;
+  box-shadow: inset 0px 1px 2px rgba(29, 29, 27, 0.15);
+  border: none;
+  &:focus {
+    border: solid 1px var(--secondary-text-cl);
+  }
+
+  @include mq(mobile-only) {
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+  &::placeholder {
+    color: var(--placeholder-cl);
+  }
+  &:focus {
+    outline: none;
+  }
+}
+
+.errorWrapper {
+  position: absolute;
+  x: 0;
+  y: 100%;
+}
+
+.error {
+  color: #f25137;
+  font-size: 12px;
+}
+.navigate {
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 1.23;
+  color: var(--secondary-text-cl);
+  text-align: center;
+}
+
 .link {
+  text-align: center;
   text-decoration: underline;
   color: var(--btn-cl);
+}
+.authBtn {
+  width: 100%;
+  margin-bottom: 20px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  background-color: var(--btn-cl);
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 1.25;
 }

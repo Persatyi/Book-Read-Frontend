@@ -1,10 +1,10 @@
 import s from "./Button.module.scss";
 import PropTypes from "prop-types";
 
-export const STYLE_TYPE = {
-  MAIN: "main",
-  SECONDARY: "secondary",
-};
+// export const STYLE_TYPE = {
+//   MAIN: "main",
+//   SECONDARY: "secondary",
+// };
 
 const Button = ({
   className = "",
