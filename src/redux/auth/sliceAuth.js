@@ -1,16 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
+// import axios from "axios";
 
-axios.defaults.baseURL = "write URL here";
+// axios.defaults.baseURL = "write URL here";
 
-const token = {
-  set(token) {
-    axios.defaults.headers.common.Authorization = `Bearer ${token}`;
-  },
-  unset() {
-    axios.defaults.headers.common.Authorization = "";
-  },
-};
+// const token = {
+//   set(token) {
+//     axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+//   },
+//   unset() {
+//     axios.defaults.headers.common.Authorization = "";
+//   },
+// };
 
 const sessionSlice = createSlice({
   name: "auth",
@@ -19,18 +19,14 @@ const sessionSlice = createSlice({
     token: null,
   },
   reducers: {
-    loggedIn(state) {
-      token.set(state.token);
+    loggedIn(state, { payload }) {
+      state.token = payload;
       state.isAuth = true;
     },
     loggedOff(state) {
       state.isAuth = false;
       state.token = null;
-      token.unset();
-    },
-    setToken(state, { payload }) {
-      token.set(payload);
-      state.token = payload;
+      // token.unset();
     },
   },
 });
