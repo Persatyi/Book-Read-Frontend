@@ -1,12 +1,12 @@
 import s from "./Chart.module.scss";
-import { useGetResultsQuery } from "redux/api/bookAPI";
+// import { useGetResultsQuery } from "redux/api/bookAPI";
 import { useState } from "react";
 import { Line } from "react-chartjs-2";
 import "chart.js/auto";
 
 const LineChart = () => {
-  const { data = {} } = useGetResultsQuery();
-  console.log("🚀 ~ data", data);
+  // const { data = {} } = useGetResultsQuery();
+  // console.log("🚀 ~ data", data);
   const [userData, setUserData] = useState({
     labels: [1, 2, 3, 4, 5, 6, 7],
     datasets: [
