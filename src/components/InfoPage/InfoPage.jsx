@@ -5,20 +5,22 @@ import Container from "components/Container";
 
 const InfoPage = () => {
   return (
-    <Container>
-      <div className={s.wrapper}>
-        <Info />
-        <nav className={s.nav}>
-          <Link to="/login" className={s.login}>
-            Log in
-          </Link>
+    <div>
+      <Container>
+        <div className={s.wrapper}>
+          <Info />
+          <nav className={s.nav}>
+            <Link to="/login" className={s.login}>
+              Log in
+            </Link>
 
-          <Link to="/register" className={s.register}>
-            Register
-          </Link>
-        </nav>
-      </div>
-    </Container>
+            <Link to="/register" className={s.register}>
+              Register
+            </Link>
+          </nav>
+        </div>
+      </Container>
+    </div>
   );
 };
 
