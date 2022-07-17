@@ -1,5 +1,5 @@
 import AddPages from "components/AddPages";
-import LineChart from "components/Chart/LineChart";
+import LineChart from "components/LineChart/LineChart";
 
 const Training = () => {
   return (

@@ -13,7 +13,7 @@ const LineChart = () => {
       {
         id: 1,
         label: "Planned",
-        // data: data?.data.map((data) => data.pages),
+        data: [1, 2, 3, 4, 5, 6, 7],
         borderColor: "rgb(255, 99, 132)",
       },
       {
