@@ -1,6 +1,6 @@
 import InfoPage from "components/InfoPage";
 import { Navigate } from "react-router-dom";
-import { useWindowSize } from "hooks/useWindowSize";
+import { useWindowSize } from "hooks";
 
 const Home = () => {
   const size = useWindowSize();

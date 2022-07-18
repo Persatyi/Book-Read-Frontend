@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useWindowSize } from "hooks/useWindowSize";
+import { useWindowSize } from "hooks";
 import Library from "components/Library/Library";
 import LibraryModal from "components/LibraryModal/LibraryModal";
 import globalSelectors from "../redux/global/global-selectors";
