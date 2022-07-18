@@ -30,11 +30,12 @@ const LineChart = ({ data }) => {
       const date2 = dayjs(start);
       const range = Math.ceil(dateNow.diff(date2, "day", true));
 
-      for (let i = 0; i <= range; i += 1) {
+      for (let i = 0; i < range; i += 1) {
         const day = dayjs(date2).add(i, "day");
         const element = dataSet.find(
           (el) => el.x === dayjs(day).format("DD.MM.YYYY")
         );
+
         if (element) {
           finalDataSet.push(element);
         } else {
@@ -48,69 +49,30 @@ const LineChart = ({ data }) => {
 
   const everageValue = () => {
     const trainingDays = Math.ceil(dayjs(end).diff(start, "day", true));
+    const dateNow = dayjs();
+    const averageAmount = totalPages / trainingDays;
+    const startDate = dayjs(start);
+    const amount = [];
+    const finalDataSet = [];
 
-    const stats = sets?.reduce((acc, el) => {
-      const day = dayjs(el.date).format("DD.MM.YYYY");
-      const pages = acc[day] ? acc[day] : [];
-      return { ...acc, [day]: [...pages, el.pages] };
-    }, {});
-
-    if (stats) {
-      const dataSet = Object.keys(stats).map((key) => {
-        return {
-          x: key,
-          y: stats[key].reduce((acc, el) => acc + el, 0),
-        };
-      });
-
-      const dateNow = dayjs();
-      const averageAmount = totalPages / trainingDays;
-      const startDate = dayjs(start);
-      const range = Math.ceil(dateNow.diff(startDate, "day", true));
-      const finalDataSet = [];
-
-      if (Math.ceil(dateNow.diff(start, "day", true)) <= 7) {
-        for (let i = 0; i < 7; i += 1) {
-          const day = dayjs(startDate).add(i, "day");
-
-          const element = dataSet.find(
-            (el) => el.x === dayjs(start).format("DD.MM.YYYY")
-          );
-
-          if (element) {
-            if (dayjs(startDate).format("DD.MM.YYYY") === element.x) {
-              finalDataSet.push({
-                x: day.format("DD.MM.YYYY"),
-                y: Math.ceil(averageAmount),
-              });
-            } else {
-              const element = dataSet.find(
-                (el) => el.x === dayjs(day).format("DD.MM.YYYY")
-              );
-
-              if (element) {
-                finalDataSet.push({
-                  x: day.format("DD.MM.YYYY"),
-                  y: Math.ceil(
-                    (totalPages - addedPages + element.y) /
-                      (trainingDays - range)
-                  ),
-                });
-              } else {
-                finalDataSet.push({
-                  x: day.format("DD.MM.YYYY"),
-                  y: Math.ceil(
-                    (totalPages - addedPages) / (trainingDays - range)
-                  ),
-                });
-              }
-            }
-          }
-        }
+    const cycle = (range) => {
+      for (let i = 0; i < range; i += 1) {
+        const day = dayjs(startDate).add(i, "day");
+        amount.push(averageAmount);
+        finalDataSet.push({
+          x: day.format("DD.MM.YYYY"),
+          y: amount[i],
+        });
       }
+    };
 
-      return finalDataSet;
+    if (Math.ceil(dateNow.diff(start, "day", true)) <= 7) {
+      cycle(7);
+    } else {
+      cycle(trainingDays);
     }
+
+    return finalDataSet;
   };
 
   const userData = sets
@@ -138,7 +100,7 @@ const LineChart = ({ data }) => {
           },
         ],
       }
-    : {};
+    : null;
 
   return (
     userData && (
@@ -207,5 +169,4 @@ const LineChart = ({ data }) => {
     )
   );
 };
-
 export default LineChart;
