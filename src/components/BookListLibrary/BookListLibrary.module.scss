@@ -143,17 +143,7 @@
       &Icon{
          margin-right: 12px;
          height: 17px;
-         width: 67px;
-         @include mq(mobile){
-            width: 37px;
-         }
-         @include mq(tablet){
-            margin-right: 18px;
-            width: 126px;
-         }
-         @include mq(desktop){
-            width: 97px;
-         }
+         max-width: 22px;
       }
       &Button{
          margin: 0 auto;
@@ -283,17 +273,7 @@
       &Icon{
          margin-right: 12px;
          height: 17px;
-         width: 67px;
-         @include mq(mobile){
-            width: 37px;
-         }
-         @include mq(tablet){
-            margin-right: 18px;
-            width: 55px;
-         }
-         @include mq(desktop){
-            width: 33px;
-         }
+         max-width:22px;
       }
    }
 }
