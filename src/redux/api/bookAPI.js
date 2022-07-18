@@ -12,7 +12,7 @@ export const bookApi = createApi({
       return headers;
     },
   }),
-  tagTypes: ["User", "Results"],
+  tagTypes: ["User", "Books", "Results"],
   endpoints: (build) => ({
     register: build.mutation({
       query: (data) => ({ url: "/users/register", method: "POST", body: data }),
@@ -41,6 +41,9 @@ export const bookApi = createApi({
       query: () => "/books",
       providesTags: ["Books", "Results"],
     }),
+    addTraining: build.mutation({
+      query: (data) => ({ url: "/trainings", method: "POST", body: data }),
+    }),
     getTraining: build.query({
       query: () => "/trainings",
       providesTags: ["Results"],
@@ -58,5 +61,6 @@ export const {
   useCurrentQuery,
   useGetResultsQuery,
   useBooksQuery,
+  useAddTrainingMutation,
   useGetTrainingQuery,
 } = bookApi;

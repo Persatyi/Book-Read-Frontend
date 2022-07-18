@@ -3,15 +3,14 @@ import LineChart from "components/LineChart/LineChart";
 import {
   // useGetBooksQuery,
   useGetResultsQuery,
-  useGetTrainingsQuery,
+  useGetTrainingQuery,
 } from "redux/api/bookAPI";
 
 const Training = () => {
-  const { data: trainings = {} } = useGetTrainingsQuery();
+  const { data: trainings = {} } = useGetTrainingQuery();
+  const { data: statistic = {} } = useGetResultsQuery();
 
   // const { data: books = [] } = useGetBooksQuery();
-
-  const { data: statistic = {} } = useGetResultsQuery();
 
   // const userStatistic = {};
   const chartData = {
