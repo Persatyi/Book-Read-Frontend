@@ -33,22 +33,6 @@ const AuthPage = ({ type, children }) => {
         </div>
       )}
     </div>
-
-    // <div className={s.wrapperMain}>
-    //   <Container>
-    //     <div className={s.wrapperS}>
-    //       <div className={s.formWrapperS}>
-    //         <div className={s.bcg}>
-    //           <AuthForm type={type} />
-    //         </div>
-    //       </div>
-
-    //       {type === authType.registration && size.width < 768 ? null : (
-    //         <div className={s.textWrapperS}>{children}</div>
-    //       )}
-    //     </div>
-    //   </Container>
-    // </div>
   );
 };
 
