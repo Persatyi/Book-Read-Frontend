@@ -1,6 +1,6 @@
 import ModalBookRead from "./ModalBookRead";
 import ModalChangesLost from "./ModalChangesLost";
-import ModalRating from "./ModalRating";
+import ModalBookReview from "./ModalReview";
 import ModalTrainingDone from "./ModalTrainingDone";
 
-export { ModalBookRead, ModalChangesLost, ModalRating, ModalTrainingDone };
+export { ModalBookRead, ModalChangesLost, ModalBookReview, ModalTrainingDone };

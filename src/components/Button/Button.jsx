@@ -1,11 +1,6 @@
 import s from "./Button.module.scss";
 import PropTypes from "prop-types";
 
-// export const STYLE_TYPE = {
-//   MAIN: "main",
-//   SECONDARY: "secondary",
-// };
-
 const Button = ({
   className = "",
   type = "button",
@@ -25,10 +20,11 @@ const Button = ({
     </button>
   );
 };
+
 Button.propTypes = {
   className: PropTypes.string,
   type: PropTypes.string,
-  styleType: PropTypes.string,
+  styleType: PropTypes.oneOf(["main", "secondary", "transparent"]),
   text: PropTypes.string.isRequired,
   onClick: PropTypes.func,
   disabled: PropTypes.bool,

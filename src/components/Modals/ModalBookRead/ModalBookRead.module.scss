@@ -1,0 +1,21 @@
+@import "src/stylesheet/mixin";
+
+.wrapper {
+  padding: 40px 25px;
+  text-align: center;
+  svg {
+    width: 50px;
+    height: 45px;
+    fill: var(--accent-cl);
+    margin-bottom: 20px;
+  }
+  p {
+    font-size: 16px;
+    line-height: 1.38;
+    font-weight: 500;
+    margin-bottom: 24px;
+  }
+  button {
+    margin: 0 auto;
+  }
+}
