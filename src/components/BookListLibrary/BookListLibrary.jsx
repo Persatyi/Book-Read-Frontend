@@ -12,13 +12,15 @@ import spriteSvg from "assets/images/sprite.svg";
 export default function BookListLibrary({ onClick }) {
    const auth = useSelector(isAuth);
    const { data = [], isLoading } = useBooksQuery(null, { skip: !auth });
-   if (isLoading) return <div>Loading</div>
+   if (isLoading) return <div className={s.loadingWrapper}>
+      <div className={s.loadingSpinner}/>
+   </div>
    const status = (e) => {
       const status = data.some(item => (item.status === e))
       return status;
    }
    return (
-      <section>
+      <>
          { status("read") && (
             <div className={s.booksWrapper}>
                <h2 className={s.booksTitle}>Already read</h2>
@@ -110,11 +112,12 @@ export default function BookListLibrary({ onClick }) {
             </ul>
          </div>
          )}
-         <div className={s.linkWrapper}>
-         <NavLink className={s.link} to='/training'>
-            My training
-            </NavLink>
-         </div>
-</section>
+         {data.length > 0 &&
+            <div className={s.linkWrapper}>
+               <NavLink className={s.link} to='/training'>
+                  My training
+               </NavLink>
+            </div>}
+      </>
    )
 };
