@@ -20,6 +20,7 @@ import s from "./Training.module.scss";
 const Training = () => {
   const auth = useSelector(isAuth);
   const [chosenBooks, setChosenBooks] = useState([]);
+  const [dates, setDates] = useState({ start: "", end: "" });
   const [isAdd, setIsAdd] = useState(false);
   const isMobile = useMediaQuery(MOBILE_ONLY);
   const { isLoading, data } = useQuery(["training"], getTraining, {
@@ -49,7 +50,12 @@ const Training = () => {
             type={TYPES.BACK}
             className={s.back}
           />
-          <AddTraining chosenBooks={chosenBooks} chooseBook={setChosenBooks} />
+          <AddTraining
+            chosenBooks={chosenBooks}
+            chooseBook={setChosenBooks}
+            dates={dates}
+            setDates={setDates}
+          />
         </Container>
       </section>
     );
@@ -57,7 +63,10 @@ const Training = () => {
   return (
     <section className={s.section}>
       <Container>
-        <Goal training={data} isActiveTraining={isActiveTraining} />
+        <Goal
+          training={isActiveTraining ? data : { ...dates, books: chosenBooks }}
+          isActiveTraining={isActiveTraining}
+        />
         {!isMobile && !isActiveTraining && (
           <AddTraining chosenBooks={chosenBooks} chooseBook={setChosenBooks} />
         )}

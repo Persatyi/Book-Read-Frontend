@@ -18,7 +18,7 @@ function NumberText({ number, text, isActiveTraining, numberClassName = "" }) {
 NumberText.propTypes = {
   number: PropTypes.number.isRequired,
   text: PropTypes.string.isRequired,
-  numberClassName: PropTypes.string.isRequired,
+  numberClassName: PropTypes.string,
 };
 
 export default NumberText;
