@@ -2,7 +2,7 @@ import s from "./AuthPage.module.scss";
 import AuthForm from "components/AuthForm";
 import PropTypes from "prop-types";
 
-import { useWindowSize } from "hooks/useWindowSize";
+import { useWindowSize } from "hooks";
 import { authType } from "assets/schemas/authFormValidation";
 
 const AuthPage = ({ type, children }) => {

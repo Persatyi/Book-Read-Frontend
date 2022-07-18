@@ -12,7 +12,6 @@ import {
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import { sessionReducer } from "./auth";
-import { globalReducer } from './global/global-slice'
 import { bookApi } from "./api/bookAPI";
 
 const authConfig = {
@@ -25,7 +24,6 @@ const persistedReducer = persistReducer(authConfig, sessionReducer);
 const store = configureStore({
   reducer: {
     auth: persistedReducer,
-    global:globalReducer,
     [bookApi.reducerPath]: bookApi.reducer,
   },
 
