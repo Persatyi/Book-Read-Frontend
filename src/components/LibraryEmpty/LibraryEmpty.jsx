@@ -1,11 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
 import spriteSvg from "assets/images/sprite.svg";
-import { useClickOutside } from "hooks";
+import { useClickOutside, useWindowSize } from "hooks";
+import Button from "components/Button";
 import s from "./LibraryEmpty.module.scss";
 
 const LibraryEmpty = (props) => {
-  const outsideClicker = useClickOutside(() => props.onClose());
+  const outsideClicker = useClickOutside(props.onClose);
+  const size = useWindowSize();
   return (
     props.open && (
       <div ref={outsideClicker} className={s.library}>
@@ -35,6 +37,13 @@ const LibraryEmpty = (props) => {
           </svg>
           <p className={s.text}>Set a goal, choose period, start training. </p>
         </div>
+        {size.width < 768 && (
+          <Button
+            text={"Ok"}
+            onClick={props.onClose}
+            className={s.libraryButton}
+          ></Button>
+        )}
       </div>
     )
   );
