@@ -1,11 +1,9 @@
 import { useState } from "react";
 import { useMediaQuery } from "react-responsive";
 import { useQuery } from "react-query";
-import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import axios from "axios";
 
-import { isAuth } from "redux/auth";
 import { useAddTrainingMutation } from "redux/api/bookAPI";
 
 import { MOBILE_ONLY } from "assets/constants/MEDIA";
@@ -21,7 +19,7 @@ import Button from "components/Button";
 import s from "./Training.module.scss";
 
 const Training = () => {
-  const auth = useSelector(isAuth);
+  const isToken = !!axios.defaults.headers.common.Authorization;
   const [addTraining] = useAddTrainingMutation();
   const [chosenBooks, setChosenBooks] = useState([]);
   const [dates, setDates] = useState({ start: null, end: null });
@@ -29,7 +27,8 @@ const Training = () => {
   const [refetch, setRefetch] = useState(false);
   const isMobile = useMediaQuery(MOBILE_ONLY);
   const { isLoading, data } = useQuery(["training", refetch], getTraining, {
-    enabled: !!auth,
+    enabled: isToken,
+    retry: false,
   });
   async function getTraining() {
     const { data } = await axios.get("/trainings");
