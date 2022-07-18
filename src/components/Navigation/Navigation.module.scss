@@ -6,17 +6,19 @@
     align-items: center;
     position: absolute;
     top: 50%;
-    right: 87px;
+    right: 121px;
     transform: translateY(-50%);
     &::after {
         content: "";
         height: 33px;
         border-right: 1px solid #E0E5EB;
-        margin-right: 14px;
     }
 
     @include mq(tablet) {
-        right: 40px;
+        right: 80px;
+    }
+    @include mq(desktop) {
+        right: 70px;
     }
 }
 
