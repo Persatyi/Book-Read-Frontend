@@ -4,8 +4,8 @@ import PropTypes from "prop-types";
 import Overlay from "components/Overlay";
 import s from "./Modal.module.css";
 
-const ModalWrapper = ({ children, onClose }) => {
-  const modalRef = useRef(document.querySelector("#modal"));
+const ModalWrapper = ({ open, onClose, children }) => {
+  const modalRef = useRef(document.getElementById("modal-root"));
 
   useEffect(() => {
     window.addEventListener("keydown", onEscPress);
@@ -16,17 +16,20 @@ const ModalWrapper = ({ children, onClose }) => {
     if (e.code === "Escape") onClose();
   };
 
-  return createPortal(
-    <Overlay onOverlayClick={onClose}>
-      <div className={s.modal}>{children}</div>
-    </Overlay>,
-    modalRef.current
+  return (
+    open &&
+    createPortal(
+      <Overlay onClick={onClose}>
+        <div className={s.modal}>{children}</div>
+      </Overlay>,
+      modalRef.current
+    )
   );
 };
 
 ModalWrapper.propTypes = {
-  children: PropTypes.node.isRequired,
   onClose: PropTypes.func.isRequired,
+  children: PropTypes.node.isRequired,
 };
 
 export default ModalWrapper;
