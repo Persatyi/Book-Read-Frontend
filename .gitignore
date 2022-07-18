@@ -131,3 +131,6 @@ yarn.lock
 
 #NPM
 package-lock.json
+
+# IDE
+/.idea

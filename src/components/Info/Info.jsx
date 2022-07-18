@@ -2,7 +2,7 @@ import s from "./Info.module.scss";
 import sprite from "../../assets/images/sprite.svg";
 const Info = () => {
   return (
-    <div>
+    <div className={s.wrapper}>
       <h1 className={s.title}>Books Reading</h1>
       <div className={s.listWrapper}>
         <p className={s.listTitle}>Will help you to</p>

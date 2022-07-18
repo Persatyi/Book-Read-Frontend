@@ -15,19 +15,21 @@ const Header = () => {
     headerCls.push(s.loggedIn);
   }
 
-  return <header className={s.header}>
-    
+  return (
+    <header className={s.header}>
       <div className={headerCls.join(" ")}>
         <span className={s.logo}>BR</span>
 
-        {isLoggedIn && <>
-          <UserBar />
-          <Navigation />
-          <Logout/>
-        </>}
+        {isLoggedIn && (
+          <>
+            <UserBar />
+            <Navigation />
+            <Logout />
+          </>
+        )}
       </div>
-    
-  </header>;
+    </header>
+  );
 };
 
 export default Header;
