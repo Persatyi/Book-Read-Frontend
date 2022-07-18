@@ -52,7 +52,7 @@ const Select = ({
       style={{ borderBottomColor: isOpen ? "#24cca7" : null }}
       onClick={openList}
     >
-      {placeholder}
+      {!field.value && placeholder}
       {options?.find(([value]) => value === field.value)?.at(1)}
       {isOpen && (
         <div className={s.wrapper}>

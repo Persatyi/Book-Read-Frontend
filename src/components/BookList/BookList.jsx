@@ -2,7 +2,7 @@ import BookItem from "components/BookItem";
 import PropTypes from "prop-types";
 import s from "./BookList.module.scss";
 
-const BookList = ({ books = [{}], className = "" }) => {
+const BookList = ({ books = [{ _id: "0" }], className = "" }) => {
   return (
     <ul className={`${s.list} ${className}`}>
       {books.map(({ _id, ...book }) => (

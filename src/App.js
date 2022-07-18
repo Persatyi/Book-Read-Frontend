@@ -1,7 +1,10 @@
-// import { Fragment, useEffect } from "react";
+import { useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+
+import { useDispatch, useSelector } from "react-redux";
+import { token, setToken } from "redux/auth";
 
 import Header from "components/Header";
 import Register from "pages/Register";
@@ -13,6 +16,12 @@ import PublicRoute from "components/PublicRoute";
 import PrivateRoute from "components/PrivateRoute";
 
 function App() {
+  const currentToken = useSelector(token);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(setToken(currentToken));
+  }, [currentToken, dispatch]);
+
   return (
     <>
       <Header />

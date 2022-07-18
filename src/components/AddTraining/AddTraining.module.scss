@@ -18,8 +18,13 @@
 }
 
 .button {
+    padding: 13px;
     margin-left: auto;
     margin-right: auto;
+}
+
+.bookButton {
+    composes: button;
     margin-top: 12px;
     max-width: 141px;
     color: var(--main-text-cl);
