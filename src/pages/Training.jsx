@@ -10,22 +10,22 @@ const Training = () => {
   const { data: trainings = {} } = useGetTrainingsQuery();
 
   // const { data: books = [] } = useGetBooksQuery();
-  // console.log("🚀 ~ books", books);
+
   const { data: statistic = {} } = useGetResultsQuery();
 
   // const userStatistic = {};
-  const newData = {
+  const chartData = {
     start: trainings?.start,
     end: trainings?.end,
     totalPages: statistic?.total,
     addedPages: statistic?.added,
-    data: statistic.data,
+    data: statistic?.data,
   };
 
   return trainings && statistic ? (
     <>
       <AddPages data={statistic} />
-      <LineChart data={newData} />
+      <LineChart data={chartData} />
     </>
   ) : null;
 };

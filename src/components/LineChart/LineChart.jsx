@@ -9,10 +9,6 @@ const LineChart = ({ data }) => {
 
   const size = useWindowSize();
 
-  const evrageValue = () => {
-    const trainingDays = dayjs(end).diff(start);
-  };
-
   const middleware = () => {
     const stats = sets?.reduce((acc, el) => {
       const day = dayjs(el.date).format("DD.MM.YYYY");
@@ -54,6 +50,12 @@ const LineChart = ({ data }) => {
     return finalDataSet;
   };
 
+  const everageValue = () => {
+    const trainingDays = dayjs(end).diff(start);
+
+    console.log("🚀 ~ trainingDays", trainingDays);
+  };
+
   const userData = sets
     ? {
         datasets: [
@@ -62,7 +64,7 @@ const LineChart = ({ data }) => {
             backgroundColor: "#091E3F",
             borderColor: "#091E3F",
             borderWidth: 2,
-            data: evrageValue(),
+            data: everageValue(),
             label: "PLAN",
             pointRadius: 5,
             tension: 0.4,
