@@ -1,15 +1,3 @@
-@import "stylesheet/_mixin.scss";
-
-.wrapper {
-  @include mq(desktop) {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -215px);
-    width: 450px;
-  }
-}
-
 .title {
   margin-bottom: 48px;
   text-align: center;

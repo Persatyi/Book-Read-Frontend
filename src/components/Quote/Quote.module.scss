@@ -12,13 +12,6 @@
   @include mq(tablet) {
     width: 397px;
   }
-  @include mq(desktop) {
-    position: absolute;
-    width: 397px;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -178px);
-  }
 }
 
 .quote {

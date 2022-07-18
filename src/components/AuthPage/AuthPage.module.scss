@@ -87,16 +87,16 @@
   background-size: cover;
   &.registrationMobile {
     height: calc(100vh - 60px);
+    padding-bottom: 0;
   }
 }
 
 .textWrapper {
-  margin: 0 auto;
+  // position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
   padding-top: 4px;
-  padding-bottom: 30px;
   @include mq(tablet) {
     height: 100%;
     padding-top: 64px;
@@ -104,7 +104,6 @@
   }
 
   @include mq(desktop) {
-    position: relative;
     width: 58vw;
     padding: 0;
   }

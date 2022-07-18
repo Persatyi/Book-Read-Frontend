@@ -10,11 +10,7 @@ const AuthPage = ({ type, children }) => {
 
   const adjustClassName = () => {
     const classNames = [s.formWrapper];
-    if (
-      type === authType.registration &&
-      size.width < 768 &&
-      size.height > 592
-    ) {
+    if (type === authType.registration && size.width < 768) {
       classNames.push(s.registrationMobile);
     }
     return classNames.join(" ");
