@@ -1,8 +1,8 @@
 @mixin mq($range) {
-  $s-mobile: 320px;
-  $mobile: 480px;
-  $tablet: 768px;
-  $desktop: 1280px;
+  $s-mobile: var(--s-mobile);
+  $mobile: var(--mobile);
+  $tablet: var(--tablet);
+  $desktop: var(--desktop);
 
   @if $range == s-mobile-only {
     @media (min-width: $s-mobile) and (max-width: #{$mobile - 0.02}) {

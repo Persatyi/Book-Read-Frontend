@@ -1,9 +1,15 @@
 :root {
+  /* main colors */
   --accent-cl: #ff6b08;
-  --main-bg-cl: #ffffff;
+  --primary-black-cl: #000000;
+  --secondary-black-cl: #242a37;
+  --primary-white-cl: #ffffff;
+
+  /* utils colors */
+  --main-bg-cl: var(--primary-white-cl);
   --secondary-bg-cl: #f6f7fb;
   --auth-bg-cl: #e5e5e5;
-  --main-text-cl: #242a37;
+  --main-text-cl: var(--secondary-black-cl);
   --secondary-text-cl: #898f9f;
   --btn-cl: var(--accent-cl);
   --btn-hover-cl: rgb(209, 74, 0);
@@ -11,8 +17,13 @@
   --placeholder-cl: #a6abb9;
   --titles-bg-cl: #b1b5c2;
   --numbers-cl: #091e3f;
-  --primary-black-cl: #000000;
   --library-btn-cl: #6d7a8d;
   --pic-overlay: rgba(9, 30, 63, 0.8);
   --modal-overlay: rgba(43, 43, 43, 0.1);
+
+  /* sizes */
+  --s-mobile: 320px;
+  --mobile: 480px;
+  --tablet: 768px;
+  --desktop: 1280px;
 }
