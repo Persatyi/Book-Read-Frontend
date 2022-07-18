@@ -17,7 +17,7 @@ const Header = () => {
 
   return (
     <header className={s.header}>
-      <Container className={!isLoggedIn ? s.authPage : ""}>
+      <Container>
         <div className={headerCls.join(" ")}>
           <span className={s.logo}>BR</span>
 
