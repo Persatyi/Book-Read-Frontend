@@ -6,6 +6,9 @@ import {
   useGetTrainingQuery,
 } from "redux/api/bookAPI";
 
+import Countdowns from "components/Countdowns";
+import Container from "components/Container";
+
 const Training = () => {
   const { data: trainings = {} } = useGetTrainingQuery();
   const { data: statistic = {} } = useGetResultsQuery();
@@ -22,11 +25,12 @@ const Training = () => {
   };
 
   return trainings && statistic ? (
-    <>
+    <Container>
+      <Countdowns date={Date.now() + 9000000} />
       <AddPages data={statistic} />
       <LineChart data={chartData} />
-    </>
+    </Container>
   ) : null;
-};
+}
 
 export default Training;
