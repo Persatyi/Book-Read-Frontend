@@ -1,6 +1,12 @@
 .wrapper {
     display: grid;
     gap: 14px;
+    justify-content: center;
+}
+
+.activeWrapper {
+    composes: wrapper;
+    gap: 8px;
 }
 
 .number {
@@ -18,10 +24,26 @@
     box-shadow: 4px 4px 8px rgba(36, 42, 55, 0.15);
 }
 
+.activeNumber {
+    composes: number;
+    width: 63px;
+    height: 63px;
+    font-size: 35px;
+    line-height: 1.08;
+
+}
+
 .text {
+    width: 100%;
     font-weight: 500;
     font-size: 14px;
     line-height: 1.21;
     text-align: center;
     color: var(--secondary-text-cl);
+}
+
+.activeText {
+    composes: text;
+    font-size: 11px;
+    line-height: 1.18;
 }

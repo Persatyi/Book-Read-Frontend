@@ -19,14 +19,27 @@ function Goal({ training, isActiveTraining }) {
       <Title text="Моя мета прочитати" />
       <ul className={isActiveTraining ? s.activeNumbers : s.numbers}>
         <li>
-          <NumberText number={booksNumber} text="Кількість книжок" />
+          <NumberText
+            number={booksNumber}
+            text="Кількість книжок"
+            isActiveTraining={isActiveTraining}
+          />
         </li>
         <li>
-          <NumberText number={daysNumber} text="Кількість днів" />
+          <NumberText
+            number={daysNumber}
+            text="Кількість днів"
+            isActiveTraining={isActiveTraining}
+          />
         </li>
         {isActiveTraining && (
           <li>
-            <NumberText number={booksLeft} text="Залишилось книжок" />
+            <NumberText
+              number={booksLeft}
+              text="Залишилось книжок"
+              isActiveTraining={isActiveTraining}
+              numberClassName={s.accent}
+            />
           </li>
         )}
       </ul>
