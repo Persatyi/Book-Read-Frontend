@@ -3,6 +3,7 @@ import Countdowns from "components/Countdowns";
 import Container from "components/Container";
 
 const Training = () => {
+  // date = training.end
   return (
     <Container>
       <Countdowns date={Date.now() + 9000000} />

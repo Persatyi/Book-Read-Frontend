@@ -1,16 +1,20 @@
 @import "stylesheet/_mixin.scss";
 
 .container {
-  margin-bottom: 40px;
-  &:first-child {
-    margin-bottom: 24px;
-    @include mq(tablet) {
-      margin-bottom: 0px;
-      margin-right: 32px;
-    }
-  }
-  margin-bottom: 24px;
+  // margin-bottom: 40px;
+  display: grid;
+  grid-row-gap: 24px;
   @include mq(tablet) {
-    display: flex;
+    grid-row-gap: 0px;
+    grid-column-gap: 32px;
+    width: 612px;
+    grid-template-columns: 1fr 1fr;
+    // margin-bottom: 36px;
+  }
+  @include mq(tablet) {
+    grid-row-gap: 0px;
+    grid-column-gap: 74px;
+    width: 654px;
+    grid-template-columns: 1fr 1fr;
   }
 }
