@@ -5,26 +5,10 @@ import Library from "components/Library/Library";
 import LibraryModal from "components/LibraryModal/LibraryModal";
 import globalSelectors from "../redux/global/global-selectors";
 import { toggleModal } from "redux/global/global-slice";
-import spriteSvg from "assets/images/sprite.svg";
-import BookList from "components/BookList/BookList";
+import BookListLibrary from '../components/BookListLibrary/BookListLibrary';
 import Container from "../components/Container/Container";
-
-const moreIcon = {
-  width: "52px",
-  height: "52px",
-  position: "fixed",
-  bottom: "12px",
-  cursor: "pointer",
-  marginLeft: "auto",
-  marginRight: "auto",
-  left: 0,
-  right: 0,
-};
-const backIcon = {
-  marginTop: "24px",
-  width: "24px",
-  height: "12px",
-};
+import MoreBtn from "components/MoreBtn/MoreBtn";
+import BackBtn from "components/BackBtn/BackBtn";
 
 export default function LibraryPage() {
   const [openLibrary, setOpenLibrary] = useState(false);
@@ -40,28 +24,18 @@ export default function LibraryPage() {
     setPlus(!plus);
   };
   return (
-    <div
-      style={{
-        backgroundColor: "var(--secondary-bg-cl)",
-        minHeight: "92vh",
-      }}
-    >
       <Container>
         {size.width < 768 && (
           <>
             {plus && (
-              <>
-                <svg onClick={isLibraryToggle} style={moreIcon}>
-                  <use href={`${spriteSvg}#icon-more`} />
-                </svg>
-                <BookList onClick={isOpenModal} />
+            <>
+              <MoreBtn onClick={isLibraryToggle} />
+                <BookListLibrary onClick={isOpenModal} />
               </>
             )}
             {openLibrary && (
-              <>
-                <svg onClick={isLibraryToggle} style={backIcon}>
-                  <use href={`${spriteSvg}#icon-back`} />
-                </svg>
+            <>
+              <BackBtn onClick={isLibraryToggle} />
                 <Library />
               </>
             )}
@@ -70,11 +44,10 @@ export default function LibraryPage() {
         {size.width > 768 && (
           <>
             <Library />
-            <BookList onClick={isOpenModal} />
+            <BookListLibrary onClick={isOpenModal} />
           </>
         )}
         {modalOpen && <LibraryModal />}
       </Container>
-    </div>
   );
 }

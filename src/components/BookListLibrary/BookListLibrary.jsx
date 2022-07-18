@@ -2,11 +2,11 @@ import React from 'react';
 import { NavLink } from "react-router-dom";
 import TitleRead from './TitleRead/TitleRead'
 import TitleReading from './TitleReading/TitleReading'
-import s from './BookList.module.scss';
+import s from './BookListLibrary.module.scss';
 import spriteSvg from "assets/images/sprite.svg";
 
 
-export default function BookList({onClick}) {
+export default function BookListLibrary({onClick}) {
    return (
       <>
          <div className={s.booksWrapper}>
