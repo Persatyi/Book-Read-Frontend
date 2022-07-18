@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import { Formik, Form } from "formik";
 import { toast } from "react-toastify";
 import { useMediaQuery } from "react-responsive";
@@ -24,17 +25,29 @@ const AddTraining = ({
   const { data, isSuccess, isFetching } = useBooksQuery();
   const [addTraining] = useAddTrainingMutation();
   const isMobile = useMediaQuery(MOBILE_ONLY);
-  const allBooks = data?.map(({ _id, title }) => [_id, title]);
-  const addBook = (values) => {
+
+  const bookIds = useMemo(
+    () => chosenBooks.map(({ _id }) => _id),
+    [chosenBooks]
+  );
+  const allBooks = useMemo(
+    () =>
+      data
+        ?.filter(({ _id }) => !bookIds.includes(_id))
+        .map(({ _id, title }) => [_id, title]),
+    [data, bookIds]
+  );
+  const addBook = (values, setFieldValue) => {
     const newBook = data.find(({ _id }) => _id === values.book);
     chooseBook([...chosenBooks, newBook]);
+    setFieldValue("book", "");
   };
+
   const onSubmit = async ({ start, end }) => {
     if (!chosenBooks.length) {
       toast.error("Додайте хоч одну книгу");
       return;
     }
-    const bookIds = chosenBooks.map(({ _id }) => _id);
     const training = { start, end, books: bookIds };
     try {
       addTraining(training);
@@ -59,7 +72,7 @@ const AddTraining = ({
           }}
           onSubmit={onSubmit}
         >
-          {({ values }) => (
+          {({ values, setFieldValue }) => (
             <Form className={s.form}>
               <DatePickerField
                 name="start"
@@ -90,7 +103,7 @@ const AddTraining = ({
               <Button
                 text="Додати"
                 className={s.bookButton}
-                onClick={() => addBook(values)}
+                onClick={() => addBook(values, setFieldValue)}
               />
               {!!chosenBooks.length && !isMobile && (
                 <Button
