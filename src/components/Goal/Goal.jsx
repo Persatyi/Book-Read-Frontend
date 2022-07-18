@@ -1,3 +1,5 @@
+import PropTypes from "prop-types";
+
 import NumberText from "components/NumberText";
 import Title from "components/Title";
 
@@ -15,7 +17,7 @@ function Goal({ training, isActiveTraining }) {
   return (
     <div className={s.container}>
       <Title text="Моя мета прочитати" />
-      <ul className={s.numbers}>
+      <ul className={isActiveTraining ? s.activeNumbers : s.numbers}>
         <li>
           <NumberText number={booksNumber} text="Кількість книжок" />
         </li>
@@ -31,4 +33,22 @@ function Goal({ training, isActiveTraining }) {
     </div>
   );
 }
+Goal.propTypes = {
+  training: PropTypes.shape({
+    start: PropTypes.string.isRequired,
+    end: PropTypes.string.isRequired,
+    books: PropTypes.arrayOf(
+      PropTypes.shape({
+        title: PropTypes.string.isRequired,
+        author: PropTypes.string.isRequired,
+        year: PropTypes.number.isRequired,
+        pages: PropTypes.number.isRequired,
+        status: PropTypes.string.isRequired,
+        rating: PropTypes.number.isRequired,
+        resume: PropTypes.string.isRequired,
+      })
+    ).isRequired,
+  }).isRequired,
+};
+
 export default Goal;

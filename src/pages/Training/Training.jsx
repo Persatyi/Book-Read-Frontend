@@ -12,7 +12,7 @@ import Container from "components/Container";
 import Goal from "components/Goal";
 import AddTraining from "components/AddTraining";
 import BookList from "components/BookList";
-import AddButton from "components/AddButton/AddButton";
+import IconButton, { TYPES } from "components/IconButton";
 // import Statistics from "components/Statistics";
 
 import s from "./Training.module.scss";
@@ -20,6 +20,7 @@ import s from "./Training.module.scss";
 const Training = () => {
   const auth = useSelector(isAuth);
   const [chosenBooks, setChosenBooks] = useState([]);
+  const [isAdd, setIsAdd] = useState(false);
   const isMobile = useMediaQuery(MOBILE_ONLY);
   const { isLoading, data } = useQuery(["training"], getTraining, {
     enabled: !!auth,
@@ -30,9 +31,29 @@ const Training = () => {
   }
   const isActiveTraining = !!data;
   const books = isActiveTraining ? data.books : chosenBooks;
-  const onAddButtonClick = () => {};
+  const onAddButtonClick = () => {
+    setIsAdd(true);
+  };
+  const onBackButtonClick = () => {
+    setIsAdd(false);
+  };
 
   if (isLoading) return <div>Loading...</div>;
+  if (isAdd)
+    return (
+      <section className={s.section}>
+        <Container>
+          <IconButton
+            onClick={onBackButtonClick}
+            label="Назад"
+            type={TYPES.BACK}
+            className={s.back}
+          />
+          <AddTraining chosenBooks={chosenBooks} chooseBook={setChosenBooks} />
+        </Container>
+      </section>
+    );
+
   return (
     <section className={s.section}>
       <Container>
@@ -45,8 +66,8 @@ const Training = () => {
           className={s.books}
           isActiveTraining={isActiveTraining}
         />
-        {isMobile && (
-          <AddButton onClick={onAddButtonClick} label="Додати тренування" />
+        {isMobile && !isActiveTraining && (
+          <IconButton onClick={onAddButtonClick} label="Додати книгу" />
         )}
         {/* <Statistics/> */}
       </Container>
