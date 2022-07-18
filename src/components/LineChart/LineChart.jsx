@@ -51,9 +51,9 @@ const LineChart = ({ data }) => {
   };
 
   const everageValue = () => {
-    const trainingDays = dayjs(end).diff(start);
-
-    console.log("🚀 ~ trainingDays", trainingDays);
+    const trainingDays = dayjs(end).diff(start, "day");
+    const averageAmount = totalPages / trainingDays;
+    console.log("🚀 ~ averageAmount", averageAmount);
   };
 
   const userData = sets
