@@ -23,7 +23,7 @@ const Logout = () => {
 
   return (
     <button type="button" className={s.logoutBtn} onClick={() => logout()}>
-      Вихід
+      Logout
     </button>
   );
 };
