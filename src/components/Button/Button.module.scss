@@ -43,3 +43,10 @@
     background-color: var(--secondary-text-cl);
   }
 }
+
+.transparent {
+  composes: main;
+  composes: secondary;
+  background-color: transparent;
+  color: var(--secondary-black-cl);
+}
