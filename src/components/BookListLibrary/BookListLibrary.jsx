@@ -1,49 +1,54 @@
 import React from 'react';
 import { NavLink } from "react-router-dom";
+import {useBooksQuery} from 'redux/api/bookAPI'
 import TitleRead from './TitleRead/TitleRead'
 import TitleReading from './TitleReading/TitleReading'
 import s from './BookListLibrary.module.scss';
 import spriteSvg from "assets/images/sprite.svg";
 
 
-export default function BookListLibrary({onClick}) {
+export default function BookListLibrary({ onClick }) {
+   // const { data } = useBooksQuery(null, { skip: !auth });
+   const { data } = useBooksQuery();
    return (
       <>
-         <div className={s.booksWrapper}>
-         <h2 className={s.booksTitle}>Already read</h2>
-         <TitleRead />
-         <ul>
-            <li
-               // key={_id}
-               className={s.readItem}>
-               <ul className={s.readBookList}>
-                  <li className={s.readBookItem}>
-                     <svg className={s.readBookIcon}>
-                        <use href={`${spriteSvg}#icon-read`} />
-                     </svg>
-                     <p>A mental hospital in Lorem ipsum dolor sit amet, consectetur adipisicing elit. Recusandae, autem.</p>
-                     {/* {title} */}
+            <div className={s.booksWrapper}>
+               <h2 className={s.booksTitle}>Already read</h2>
+               <TitleRead />
+            <ul>
+               {data.map(item => (
+                  <li
+                     // key={item._id}
+                     className={s.readItem}>
+                     <ul className={s.readBookList}>
+                        <li className={s.readBookItem}>
+                           <svg className={s.readBookIcon}>
+                              <use href={`${spriteSvg}#icon-read`} />
+                           </svg>
+                           <p>A mental hospital in Lorem ipsum dolor sit amet, consectetur adipisicing elit. Recusandae, autem.</p>
+                           {/* {title} */}
+                        </li>
+                        <li className={s.readBookItem}><span>Author:</span>Cooper Alan
+                           {/* author */}
+                        </li>
+                        <li className={s.readBookItem}><span>Year:</span>2009
+                           {/* year */}
+                        </li>
+                        <li className={s.readBookItem}><span>Pages:</span>183
+                           {/* pages */}
+                        </li>
+                        <li className={s.readBookItem}>
+                           <span>Rating:</span>
+                           <svg style={{ width: "101px", height: "17px" }}>
+                              <use href={`${spriteSvg}#icon-rating`} />
+                           </svg>
+                        </li>
+                        <li className={s.readBookButton} onClick={onClick}>Resume</li>
+                     </ul>
                   </li>
-                  <li className={s.readBookItem}><span>Author:</span>Cooper Alan
-                     {/* author */}
-                  </li>
-                  <li className={s.readBookItem}><span>Year:</span>2009
-                     {/* year */}
-                  </li>
-                  <li className={s.readBookItem}><span>Pages:</span>183
-                     {/* pages */}
-                  </li>
-                     <li className={s.readBookItem}>
-                        <span>Rating:</span>
-                     <svg style={{ width: "101px", height: "17px" }}>
-                        <use href={`${spriteSvg}#icon-rating`} />
-                     </svg>
-                  </li>
-                  <li className={s.readBookButton} onClick={onClick}>Resume</li>
+               ))}
                </ul>
-            </li>
-         </ul>
-      </div>
+         </div>
          <div className={s.booksWrapper}>
             <h2 className={s.booksTitle}>Reading now</h2>
             <TitleReading />

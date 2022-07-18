@@ -37,6 +37,10 @@ export const bookApi = createApi({
       query: () => "/users/current",
       providesTags: ["User"],
     }),
+    books: build.query({
+      query: () => "/books",
+      providesTags: ["Books"],
+    }),
     addBook: build.mutation({
       query: (data)=> ({url: "/books", method: "POST", body: data}),
     }),
@@ -52,5 +56,6 @@ export const {
   useLogoutMutation,
   useCurrentQuery,
   useGetResultsQuery,
+  useBooksQuery,
   useAddBookMutation,
 } = bookApi;
