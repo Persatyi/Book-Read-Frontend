@@ -37,6 +37,9 @@ export const bookApi = createApi({
       query: () => "/users/current",
       providesTags: ["User"],
     }),
+    addBook: build.mutation({
+      query: (data)=> ({url: "/books", method: "POST", body: data}),
+    }),
   }),
 });
 // refetchOnFocus: true,
@@ -49,4 +52,5 @@ export const {
   useLogoutMutation,
   useCurrentQuery,
   useGetResultsQuery,
+  useAddBookMutation,
 } = bookApi;

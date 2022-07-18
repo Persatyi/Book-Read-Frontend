@@ -1,10 +1,12 @@
 import React from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
+import { toast } from "react-toastify";
 import s from "./AddBook.module.scss";
+import {useAddBookMutation} from 'redux/api/bookAPI'
 import addBookSchema from "./addBookSchema";
 
 export default function AddBook() {
-  const disp = (values) => console.log(values);
+  const [addBook] = useAddBookMutation();
   return (
     <Formik
       initialValues={{
@@ -15,8 +17,9 @@ export default function AddBook() {
       }}
       validationSchema={addBookSchema}
       validateOnBlur
-      onSubmit={(values, actions) => {
-        disp(values);
+      onSubmit={async(values, actions) => {
+        await addBook(values);
+        toast.success("Book added");
         actions.resetForm();
       }}
     >
