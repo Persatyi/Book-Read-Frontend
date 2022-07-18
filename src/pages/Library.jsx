@@ -1,13 +1,10 @@
 import React, { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { useWindowSize } from "hooks";
-import Library from "components/Library/Library";
-import LibraryModal from "components/LibraryModal/LibraryModal";
-import globalSelectors from "../redux/global/global-selectors";
-import { toggleModal } from "redux/global/global-slice";
+import { useToggle, useWindowSize } from "hooks";
 import spriteSvg from "assets/images/sprite.svg";
+import Library from "components/Library/Library";
+import LibraryEmpty from "components/LibraryEmpty";
 import BookList from "components/BookList/BookList";
-import Container from "../components/Container/Container";
+import Container from "components/Container";
 
 const moreIcon = {
   width: "52px",
@@ -27,17 +24,14 @@ const backIcon = {
 };
 
 export default function LibraryPage() {
-  const [openLibrary, setOpenLibrary] = useState(false);
-  const [plus, setPlus] = useState(true);
-  const dispatch = useDispatch();
+  const [showsLib, toggleLib] = useToggle();
+  const [plus, togglePlus] = useToggle();
+  /* TODO: placeholder must be shown only when library is empty */
+  const [showsPlaceholder, setShowsPlaceholder] = useState(true);
   const size = useWindowSize();
-  const modalOpen = useSelector(globalSelectors.getIsModal);
-  const isOpenModal = () => {
-    dispatch(toggleModal());
-  };
   const isLibraryToggle = () => {
-    setOpenLibrary(!openLibrary);
-    setPlus(!plus);
+    toggleLib();
+    togglePlus();
   };
   return (
     <div
@@ -54,10 +48,11 @@ export default function LibraryPage() {
                 <svg onClick={isLibraryToggle} style={moreIcon}>
                   <use href={`${spriteSvg}#icon-more`} />
                 </svg>
-                <BookList onClick={isOpenModal} />
+                {/* TODO: open Resume modal on click */}
+                <BookList onClick={() => {}} />
               </>
             )}
-            {openLibrary && (
+            {showsLib && (
               <>
                 <svg onClick={isLibraryToggle} style={backIcon}>
                   <use href={`${spriteSvg}#icon-back`} />
@@ -67,13 +62,17 @@ export default function LibraryPage() {
             )}
           </>
         )}
-        {size.width > 768 && (
+        {size.width >= 768 && (
           <>
             <Library />
-            <BookList onClick={isOpenModal} />
+            {/* TODO: open Resume modal on click */}
+            <BookList onClick={() => {}} />
           </>
         )}
-        {modalOpen && <LibraryModal />}
+        <LibraryEmpty
+          open={showsPlaceholder}
+          onClose={() => setShowsPlaceholder(false)}
+        />
       </Container>
     </div>
   );
