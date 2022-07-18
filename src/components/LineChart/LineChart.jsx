@@ -1,11 +1,12 @@
 import s from "./Chart.module.scss";
-import { useWindowSize } from "hooks/useWindowSize";
+import useWindowSize from "hooks/useWindowSize";
 import "chart.js/auto";
 import { Chart } from "react-chartjs-2";
 import dayjs from "dayjs";
 
 const LineChart = ({ data }) => {
   const { start, end, totalPages, addedPages, data: sets = [] } = data;
+  console.log("🚀 ~ addedPages", addedPages);
 
   const size = useWindowSize();
 
@@ -15,6 +16,7 @@ const LineChart = ({ data }) => {
       const pages = acc[day] ? acc[day] : [];
       return { ...acc, [day]: [...pages, el.pages] };
     }, {});
+    console.log("🚀 ~ stats", stats);
 
     const finalDataSet = [];
 
@@ -25,39 +27,37 @@ const LineChart = ({ data }) => {
           y: stats[key].reduce((acc, el) => acc + el, 0),
         };
       });
+      console.log("🚀 ~ dataSet", dataSet);
 
       const dateNow = dayjs();
       const date2 = dayjs(start);
-      const range = dateNow.diff(date2, "day");
-      if (range < 7) {
-        for (let i = 0; i < range; i += 1) {
-          const day = dayjs(date2).add(i, "day");
-          const element = dataSet.find(
-            (el) => el.x === dayjs(day).format("DD.MM.YYYY")
-          );
-          if (element) {
-            finalDataSet.push(element);
-          } else {
-            finalDataSet.push({ x: dayjs(day).format("DD.MM.YYYY"), y: 0 });
-          }
+      const range = Math.ceil(dateNow.diff(date2, "day", true));
+
+      for (let i = 0; i <= range; i += 1) {
+        const day = dayjs(date2).add(i, "day");
+        const element = dataSet.find(
+          (el) => el.x === dayjs(day).format("DD.MM.YYYY")
+        );
+        if (element) {
+          finalDataSet.push(element);
+        } else {
+          finalDataSet.push({ x: dayjs(day).format("DD.MM.YYYY"), y: 0 });
         }
       }
     }
-    // if (finalDataSet.length === 7) {
-    //   return finalDataSet;
-    // }
 
     return finalDataSet;
   };
 
   const everageValue = () => {
-    const trainingDays = dayjs(end).diff(start, "day");
+    const trainingDays = Math.ceil(dayjs(end).diff(start, "day", true));
+
     const dateNow = dayjs();
-    const averageAmount = totalPages / trainingDays;
+    let averageAmount = totalPages / trainingDays;
     const startDate = dayjs(start);
     const finalDataSet = [];
 
-    if (dateNow.diff(start, "day") <= 7) {
+    if (Math.ceil(dateNow.diff(start, "day", true)) <= 7) {
       for (let i = 0; i < 7; i += 1) {
         const day = dayjs(startDate).add(i, "day");
         finalDataSet.push({ x: day.format("DD.MM.YYYY"), y: averageAmount });
