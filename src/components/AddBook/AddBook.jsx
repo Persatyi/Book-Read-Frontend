@@ -1,9 +1,9 @@
 import React from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import s from "./Library.module.scss";
-import librarySchema from "./librarySchema";
+import s from "./AddBook.module.scss";
+import addBookSchema from "./addBookSchema";
 
-export default function Library() {
+export default function AddBook() {
   const disp = (values) => console.log(values);
   return (
     <Formik
@@ -13,7 +13,7 @@ export default function Library() {
         year: "",
         pages: "",
       }}
-      validationSchema={librarySchema}
+      validationSchema={addBookSchema}
       validateOnBlur
       onSubmit={(values, actions) => {
         disp(values);

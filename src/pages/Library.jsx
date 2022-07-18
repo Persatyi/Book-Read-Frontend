@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useWindowSize } from "hooks/useWindowSize";
-import Library from "components/Library/Library";
+import AddBook from "components/AddBook/AddBook";
 import LibraryModal from "components/LibraryModal/LibraryModal";
 import globalSelectors from "../redux/global/global-selectors";
 import { toggleModal } from "redux/global/global-slice";
@@ -36,14 +36,14 @@ export default function LibraryPage() {
             {openLibrary && (
             <>
               <BackBtn onClick={isLibraryToggle} />
-                <Library />
+                <AddBook />
               </>
             )}
           </>
         )}
         {size.width > 768 && (
           <>
-            <Library />
+            <AddBook />
             <BookListLibrary onClick={isOpenModal} />
           </>
         )}
