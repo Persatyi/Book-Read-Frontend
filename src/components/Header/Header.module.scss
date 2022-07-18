@@ -12,26 +12,32 @@
 .container {
   margin-left: auto;
   margin-right: auto;
-  width: 280px;
+  padding-left: 20px;
+  padding-right: 20px;
+  width: 100vw;
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
   &.loggedIn {
     justify-content: space-between;
-  }
-
-  @include mq(mobile) {
-    width: 430px;
+    @include mq(tablet) {
+      width: 768px;
+    }
+    @include mq(desktop) {
+      width: 1248px;
+    }
   }
 
   @include mq(tablet) {
-    width: 704px;
-    justify-content: flex-start;
+    padding-left: 32px;
+    padding-right: 32px;
+    justify-content: space-between;
   }
 
   @include mq(desktop) {
-    width: 1248px;
+    padding-left: 16px;
+    padding-right: 16px;
   }
 }
 
