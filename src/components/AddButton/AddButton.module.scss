@@ -1,0 +1,21 @@
+.button {
+    position: absolute;
+    bottom: 32px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 0;
+    width: 52px;
+    height: 52px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    border-radius: 50%;
+    background-color: var(--btn-cl);
+    transition: background-color 250ms linear;
+
+    &:hover,
+    &:focus {
+        background-color: var(--btn-hover-cl);
+    }
+}

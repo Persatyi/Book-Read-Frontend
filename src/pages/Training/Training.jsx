@@ -12,6 +12,7 @@ import Container from "components/Container";
 import Goal from "components/Goal";
 import AddTraining from "components/AddTraining";
 import BookList from "components/BookList";
+import AddButton from "components/AddButton/AddButton";
 // import Statistics from "components/Statistics";
 
 import s from "./Training.module.scss";
@@ -29,8 +30,9 @@ const Training = () => {
   }
   const isActiveTraining = !!data;
   const books = isActiveTraining ? data.books : chosenBooks;
-  if (isLoading) return <div>Loading...</div>;
+  const onAddButtonClick = () => {};
 
+  if (isLoading) return <div>Loading...</div>;
   return (
     <section className={s.section}>
       <Container>
@@ -43,7 +45,9 @@ const Training = () => {
           className={s.books}
           isActiveTraining={isActiveTraining}
         />
-        {/* {isMobile && <IconButton/>} */}
+        {isMobile && (
+          <AddButton onClick={onAddButtonClick} label="Додати тренування" />
+        )}
         {/* <Statistics/> */}
       </Container>
     </section>
