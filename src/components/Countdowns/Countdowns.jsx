@@ -3,7 +3,7 @@ import dayjs from "dayjs";
 import s from "./Countdowns.module.scss";
 
 const Countdowns = ({ date }) => {
-  const endOfYear = dayjs().endOf("year");
+  const endOfYear = dayjs().endOf("year").format();
   return (
     <div className={s.container}>
       <Timer title="Years countdown" date={endOfYear} />
