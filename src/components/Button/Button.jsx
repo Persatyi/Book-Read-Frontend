@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 // export const STYLE_TYPE = {
 //   MAIN: "main",
 //   SECONDARY: "secondary",
+//   TRANSPARENT: "transparent",
 // };
 
 const Button = ({

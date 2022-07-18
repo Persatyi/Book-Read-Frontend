@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 import PropTypes from "prop-types";
 import Overlay from "components/Overlay";
-import s from "./Modal.module.css";
+import s from "./ModalWrapper.module.scss";
 
 const ModalWrapper = ({ open, onClose, children }) => {
   const modalRef = useRef(document.getElementById("modal-root"));
@@ -28,6 +28,7 @@ const ModalWrapper = ({ open, onClose, children }) => {
 };
 
 ModalWrapper.propTypes = {
+  open: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
   children: PropTypes.node.isRequired,
 };

@@ -1,0 +1,15 @@
+.btn {
+  background-color: transparent;
+  border: none;
+}
+
+.star {
+  width: 17px;
+  height: 17px;
+  &.active {
+    stroke: var(--accent-cl);
+  }
+  &.inactive {
+    stroke: var(--placeholder-cl);
+  }
+}
