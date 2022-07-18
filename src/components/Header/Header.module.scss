@@ -6,6 +6,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: var(--main-bg-cl);
 }
 
 .container {
@@ -32,7 +33,6 @@
     padding-left: 32px;
     padding-right: 32px;
     justify-content: space-between;
-    
   }
 
   @include mq(desktop) {
