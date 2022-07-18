@@ -37,11 +37,11 @@ export const bookApi = createApi({
       query: () => "/users/current",
       providesTags: ["User"],
     }),
-    getBooks: build.query({
+    books: build.query({
       query: () => "/books",
-      providesTags: ["Results"],
+      providesTags: ["Books", "Results"],
     }),
-    getTrainings: build.query({
+    getTraining: build.query({
       query: () => "/trainings",
       providesTags: ["Results"],
     }),
@@ -57,6 +57,6 @@ export const {
   useLogoutMutation,
   useCurrentQuery,
   useGetResultsQuery,
-  useGetBooksQuery,
-  useGetTrainingsQuery,
+  useBooksQuery,
+  useGetTrainingQuery,
 } = bookApi;
