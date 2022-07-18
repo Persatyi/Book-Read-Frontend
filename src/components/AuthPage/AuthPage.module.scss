@@ -87,16 +87,16 @@
   background-size: cover;
   &.registrationMobile {
     height: calc(100vh - 60px);
-    padding-bottom: 0;
   }
 }
 
 .textWrapper {
-  // position: relative;
+  margin: 0 auto;
   display: flex;
   align-items: center;
   justify-content: center;
   padding-top: 4px;
+  padding-bottom: 30px;
   @include mq(tablet) {
     height: 100%;
     padding-top: 64px;
@@ -104,7 +104,109 @@
   }
 
   @include mq(desktop) {
+    position: relative;
     width: 58vw;
     padding: 0;
   }
 }
+// ----------------------------------------------------------
+
+// .wrapperMain {
+//   width: 100vw;
+//   background-image: linear-gradient(
+//       to bottom,
+//       var(--pic-overlay),
+//       var(--pic-overlay)
+//     ),
+//     url("../../assets/images/auth/bg-reg-sm-min.jpeg");
+
+//   @include mq(retina) {
+//     background-image: linear-gradient(
+//         to bottom,
+//         var(--pic-overlay),
+//         var(--pic-overlay)
+//       ),
+//       url("../../assets/images/auth/bg-reg-sm-2x-min.jpeg");
+//   }
+//   background-size: cover;
+//   background-repeat: no-repeat;
+//   @include mq(tablet) {
+//     background-image: linear-gradient(
+//         to bottom,
+//         var(--pic-overlay),
+//         var(--pic-overlay)
+//       ),
+//       url("../../assets/images/auth/bg-reg-md-min.jpeg");
+
+//     @include mq(retina) {
+//       background-image: linear-gradient(
+//           to bottom,
+//           var(--pic-overlay),
+//           var(--pic-overlay)
+//         ),
+//         url("../../assets/images/auth/bg-reg-md-2x-min.jpeg");
+//     }
+//   }
+//   @include mq(desktop) {
+//     background-image: linear-gradient(
+//         to bottom,
+//         var(--pic-overlay),
+//         var(--pic-overlay)
+//       ),
+//       url("../../assets/images/auth/bg-log-lg-min.jpeg");
+//     @include mq(retina) {
+//       background-image: linear-gradient(
+//           to bottom,
+//           var(--pic-overlay),
+//           var(--pic-overlay)
+//         ),
+//         url("../../assets/images/auth/bg-log-lg-2x-min.jpeg");
+//     }
+//     background-size: calc(50vw - 98px);
+//   }
+// }
+
+// .wrapperS {
+//   display: flex;
+//   flex-direction: column;
+//   @include mq(desktop) {
+//     flex-direction: row;
+//     flex-wrap: nowrap;
+//     height: calc(100vh - 60px);
+//   }
+// }
+
+// .formWrapperS {
+//   @include mq(tablet) {
+//     display: flex;
+//     align-items: center;
+//     justify-content: center;
+//     padding-top: 64px;
+//     padding-bottom: 64px;
+//   }
+//   @include mq(desktop) {
+//     padding: 0;
+//     width: 42%;
+//     height: 100%;
+//   }
+// }
+
+// .textWrapperS {
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+//   padding-top: 4px;
+//   padding-bottom: 30px;
+//   @include mq(tablet) {
+//     height: 100%;
+//     padding-top: 64px;
+//     padding-bottom: 64px;
+//   }
+
+//   @include mq(desktop) {
+//     position: relative;
+//     width: 58%;
+//     padding: 0;
+//     // border: 1px solid black;
+//   }
+// }
