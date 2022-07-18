@@ -1,5 +1,29 @@
+@import "stylesheet/mixin.scss";
+
 .chart {
-  padding: 25px 22px, 40px 22px;
+  background-color: var(--main-bg-cl);
+  box-shadow: 0px 2px 3px rgba(9, 30, 63, 0.25);
   width: 280px;
   height: 290px;
+  padding-top: 5px;
+  padding-bottom: 20px;
+  padding-right: 22px;
+  padding-left: 22px;
+
+  @include mq(tablet) {
+    width: 704px;
+    height: 340px;
+    padding-top: 15px;
+    padding-bottom: 25px;
+    padding-right: 50px;
+    padding-left: 50px;
+  }
+  @include mq(desktop) {
+    width: 928px;
+    height: 340px;
+    padding-left: 35px;
+    padding-right: 80px;
+    padding-top: 20px;
+    padding-bottom: 25px;
+  }
 }

@@ -37,6 +37,14 @@ export const bookApi = createApi({
       query: () => "/users/current",
       providesTags: ["User"],
     }),
+    getBooks: build.query({
+      query: () => "/books",
+      providesTags: ["Results"],
+    }),
+    getTrainings: build.query({
+      query: () => "/trainings",
+      providesTags: ["Results"],
+    }),
   }),
 });
 // refetchOnFocus: true,
@@ -49,4 +57,6 @@ export const {
   useLogoutMutation,
   useCurrentQuery,
   useGetResultsQuery,
+  useGetBooksQuery,
+  useGetTrainingsQuery,
 } = bookApi;
