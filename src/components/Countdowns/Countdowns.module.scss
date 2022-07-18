@@ -1,0 +1,16 @@
+@import "stylesheet/_mixin.scss";
+
+.container {
+  margin-bottom: 40px;
+  &:first-child {
+    margin-bottom: 24px;
+    @include mq(tablet) {
+      margin-bottom: 0px;
+      margin-right: 32px;
+    }
+  }
+  margin-bottom: 24px;
+  @include mq(tablet) {
+    display: flex;
+  }
+}
