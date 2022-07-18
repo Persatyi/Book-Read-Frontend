@@ -38,7 +38,11 @@ const Training = () => {
         {!isMobile && !isActiveTraining && (
           <AddTraining chosenBooks={chosenBooks} chooseBook={setChosenBooks} />
         )}
-        <BookList books={books} className={s.books} />
+        <BookList
+          books={books}
+          className={s.books}
+          isActiveTraining={isActiveTraining}
+        />
         {/* {isMobile && <IconButton/>} */}
         {/* <Statistics/> */}
       </Container>

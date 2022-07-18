@@ -4,19 +4,31 @@ import sprite from "assets/images/sprite.svg";
 
 import s from "./BookItem.module.scss";
 
-function BookItem({ book = {} }) {
+function BookItem({ book = {}, isActiveTraining }) {
   const {
     title = "...",
     author = "...",
     year = "...",
     pages = "...",
-    // status,
+    status,
   } = book;
   return (
     <li className={s.item}>
-      <svg className={s.bookIcon} width="22" height="17">
-        <use href={`${sprite}#icon-flat`}></use>
-      </svg>
+      {isActiveTraining ? (
+        <svg className={s.icon} width="22" height="17">
+          <use
+            href={
+              status === "read"
+                ? `${sprite}#icon-checkbox`
+                : `${sprite}#icon-box`
+            }
+          ></use>
+        </svg>
+      ) : (
+        <svg className={s.icon} width="22" height="17">
+          <use href={`${sprite}#icon-flat`}></use>
+        </svg>
+      )}
       <p>{title}</p>
       <p>
         <span className={s.subtitle}>Автор:</span>
@@ -41,6 +53,7 @@ BookItem.propTypes = {
     pages: PropTypes.number,
     status: PropTypes.string,
   }),
+  isActiveTraining: PropTypes.bool.isRequired,
 };
 
 export default BookItem;
