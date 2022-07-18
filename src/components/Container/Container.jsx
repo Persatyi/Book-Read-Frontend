@@ -1,7 +1,7 @@
-import s from "./Container.module.scss"
+import s from "./Container.module.scss";
 
 const Container = (props) => {
-    const {children} = props
+  const { children } = props;
   return <div className={s.container}>{children}</div>;
 };
 
