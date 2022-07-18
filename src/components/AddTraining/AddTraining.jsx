@@ -14,7 +14,13 @@ import { MOBILE_ONLY } from "assets/constants/MEDIA";
 
 import s from "./AddTraining.module.scss";
 
-const AddTraining = ({ chosenBooks, chooseBook, dates, setDates }) => {
+const AddTraining = ({
+  chosenBooks,
+  chooseBook,
+  dates,
+  setDates,
+  setRefetch,
+}) => {
   const { data, isSuccess, isFetching } = useBooksQuery();
   const [addTraining] = useAddTrainingMutation();
   const isMobile = useMediaQuery(MOBILE_ONLY);
@@ -23,14 +29,19 @@ const AddTraining = ({ chosenBooks, chooseBook, dates, setDates }) => {
     const newBook = data.find(({ _id }) => _id === values.book);
     chooseBook([...chosenBooks, newBook]);
   };
-  const onSubmit = ({ start, end }) => {
+  const onSubmit = async ({ start, end }) => {
     if (!chosenBooks.length) {
       toast.error("Додайте хоч одну книгу");
       return;
     }
     const bookIds = chosenBooks.map(({ _id }) => _id);
     const training = { start, end, books: bookIds };
-    addTraining(training);
+    try {
+      addTraining(training);
+      setRefetch(true);
+    } catch (error) {
+      toast.error("Не можу додати тренування, спробуйте ще раз");
+    }
   };
   const onStartChange = (value) => setDates({ ...dates, start: value });
   const onEndChange = (value) => setDates({ ...dates, end: value });
@@ -107,10 +118,11 @@ AddTraining.propTypes = {
   ),
   chooseBook: PropTypes.func,
   dates: PropTypes.shape({
-    start: PropTypes.object.isRequired,
-    end: PropTypes.object.isRequired,
+    start: PropTypes.object,
+    end: PropTypes.object,
   }),
   setDates: PropTypes.func,
+  setRefetch: PropTypes.func,
 };
 
 export default AddTraining;

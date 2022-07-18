@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { useMediaQuery } from "react-responsive";
 import { useQuery } from "react-query";
+import { useSelector } from "react-redux";
+import { toast } from "react-toastify";
 import axios from "axios";
 
-import { useSelector } from "react-redux";
 import { isAuth } from "redux/auth";
+import { useAddTrainingMutation } from "redux/api/bookAPI";
 
 import { MOBILE_ONLY } from "assets/constants/MEDIA";
 
@@ -13,17 +15,20 @@ import Goal from "components/Goal";
 import AddTraining from "components/AddTraining";
 import BookList from "components/BookList";
 import IconButton, { TYPES } from "components/IconButton";
+import Button from "components/Button";
 // import Statistics from "components/Statistics";
 
 import s from "./Training.module.scss";
 
 const Training = () => {
   const auth = useSelector(isAuth);
+  const [addTraining] = useAddTrainingMutation();
   const [chosenBooks, setChosenBooks] = useState([]);
-  const [dates, setDates] = useState({ start: "", end: "" });
+  const [dates, setDates] = useState({ start: null, end: null });
   const [isAdd, setIsAdd] = useState(false);
+  const [refetch, setRefetch] = useState(false);
   const isMobile = useMediaQuery(MOBILE_ONLY);
-  const { isLoading, data } = useQuery(["training"], getTraining, {
+  const { isLoading, data } = useQuery(["training", refetch], getTraining, {
     enabled: !!auth,
   });
   async function getTraining() {
@@ -37,6 +42,29 @@ const Training = () => {
   };
   const onBackButtonClick = () => {
     setIsAdd(false);
+  };
+  const onAddTrainingClick = async () => {
+    const { start, end } = dates;
+    if (!chosenBooks.length) {
+      toast.error("Додайте хоч одну книгу");
+      return;
+    }
+    if (!start) {
+      toast.error("Виберіть дату початку тренування");
+      return;
+    }
+    if (!end) {
+      toast.error("Виберіть дату закінчення тренування");
+      return;
+    }
+    const bookIds = chosenBooks.map(({ _id }) => _id);
+    const training = { start, end, books: bookIds };
+    try {
+      await addTraining(training);
+      setRefetch(true);
+    } catch (error) {
+      toast.error("Не можу додати тренування, спробуйте ще раз");
+    }
   };
 
   if (isLoading) return <div>Loading...</div>;
@@ -55,6 +83,7 @@ const Training = () => {
             chooseBook={setChosenBooks}
             dates={dates}
             setDates={setDates}
+            setRefetch={setRefetch}
           />
         </Container>
       </section>
@@ -77,6 +106,14 @@ const Training = () => {
         />
         {isMobile && !isActiveTraining && (
           <IconButton onClick={onAddButtonClick} label="Додати книгу" />
+        )}
+        {isMobile && !!chosenBooks?.length && (
+          <Button
+            type="button"
+            text="Почати тренування"
+            className={s.button}
+            onClick={onAddTrainingClick}
+          />
         )}
         {/* <Statistics/> */}
       </Container>
