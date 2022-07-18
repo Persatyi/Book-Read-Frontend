@@ -7,6 +7,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rgba(2b, 2b, 2b, 0.8);
+  background-color: var(--modal-overlay);
   z-index: 1000;
 }

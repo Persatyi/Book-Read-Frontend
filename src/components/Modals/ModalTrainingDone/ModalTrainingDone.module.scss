@@ -1,0 +1,43 @@
+@import "src/stylesheet/mixin";
+
+.wrapper {
+  padding: 45px 20px;
+  text-align: center;
+  svg {
+    width: 50px;
+    height: 45px;
+    fill: var(--placeholder-cl);
+    margin-bottom: 20px;
+  }
+  p {
+    font-size: 16px;
+    line-height: 1.38;
+    font-weight: 500;
+    margin-bottom: 14px;
+    padding: 0 40px;
+  }
+}
+
+.btnGroup {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+@include mq(mobile) {
+  .wrapper p {
+    padding: 0;
+  }
+}
+
+@include mq(tablet) {
+  .wrapper p {
+    margin-bottom: 24px;
+  }
+  .btnGroup {
+    flex-direction: row;
+    justify-content: center;
+    gap: 32px;
+  }
+}
