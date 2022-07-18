@@ -21,6 +21,7 @@ const Rating = (props) => {
           key={idx}
           type={"button"}
           role={"radio"}
+          aria-checked={star === "solid-star"}
           onClick={() => props.onChange(idx + 1)}
           className={s.btn}
         >

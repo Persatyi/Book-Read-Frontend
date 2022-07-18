@@ -4,23 +4,24 @@ import PropTypes from "prop-types";
 import Overlay from "components/Overlay";
 import s from "./ModalWrapper.module.scss";
 
-const ModalWrapper = ({ open, onClose, children }) => {
+const ModalWrapper = ({ size = "small", open, onClose, children }) => {
   const modalRef = useRef(document.getElementById("modal-root"));
 
   useEffect(() => {
+    const onEscPress = (e) => {
+      if (e.code === "Escape") onClose();
+    };
     window.addEventListener("keydown", onEscPress);
     return () => window.removeEventListener("keydown", onEscPress);
-  }, []);
-
-  const onEscPress = (e) => {
-    if (e.code === "Escape") onClose();
-  };
+  }, [onClose]);
 
   return (
     open &&
     createPortal(
       <Overlay onClick={onClose}>
-        <div className={s.modal}>{children}</div>
+        <div className={`${s.modal} ${size === "large" && s.large}`}>
+          {children}
+        </div>
       </Overlay>,
       modalRef.current
     )
@@ -28,6 +29,7 @@ const ModalWrapper = ({ open, onClose, children }) => {
 };
 
 ModalWrapper.propTypes = {
+  size: PropTypes.oneOf(["small", "large"]),
   open: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
   children: PropTypes.node.isRequired,

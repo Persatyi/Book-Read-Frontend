@@ -47,7 +47,6 @@ export default function LibraryPage() {
         open={openPlaceholder}
         onClose={() => setOpenPlaceholder(false)}
       />
-      {/* TODO: change to open={openModal} before pull request */}
       <ModalBookReview open={openModal} onClose={toggleModal} />
     </Container>
   );

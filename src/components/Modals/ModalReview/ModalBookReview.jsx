@@ -31,7 +31,7 @@ const handleSubmit = async (payload) => {
 };
 
 const ModalBookReview = (props) => (
-  <ModalWrapper open={props.open} onClose={props.onClose}>
+  <ModalWrapper size={"large"} open={props.open} onClose={props.onClose}>
     <Formik
       initialValues={init}
       validationSchema={reviewFormValidation}
@@ -70,7 +70,11 @@ const ModalBookReview = (props) => (
             />
           </div>
           <div className={s.btnGroup}>
-            <Button type={"button"} styleType={"transparent"} text={"Back"} />
+            <Button
+              styleType={"transparent"}
+              text={"Back"}
+              onClick={props.onClose}
+            />
             <Button
               type={"submit"}
               disabled={!(isValid && dirty)}

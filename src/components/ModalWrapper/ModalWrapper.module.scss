@@ -1,13 +1,18 @@
 @import "src/stylesheet/mixin";
 
 .modal {
-  width: calc(min(var(--tablet), 100vw) - 40px);
-  max-width: calc(var(--tablet) - 160px);
+  width: calc(100vw - 40px);
   max-height: calc(100vh - 40px);
   background-color: var(--main-bg-cl);
   overflow: hidden;
 
+  @include mq(mobile) {
+    width: 400px;
+  }
+
   @include mq(tablet) {
-    width: calc(100vw - 160px);
+    &.large {
+      width: 608px;
+    }
   }
 }
