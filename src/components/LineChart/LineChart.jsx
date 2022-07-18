@@ -6,7 +6,6 @@ import dayjs from "dayjs";
 
 const LineChart = ({ data }) => {
   const { start, end, totalPages, addedPages, data: sets = [] } = data;
-  console.log("🚀 ~ addedPages", addedPages);
 
   const size = useWindowSize();
 
@@ -16,7 +15,6 @@ const LineChart = ({ data }) => {
       const pages = acc[day] ? acc[day] : [];
       return { ...acc, [day]: [...pages, el.pages] };
     }, {});
-    console.log("🚀 ~ stats", stats);
 
     const finalDataSet = [];
 
@@ -27,7 +25,6 @@ const LineChart = ({ data }) => {
           y: stats[key].reduce((acc, el) => acc + el, 0),
         };
       });
-      console.log("🚀 ~ dataSet", dataSet);
 
       const dateNow = dayjs();
       const date2 = dayjs(start);
@@ -52,16 +49,66 @@ const LineChart = ({ data }) => {
   const everageValue = () => {
     const trainingDays = Math.ceil(dayjs(end).diff(start, "day", true));
 
-    const dateNow = dayjs();
-    let averageAmount = totalPages / trainingDays;
-    const startDate = dayjs(start);
-    const finalDataSet = [];
+    const stats = sets?.reduce((acc, el) => {
+      const day = dayjs(el.date).format("DD.MM.YYYY");
+      const pages = acc[day] ? acc[day] : [];
+      return { ...acc, [day]: [...pages, el.pages] };
+    }, {});
 
-    if (Math.ceil(dateNow.diff(start, "day", true)) <= 7) {
-      for (let i = 0; i < 7; i += 1) {
-        const day = dayjs(startDate).add(i, "day");
-        finalDataSet.push({ x: day.format("DD.MM.YYYY"), y: averageAmount });
+    if (stats) {
+      const dataSet = Object.keys(stats).map((key) => {
+        return {
+          x: key,
+          y: stats[key].reduce((acc, el) => acc + el, 0),
+        };
+      });
+
+      const dateNow = dayjs();
+      const averageAmount = totalPages / trainingDays;
+      const startDate = dayjs(start);
+      const range = Math.ceil(dateNow.diff(startDate, "day", true));
+      const finalDataSet = [];
+
+      if (Math.ceil(dateNow.diff(start, "day", true)) <= 7) {
+        for (let i = 0; i < 7; i += 1) {
+          const day = dayjs(startDate).add(i, "day");
+
+          const element = dataSet.find(
+            (el) => el.x === dayjs(start).format("DD.MM.YYYY")
+          );
+
+          if (element) {
+            if (dayjs(startDate).format("DD.MM.YYYY") === element.x) {
+              finalDataSet.push({
+                x: day.format("DD.MM.YYYY"),
+                y: Math.ceil(averageAmount),
+              });
+            } else {
+              const element = dataSet.find(
+                (el) => el.x === dayjs(day).format("DD.MM.YYYY")
+              );
+
+              if (element) {
+                finalDataSet.push({
+                  x: day.format("DD.MM.YYYY"),
+                  y: Math.ceil(
+                    (totalPages - addedPages + element.y) /
+                      (trainingDays - range)
+                  ),
+                });
+              } else {
+                finalDataSet.push({
+                  x: day.format("DD.MM.YYYY"),
+                  y: Math.ceil(
+                    (totalPages - addedPages) / (trainingDays - range)
+                  ),
+                });
+              }
+            }
+          }
+        }
       }
+
       return finalDataSet;
     }
   };
