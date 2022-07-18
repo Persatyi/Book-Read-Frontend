@@ -52,8 +52,18 @@ const LineChart = ({ data }) => {
 
   const everageValue = () => {
     const trainingDays = dayjs(end).diff(start, "day");
+    const dateNow = dayjs();
     const averageAmount = totalPages / trainingDays;
-    console.log("🚀 ~ averageAmount", averageAmount);
+    const startDate = dayjs(start);
+    const finalDataSet = [];
+
+    if (dateNow.diff(start, "day") <= 7) {
+      for (let i = 0; i < 7; i += 1) {
+        const day = dayjs(startDate).add(i, "day");
+        finalDataSet.push({ x: day.format("DD.MM.YYYY"), y: averageAmount });
+      }
+      return finalDataSet;
+    }
   };
 
   const userData = sets
