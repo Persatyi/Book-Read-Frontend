@@ -1,0 +1,321 @@
+@import "stylesheet/mixin.scss";
+.books{
+   &Wrapper{
+      padding-top: 20px;
+      @include mq(tablet){
+         padding-top: 40px;
+      }
+   }
+   &Title {
+      font-family: 'Montserrat';
+      font-weight: 600;
+      font-size: 19px;
+      line-height: 1.2;
+      margin-bottom: 24px;
+      @include mq(tablet){
+         margin-bottom: 20px;
+      }
+      @include mq(desktop){
+               margin-bottom: 24px;
+      }
+   }
+}
+.read{
+   &Item{
+      padding: 20px 30px 28px 20px;
+      height: 100%;
+      background-color: var(--main-bg-cl);
+      display: flex;
+      align-items: center;
+      margin-bottom: 8px;
+      @include mq(tablet){
+      padding: 0px 20px;
+      height: 62px;
+      }
+   }
+   &Book{
+      &List{
+         display: flex;
+         flex-direction: column;
+         @include mq(tablet){
+            align-items: center;
+            flex-direction: row;
+         }
+      }
+      &Item{
+         font-family: 'Montserrat';
+         font-weight: 500;
+         font-size: 12px;
+         line-height: 1.25;
+         color: var(--main-text-cl);
+         @include mq(tablet){
+         font-size: 14px;
+         line-height: 1.2;
+         margin-bottom: 0px;
+            }
+            & span{
+               font-family: 'Montserrat';
+               font-weight: 500;
+               font-size: 12px;
+               line-height: 1.25;
+               color:var(--secondary-text-cl);
+               margin-left: 34px;
+               @include mq(tablet){
+                  display: none;
+               }
+            }
+         &:nth-child(1){
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+            @include mq(tablet){
+               margin-bottom: 0px;
+               width: 164px;
+            }
+            @include mq(desktop){
+            width: 197px;
+            }
+            & p {
+               max-height: 45px;
+               text-overflow: ellipsis;
+               overflow: hidden;
+               @include mq(tablet){
+                  max-height: 34px;
+                  white-space: nowrap;
+               }
+            }
+         }
+         &:nth-child(2){
+            margin-bottom: 14px;
+            & span{
+                  margin-right:35px;
+               }
+            @include mq(tablet){
+               margin-bottom: 0px;
+               width: 116px;
+               margin-left: 32px;
+            }
+            @include mq(desktop){
+               width: 266px;
+               margin-left: 144px;
+            }
+         }
+         &:nth-child(3){
+            margin-bottom: 14px;
+            & span{
+                  margin-right:51px;
+               }
+            @include mq(tablet){
+               margin-bottom: 0px;
+               width: 88px;
+            }
+            @include mq(desktop){
+               width: 117px;
+            }
+         }
+         &:nth-child(4){
+            margin-bottom: 14px;
+            & span{
+                  margin-right:40px;
+               }
+            @include mq(tablet){
+               margin-bottom: 0px;
+               width: 55px;
+            }
+            @include mq(desktop){
+               width: 133px;
+            }
+         }
+         &:nth-child(5){
+            margin-bottom: 20px;
+            & span{
+                  margin-right:37px;
+               }
+            @include mq(tablet){
+               margin-bottom: 0px;
+               width: 129px;
+            }
+            @include mq(desktop){
+               width: 161px;
+            }
+         }
+      }
+      &Icon{
+         margin-right: 12px;
+         height: 17px;
+         width: 67px;
+         @include mq(mobile){
+            width: 37px;
+         }
+         @include mq(tablet){
+            margin-right: 18px;
+            width: 126px;
+         }
+         @include mq(desktop){
+            width: 97px;
+         }
+      }
+      &Button{
+         margin: 0 auto;
+         display: block;
+         font-family: 'Montserrat';
+         font-weight: 500;
+         font-size: 14px;
+         line-height: 1.2;
+         color: var(--main-bg-cl);
+         background: var(--library-btn-cl);
+         box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+         cursor: pointer;
+         padding: 11px 33px 12px 35px;
+         @include mq(tablet){
+            padding: 11px 11px 12px 10px;
+         }
+         @include mq(desktop){
+            padding: 11px 35px 12px 36px;
+         }
+      }
+   }
+}
+.reading{
+   &Item{
+      padding: 20px 30px 28px 20px;
+      height: 100%;
+      background-color: var(--main-bg-cl);
+      display: flex;
+      align-items: center;
+      margin-bottom: 8px;
+      @include mq(tablet){
+      padding: 0px 20px;
+      height: 62px;
+      }
+   }
+   &Book{
+      &List{
+         display: flex;
+         flex-direction: column;
+         @include mq(tablet){
+            align-items: center;
+            flex-direction: row;
+         }
+      }
+      &Item{
+         font-family: 'Montserrat';
+         font-weight: 500;
+         font-size: 12px;
+         line-height: 1.25;
+         color: var(--main-text-cl);
+         @include mq(tablet){
+         font-size: 14px;
+         line-height: 1.2;
+         margin-bottom: 0px;
+         width: 193px;
+            }
+            & span{
+               font-family: 'Montserrat';
+               font-weight: 500;
+               font-size: 12px;
+               line-height: 1.25;
+               color:var(--secondary-text-cl);
+               margin-left: 34px;
+               @include mq(tablet){
+                  display: none;
+               }
+            }
+         &:nth-child(1){
+            display: flex;
+            margin-bottom: 12px;
+            align-items: center;
+            @include mq(tablet){
+               margin-bottom: 0px;
+               width: 316px;
+            }
+            @include mq(desktop){
+               width: 509px;
+            }
+            & p {
+               max-height: 45px;
+               text-overflow: ellipsis;
+               overflow: hidden;
+               @include mq(tablet){
+
+                  max-height: 34px;
+                  white-space: nowrap;
+               }
+            }
+         }
+         &:nth-child(2){
+            margin-bottom: 14px;
+            & span{
+                  margin-right:35px;
+               }
+            @include mq(tablet){
+               margin-bottom: 0px;
+               width: 206px;
+               margin-left: 32px;
+            }
+            @include mq(desktop){
+               width: 381px;
+               margin-left: 111px;
+            }
+         }
+         &:nth-child(3){
+            margin-bottom: 14px;
+            & span{
+                  margin-right:51px;
+               }
+            @include mq(tablet){
+               margin-bottom: 0px;
+               width: 84px;
+            }
+            @include mq(desktop){
+               width: 124px;
+            }
+         }
+         &:nth-child(4){
+            & span{
+                  margin-right:40px;
+               }
+            @include mq(tablet){
+               margin-bottom: 0px;
+            }
+         }
+      }
+      &Icon{
+         margin-right: 12px;
+         height: 17px;
+         width: 67px;
+         @include mq(mobile){
+            width: 37px;
+         }
+         @include mq(tablet){
+            margin-right: 18px;
+            width: 55px;
+         }
+         @include mq(desktop){
+            width: 33px;
+         }
+      }
+   }
+}
+.link{
+   font-family: 'Montserrat';
+   font-weight: 600;
+   font-size: 16px;
+   line-height: 1.25;
+   background-color: var(--btn-cl);
+   color: var(--main-bg-cl);
+   margin-bottom: 40px;
+   margin-top: 20px;
+   padding: 11px 38px 11px 38px;
+   @include mq(tablet){
+      padding: 10px 53px 10px 52px;
+      margin-top: 32px;
+   }
+   &Wrapper{
+      display: flex;
+      justify-content: center;
+      @include mq(desktop){
+         display: none;
+      }
+   }
+}

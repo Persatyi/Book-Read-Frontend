@@ -1,0 +1,40 @@
+@import "stylesheet/mixin.scss";
+.titleList{
+   display: none;
+   @include mq(tablet){
+      display: flex;
+      margin-bottom: 8px;
+   }
+   &Item{
+      font-family: 'Montserrat';
+      font-style: normal;
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 1.2;
+      color: var(--secondary-text-cl);
+      &:nth-child(1){
+         @include mq(tablet){
+            margin-right: 299px;
+         }
+         @include mq(desktop){
+            margin-right: 571px;
+         }
+      }
+      &:nth-child(2){
+         @include mq(tablet){
+            margin-right: 164px;
+         }
+         @include mq(desktop){
+            margin-right: 339px;
+         }
+      }
+      &:nth-child(3){
+         @include mq(tablet){
+            margin-right: 25px;
+         }
+         @include mq(desktop){
+            margin-right: 72px;
+         }
+      }
+   }
+}

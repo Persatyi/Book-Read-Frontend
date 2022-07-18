@@ -1,0 +1,146 @@
+@import "stylesheet/mixin.scss";
+.form{
+    transition: all 250ms ease;
+    padding-top: 32px;
+    @include mq(tablet){
+        display: flex;
+        padding: 32px 0px 40px 0px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    @include mq(desktop){
+    padding: 40px 0px 40px 0px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+    }
+    &__label{
+        display: flex;
+        flex-direction: column;
+        font-family: 'Montserrat';
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 1.2;
+        color: var(--secondary-text-cl);
+        & span{
+            display: flex;
+        }
+    }
+    &__input{
+        transition: all 250ms ease;
+        background-color:transparent;
+        border: 1px solid var(--placeholder-cl);
+        outline: none;
+        padding: 12px;
+        margin-top: 8px;
+        width: 100%;
+        &:focus{
+            border: 1px solid transparent;
+            box-shadow: inset 0px 1px 2px rgba(29, 29, 27, 0.15);
+            background-color: var(--main-bg-cl);
+        }
+        &_title{
+            margin-bottom: 20px;
+            @include mq(tablet) {
+            width: 704px;
+            margin-bottom: 34px;
+            }
+            @include mq(desktop) {
+            width: 346px;
+            margin-bottom: 0px;
+            margin-right: 16px;
+            }
+        }
+        &_author{
+            margin-bottom: 20px;
+            @include mq(tablet) {
+            width: 336px;
+            margin-right: 32px;
+            margin-bottom: 0px;
+            }
+            @include mq(desktop) {
+            width: 250px;
+            margin-right: 16px;
+            }
+        }
+        &_year{
+            margin-bottom: 20px;
+            @include mq(tablet) {
+            width: 152px;
+            margin-right: 32px;
+            margin-bottom: 0px;
+            }
+            @include mq(desktop) {
+            width: 134px;
+            margin-right: 16px;
+            }
+        }
+        &_pages{
+            margin-bottom: 40px;
+            @include mq(tablet) {
+            width: 152px;
+            margin-bottom: 0px;
+            }
+            @include mq(desktop) {
+            width: 134px;
+            }
+        }
+    }
+    &__error{
+        color: red;
+        position: absolute;
+        margin-top: 67px;
+        @include mq(tablet){
+        margin-top: 0px;
+        top: 260px;
+        }
+        @include mq(desktop){
+        top: 170px;
+        max-width: 190px;
+        }
+        &_title{
+        top: 200px;
+        margin-top: 0px;
+        @include mq(tablet){
+            top: 160px;
+        }
+        @include mq(desktop){
+            top:170px;
+        }
+        }
+    }
+    &__button{
+        margin: 0 auto;
+        display: block;
+        font-family: 'Montserrat';
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 1.2;
+        background-color: transparent;
+        outline-color: var(--primary-black-cl);
+        padding: 12px 76px 12px 75px;
+        border: 1px solid var(--main-text-cl);
+        @include mq(tablet) {
+            margin-top: 40px;
+        }
+        @include mq(desktop) {
+            margin-top: 0px;
+            margin-left: 48px;
+        }
+    }
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+input:-webkit-autofill {
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: black;
+}
+
+
+
+
+
