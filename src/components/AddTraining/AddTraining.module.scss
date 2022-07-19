@@ -25,6 +25,8 @@
 }
 
 .wrapper {
+    position: relative;
+
     @include mq(tablet) {
         width: 250px;
     }
@@ -34,10 +36,33 @@
     padding-left: 41px;
     height: 42px;
     width: 100%;
+    border: 1px solid var(--placeholder-cl);
+}
+
+.icon {
+    position: absolute;
+    top: 50%;
+    left: 12px;
+    transform: translateY(-50%);
+    pointer-events: none;
+}
+
+.polygon {
+    position: absolute;
+    top: 50%;
+    right: 12px;
+    transform: translateY(-50%);
+    pointer-events: none;
+}
+
+.relative {
+    position: relative;
 }
 
 .select {
+    position: relative;
     padding-left: 12px;
+    height: 42px;
     display: flex;
     align-items: center;
     font-weight: 500;
@@ -48,8 +73,6 @@
 
     @include mq(tablet) {
         width: 483px;
-        height: 42px;
-        margin-right: 10px;
     }
 
     @include mq(desktop) {
@@ -81,5 +104,6 @@
         margin: 0;
         min-width: 171px;
         height: 42px;
+        margin-left: 10px;
     }
 }

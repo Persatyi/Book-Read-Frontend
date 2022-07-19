@@ -12,6 +12,7 @@ import Select from "components/Select";
 import Button from "components/Button";
 
 import { MOBILE_ONLY } from "assets/constants/MEDIA";
+import sprite from "assets/images/sprite.svg";
 
 import s from "./AddTraining.module.scss";
 
@@ -86,6 +87,12 @@ const AddTraining = ({
                   autocomplete="off"
                   required
                 />
+                <svg className={s.icon} width="17" height="17">
+                  <use href={`${sprite}#icon-calendar`}></use>
+                </svg>
+                <svg className={s.polygon} width="13" height="7">
+                  <use href={`${sprite}#icon-polygon`}></use>
+                </svg>
               </div>
               <div className={s.wrapper}>
                 <DatePickerField
@@ -98,13 +105,24 @@ const AddTraining = ({
                   autocomplete="off"
                   required
                 />
+                <svg className={s.icon} width="17" height="17">
+                  <use href={`${sprite}#icon-calendar`}></use>
+                </svg>
+                <svg className={s.polygon} width="13" height="7">
+                  <use href={`${sprite}#icon-polygon`}></use>
+                </svg>
               </div>
-              <Select
-                options={allBooks}
-                name="book"
-                containerClassName={s.select}
-                placeholder="Обрати книгу з бібліотеки"
-              />
+              <div className={s.relative}>
+                <Select
+                  options={allBooks}
+                  name="book"
+                  containerClassName={s.select}
+                  placeholder="Обрати книгу з бібліотеки"
+                />
+                <svg className={s.polygon} width="13" height="7">
+                  <use href={`${sprite}#icon-polygon`}></use>
+                </svg>
+              </div>
               <Button
                 text="Додати"
                 className={s.bookButton}

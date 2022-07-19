@@ -41,5 +41,13 @@
 <symbol id="icon-polygon" viewBox="0 0 52 32">
 <path fill="#939393" style="fill: var(--color1, #939393)" d="M26 32l-25.981-30h51.962l-25.981 30z"></path>
 </symbol>
+<symbol id="icon-calendar" viewBox="0 0 32 32">
+<path fill="#a6abb9" style="fill: var(--color1, #a6abb9)" d="M28.25 2.5h-1.5v-2.5h-2.5v2.5h-16.5v-2.5h-2.5v2.5h-1.5c-2.068 0-3.75 1.682-3.75 3.75v22c0 2.068 1.682 3.75 3.75 3.75h24.5c2.068 0 3.75-1.682 3.75-3.75v-22c0-2.068-1.682-3.75-3.75-3.75zM29.5 28.25c0 0.689-0.561 1.25-1.25 1.25h-24.5c-0.689 0-1.25-0.561-1.25-1.25v-16.5h27v16.5zM29.5 9.25h-27v-3c0-0.689 0.561-1.25 1.25-1.25h1.5v2.5h2.5v-2.5h16.5v2.5h2.5v-2.5h1.5c0.689 0 1.25 0.561 1.25 1.25v3z"></path>
+<path fill="#a6abb9" style="fill: var(--color1, #a6abb9)" d="M7.25 14.375h-2.5v2.5h2.5v-2.5z"></path>
+<path fill="#a6abb9" style="fill: var(--color1, #a6abb9)" d="M12.25 14.375h-2.5v2.5h2.5v-2.5z"></path>
+<path fill="#a6abb9" style="fill: var(--color1, #a6abb9)" d="M17.25 14.375h-2.5v2.5h2.5v-2.5z"></path>
+<path fill="#a6abb9" style="fill: var(--color1, #a6abb9)" d="M22.25 14.375h-2.5v2.5h2.5v-2.5z"></path>
+<path fill="#a6abb9" style="fill: var(--color1, #a6abb9)" d="M27.25 14.375h-2.5v2.5h2.5v-2.5z"></path>
+</symbol>
 </defs>
 </svg>
