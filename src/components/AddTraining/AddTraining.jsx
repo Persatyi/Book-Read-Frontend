@@ -21,6 +21,7 @@ const AddTraining = ({
   dates,
   setDates,
   setRefetch,
+  className = "",
 }) => {
   const { data, isSuccess, isFetching } = useBooksQuery();
   const [addTraining] = useAddTrainingMutation();
@@ -62,7 +63,7 @@ const AddTraining = ({
   if (isFetching) return <div>Loading</div>;
   if (isSuccess)
     return (
-      <>
+      <div className={className}>
         <Title text="Моє тренування" className={s.title} />
         <Formik
           initialValues={{
@@ -74,26 +75,30 @@ const AddTraining = ({
         >
           {({ values, setFieldValue }) => (
             <Form className={s.form}>
-              <DatePickerField
-                name="start"
-                className={s.date}
-                minDate={new Date()}
-                onChangeCb={onStartChange}
-                dateFormat="dd.MM.yyyy"
-                placeholderText="Початок"
-                autocomplete="off"
-                required
-              />
-              <DatePickerField
-                name="end"
-                className={s.date}
-                minDate={values.start}
-                onChangeCb={onEndChange}
-                dateFormat="dd.MM.yyyy"
-                placeholderText="Завершення"
-                autocomplete="off"
-                required
-              />
+              <div className={s.wrapper}>
+                <DatePickerField
+                  name="start"
+                  className={s.date}
+                  minDate={new Date()}
+                  onChangeCb={onStartChange}
+                  dateFormat="dd.MM.yyyy"
+                  placeholderText="Початок"
+                  autocomplete="off"
+                  required
+                />
+              </div>
+              <div className={s.wrapper}>
+                <DatePickerField
+                  name="end"
+                  className={s.date}
+                  minDate={values.start}
+                  onChangeCb={onEndChange}
+                  dateFormat="dd.MM.yyyy"
+                  placeholderText="Завершення"
+                  autocomplete="off"
+                  required
+                />
+              </div>
               <Select
                 options={allBooks}
                 name="book"
@@ -115,7 +120,7 @@ const AddTraining = ({
             </Form>
           )}
         </Formik>
-      </>
+      </div>
     );
 };
 AddTraining.propTypes = {
@@ -136,6 +141,7 @@ AddTraining.propTypes = {
   }),
   setDates: PropTypes.func,
   setRefetch: PropTypes.func,
+  className: PropTypes.string,
 };
 
 export default AddTraining;

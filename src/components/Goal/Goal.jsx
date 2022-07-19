@@ -5,7 +5,7 @@ import Title from "components/Title";
 
 import s from "./Goal.module.scss";
 
-function Goal({ training, isActiveTraining }) {
+function Goal({ training, isActiveTraining, className = "" }) {
   const booksNumber = training?.books?.length ?? 0;
   const daysNumber = training?.end
     ? (new Date(training?.end) - new Date(training?.start)) / 86400000
@@ -15,8 +15,8 @@ function Goal({ training, isActiveTraining }) {
     0
   );
   return (
-    <div className={s.container}>
-      <Title text="Моя мета прочитати" />
+    <div className={`${s.container} ${className}`}>
+      <Title text="Моя мета прочитати" className={s.title} />
       <ul className={isActiveTraining ? s.activeNumbers : s.numbers}>
         <li>
           <NumberText

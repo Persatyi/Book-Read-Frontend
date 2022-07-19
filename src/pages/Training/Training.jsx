@@ -70,7 +70,7 @@ const Training = () => {
   if (isAdd)
     return (
       <section className={s.section}>
-        <Container>
+        <Container className={s.container}>
           <IconButton
             onClick={onBackButtonClick}
             label="Назад"
@@ -90,13 +90,18 @@ const Training = () => {
 
   return (
     <section className={s.section}>
-      <Container>
+      <Container className={s.container}>
         <Goal
           training={isActiveTraining ? data : { ...dates, books: chosenBooks }}
           isActiveTraining={isActiveTraining}
+          className={s.goal}
         />
         {!isMobile && !isActiveTraining && (
-          <AddTraining chosenBooks={chosenBooks} chooseBook={setChosenBooks} />
+          <AddTraining
+            chosenBooks={chosenBooks}
+            chooseBook={setChosenBooks}
+            className={s.addTraining}
+          />
         )}
         <BookList
           books={books}

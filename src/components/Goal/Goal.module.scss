@@ -1,12 +1,38 @@
+@import "stylesheet/_mixin.scss";
+
 .container {
     background-color: var(--main-bg-cl);
     box-shadow: 0px 2px 3px rgba(9, 30, 63, 0.1);
+
+    @include mq(tablet-only) {
+        display: flex;
+        padding-top: 20px;
+        padding-left: 28px;
+        padding-right: 52px;
+        padding-bottom: 8px;
+        align-items: center;
+        justify-content: space-between;
+    }
+}
+
+.title {
+    @include mq(tablet) {
+        display: flex;
+        width: 275px;
+        height: 60px;
+    }
 }
 
 .numbers {
     padding: 44px 30px;
     display: flex;
     gap: 20px;
+    justify-content: center;
+
+    @include mq(tablet) {
+        padding: 0;
+        gap: 40px;
+    }
 }
 
 .activeNumbers {
