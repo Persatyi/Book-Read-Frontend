@@ -13,11 +13,7 @@ import { ModalBookReview } from "components/Modals";
 
 export default function LibraryPage() {
   const auth = useSelector(isAuth);
-  const {
-    data = [],
-    isSuccess,
-    isLoading,
-  } = useBooksQuery(null, { skip: !auth });
+  const { data = [], isLoading } = useBooksQuery(null, { skip: !auth });
   const size = useWindowSize();
   const [plus, togglePlus] = useToggle();
   /* TODO: placeholder must be shown only when library is empty */
@@ -29,42 +25,41 @@ export default function LibraryPage() {
     } else setOpenPlaceholder(false);
   }, [data.length]);
   if (isLoading) return <div>Loading...</div>;
-  if (isSuccess)
-    return (
-      <Container>
-        {size.width < 768 && (
-          <>
-            {plus && (
-              <>
-                <MoreBtn onClick={togglePlus} />
-                {/* TODO: open Resume modal on click */}
-                <BookListLibrary onClick={() => {}} />
-              </>
-            )}
-            {!plus && (
-              <>
-                <BackBtn onClick={togglePlus} />
-                <LibraryEmpty
-                  open={openPlaceholder}
-                  onClose={() => setOpenPlaceholder(false)}
-                />
-                <AddBook />
-              </>
-            )}
-          </>
-        )}
-        {size.width >= 768 && (
-          <>
-            <AddBook />
-            {/* TODO: open Resume modal on click */}
-            <BookListLibrary onClick={toggleModal} />
-            <LibraryEmpty
-              open={openPlaceholder}
-              onClose={() => setOpenPlaceholder(false)}
-            />
-            <ModalBookReview open={openModal} onClose={toggleModal} />
-          </>
-        )}
-      </Container>
-    );
+  return (
+    <Container>
+      {size.width < 768 && (
+        <>
+          {plus && (
+            <>
+              <MoreBtn onClick={togglePlus} />
+              {/* TODO: open Resume modal on click */}
+              <BookListLibrary onClick={() => {}} />
+            </>
+          )}
+          {!plus && (
+            <>
+              <BackBtn onClick={togglePlus} />
+              <LibraryEmpty
+                open={openPlaceholder}
+                onClose={() => setOpenPlaceholder(false)}
+              />
+              <AddBook />
+            </>
+          )}
+        </>
+      )}
+      {size.width >= 768 && (
+        <>
+          <AddBook />
+          {/* TODO: open Resume modal on click */}
+          <BookListLibrary onClick={toggleModal} />
+          <LibraryEmpty
+            open={openPlaceholder}
+            onClose={() => setOpenPlaceholder(false)}
+          />
+          <ModalBookReview open={openModal} onClose={toggleModal} />
+        </>
+      )}
+    </Container>
+  );
 }
