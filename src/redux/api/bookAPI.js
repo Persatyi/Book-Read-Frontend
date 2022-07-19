@@ -32,6 +32,7 @@ export const bookApi = createApi({
     }),
     logout: build.mutation({
       query: () => ({ url: "/users/logout", method: "POST" }),
+      invalidatesTags: ["User"],
     }),
     current: build.query({
       query: () => "/users/current",
