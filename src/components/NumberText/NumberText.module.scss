@@ -1,4 +1,5 @@
 .wrapper {
+    width: 100px;
     display: grid;
     gap: 14px;
     justify-content: center;
@@ -6,10 +7,12 @@
 
 .activeWrapper {
     composes: wrapper;
+    width: 63px;
     gap: 8px;
 }
 
 .number {
+    margin: 0 auto;
     width: 100px;
     height: 100px;
     display: flex;
