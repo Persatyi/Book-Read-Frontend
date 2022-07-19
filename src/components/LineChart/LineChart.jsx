@@ -50,26 +50,75 @@ const LineChart = ({ data }) => {
   const everageValue = () => {
     const trainingDays = Math.ceil(dayjs(end).diff(start, "day", true));
     const dateNow = dayjs();
-    const averageAmount = totalPages / trainingDays;
+    const averageAmount = Math.ceil(totalPages / trainingDays);
     const startDate = dayjs(start);
-    const amount = [];
+    const prevAmount = [0];
     const finalDataSet = [];
 
-    const cycle = (range) => {
-      for (let i = 0; i < range; i += 1) {
-        const day = dayjs(startDate).add(i, "day");
-        amount.push(averageAmount);
-        finalDataSet.push({
-          x: day.format("DD.MM.YYYY"),
-          y: amount[i],
-        });
-      }
-    };
+    const stats = sets?.reduce((acc, el) => {
+      const day = dayjs(el.date).format("DD.MM.YYYY");
+      const pages = acc[day] ? acc[day] : [];
+      return { ...acc, [day]: [...pages, el.pages] };
+    }, {});
 
-    if (Math.ceil(dateNow.diff(start, "day", true)) <= 7) {
-      cycle(7);
-    } else {
-      cycle(trainingDays);
+    if (stats) {
+      const dataSet = Object.keys(stats).map((key) => {
+        return {
+          x: key,
+          y: stats[key].reduce((acc, el) => acc + el, 0),
+        };
+      });
+
+      const cycle = (range) => {
+        for (let i = 0; i < range; i += 1) {
+          const day = dayjs(startDate).add(i, "day");
+          const element = dataSet.find(
+            (el) => el.x === dayjs(day).format("DD.MM.YYYY")
+          );
+
+          if (
+            //<==== перший день якшо доданих сторінок більше чи менше за сьогодні то показати модалку
+            dayjs(day).format("DD.MM.YYYY") ===
+            dayjs(startDate).format("DD.MM.YYYY")
+          ) {
+            console.log("перший день");
+            finalDataSet.push({
+              x: day.format("DD.MM.YYYY"),
+              y: averageAmount,
+            });
+
+            if (element) {
+              console.log("пушим Y");
+              prevAmount.push(element.y);
+            } else {
+              console.log("пушим 0");
+              prevAmount.push(0);
+            }
+          } else {
+            // iнші дні
+            console.log("інші дні");
+            finalDataSet.push({
+              x: day.format("DD.MM.YYYY"),
+              y:
+                (totalPages - addedPages + prevAmount[i]) /
+                Math.ceil(dayjs(end).diff(dateNow, "day", true)),
+            });
+            if (element) {
+              console.log("інші пушим Y");
+              prevAmount.push(element.y);
+            } else {
+              console.log("інші пушим 0");
+              prevAmount.push(0);
+            }
+          }
+        }
+      };
+
+      if (Math.ceil(dateNow.diff(start, "day", true)) <= 7) {
+        cycle(7);
+      } else {
+        cycle(trainingDays);
+      }
     }
 
     return finalDataSet;
