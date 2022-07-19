@@ -15,7 +15,6 @@ export default function LibraryPage() {
   const auth = useSelector(isAuth);
   const { data = []} = useBooksQuery(null, { skip: !auth });
   const size = useWindowSize();
-  const open = !data.length
   const [plus, togglePlus] = useToggle();
   /* TODO: placeholder must be shown only when library is empty */
   const [openPlaceholder, setOpenPlaceholder] = useState(true);
@@ -34,10 +33,11 @@ export default function LibraryPage() {
           {!plus && (
                 <>
               <BackBtn onClick={togglePlus} />
+              {!data.length &&
                 <LibraryEmpty
                   open={openPlaceholder}
                   onClose={() => setOpenPlaceholder(false)}
-                />
+                />}
               <AddBook />
                 </>
           )}
@@ -48,10 +48,11 @@ export default function LibraryPage() {
             <AddBook />
           {/* TODO: open Resume modal on click */}
           <BookListLibrary onClick={toggleModal} />
-          <LibraryEmpty
-            open={openPlaceholder}
-            onClose={() => setOpenPlaceholder(false)}
-          />
+            {!data.length &&
+                <LibraryEmpty
+                  open={openPlaceholder}
+                  onClose={() => setOpenPlaceholder(false)}
+                />}
       <ModalBookReview open={openModal} onClose={toggleModal} />
         </>
       )}
