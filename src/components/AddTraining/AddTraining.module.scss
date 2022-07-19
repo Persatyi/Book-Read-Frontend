@@ -81,9 +81,14 @@
 }
 
 .button {
-    padding: 13px;
+    min-height: 42px;
+    padding-left: 13px;
+    padding-right: 13px;
     margin-left: auto;
     margin-right: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .bookButton {
@@ -92,6 +97,7 @@
     max-width: 141px;
     color: var(--main-text-cl);
     background-color: var(--secondary-bg-cl);
+    border-color: var(--main-text-cl);
     transition: color 250ms linear, background-color 250ms linear, scale 250ms linear, box-shadow 250ms linear;
 
     &:hover:not(:disabled),
@@ -103,7 +109,6 @@
     @include mq(tablet) {
         margin: 0;
         min-width: 171px;
-        height: 42px;
         margin-left: 10px;
     }
 }
