@@ -9,6 +9,7 @@ import { useRegisterMutation, useLoginMutation } from "redux/api/bookAPI.js";
 import { loggedIn } from "redux/auth/sliceAuth";
 
 import Button from "components/Button";
+import GoogleBtn from "components/GoogleBtn";
 
 const AuthForm = ({ type }) => {
   const dispatch = useDispatch();
@@ -76,6 +77,7 @@ const AuthForm = ({ type }) => {
         handleSubmit,
       }) => (
         <form onSubmit={handleSubmit} className={s.form}>
+          <GoogleBtn />
           {isRegister ? (
             <>
               <div className={s.inputWrapper}>
