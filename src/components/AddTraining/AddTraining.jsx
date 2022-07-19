@@ -52,7 +52,7 @@ const AddTraining = ({
     }
     const training = { start, end, books: bookIds };
     try {
-      addTraining(training);
+      await addTraining(training);
       setRefetch(true);
     } catch (error) {
       toast.error("Не можу додати тренування, спробуйте ще раз");
