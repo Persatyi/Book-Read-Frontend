@@ -100,6 +100,9 @@ const Training = () => {
           <AddTraining
             chosenBooks={chosenBooks}
             chooseBook={setChosenBooks}
+            dates={dates}
+            setDates={setDates}
+            setRefetch={setRefetch}
             className={s.addTraining}
           />
         )}
