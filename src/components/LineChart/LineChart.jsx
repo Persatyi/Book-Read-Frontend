@@ -3,13 +3,16 @@ import useWindowSize from "hooks/useWindowSize";
 import "chart.js/auto";
 import { Chart } from "react-chartjs-2";
 import dayjs from "dayjs";
-import moment from "moment";
 
 const LineChart = ({ data }) => {
+  const size = useWindowSize();
   const { start, end, totalPages, addedPages, data: sets = [] } = data;
-  const dateNow = dayjs();
-  const trainingDays = dayjs(end).diff(start, "hour", true) / 24;
-  const startDate = moment().utc(start);
+
+  const parsedStartDate = Date.parse(start);
+  const parcedEndDate = Date.parse(end);
+  const startDate = dayjs(parsedStartDate);
+  const trainingDays =
+    dayjs(parcedEndDate).diff(parsedStartDate, "hour", true) / 24;
 
   function getDates() {
     const dateArray = [dayjs(startDate).format("DD.MM.YYYY")];
@@ -20,14 +23,10 @@ const LineChart = ({ data }) => {
     return dateArray; // Отримуєм масив дат
   }
 
-  // if (start) {
-  // getDates();
-  console.log("🚀 ~ getDates()", getDates());
-
-  // }
-
   const averagePerDay = () => {
-    const trainingRange = getDates().length;
+    const trainingRange = Math.ceil(
+      dayjs(dayjs()).diff(startDate, "day", true)
+    );
 
     if (addedPages) {
       const total = Math.ceil(addedPages / trainingRange);
@@ -36,8 +35,6 @@ const LineChart = ({ data }) => {
       return 0;
     }
   };
-
-  const size = useWindowSize();
 
   const middleware = () => {
     const stats = sets?.reduce((acc, el) => {
@@ -56,7 +53,7 @@ const LineChart = ({ data }) => {
         };
       });
 
-      for (let i = 0; i <= getDates().length; i += 1) {
+      for (let i = 0; i < dataSet.length; i += 1) {
         const day = dayjs(startDate).add(i, "day");
         const element = dataSet.find(
           (el) => el.x === dayjs(day).format("DD.MM.YYYY")
@@ -74,85 +71,30 @@ const LineChart = ({ data }) => {
   };
 
   const averageValue = () => {
-    // const dateNow = dayjs();
-    const averageAmountOfPages = Math.ceil(totalPages / trainingDays);
-    const prevAmount = [0];
     const finalDataSet = [];
 
-    const stats = sets?.reduce((acc, el) => {
-      const day = dayjs(el.date).format("DD.MM.YYYY");
-      const pages = acc[day] ? acc[day] : [];
-      return { ...acc, [day]: [...pages, el.pages] };
-    }, {});
+    const cycle = (range) => {
+      for (let i = 0; i < range; i += 1) {
+        const day = dayjs(startDate).add(i, "day");
 
-    if (stats) {
-      const dataSet = Object.keys(stats).map((key) => {
-        return {
-          x: key,
-          y: stats[key].reduce((acc, el) => acc + el, 0),
-        };
-      });
-
-      const cycle = (range) => {
-        for (let i = 0; i <= range; i += 1) {
-          const element = dataSet.find(
-            (el) => el.x === dayjs(startDate).format("DD.MM.YYYY")
-          );
-
-          if (element) {
-            if (
-              //<==== перший день якшо доданих сторінок більше чи менше за сьогодні то показати модалку
-              getDates()[i] === element.x
-            ) {
-              finalDataSet.push({
-                x: dayjs(startDate).format("DD.MM.YYYY"),
-                y: averageAmountOfPages,
-              });
-
-              // if (element) {
-              //   prevAmount.push(element.y);
-              // } else {
-              //   prevAmount.push(0);
-              // }
-            } else if (
-              getDates()[i] ===
-              dayjs(startDate).add(1, "day").format("DD.MM.YYYY") //другий день від початку
-            ) {
-              finalDataSet.push({
-                x: dayjs(startDate).add(1, "day").format("DD.MM.YYYY"),
-                y:
-                  (totalPages - prevAmount[i]) / getDates().slice(i, -1).length,
-              });
-
-              // if (element) {
-              //   prevAmount.push(element.y);
-              // } else {
-              //   prevAmount.push(0);
-              // }
-            } else {
-              // iнші дні
-
-              finalDataSet.push({
-                x: getDates()[i],
-                y: (totalPages - addedPages) / getDates().slice(i, -1).length, // here should be current date or date in cycle?
-              });
-              // if (element) {
-              //   prevAmount.push(element.y);
-              // } else {
-              //   prevAmount.push(0);
-              // }
-            }
-          }
+        if (
+          dayjs(day).format("DD.MM.YYYY") ===
+          dayjs(startDate).format("DD.MM.YYYY")
+        ) {
+          finalDataSet.push({
+            x: dayjs(day).format("DD.MM.YYYY"),
+            y: Math.ceil((totalPages - addedPages) / getDates().length),
+          });
+        } else {
+          finalDataSet.push({
+            x: dayjs(day).format("DD.MM.YYYY"),
+            y: Math.ceil((totalPages - addedPages) / (getDates().length - i)),
+          });
         }
-      };
-
-      // if (Math.ceil(dateNow.diff(start, "day", true)) <= 7) {
-      //   cycle(7);
-      // }
-      if (start) {
-        cycle(getDates().length);
       }
-    }
+    };
+
+    cycle(getDates().length);
 
     return finalDataSet;
   };
@@ -233,7 +175,7 @@ const LineChart = ({ data }) => {
                 display: true,
                 position: "top",
                 align: "start",
-                text: `AMOUNT OF PAGES / DAY ${averagePerDay()}`,
+                text: `AMOUNT OF PAGES / DAY  ${averagePerDay()}`,
                 color: "#242A37",
                 padding: 20,
                 fullSize: false,
