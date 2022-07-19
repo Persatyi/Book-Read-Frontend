@@ -7,6 +7,7 @@ import s from "./IconButton.module.scss";
 export const TYPES = {
   ADD: "add",
   BACK: "back",
+  DELETE: "delete",
 };
 
 const IconButton = ({ onClick, label, className = "", type = TYPES.ADD }) => {
@@ -26,13 +27,26 @@ const IconButton = ({ onClick, label, className = "", type = TYPES.ADD }) => {
   if (type === TYPES.BACK)
     return (
       <button
-        className={`${s.back} ${className}`}
+        className={`${s.icon} ${className}`}
         type="button"
         onClick={onClick}
         aria-label={label}
       >
         <svg width="24" height="12">
           <use href={`${sprite}#icon-back`}></use>
+        </svg>
+      </button>
+    );
+  if (type === TYPES.DELETE)
+    return (
+      <button
+        className={`${s.icon} ${className}`}
+        type="button"
+        onClick={onClick}
+        aria-label={label}
+      >
+        <svg width="14" height="18">
+          <use href={`${sprite}#icon-delete`}></use>
         </svg>
       </button>
     );

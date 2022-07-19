@@ -24,9 +24,9 @@
     }
 }
 
-.back {
+.icon {
     composes: button;
-    width: 24px;
-    height: 12px;
+    width: unset;
+    height: unset;
     background-color: transparent;
 }

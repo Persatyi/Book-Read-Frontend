@@ -110,6 +110,8 @@ const Training = () => {
           books={books}
           className={s.books}
           isActiveTraining={isActiveTraining}
+          chosenBooks={chosenBooks}
+          chooseBook={setChosenBooks}
         />
         {isMobile && !isActiveTraining && (
           <IconButton onClick={onAddButtonClick} label="Додати книгу" />
