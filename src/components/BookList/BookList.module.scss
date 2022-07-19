@@ -1,0 +1,24 @@
+@import "stylesheet/_mixin.scss";
+
+.list {
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 1.25;
+    color: var(--secondary-text-cl);
+}
+
+.head {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    display: grid;
+    grid-template-columns: 252px 252px 100px 100px;
+    border-top: 1px solid var(--auth-bg-cl);
+
+    @include mq(desktop) {
+        grid-template-columns: 364px 364px 100px 100px;
+    }
+}
+
+.subtitle {
+    color: var(--secondary-text-cl);
+}

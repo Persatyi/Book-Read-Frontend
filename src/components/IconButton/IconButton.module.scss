@@ -1,0 +1,32 @@
+.button {
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+}
+
+.plus {
+    composes: button;
+    width: 52px;
+    height: 52px;
+    position: absolute;
+    bottom: 32px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 50%;
+    background-color: var(--btn-cl);
+    transition: background-color 250ms linear;
+
+    &:hover,
+    &:focus {
+        background-color: var(--btn-hover-cl);
+    }
+}
+
+.icon {
+    composes: button;
+    width: unset;
+    height: unset;
+    background-color: transparent;
+}

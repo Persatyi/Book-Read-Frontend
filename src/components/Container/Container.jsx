@@ -1,8 +1,8 @@
 import s from "./Container.module.scss";
 
 const Container = (props) => {
-  const { children } = props;
-  return <div className={s.container}>{children}</div>;
+  const { children, className } = props;
+  return <div className={`${s.container} ${className}`}>{children}</div>;
 };
 
 export default Container;

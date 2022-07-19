@@ -1,0 +1,60 @@
+@import "stylesheet/_mixin.scss";
+
+.item {
+    position: relative;
+    padding: 20px 40px;
+    display: grid;
+    gap: 15px;
+    font-weight: 500;
+    color: var(--main-text-cl);
+    border-bottom: 1px solid var(--auth-bg-cl);
+
+    &:first-of-type {
+        border-top: 1px solid var(--auth-bg-cl);
+    }
+
+    @include mq(tablet) {
+        padding-left: 0;
+        display: grid;
+        grid-template-columns: 252px 252px 100px 100px;
+        gap: unset;
+    }
+
+    @include mq(desktop) {
+        grid-template-columns: 364px 364px 100px 100px;
+    }
+
+}
+
+.icon {
+    position: absolute;
+    left: 0;
+    top: 20px;
+}
+
+.delete {
+    position: absolute;
+    top: 50%;
+    right: 0px;
+    transform: translateY(-50%);
+
+    @include mq(tablet) {
+        right: 16px;
+    }
+
+    @include mq(desktop) {
+        right: 32px;
+    }
+}
+
+.title {
+    @include mq(tablet) {
+        padding-left: 32px;
+    }
+}
+
+.subtitle {
+    display: inline-block;
+    width: 70px;
+    color: var(--secondary-text-cl);
+}

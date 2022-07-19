@@ -1,7 +1,11 @@
-import React, { lazy, Suspense } from "react";
+import { lazy, Suspense, useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+
+import { useDispatch, useSelector } from "react-redux";
+import { token, setToken } from "redux/auth";
+
 import Loader from "components/Loader";
 // import Header from "components/Header";
 // import Register from "pages/Register";
@@ -20,6 +24,12 @@ const Library = lazy(() => import("pages/Library"));
 const Header = lazy(() => import("components/Header"));
 
 function App() {
+  const currentToken = useSelector(token);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(setToken(currentToken));
+  }, [currentToken, dispatch]);
+
   return (
     <>
       <Suspense fallback={<Loader />}>

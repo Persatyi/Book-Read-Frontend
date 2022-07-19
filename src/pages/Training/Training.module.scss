@@ -1,0 +1,44 @@
+@import "stylesheet/_mixin.scss";
+
+.section {
+    padding-top: 20px;
+    background-color: var(--secondary-bg-cl);
+}
+
+.container {
+    @include mq(desktop) {
+        display: grid;
+        grid-template-columns: 928px 1fr;
+        column-gap: 32px;
+        row-gap: 23px;
+        justify-content: space-between;
+    }
+}
+
+.goal {
+    @include mq(tablet) {
+        grid-column: 2/3;
+    }
+}
+
+.addTraining {
+    @include mq(tablet) {
+        grid-column: 1/2;
+        grid-row: 1/2;
+    }
+}
+
+.back {
+    margin-bottom: 32px;
+}
+
+.books {
+    margin-top: 32px;
+}
+
+.button {
+    padding: 13px;
+    margin-top: 32px;
+    margin-left: auto;
+    margin-right: auto;
+}
