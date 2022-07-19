@@ -17,7 +17,7 @@ export default function AddBook() {
       }}
       validationSchema={addBookSchema}
       validateOnBlur
-      onSubmit={async(values, actions) => {
+      onSubmit={async (values, actions) => {
         await addBook(values);
         toast.success("Book added");
         actions.resetForm();
