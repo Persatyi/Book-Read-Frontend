@@ -4,7 +4,6 @@ import UserBar from "components/UserBar";
 import React from "react";
 import { useSelector } from "react-redux";
 import { isAuth } from "redux/auth";
-import Container from "../Container";
 import s from "./Header.module.scss";
 
 const Header = () => {
@@ -17,19 +16,17 @@ const Header = () => {
 
   return (
     <header className={s.header}>
-      <Container>
-        <div className={headerCls.join(" ")}>
-          <span className={s.logo}>BR</span>
+      <div className={headerCls.join(" ")}>
+        <span className={s.logo}>BR</span>
 
-          {isLoggedIn && (
-            <>
-              <UserBar />
-              <Navigation />
-              <Logout />
-            </>
-          )}
-        </div>
-      </Container>
+        {isLoggedIn && (
+          <>
+            <UserBar />
+            <Navigation />
+            <Logout />
+          </>
+        )}
+      </div>
     </header>
   );
 };

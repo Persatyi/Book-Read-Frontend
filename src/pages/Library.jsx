@@ -9,14 +9,17 @@ import MoreBtn from "components/MoreBtn/MoreBtn";
 import BackBtn from "components/BackBtn/BackBtn";
 import LibraryEmpty from "components/LibraryEmpty";
 import AddBook from 'components/AddBook';
+import { ModalBookReview } from "components/Modals";
 
 export default function LibraryPage() {
   const auth = useSelector(isAuth);
   const { data = []} = useBooksQuery(null, { skip: !auth });
   const size = useWindowSize();
+  const open = !data.length
   const [plus, togglePlus] = useToggle();
   /* TODO: placeholder must be shown only when library is empty */
-  const [openPlaceholder, setOpenPlaceholder] = useState(!!data.length);
+  const [openPlaceholder, setOpenPlaceholder] = useState(true);
+  const [openModal, toggleModal] = useToggle();
   return (
     <Container>
       {size.width < 768 && (
@@ -42,13 +45,14 @@ export default function LibraryPage() {
       )}
       {size.width >= 768 && (
         <>
-          <AddBook />
+            <AddBook />
           {/* TODO: open Resume modal on click */}
+          <BookListLibrary onClick={toggleModal} />
           <LibraryEmpty
-              open={openPlaceholder}
-              onClose={() => setOpenPlaceholder(false)}
-            />
-              <BookListLibrary onClick={() => {}} />
+            open={openPlaceholder}
+            onClose={() => setOpenPlaceholder(false)}
+          />
+      <ModalBookReview open={openModal} onClose={toggleModal} />
         </>
       )}
     </Container>

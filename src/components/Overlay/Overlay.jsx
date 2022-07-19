@@ -1,5 +1,5 @@
-import s from "./Overlay.module.css";
 import PropTypes from "prop-types";
+import s from "./Overlay.module.scss";
 
 const Overlay = ({ children, onClick }) => {
   const handleClick = (e) => {
