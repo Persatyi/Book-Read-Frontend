@@ -26,6 +26,7 @@ const store = configureStore({
     auth: persistedReducer,
     [bookApi.reducerPath]: bookApi.reducer,
   },
+
   middleware: (getDefaultMiddleware) => [
     ...getDefaultMiddleware({
       serializableCheck: {

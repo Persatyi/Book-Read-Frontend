@@ -32,6 +32,7 @@ export const bookApi = createApi({
     }),
     logout: build.mutation({
       query: () => ({ url: "/users/logout", method: "POST" }),
+      invalidatesTags: ["User"],
     }),
     current: build.query({
       query: () => "/users/current",
@@ -44,10 +45,14 @@ export const bookApi = createApi({
     addTraining: build.mutation({
       query: (data) => ({ url: "/trainings", method: "POST", body: data }),
     }),
+    addBook: build.mutation({
+      query: (data) => ({ url: "/books", method: "POST", body: data }),
+      invalidatesTags: ["Books"],
+    }),
   }),
+  // refetchOnFocus: true,
+  // refetchOnReconnect: true,
 });
-// refetchOnFocus: true,
-// refetchOnReconnect: true,
 
 export const {
   useRegisterMutation,
@@ -58,4 +63,5 @@ export const {
   useGetResultsQuery,
   useBooksQuery,
   useAddTrainingMutation,
+  useAddBookMutation,
 } = bookApi;

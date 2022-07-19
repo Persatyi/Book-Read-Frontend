@@ -14,6 +14,9 @@ body {
     Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  width: 100%;
+  color: var(--main-text-cl);
+  background-color: var(--secondary-bg-cl);
 }
 
 a {

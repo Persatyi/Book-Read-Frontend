@@ -2,6 +2,7 @@ import { useEffect, useRef } from "react";
 
 const useClickOutside = (callback) => {
   const domNode = useRef();
+
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (!domNode.current?.contains(e.target)) {
