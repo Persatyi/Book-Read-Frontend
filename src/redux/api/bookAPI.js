@@ -32,6 +32,7 @@ export const bookApi = createApi({
     }),
     logout: build.mutation({
       query: () => ({ url: "/users/logout", method: "POST" }),
+      invalidatesTags: ["User"],
     }),
     current: build.query({
       query: () => "/users/current",
@@ -46,7 +47,11 @@ export const bookApi = createApi({
     }),
     getTraining: build.query({
       query: () => "/trainings",
-      providesTags: ["Results"],
+      providesTags: ["Results", "Books"],
+    }),
+    addBook: build.mutation({
+      query: (data) => ({ url: "/books", method: "POST", body: data }),
+      invalidatesTags: ["Books"],
     }),
   }),
 });
@@ -63,4 +68,5 @@ export const {
   useBooksQuery,
   useAddTrainingMutation,
   useGetTrainingQuery,
+  useAddBookMutation,
 } = bookApi;
