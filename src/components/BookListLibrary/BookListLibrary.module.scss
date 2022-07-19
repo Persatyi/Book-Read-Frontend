@@ -143,17 +143,7 @@
       &Icon{
          margin-right: 12px;
          height: 17px;
-         width: 67px;
-         @include mq(mobile){
-            width: 37px;
-         }
-         @include mq(tablet){
-            margin-right: 18px;
-            width: 126px;
-         }
-         @include mq(desktop){
-            width: 97px;
-         }
+         max-width: 22px;
       }
       &Button{
          margin: 0 auto;
@@ -283,17 +273,7 @@
       &Icon{
          margin-right: 12px;
          height: 17px;
-         width: 67px;
-         @include mq(mobile){
-            width: 37px;
-         }
-         @include mq(tablet){
-            margin-right: 18px;
-            width: 55px;
-         }
-         @include mq(desktop){
-            width: 33px;
-         }
+         max-width:22px;
       }
    }
 }
@@ -317,5 +297,28 @@
       @include mq(desktop){
          display: none;
       }
+   }
+}
+@keyframes spinner {
+   0% {
+      transform: rotate(0deg);
+   }
+   100% {
+      transform: rotate(360deg);
+   }
+}
+.loading{
+   &Wrapper{
+      margin-top: 100px;
+      display: flex;
+      justify-content: center;
+   }
+   &Spinner {
+      width: 150px;
+      height: 150px;
+      border: 10px solid #f3f3f3; 
+      border-top: 10px solid #383636; 
+      border-radius: 50%;
+      animation: spinner 1.5s linear infinite;
    }
 }

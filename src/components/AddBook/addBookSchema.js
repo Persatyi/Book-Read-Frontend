@@ -1,6 +1,6 @@
 import * as Yup from 'yup';
 
-const librarySchema = Yup.object().shape({
+const addBookSchema = Yup.object().shape({
    title: Yup.string()
    .min(3, 'Title is short')
    .max(100, 'Title is long')
@@ -19,4 +19,4 @@ const librarySchema = Yup.object().shape({
    .required('Enter this field')
    })
 
-export default librarySchema;
+export default addBookSchema;

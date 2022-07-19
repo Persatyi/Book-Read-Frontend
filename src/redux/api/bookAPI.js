@@ -12,7 +12,7 @@ export const bookApi = createApi({
       return headers;
     },
   }),
-  tagTypes: ["User", "Results"],
+  tagTypes: ["User","Books", "Results"],
   endpoints: (build) => ({
     register: build.mutation({
       query: (data) => ({ url: "/users/register", method: "POST", body: data }),
@@ -38,6 +38,14 @@ export const bookApi = createApi({
       query: () => "/users/current",
       providesTags: ["User"],
     }),
+    books: build.query({
+      query: () => "/books",
+      providesTags: ["Books"],
+    }),
+    addBook: build.mutation({
+      query: (data) => ({ url: "/books", method: "POST", body: data }),
+      invalidatesTags: ["Books"]
+    }),
   }),
 });
 // refetchOnFocus: true,
@@ -50,4 +58,6 @@ export const {
   useLogoutMutation,
   useCurrentQuery,
   useGetResultsQuery,
+  useBooksQuery,
+  useAddBookMutation,
 } = bookApi;
