@@ -19,8 +19,10 @@ import s from "./AddTraining.module.scss";
 const AddTraining = ({
   chosenBooks,
   chooseBook,
-  dates,
-  setDates,
+  start,
+  end,
+  setStart,
+  setEnd,
   setRefetch,
   className = "",
 }) => {
@@ -41,7 +43,7 @@ const AddTraining = ({
   );
   const addBook = (values, setFieldValue) => {
     const newBook = data.find(({ _id }) => _id === values.book);
-    chooseBook([...chosenBooks, newBook]);
+    chooseBook(newBook);
     setFieldValue("book", "");
   };
 
@@ -58,8 +60,6 @@ const AddTraining = ({
       toast.error("Не можу додати тренування, спробуйте ще раз");
     }
   };
-  const onStartChange = (value) => setDates({ ...dates, start: value });
-  const onEndChange = (value) => setDates({ ...dates, end: value });
 
   if (isFetching) return <div>Loading</div>;
   if (isSuccess)
@@ -68,8 +68,8 @@ const AddTraining = ({
         <Title text="Моє тренування" className={s.title} />
         <Formik
           initialValues={{
-            start: dates?.start ?? "",
-            end: dates?.end ?? "",
+            start: start ?? "",
+            end: end ?? "",
             book: "",
           }}
           onSubmit={onSubmit}
@@ -81,7 +81,7 @@ const AddTraining = ({
                   name="start"
                   className={s.date}
                   minDate={new Date()}
-                  onChangeCb={onStartChange}
+                  onChangeCb={(value) => setStart(value)}
                   dateFormat="dd.MM.yyyy"
                   placeholderText="Початок"
                   autocomplete="off"
@@ -99,7 +99,7 @@ const AddTraining = ({
                   name="end"
                   className={s.date}
                   minDate={values.start}
-                  onChangeCb={onEndChange}
+                  onChangeCb={(value) => setEnd(value)}
                   dateFormat="dd.MM.yyyy"
                   placeholderText="Завершення"
                   autocomplete="off"
@@ -153,11 +153,10 @@ AddTraining.propTypes = {
     })
   ),
   chooseBook: PropTypes.func,
-  dates: PropTypes.shape({
-    start: PropTypes.object,
-    end: PropTypes.object,
-  }),
-  setDates: PropTypes.func,
+  start: PropTypes.oneOfType([PropTypes.instanceOf(Date), PropTypes.string]),
+  end: PropTypes.oneOfType([PropTypes.instanceOf(Date), PropTypes.string]),
+  setStart: PropTypes.func,
+  setEnd: PropTypes.func,
   setRefetch: PropTypes.func,
   className: PropTypes.string,
 };
