@@ -1,0 +1,18 @@
+@import "stylesheet/_mixin.scss";
+
+.title {
+    padding: 18px 30px;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 1.2;
+    text-align: center;
+    color: var(--main-bg-cl);
+    background: var(--titles-bg-cl);
+    box-shadow: 0px 2px 3px rgba(9, 30, 63, 0.1);
+
+    @include mq(tablet) {
+        padding-left: 28px;
+        padding-right: 27px;
+    }
+
+}

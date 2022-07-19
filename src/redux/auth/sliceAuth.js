@@ -1,16 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit";
-// import axios from "axios";
+import axios from "axios";
 
-// axios.defaults.baseURL = "write URL here";
+axios.defaults.baseURL = "https://persatyi-book-read-backend.herokuapp.com/api";
 
-// const token = {
-//   set(token) {
-//     axios.defaults.headers.common.Authorization = `Bearer ${token}`;
-//   },
-//   unset() {
-//     axios.defaults.headers.common.Authorization = "";
-//   },
-// };
+const token = {
+  set(token) {
+    axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+  },
+  unset() {
+    axios.defaults.headers.common.Authorization = "";
+  },
+};
 
 const sessionSlice = createSlice({
   name: "auth",
@@ -22,11 +22,15 @@ const sessionSlice = createSlice({
     loggedIn(state, { payload }) {
       state.token = payload;
       state.isAuth = true;
+      token.set(payload);
     },
     loggedOff(state) {
       state.isAuth = false;
       state.token = null;
-      // token.unset();
+      token.unset();
+    },
+    setToken(_, { payload }) {
+      token.set(payload);
     },
   },
 });

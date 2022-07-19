@@ -2,7 +2,7 @@ import DatePicker from "react-datepicker";
 import { useField, useFormikContext } from "formik";
 import "react-datepicker/dist/react-datepicker.css";
 
-const DatePickerField = ({ ...props }) => {
+const DatePickerField = ({ onChangeCb, ...props }) => {
   const { setFieldValue } = useFormikContext();
   const [field] = useField(props);
 
@@ -13,6 +13,7 @@ const DatePickerField = ({ ...props }) => {
       selected={(field.value && new Date(field.value)) || null}
       onChange={(value) => {
         setFieldValue(field.name, value);
+        onChangeCb(value);
       }}
     />
   );
