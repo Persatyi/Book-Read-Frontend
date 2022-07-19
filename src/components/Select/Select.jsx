@@ -49,7 +49,10 @@ const Select = ({
   return (
     <div
       className={`${containerClassName} ${s.container}`}
-      style={{ borderBottomColor: isOpen ? "#24cca7" : null }}
+      style={{
+        borderBottomColor: isOpen ? "#24cca7" : null,
+        color: field.value ? "#242a37" : null,
+      }}
       onClick={openList}
     >
       {!field.value && placeholder}
