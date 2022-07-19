@@ -3,9 +3,39 @@ import useWindowSize from "hooks/useWindowSize";
 import "chart.js/auto";
 import { Chart } from "react-chartjs-2";
 import dayjs from "dayjs";
+import moment from "moment";
 
 const LineChart = ({ data }) => {
   const { start, end, totalPages, addedPages, data: sets = [] } = data;
+  const dateNow = dayjs();
+  const trainingDays = dayjs(end).diff(start, "hour", true) / 24;
+  const startDate = moment().utc(start);
+
+  function getDates() {
+    const dateArray = [dayjs(startDate).format("DD.MM.YYYY")];
+    for (let i = 1; i <= trainingDays; i += 1) {
+      const currentDate = dayjs(startDate).add(i, "day").format("DD.MM.YYYY");
+      dateArray.push(currentDate);
+    }
+    return dateArray; // Отримуєм масив дат
+  }
+
+  // if (start) {
+  // getDates();
+  console.log("🚀 ~ getDates()", getDates());
+
+  // }
+
+  const averagePerDay = () => {
+    const trainingRange = getDates().length;
+
+    if (addedPages) {
+      const total = Math.ceil(addedPages / trainingRange);
+      return total === undefined ? 0 : total;
+    } else {
+      return 0;
+    }
+  };
 
   const size = useWindowSize();
 
@@ -26,12 +56,8 @@ const LineChart = ({ data }) => {
         };
       });
 
-      const dateNow = dayjs();
-      const date2 = dayjs(start);
-      const range = Math.ceil(dateNow.diff(date2, "day", true));
-
-      for (let i = 0; i < range; i += 1) {
-        const day = dayjs(date2).add(i, "day");
+      for (let i = 0; i <= getDates().length; i += 1) {
+        const day = dayjs(startDate).add(i, "day");
         const element = dataSet.find(
           (el) => el.x === dayjs(day).format("DD.MM.YYYY")
         );
@@ -47,11 +73,9 @@ const LineChart = ({ data }) => {
     return finalDataSet;
   };
 
-  const everageValue = () => {
-    const trainingDays = Math.ceil(dayjs(end).diff(start, "day", true));
-    const dateNow = dayjs();
-    const averageAmount = Math.ceil(totalPages / trainingDays);
-    const startDate = dayjs(start);
+  const averageValue = () => {
+    // const dateNow = dayjs();
+    const averageAmountOfPages = Math.ceil(totalPages / trainingDays);
     const prevAmount = [0];
     const finalDataSet = [];
 
@@ -70,54 +94,63 @@ const LineChart = ({ data }) => {
       });
 
       const cycle = (range) => {
-        for (let i = 0; i < range; i += 1) {
-          const day = dayjs(startDate).add(i, "day");
+        for (let i = 0; i <= range; i += 1) {
           const element = dataSet.find(
-            (el) => el.x === dayjs(day).format("DD.MM.YYYY")
+            (el) => el.x === dayjs(startDate).format("DD.MM.YYYY")
           );
 
-          if (
-            //<==== перший день якшо доданих сторінок більше чи менше за сьогодні то показати модалку
-            dayjs(day).format("DD.MM.YYYY") ===
-            dayjs(startDate).format("DD.MM.YYYY")
-          ) {
-            console.log("перший день");
-            finalDataSet.push({
-              x: day.format("DD.MM.YYYY"),
-              y: averageAmount,
-            });
+          if (element) {
+            if (
+              //<==== перший день якшо доданих сторінок більше чи менше за сьогодні то показати модалку
+              getDates()[i] === element.x
+            ) {
+              finalDataSet.push({
+                x: dayjs(startDate).format("DD.MM.YYYY"),
+                y: averageAmountOfPages,
+              });
 
-            if (element) {
-              console.log("пушим Y");
-              prevAmount.push(element.y);
+              // if (element) {
+              //   prevAmount.push(element.y);
+              // } else {
+              //   prevAmount.push(0);
+              // }
+            } else if (
+              getDates()[i] ===
+              dayjs(startDate).add(1, "day").format("DD.MM.YYYY") //другий день від початку
+            ) {
+              finalDataSet.push({
+                x: dayjs(startDate).add(1, "day").format("DD.MM.YYYY"),
+                y:
+                  (totalPages - prevAmount[i]) / getDates().slice(i, -1).length,
+              });
+
+              // if (element) {
+              //   prevAmount.push(element.y);
+              // } else {
+              //   prevAmount.push(0);
+              // }
             } else {
-              console.log("пушим 0");
-              prevAmount.push(0);
-            }
-          } else {
-            // iнші дні
-            console.log("інші дні");
-            finalDataSet.push({
-              x: day.format("DD.MM.YYYY"),
-              y:
-                (totalPages - addedPages + prevAmount[i]) /
-                Math.ceil(dayjs(end).diff(dateNow, "day", true)),
-            });
-            if (element) {
-              console.log("інші пушим Y");
-              prevAmount.push(element.y);
-            } else {
-              console.log("інші пушим 0");
-              prevAmount.push(0);
+              // iнші дні
+
+              finalDataSet.push({
+                x: getDates()[i],
+                y: (totalPages - addedPages) / getDates().slice(i, -1).length, // here should be current date or date in cycle?
+              });
+              // if (element) {
+              //   prevAmount.push(element.y);
+              // } else {
+              //   prevAmount.push(0);
+              // }
             }
           }
         }
       };
 
-      if (Math.ceil(dateNow.diff(start, "day", true)) <= 7) {
-        cycle(7);
-      } else {
-        cycle(trainingDays);
+      // if (Math.ceil(dateNow.diff(start, "day", true)) <= 7) {
+      //   cycle(7);
+      // }
+      if (start) {
+        cycle(getDates().length);
       }
     }
 
@@ -132,7 +165,7 @@ const LineChart = ({ data }) => {
             backgroundColor: "#091E3F",
             borderColor: "#091E3F",
             borderWidth: 2,
-            data: everageValue(),
+            data: averageValue(),
             label: "PLAN",
             pointRadius: 5,
             tension: 0.4,
@@ -200,7 +233,7 @@ const LineChart = ({ data }) => {
                 display: true,
                 position: "top",
                 align: "start",
-                text: `AMOUNT OF PAGES / DAY 10`,
+                text: `AMOUNT OF PAGES / DAY ${averagePerDay()}`,
                 color: "#242A37",
                 padding: 20,
                 fullSize: false,
