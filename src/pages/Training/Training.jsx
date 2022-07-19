@@ -22,6 +22,7 @@ const ACTION_TYPES = {
   REFETCH: "refetch",
   ADD: "add",
   CHOOSE_BOOK: "chooseBook",
+  DELETE_BOOK: "deleteBook",
   SET_START: "setStart",
   SET_END: "setEnd",
 };
@@ -41,6 +42,11 @@ const reducer = (state, { type, payload }) => {
       return { ...state, isAdd: payload };
     case ACTION_TYPES.CHOOSE_BOOK:
       return { ...state, chosenBooks: [...state.chosenBooks, payload] };
+    case ACTION_TYPES.DELETE_BOOK:
+      return {
+        ...state,
+        chosenBooks: state.chosenBooks.filter(({ _id }) => _id !== payload),
+      };
     case ACTION_TYPES.SET_START:
       return { ...state, start: payload };
     case ACTION_TYPES.SET_END:
@@ -66,6 +72,8 @@ const Training = () => {
   }
   const chooseBook = (payload) =>
     dispatch({ type: ACTION_TYPES.CHOOSE_BOOK, payload });
+  const deleteBook = (payload) =>
+    dispatch({ type: ACTION_TYPES.DELETE_BOOK, payload });
   const setStart = (payload) =>
     dispatch({ type: ACTION_TYPES.SET_START, payload });
   const setEnd = (payload) => dispatch({ type: ACTION_TYPES.SET_END, payload });
@@ -154,7 +162,7 @@ const Training = () => {
           className={s.books}
           isActiveTraining={isActiveTraining}
           chosenBooks={chosenBooks}
-          chooseBook={chooseBook}
+          deleteBook={deleteBook}
         />
         {isMobile && !isActiveTraining && (
           <IconButton onClick={onAddButtonClick} label="Додати книгу" />
