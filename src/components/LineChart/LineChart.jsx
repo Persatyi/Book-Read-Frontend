@@ -4,9 +4,12 @@ import "chart.js/auto";
 import { Chart } from "react-chartjs-2";
 import dayjs from "dayjs";
 
-const LineChart = ({ data, className = "" }) => {
+const LineChart = ({ data, start, end, className = "" }) => {
   const size = useWindowSize();
-  const { start, end, totalPages, addedPages, data: sets = [] } = data;
+
+  const addedPages = 10;
+  const totalPages = 50;
+  const sets = [];
 
   const parsedStartDate = Date.parse(start);
   const parcedEndDate = Date.parse(end);
@@ -73,12 +76,16 @@ const LineChart = ({ data, className = "" }) => {
   const averageValue = () => {
     const finalDataSet = [];
 
-    for (let i = 0; i < getDates().length || 7; i += 1) {
-      finalDataSet.push({
-        x: getDates()[i],
-        y: Math.ceil((totalPages - addedPages) / (getDates().length - i)),
-      });
-    }
+    const cycle = (range) => {
+      for (let i = 0; i < range; i += 1) {
+        finalDataSet.push({
+          x: getDates()[i],
+          y: Math.ceil((totalPages - addedPages) / (getDates().length - i)),
+        });
+      }
+    };
+
+    cycle(getDates().length);
 
     return finalDataSet;
   };
@@ -104,7 +111,9 @@ const LineChart = ({ data, className = "" }) => {
             label: "ACT",
             pointRadius: 5,
             tension: 0.4,
-            data: middleware(),
+            data: !!middleware().length
+              ? middleware()
+              : [{ x: dayjs().format("DD.MM.YYYY"), y: 0 }],
           },
         ],
       }

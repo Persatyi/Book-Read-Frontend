@@ -4,11 +4,7 @@ import { useQuery } from "react-query";
 import { toast } from "react-toastify";
 import axios from "axios";
 
-import {
-  useAddTrainingMutation,
-  useGetResultsQuery,
-  useGetTrainingQuery,
-} from "redux/api/bookAPI";
+import { useAddTrainingMutation } from "redux/api/bookAPI";
 
 import { MOBILE_ONLY } from "assets/constants/MEDIA";
 
@@ -19,7 +15,7 @@ import BookList from "components/BookList";
 import IconButton, { TYPES } from "components/IconButton";
 import Button from "components/Button";
 import LineChart from "components/LineChart/LineChart";
-import AddPages from "components/AddPages";
+// import AddPages from "components/AddPages";
 // import Statistics from "components/Statistics";
 
 import s from "./Training.module.scss";
@@ -39,6 +35,7 @@ const initialState = {
   end: null,
   isAdd: false,
   isRefetch: false,
+  addedPages: null,
 };
 const reducer = (state, { type, payload }) => {
   switch (type) {
@@ -66,28 +63,28 @@ const Training = () => {
   const isToken = !!axios.defaults.headers.common.Authorization;
   const [addTraining] = useAddTrainingMutation();
   const [state, dispatch] = useReducer(reducer, initialState);
-  const { chosenBooks, start, end, isAdd, isRefetch } = state;
+  const { chosenBooks, start, end, isAdd, isRefetch, addedPages } = state;
   const isMobile = useMediaQuery(MOBILE_ONLY);
   const { isLoading, data } = useQuery(["training", isRefetch], getTraining, {
     enabled: isToken,
     retry: false,
   });
 
-  const { data: trainings = {} } = useGetTrainingQuery();
-  const { data: statistic = {} } = useGetResultsQuery();
-
-  const chartData = {
-    start: trainings?.start,
-    end: trainings?.end,
-    totalPages: statistic?.total,
-    addedPages: statistic?.added,
-    data: statistic?.data,
-  };
+  const { data: response } = useQuery("results", getResults, {
+    enabled: isToken,
+    retry: false,
+  });
 
   async function getTraining() {
     const { data } = await axios.get("/trainings");
     return data;
   }
+
+  async function getResults() {
+    const { data } = await axios.get("/results");
+    return data;
+  }
+
   const chooseBook = (payload) =>
     dispatch({ type: ACTION_TYPES.CHOOSE_BOOK, payload });
   const deleteBook = (payload) =>
@@ -182,8 +179,14 @@ const Training = () => {
           className={s.book}
           deleteBook={deleteBook}
         />
-        <LineChart data={chartData} className={s.chart} />
-        <AddPages data={statistic} className={s.addPages} />
+        <LineChart
+          addedPages={addedPages}
+          start={start}
+          end={end}
+          data={response}
+          className={s.chart}
+        />
+        {/* <AddPages data={statistic} className={s.addPages} /> */}
         {isMobile && !isActiveTraining && (
           <IconButton onClick={onAddButtonClick} label="Додати книгу" />
         )}
