@@ -73,28 +73,12 @@ const LineChart = ({ data, className = "" }) => {
   const averageValue = () => {
     const finalDataSet = [];
 
-    const cycle = (range) => {
-      for (let i = 0; i < range; i += 1) {
-        const day = dayjs(startDate).add(i, "day");
-
-        if (
-          dayjs(day).format("DD.MM.YYYY") ===
-          dayjs(startDate).format("DD.MM.YYYY")
-        ) {
-          finalDataSet.push({
-            x: dayjs(day).format("DD.MM.YYYY"),
-            y: Math.ceil((totalPages - addedPages) / getDates().length),
-          });
-        } else {
-          finalDataSet.push({
-            x: dayjs(day).format("DD.MM.YYYY"),
-            y: Math.ceil((totalPages - addedPages) / (getDates().length - i)),
-          });
-        }
-      }
-    };
-
-    cycle(getDates().length);
+    for (let i = 0; i < getDates().length || 7; i += 1) {
+      finalDataSet.push({
+        x: getDates()[i],
+        y: Math.ceil((totalPages - addedPages) / (getDates().length - i)),
+      });
+    }
 
     return finalDataSet;
   };
