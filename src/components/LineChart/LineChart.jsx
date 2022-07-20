@@ -4,12 +4,9 @@ import "chart.js/auto";
 import { Chart } from "react-chartjs-2";
 import dayjs from "dayjs";
 
-const LineChart = ({ data, start, end, className = "" }) => {
+const LineChart = ({ data = [], className = "" }) => {
+  const { start, end, data: sets, added: addedPages, total: totalPages } = data;
   const size = useWindowSize();
-
-  const addedPages = 10;
-  const totalPages = 50;
-  const sets = [];
 
   const parsedStartDate = Date.parse(start);
   const parcedEndDate = Date.parse(end);
@@ -111,9 +108,7 @@ const LineChart = ({ data, start, end, className = "" }) => {
             label: "ACT",
             pointRadius: 5,
             tension: 0.4,
-            data: !!middleware().length
-              ? middleware()
-              : [{ x: dayjs().format("DD.MM.YYYY"), y: 0 }],
+            data: middleware(),
           },
         ],
       }

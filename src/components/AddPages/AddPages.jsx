@@ -2,19 +2,17 @@ import s from "./AddPages.module.scss";
 import spriteSvg from "assets/images/sprite.svg";
 import { schema } from "assets/schemas/addPagesValidation";
 import Button from "components/Button";
-import { useAddPageMutation } from "redux/api/bookAPI";
 
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import DatePickerField from "components/DatePickerField";
 import dayjs from "dayjs";
 
-const AddPages = (props) => {
-  const { data, className } = props;
-
-  const [addPage] = useAddPageMutation();
+const AddPages = ({ data = {}, className, updateResults, onClick }) => {
+  const { data: sets, start } = data;
+  const parsedStart = Date.parse(start);
 
   const onSubmit = (values) => {
-    addPage(values);
+    updateResults(values);
   };
 
   return (
@@ -32,7 +30,7 @@ const AddPages = (props) => {
               <DatePickerField
                 className={s.date}
                 name="date"
-                // minDate={}
+                minDate={parsedStart}
                 maxDate={new Date()}
                 dateFormat="MM.dd.yyyy"
                 closeOnScroll={true}
@@ -58,9 +56,9 @@ const AddPages = (props) => {
             text="Add result"
           />
           <h2 className={s.statisticsTitle}>STATISTICS</h2>
-          {data?.data && (
+          {!!sets && (
             <ul className={s.statistics}>
-              {data.data
+              {sets
                 .slice(0)
                 .reverse()
                 .map(({ _id: id, pages, date }) => (

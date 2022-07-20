@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 
 import axios from "axios";
 
-import { useAddTrainingMutation } from "redux/api/bookAPI";
+import { useAddTrainingMutation, useAddPageMutation } from "redux/api/bookAPI";
 
 import { MOBILE_ONLY } from "assets/constants/MEDIA";
 
@@ -16,7 +16,7 @@ import BookList from "components/BookList";
 import IconButton, { TYPES } from "components/IconButton";
 import Button from "components/Button";
 import LineChart from "components/LineChart/LineChart";
-// import AddPages from "components/AddPages";
+import AddPages from "components/AddPages";
 // import Statistics from "components/Statistics";
 
 import s from "./Training.module.scss";
@@ -65,7 +65,7 @@ const Training = () => {
   const isToken = !!axios.defaults.headers.common.Authorization;
   const [addTraining] = useAddTrainingMutation();
   const [state, dispatch] = useReducer(reducer, initialState);
-  const { chosenBooks, start, end, isAdd, isRefetch, addedPages } = state;
+  const { chosenBooks, start, end, isAdd, isRefetch } = state;
   const isMobile = useMediaQuery(MOBILE_ONLY);
   const { isLoading, data } = useQuery(["training", isRefetch], getTraining, {
     enabled: isToken,
@@ -77,6 +77,8 @@ const Training = () => {
     retry: false,
   });
 
+  const [addPage] = useAddPageMutation();
+
   async function getTraining() {
     const { data } = await axios.get("/trainings");
     return data;
@@ -85,6 +87,10 @@ const Training = () => {
   async function getResults() {
     const { data } = await axios.get("/results");
     return data;
+  }
+
+  async function updateResults(data) {
+    await addPage(data);
   }
 
   const chooseBook = (payload) =>
@@ -202,9 +208,13 @@ const Training = () => {
             onClick={onAddTrainingClick}
           />
         )}
-        <LineChart data={chartData} className={s.chart} />
+        <LineChart data={response} className={s.chart} />
         {isActiveTraining && (
-          // <AddPages data={statistic} className={s.addPages} />
+          <AddPages
+            updateResults={updateResults}
+            data={response}
+            className={s.addPages}
+          />
         )}
         {isMobile && !isActiveTraining && (
           <IconButton onClick={onAddButtonClick} label="Додати книгу" />
