@@ -4,7 +4,11 @@ import { useQuery } from "react-query";
 import { toast } from "react-toastify";
 import axios from "axios";
 
-import { useAddTrainingMutation } from "redux/api/bookAPI";
+import {
+  useAddTrainingMutation,
+  useGetResultsQuery,
+  useGetTrainingQuery,
+} from "redux/api/bookAPI";
 
 import { MOBILE_ONLY } from "assets/constants/MEDIA";
 
@@ -14,6 +18,8 @@ import AddTraining from "components/AddTraining";
 import BookList from "components/BookList";
 import IconButton, { TYPES } from "components/IconButton";
 import Button from "components/Button";
+import LineChart from "components/LineChart/LineChart";
+import AddPages from "components/AddPages";
 // import Statistics from "components/Statistics";
 
 import s from "./Training.module.scss";
@@ -66,6 +72,18 @@ const Training = () => {
     enabled: isToken,
     retry: false,
   });
+
+  const { data: trainings = {} } = useGetTrainingQuery();
+  const { data: statistic = {} } = useGetResultsQuery();
+
+  const chartData = {
+    start: trainings?.start,
+    end: trainings?.end,
+    totalPages: statistic?.total,
+    addedPages: statistic?.added,
+    data: statistic?.data,
+  };
+
   async function getTraining() {
     const { data } = await axios.get("/trainings");
     return data;
@@ -159,11 +177,13 @@ const Training = () => {
         )}
         <BookList
           books={books}
-          className={s.books}
           isActiveTraining={isActiveTraining}
           chosenBooks={chosenBooks}
+          className={s.book}
           deleteBook={deleteBook}
         />
+        <LineChart data={chartData} className={s.chart} />
+        <AddPages data={statistic} className={s.addPages} />
         {isMobile && !isActiveTraining && (
           <IconButton onClick={onAddButtonClick} label="Додати книгу" />
         )}
