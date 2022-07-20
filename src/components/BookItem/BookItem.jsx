@@ -8,7 +8,7 @@ import sprite from "assets/images/sprite.svg";
 
 import s from "./BookItem.module.scss";
 
-function BookItem({ book = {}, isActiveTraining, chosenBooks, chooseBook }) {
+function BookItem({ book = {}, isActiveTraining, chosenBooks, deleteBook }) {
   const {
     _id,
     title = "...",
@@ -19,8 +19,7 @@ function BookItem({ book = {}, isActiveTraining, chosenBooks, chooseBook }) {
   } = book;
   const isMobile = useMediaQuery(MOBILE_ONLY);
   const onDeleteClick = () => {
-    const newBooks = chosenBooks.filter((book) => book._id !== _id);
-    chooseBook(newBooks);
+    deleteBook(_id);
   };
 
   return (
@@ -84,7 +83,7 @@ BookItem.propTypes = {
       status: PropTypes.string,
     })
   ),
-  chooseBook: PropTypes.func,
+  deleteBook: PropTypes.func,
 };
 
 export default BookItem;

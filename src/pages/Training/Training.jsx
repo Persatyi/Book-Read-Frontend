@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useReducer } from "react";
 import { useMediaQuery } from "react-responsive";
 import { useQuery } from "react-query";
 import { toast } from "react-toastify";
@@ -18,15 +18,51 @@ import Button from "components/Button";
 
 import s from "./Training.module.scss";
 
+const ACTION_TYPES = {
+  REFETCH: "refetch",
+  ADD: "add",
+  CHOOSE_BOOK: "chooseBook",
+  DELETE_BOOK: "deleteBook",
+  SET_START: "setStart",
+  SET_END: "setEnd",
+};
+
+const initialState = {
+  chosenBooks: [],
+  start: null,
+  end: null,
+  isAdd: false,
+  isRefetch: false,
+};
+const reducer = (state, { type, payload }) => {
+  switch (type) {
+    case ACTION_TYPES.REFETCH:
+      return { ...state, isRefetch: true };
+    case ACTION_TYPES.ADD:
+      return { ...state, isAdd: payload };
+    case ACTION_TYPES.CHOOSE_BOOK:
+      return { ...state, chosenBooks: [...state.chosenBooks, payload] };
+    case ACTION_TYPES.DELETE_BOOK:
+      return {
+        ...state,
+        chosenBooks: state.chosenBooks.filter(({ _id }) => _id !== payload),
+      };
+    case ACTION_TYPES.SET_START:
+      return { ...state, start: payload };
+    case ACTION_TYPES.SET_END:
+      return { ...state, end: payload };
+    default:
+      return state;
+  }
+};
+
 const Training = () => {
   const isToken = !!axios.defaults.headers.common.Authorization;
   const [addTraining] = useAddTrainingMutation();
-  const [chosenBooks, setChosenBooks] = useState([]);
-  const [dates, setDates] = useState({ start: null, end: null });
-  const [isAdd, setIsAdd] = useState(false);
-  const [refetch, setRefetch] = useState(false);
+  const [state, dispatch] = useReducer(reducer, initialState);
+  const { chosenBooks, start, end, isAdd, isRefetch } = state;
   const isMobile = useMediaQuery(MOBILE_ONLY);
-  const { isLoading, data } = useQuery(["training", refetch], getTraining, {
+  const { isLoading, data } = useQuery(["training", isRefetch], getTraining, {
     enabled: isToken,
     retry: false,
   });
@@ -34,16 +70,25 @@ const Training = () => {
     const { data } = await axios.get("/trainings");
     return data;
   }
+  const chooseBook = (payload) =>
+    dispatch({ type: ACTION_TYPES.CHOOSE_BOOK, payload });
+  const deleteBook = (payload) =>
+    dispatch({ type: ACTION_TYPES.DELETE_BOOK, payload });
+  const setStart = (payload) =>
+    dispatch({ type: ACTION_TYPES.SET_START, payload });
+  const setEnd = (payload) => dispatch({ type: ACTION_TYPES.SET_END, payload });
+  const setRefetch = () =>
+    dispatch({ type: ACTION_TYPES.REFETCH, payload: true });
+
   const isActiveTraining = !!data;
   const books = isActiveTraining ? data.books : chosenBooks;
   const onAddButtonClick = () => {
-    setIsAdd(true);
+    dispatch({ type: ACTION_TYPES.ADD, payload: true });
   };
   const onBackButtonClick = () => {
-    setIsAdd(false);
+    dispatch({ type: ACTION_TYPES.ADD, payload: false });
   };
   const onAddTrainingClick = async () => {
-    const { start, end } = dates;
     if (!chosenBooks.length) {
       toast.error("Додайте хоч одну книгу");
       return;
@@ -79,9 +124,11 @@ const Training = () => {
           />
           <AddTraining
             chosenBooks={chosenBooks}
-            chooseBook={setChosenBooks}
-            dates={dates}
-            setDates={setDates}
+            chooseBook={chooseBook}
+            start={start}
+            end={end}
+            setStart={setStart}
+            setEnd={setEnd}
             setRefetch={setRefetch}
           />
         </Container>
@@ -92,16 +139,20 @@ const Training = () => {
     <section className={s.section}>
       <Container className={s.container}>
         <Goal
-          training={isActiveTraining ? data : { ...dates, books: chosenBooks }}
+          training={
+            isActiveTraining ? data : { start, end, books: chosenBooks }
+          }
           isActiveTraining={isActiveTraining}
           className={s.goal}
         />
         {!isMobile && !isActiveTraining && (
           <AddTraining
             chosenBooks={chosenBooks}
-            chooseBook={setChosenBooks}
-            dates={dates}
-            setDates={setDates}
+            chooseBook={chooseBook}
+            start={start}
+            end={end}
+            setStart={setStart}
+            setEnd={setEnd}
             setRefetch={setRefetch}
             className={s.addTraining}
           />
@@ -111,7 +162,7 @@ const Training = () => {
           className={s.books}
           isActiveTraining={isActiveTraining}
           chosenBooks={chosenBooks}
-          chooseBook={setChosenBooks}
+          deleteBook={deleteBook}
         />
         {isMobile && !isActiveTraining && (
           <IconButton onClick={onAddButtonClick} label="Додати книгу" />
