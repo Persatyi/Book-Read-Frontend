@@ -184,22 +184,18 @@ const Training = () => {
             setStart={setStart}
             setEnd={setEnd}
             setRefetch={setRefetch}
+            isActiveTraining={isActiveTraining}
+            deleteBook={deleteBook}
             className={s.addTraining}
           />
         )}
-        <BookList
-          books={books}
-          isActiveTraining={isActiveTraining}
-          chosenBooks={chosenBooks}
-          className={s.book}
-          deleteBook={deleteBook}
-        />
-        <LineChart data={chartData} className={s.chart} />
-        {isActiveTraining && (
-          <AddPages data={statistic} className={s.addPages} />
-        )}
-        {isMobile && !isActiveTraining && (
-          <IconButton onClick={onAddButtonClick} label="Додати книгу" />
+        {(isActiveTraining || isMobile) && (
+          <BookList
+            books={books}
+            isActiveTraining={isActiveTraining}
+            chosenBooks={chosenBooks}
+            deleteBook={deleteBook}
+          />
         )}
         {isMobile && !!chosenBooks?.length && (
           <Button
@@ -208,6 +204,13 @@ const Training = () => {
             className={s.button}
             onClick={onAddTrainingClick}
           />
+        )}
+        <LineChart data={chartData} className={s.chart} />
+        {isActiveTraining && (
+          <AddPages data={statistic} className={s.addPages} />
+        )}
+        {isMobile && !isActiveTraining && (
+          <IconButton onClick={onAddButtonClick} label="Додати книгу" />
         )}
       </Container>
     </section>

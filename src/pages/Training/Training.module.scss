@@ -46,7 +46,8 @@
   }
 
   @include mq(desktop) {
-    grid-row: 1/3;
+    grid-row: 1/2;
+    height: 304px;
   }
 }
 
@@ -55,6 +56,8 @@
 
   @include mq(desktop) {
     margin-top: 12px;
+    height: unset;
+    grid-row: 1/3;
   }
 }
 
