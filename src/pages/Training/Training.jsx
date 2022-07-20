@@ -2,6 +2,7 @@ import { useReducer } from "react";
 import { useMediaQuery } from "react-responsive";
 import { useQuery } from "react-query";
 import { toast } from "react-toastify";
+
 import axios from "axios";
 
 import { useAddTrainingMutation } from "redux/api/bookAPI";
@@ -19,6 +20,7 @@ import LineChart from "components/LineChart/LineChart";
 // import Statistics from "components/Statistics";
 
 import s from "./Training.module.scss";
+import Timer from "components/Timer";
 
 const ACTION_TYPES = {
   REFETCH: "refetch",
@@ -125,6 +127,11 @@ const Training = () => {
       toast.error("Не можу додати тренування, спробуйте ще раз");
     }
   };
+  const date = new Date();
+  const nextYear = new Date(
+    new Date(`${date.getFullYear() + 1}-01-01`).getTime() +
+      date.getTimezoneOffset() * 60 * 1000
+  );
 
   if (isLoading) return <div>Loading...</div>;
   if (isAdd)
@@ -149,16 +156,21 @@ const Training = () => {
         </Container>
       </section>
     );
-
   return (
     <section className={s.section}>
       <Container className={s.container}>
+        {isActiveTraining && (
+          <div className={s.timers}>
+            <Timer title="До закінчення року залишилось" date={nextYear} />
+            <Timer title="До досягнення мети залишилось" date={data.end} />
+          </div>
+        )}
         <Goal
           training={
             isActiveTraining ? data : { start, end, books: chosenBooks }
           }
           isActiveTraining={isActiveTraining}
-          className={s.goal}
+          className={isActiveTraining ? s.activeGoal : s.goal}
         />
         {!isMobile && !isActiveTraining && (
           <AddTraining
@@ -169,26 +181,18 @@ const Training = () => {
             setStart={setStart}
             setEnd={setEnd}
             setRefetch={setRefetch}
+            isActiveTraining={isActiveTraining}
+            deleteBook={deleteBook}
             className={s.addTraining}
           />
         )}
-        <BookList
-          books={books}
-          isActiveTraining={isActiveTraining}
-          chosenBooks={chosenBooks}
-          className={s.book}
-          deleteBook={deleteBook}
-        />
-        <LineChart
-          addedPages={addedPages}
-          start={start}
-          end={end}
-          data={response}
-          className={s.chart}
-        />
-        {/* <AddPages data={statistic} className={s.addPages} /> */}
-        {isMobile && !isActiveTraining && (
-          <IconButton onClick={onAddButtonClick} label="Додати книгу" />
+        {(isActiveTraining || isMobile) && (
+          <BookList
+            books={books}
+            isActiveTraining={isActiveTraining}
+            chosenBooks={chosenBooks}
+            deleteBook={deleteBook}
+          />
         )}
         {isMobile && !!chosenBooks?.length && (
           <Button
@@ -198,7 +202,13 @@ const Training = () => {
             onClick={onAddTrainingClick}
           />
         )}
-        {/* <Statistics/> */}
+        <LineChart data={chartData} className={s.chart} />
+        {isActiveTraining && (
+          // <AddPages data={statistic} className={s.addPages} />
+        )}
+        {isMobile && !isActiveTraining && (
+          <IconButton onClick={onAddButtonClick} label="Додати книгу" />
+        )}
       </Container>
     </section>
   );
