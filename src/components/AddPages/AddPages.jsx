@@ -9,7 +9,7 @@ import DatePickerField from "components/DatePickerField";
 import dayjs from "dayjs";
 
 const AddPages = (props) => {
-  const { data } = props;
+  const { data, className } = props;
 
   const [addPage] = useAddPageMutation();
 
@@ -24,7 +24,7 @@ const AddPages = (props) => {
       validationSchema={schema}
     >
       {({ values, handleSubmit, handleChange, isValid, dirty }) => (
-        <Form onSubmit={handleSubmit} className={s.form}>
+        <Form onSubmit={handleSubmit} className={`${s.form} ${className}`}>
           <h2 className={s.title}>Result</h2>
           <div className={s.wrapper}>
             <div className={s.fieldWrapper}>
@@ -32,6 +32,7 @@ const AddPages = (props) => {
               <DatePickerField
                 className={s.date}
                 name="date"
+                // minDate={}
                 maxDate={new Date()}
                 dateFormat="MM.dd.yyyy"
                 closeOnScroll={true}

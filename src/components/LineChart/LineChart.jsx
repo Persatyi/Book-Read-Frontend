@@ -4,7 +4,7 @@ import "chart.js/auto";
 import { Chart } from "react-chartjs-2";
 import dayjs from "dayjs";
 
-const LineChart = ({ data }) => {
+const LineChart = ({ data, className = "" }) => {
   const size = useWindowSize();
   const { start, end, totalPages, addedPages, data: sets = [] } = data;
 
@@ -128,7 +128,7 @@ const LineChart = ({ data }) => {
 
   return (
     userData && (
-      <div className={s.chart}>
+      <div className={`${s.chart} ${className}`}>
         <Chart
           type="line"
           data={userData}
