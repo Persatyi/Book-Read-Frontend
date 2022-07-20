@@ -12,7 +12,7 @@ const BookList = ({
   className = "",
   isActiveTraining,
   chosenBooks,
-  chooseBook,
+  deleteBook,
 }) => {
   const isMobile = useMediaQuery(MOBILE_ONLY);
   return (
@@ -31,7 +31,7 @@ const BookList = ({
           book={book}
           isActiveTraining={isActiveTraining}
           chosenBooks={chosenBooks}
-          chooseBook={chooseBook}
+          deleteBook={deleteBook}
         />
       ))}
     </ul>
@@ -60,7 +60,7 @@ BookList.propTypes = {
       status: PropTypes.string,
     })
   ),
-  chooseBook: PropTypes.func,
+  deleteBook: PropTypes.func,
 };
 
 export default BookList;

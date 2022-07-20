@@ -48,8 +48,8 @@ function Goal({ training, isActiveTraining, className = "" }) {
 }
 Goal.propTypes = {
   training: PropTypes.shape({
-    start: PropTypes.object,
-    end: PropTypes.object,
+    start: PropTypes.oneOfType([PropTypes.instanceOf(Date), PropTypes.string]),
+    end: PropTypes.oneOfType([PropTypes.instanceOf(Date), PropTypes.string]),
     books: PropTypes.arrayOf(
       PropTypes.shape({
         title: PropTypes.string.isRequired,
