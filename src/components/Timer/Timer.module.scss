@@ -1,9 +1,13 @@
 @import "stylesheet/_mixin.scss";
 
 .container {
+  margin-left: auto;
+  margin-right: auto;
   width: 280px;
+
   @include mq(tablet) {
     width: 290px;
+    margin: unset;
   }
 }
 

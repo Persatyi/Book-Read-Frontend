@@ -15,6 +15,7 @@ import { MOBILE_ONLY } from "assets/constants/MEDIA";
 import sprite from "assets/images/sprite.svg";
 
 import s from "./AddTraining.module.scss";
+import BookList from "components/BookList";
 
 const AddTraining = ({
   chosenBooks,
@@ -24,6 +25,8 @@ const AddTraining = ({
   setStart,
   setEnd,
   setRefetch,
+  isActiveTraining,
+  deleteBook,
   className = "",
 }) => {
   const { data, isSuccess, isFetching } = useBooksQuery();
@@ -128,6 +131,15 @@ const AddTraining = ({
                 className={s.bookButton}
                 onClick={() => addBook(values, setFieldValue)}
               />
+              {!isMobile && (
+                <BookList
+                  books={chosenBooks}
+                  isActiveTraining={isActiveTraining}
+                  chosenBooks={chosenBooks}
+                  className={s.book}
+                  deleteBook={deleteBook}
+                />
+              )}
               {!!chosenBooks.length && !isMobile && (
                 <Button
                   type="submit"
@@ -158,6 +170,8 @@ AddTraining.propTypes = {
   setStart: PropTypes.func,
   setEnd: PropTypes.func,
   setRefetch: PropTypes.func,
+  isActiveTraining: PropTypes.bool,
+  deleteBook: PropTypes.func,
   className: PropTypes.string,
 };
 
