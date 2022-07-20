@@ -5,6 +5,8 @@ import PropTypes from "prop-types";
 import { useWindowSize } from "hooks";
 import { authType } from "assets/schemas/authFormValidation";
 
+import GoogleBtn from "components/GoogleBtn";
+
 const AuthPage = ({ type, children }) => {
   const size = useWindowSize();
 
@@ -24,6 +26,7 @@ const AuthPage = ({ type, children }) => {
     <div className={s.wrapper}>
       <div className={adjustClassName()}>
         <div className={s.container}>
+          <GoogleBtn/>
           <AuthForm type={type} />
         </div>
       </div>
