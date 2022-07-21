@@ -1,21 +1,17 @@
 import s from "./AddPages.module.scss";
 import spriteSvg from "assets/images/sprite.svg";
+import { schema } from "assets/schemas/addPagesValidation";
 import Button from "components/Button";
-import { useAddPageMutation, useGetResultsQuery } from "redux/api/bookAPI";
+import { useAddPageMutation } from "redux/api/bookAPI";
 
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import DatePickerField from "components/DatePickerField";
-import * as yup from "yup";
 import dayjs from "dayjs";
 
-const schema = yup.object().shape({
-  date: yup.date(),
-  pages: yup.number().min(1, "Can't be empty").required(),
-});
+const AddPages = (props) => {
+  const { data, className } = props;
 
-const AddPages = () => {
   const [addPage] = useAddPageMutation();
-  const { data = {} } = useGetResultsQuery();
 
   const onSubmit = (values) => {
     addPage(values);
@@ -28,7 +24,7 @@ const AddPages = () => {
       validationSchema={schema}
     >
       {({ values, handleSubmit, handleChange, isValid, dirty }) => (
-        <Form onSubmit={handleSubmit} className={s.form}>
+        <Form onSubmit={handleSubmit} className={`${s.form} ${className}`}>
           <h2 className={s.title}>Result</h2>
           <div className={s.wrapper}>
             <div className={s.fieldWrapper}>
@@ -36,6 +32,7 @@ const AddPages = () => {
               <DatePickerField
                 className={s.date}
                 name="date"
+                // minDate={}
                 maxDate={new Date()}
                 dateFormat="MM.dd.yyyy"
                 closeOnScroll={true}
@@ -61,7 +58,7 @@ const AddPages = () => {
             text="Add result"
           />
           <h2 className={s.statisticsTitle}>STATISTICS</h2>
-          {data.data && (
+          {data?.data && (
             <ul className={s.statistics}>
               {data.data
                 .slice(0)
