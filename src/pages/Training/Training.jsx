@@ -1,11 +1,11 @@
 import { useReducer } from "react";
 import { useMediaQuery } from "react-responsive";
-import { useQuery } from "react-query";
+import { useQuery, useMutation } from "react-query";
 import { toast } from "react-toastify";
 
 import axios from "axios";
 
-import { useAddTrainingMutation, useAddPageMutation } from "redux/api/bookAPI";
+import { useAddTrainingMutation } from "redux/api/bookAPI";
 
 import { MOBILE_ONLY } from "assets/constants/MEDIA";
 
@@ -29,6 +29,7 @@ const ACTION_TYPES = {
   DELETE_BOOK: "deleteBook",
   SET_START: "setStart",
   SET_END: "setEnd",
+  UPDATE: "update",
 };
 
 const initialState = {
@@ -37,7 +38,7 @@ const initialState = {
   end: null,
   isAdd: false,
   isRefetch: false,
-  addedPages: null,
+  updateStats: false,
 };
 const reducer = (state, { type, payload }) => {
   switch (type) {
@@ -56,6 +57,9 @@ const reducer = (state, { type, payload }) => {
       return { ...state, start: payload };
     case ACTION_TYPES.SET_END:
       return { ...state, end: payload };
+    case ACTION_TYPES.UPDATE:
+      console.log("Reducer");
+      return { ...state, updateStats: !state.updateStats };
     default:
       return state;
   }
@@ -65,19 +69,24 @@ const Training = () => {
   const isToken = !!axios.defaults.headers.common.Authorization;
   const [addTraining] = useAddTrainingMutation();
   const [state, dispatch] = useReducer(reducer, initialState);
-  const { chosenBooks, start, end, isAdd, isRefetch } = state;
+  const { chosenBooks, start, end, isAdd, isRefetch, updateStats } = state;
   const isMobile = useMediaQuery(MOBILE_ONLY);
   const { isLoading, data } = useQuery(["training", isRefetch], getTraining, {
     enabled: isToken,
     retry: false,
   });
 
-  const { data: response } = useQuery("results", getResults, {
+  const { data: response } = useQuery(["results", updateStats], getResults, {
     enabled: isToken,
     retry: false,
   });
 
-  const [addPage] = useAddPageMutation();
+  const addResults = async (data) => {
+    const result = await axios.post("/results", data);
+    return result;
+  };
+
+  const { mutate } = useMutation(addResults);
 
   async function getTraining() {
     const { data } = await axios.get("/trainings");
@@ -89,10 +98,6 @@ const Training = () => {
     return data;
   }
 
-  async function updateResults(data) {
-    await addPage(data);
-  }
-
   const chooseBook = (payload) =>
     dispatch({ type: ACTION_TYPES.CHOOSE_BOOK, payload });
   const deleteBook = (payload) =>
@@ -102,6 +107,7 @@ const Training = () => {
   const setEnd = (payload) => dispatch({ type: ACTION_TYPES.SET_END, payload });
   const setRefetch = () =>
     dispatch({ type: ACTION_TYPES.REFETCH, payload: true });
+  const setUpdate = () => dispatch({ type: ACTION_TYPES.UPDATE });
 
   const isActiveTraining = !!data;
   const books = isActiveTraining ? data.books : chosenBooks;
@@ -211,7 +217,8 @@ const Training = () => {
         <LineChart data={response} className={s.chart} />
         {isActiveTraining && (
           <AddPages
-            updateResults={updateResults}
+            updateResults={mutate}
+            setUpdate={setUpdate}
             data={response}
             className={s.addPages}
           />

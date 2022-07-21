@@ -13,6 +13,7 @@ const LineChart = ({ data = [], className = "" }) => {
   const startDate = dayjs(parsedStartDate);
   const trainingDays =
     dayjs(parcedEndDate).diff(parsedStartDate, "hour", true) / 24;
+  const daysGone = Math.ceil(dayjs(dayjs()).diff(startDate, "day", true));
 
   function getDates() {
     const dateArray = [dayjs(startDate).format("DD.MM.YYYY")];
@@ -24,12 +25,8 @@ const LineChart = ({ data = [], className = "" }) => {
   }
 
   const averagePerDay = () => {
-    const trainingRange = Math.ceil(
-      dayjs(dayjs()).diff(startDate, "day", true)
-    );
-
     if (addedPages) {
-      const total = Math.ceil(addedPages / trainingRange);
+      const total = Math.ceil(addedPages / daysGone);
       return total === undefined ? 0 : total;
     } else {
       return 0;
@@ -53,7 +50,7 @@ const LineChart = ({ data = [], className = "" }) => {
         };
       });
 
-      for (let i = 0; i < dataSet.length; i += 1) {
+      for (let i = 0; i < daysGone; i += 1) {
         const day = dayjs(startDate).add(i, "day");
         const element = dataSet.find(
           (el) => el.x === dayjs(day).format("DD.MM.YYYY")

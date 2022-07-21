@@ -6,13 +6,21 @@ import Button from "components/Button";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import DatePickerField from "components/DatePickerField";
 import dayjs from "dayjs";
+import { toast } from "react-toastify";
 
-const AddPages = ({ data = {}, className, updateResults, onClick }) => {
+const AddPages = ({ data = {}, className, updateResults, setUpdate }) => {
   const { data: sets, start } = data;
   const parsedStart = Date.parse(start);
 
-  const onSubmit = (values) => {
-    updateResults(values);
+  const onSubmit = async (values) => {
+    try {
+      console.log("Sending result");
+      await updateResults(values);
+      console.log("Result sent");
+      setUpdate();
+    } catch (error) {
+      toast.error("Something went wrong please try again");
+    }
   };
 
   return (
@@ -21,7 +29,7 @@ const AddPages = ({ data = {}, className, updateResults, onClick }) => {
       onSubmit={onSubmit}
       validationSchema={schema}
     >
-      {({ values, handleSubmit, handleChange, isValid, dirty }) => (
+      {({ values, handleSubmit, isValid, dirty }) => (
         <Form onSubmit={handleSubmit} className={`${s.form} ${className}`}>
           <h2 className={s.title}>Result</h2>
           <div className={s.wrapper}>
@@ -35,7 +43,6 @@ const AddPages = ({ data = {}, className, updateResults, onClick }) => {
                 dateFormat="MM.dd.yyyy"
                 closeOnScroll={true}
                 value={values.date}
-                onChange={handleChange}
               />
               <svg className={s.iconSvg} style={{ width: "24px" }}>
                 <use href={`${spriteSvg}#icon-polygon`}></use>
