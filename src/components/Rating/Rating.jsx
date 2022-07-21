@@ -34,9 +34,9 @@ const Rating = (props) => {
   );
 };
 
-Rating.propTypes = {
-  mark: PropTypes.number.isRequired,
-  onChange: PropTypes.func,
-};
+// Rating.propTypes = {
+//   mark: PropTypes.number.isRequired,
+//   onChange: PropTypes.func,
+// };
 
 export default Rating;
