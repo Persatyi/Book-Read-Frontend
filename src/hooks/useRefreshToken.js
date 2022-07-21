@@ -16,11 +16,11 @@ const useRefreshToken = () => {
   const [updateTokens] = useRefreshTokenMutation();
 
   const checkRefreshToken = async () => {
-    const isExpired = new Date() > new Date(jwt_decode(currentToken).exp);
-
-    if (!isExpired) return;
+    if (!refreshToken) return;
 
     try {
+      const isExpired = new Date() > new Date(jwt_decode(currentToken).exp);
+      if (!isExpired) return;
       const tokens = await updateTokens({ refreshToken }).unwrap();
       dispatch(resetTokens(tokens));
       dispatch(setIsAuth(true));
