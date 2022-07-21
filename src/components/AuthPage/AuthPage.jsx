@@ -26,7 +26,7 @@ const AuthPage = ({ type, children }) => {
     <div className={s.wrapper}>
       <div className={adjustClassName()}>
         <div className={s.container}>
-          <GoogleBtn/>
+          <GoogleBtn />
           <AuthForm type={type} />
         </div>
       </div>
