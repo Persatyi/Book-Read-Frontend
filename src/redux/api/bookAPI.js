@@ -1,9 +1,11 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
+// https://persatyi-book-read-backend.herokuapp.com/api
+
 export const bookApi = createApi({
   reducerPath: "bookApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: "https://persatyi-book-read-backend.herokuapp.com/api",
+    baseUrl: "http://localhost:3001/api",
     prepareHeaders: (headers, { getState }) => {
       const token = getState().auth.token;
       if (token) {
@@ -20,6 +22,10 @@ export const bookApi = createApi({
     }),
     login: build.mutation({
       query: (data) => ({ url: "/users/login", method: "POST", body: data }),
+      invalidatesTags: ["User"],
+    }),
+    googleLogin: build.mutation({
+      query: (data) => ({ url: "/users/login-google", method: "POST", body: data }),
       invalidatesTags: ["User"],
     }),
     addPage: build.mutation({
@@ -61,6 +67,7 @@ export const bookApi = createApi({
 export const {
   useRegisterMutation,
   useLoginMutation,
+  useGoogleLoginMutation,
   useAddPageMutation,
   useLogoutMutation,
   useCurrentQuery,
