@@ -36,6 +36,11 @@
         padding: 0;
         gap: 40px;
     }
+
+    @include mq(desktop) {
+        padding-top: 44px;
+        padding-bottom: 44px;
+    }
 }
 
 .activeNumbers {
@@ -43,6 +48,11 @@
     display: flex;
     gap: 12px;
     justify-content: center;
+
+    @include mq(desktop) {
+        padding-top: 80px;
+        padding-bottom: 80px;
+    }
 }
 
 .accent {
