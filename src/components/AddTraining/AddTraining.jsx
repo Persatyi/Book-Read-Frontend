@@ -11,6 +11,7 @@ import DatePickerField from "components/DatePickerField";
 import Select from "components/Select";
 import Button from "components/Button";
 
+import useRefreshToken from "hooks/useRefreshToken";
 import { MOBILE_ONLY } from "assets/constants/MEDIA";
 import sprite from "assets/images/sprite.svg";
 
@@ -28,6 +29,7 @@ const AddTraining = ({
 }) => {
   const { data, isSuccess, isFetching } = useBooksQuery();
   const [addTraining] = useAddTrainingMutation();
+  const checkRefreshToken = useRefreshToken();
   const isMobile = useMediaQuery(MOBILE_ONLY);
 
   const bookIds = useMemo(
@@ -54,7 +56,8 @@ const AddTraining = ({
     }
     const training = { start, end, books: bookIds };
     try {
-      await addTraining(training);
+      await checkRefreshToken();
+      await addTraining(training).unwrap();
       setRefetch(true);
     } catch (error) {
       toast.error("Не можу додати тренування, спробуйте ще раз");

@@ -7,13 +7,16 @@ import { useAddPageMutation } from "redux/api/bookAPI";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import DatePickerField from "components/DatePickerField";
 import dayjs from "dayjs";
+import useRefreshToken from "hooks/useRefreshToken";
 
 const AddPages = (props) => {
   const { data, className } = props;
 
   const [addPage] = useAddPageMutation();
+  const checkRefreshToken = useRefreshToken();
 
-  const onSubmit = (values) => {
+  const onSubmit = async (values) => {
+    await checkRefreshToken();
     addPage(values);
   };
 

@@ -63,7 +63,7 @@ export const bookApi = createApi({
       invalidatesTags: ["Books"],
     }),
   }),
-  // refetchOnFocus: true,
+  refetchOnFocus: true,
   // refetchOnReconnect: true,
 });
 

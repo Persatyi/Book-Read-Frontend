@@ -10,6 +10,7 @@ import {
   useGetTrainingQuery,
 } from "redux/api/bookAPI";
 
+import useRefreshToken from "hooks/useRefreshToken";
 import { MOBILE_ONLY } from "assets/constants/MEDIA";
 
 import Container from "components/Container";
@@ -72,6 +73,7 @@ const Training = () => {
     enabled: isToken,
     retry: false,
   });
+  const checkRefreshToken = useRefreshToken();
 
   const { data: trainings = {} } = useGetTrainingQuery();
   const { data: statistic = {} } = useGetResultsQuery();
@@ -122,6 +124,7 @@ const Training = () => {
     const bookIds = chosenBooks.map(({ _id }) => _id);
     const training = { start, end, books: bookIds };
     try {
+      await checkRefreshToken();
       await addTraining(training);
       setRefetch(true);
     } catch (error) {
