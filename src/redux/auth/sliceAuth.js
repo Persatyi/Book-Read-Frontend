@@ -17,24 +17,33 @@ const sessionSlice = createSlice({
   initialState: {
     isAuth: false,
     token: null,
+    refreshToken: null,
   },
   reducers: {
     loggedIn(state, { payload }) {
-      state.token = payload;
+      state.token = payload.token;
+      state.refreshToken = payload.refreshToken;
       state.isAuth = true;
-      token.set(payload);
+      // token.set(payload);
     },
     loggedOff(state) {
       state.isAuth = false;
       state.token = null;
+      state.refreshToken = null;
       token.unset();
     },
-    setToken(_, { payload }) {
+    resetTokens(state, { payload }) {
+      state.token = payload.token;
+      state.refreshToken = payload.refreshToken;
+    },
+    setToken(state, { payload }) {
+      state.isAuth = true;
       token.set(payload);
     },
   },
 });
 
-export const { loggedIn, loggedOff, setToken } = sessionSlice.actions;
+export const { loggedIn, loggedOff, resetTokens, setToken } =
+  sessionSlice.actions;
 
 export const sessionReducer = sessionSlice.reducer;

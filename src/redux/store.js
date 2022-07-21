@@ -17,6 +17,7 @@ import { bookApi } from "./api/bookAPI";
 const authConfig = {
   key: "bookReader/token",
   storage,
+  blacklist: ["isAuth"],
 };
 
 const persistedReducer = persistReducer(authConfig, sessionReducer);

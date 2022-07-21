@@ -2,9 +2,21 @@ import { lazy, Suspense, useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
+import { resetTokens } from "redux/auth/sliceAuth";
 import { useDispatch, useSelector } from "react-redux";
-import { token, setToken } from "redux/auth";
+import {
+  token,
+  setToken,
+  isAuth,
+  getRefreshToken,
+  loggedOff,
+} from "redux/auth";
+
+import {
+  useCurrentQuery,
+  useRefreshTokenMutation,
+  useLogoutMutation,
+} from "redux/api/bookAPI";
 
 import Loader from "components/Loader";
 // import Header from "components/Header";
@@ -25,10 +37,54 @@ const Header = lazy(() => import("components/Header"));
 
 function App() {
   const currentToken = useSelector(token);
+  const refreshToken = useSelector(getRefreshToken);
+  const auth = useSelector(isAuth);
   const dispatch = useDispatch();
+  const { error } = useCurrentQuery(null, { skip: !auth });
+  const [updateTokens] = useRefreshTokenMutation();
+
   useEffect(() => {
     dispatch(setToken(currentToken));
+    console.log("set token");
   }, [currentToken, dispatch]);
+
+  useEffect(() => {
+    (async () => {
+      console.log("check token");
+      if (error) {
+        console.log(error);
+      }
+      // console.log(error.message);
+      if (error && error.data.message === "jwt expired") {
+        console.log("jwt expired");
+        try {
+          const tokens = await updateTokens({ refreshToken }).unwrap();
+
+          dispatch(resetTokens(tokens));
+          console.log("reset tokens");
+        } catch (error) {
+          console.log("logout");
+          dispatch(loggedOff());
+        }
+      }
+    })();
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [error]);
+
+  // useEffect(() => {
+  //   if (tokens) {
+  //     dispatch(resetTokens(tokens));
+  //     console.log("reset tokens");
+  //   }
+  // }, [dispatch, tokens]);
+
+  // useEffect(() => {
+  //   if (refreshError) {
+  //     console.log("~ refreshError", refreshError);
+
+  //   }
+  // }, [refreshError]);
 
   return (
     <>

@@ -6,7 +6,7 @@ const PublicRoute = () => {
   const isLoggedIn = useSelector(isAuth);
 
   if (isLoggedIn) {
-    return <Navigate to="/training" />;
+    return <Navigate to="/library" />;
   }
   return <Outlet />;
 };
