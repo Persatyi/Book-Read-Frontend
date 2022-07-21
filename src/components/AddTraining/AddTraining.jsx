@@ -15,13 +15,18 @@ import { MOBILE_ONLY } from "assets/constants/MEDIA";
 import sprite from "assets/images/sprite.svg";
 
 import s from "./AddTraining.module.scss";
+import BookList from "components/BookList";
 
 const AddTraining = ({
   chosenBooks,
   chooseBook,
-  dates,
-  setDates,
+  start,
+  end,
+  setStart,
+  setEnd,
   setRefetch,
+  isActiveTraining,
+  deleteBook,
   className = "",
 }) => {
   const { data, isSuccess, isFetching } = useBooksQuery();
@@ -41,7 +46,7 @@ const AddTraining = ({
   );
   const addBook = (values, setFieldValue) => {
     const newBook = data.find(({ _id }) => _id === values.book);
-    chooseBook([...chosenBooks, newBook]);
+    chooseBook(newBook);
     setFieldValue("book", "");
   };
 
@@ -58,8 +63,6 @@ const AddTraining = ({
       toast.error("Не можу додати тренування, спробуйте ще раз");
     }
   };
-  const onStartChange = (value) => setDates({ ...dates, start: value });
-  const onEndChange = (value) => setDates({ ...dates, end: value });
 
   if (isFetching) return <div>Loading</div>;
   if (isSuccess)
@@ -68,8 +71,8 @@ const AddTraining = ({
         <Title text="Моє тренування" className={s.title} />
         <Formik
           initialValues={{
-            start: dates?.start ?? "",
-            end: dates?.end ?? "",
+            start: start ?? "",
+            end: end ?? "",
             book: "",
           }}
           onSubmit={onSubmit}
@@ -81,7 +84,7 @@ const AddTraining = ({
                   name="start"
                   className={s.date}
                   minDate={new Date()}
-                  onChangeCb={onStartChange}
+                  onChangeCb={(value) => setStart(value)}
                   dateFormat="dd.MM.yyyy"
                   placeholderText="Початок"
                   autocomplete="off"
@@ -99,7 +102,7 @@ const AddTraining = ({
                   name="end"
                   className={s.date}
                   minDate={values.start}
-                  onChangeCb={onEndChange}
+                  onChangeCb={(value) => setEnd(value)}
                   dateFormat="dd.MM.yyyy"
                   placeholderText="Завершення"
                   autocomplete="off"
@@ -128,6 +131,15 @@ const AddTraining = ({
                 className={s.bookButton}
                 onClick={() => addBook(values, setFieldValue)}
               />
+              {!isMobile && (
+                <BookList
+                  books={chosenBooks}
+                  isActiveTraining={isActiveTraining}
+                  chosenBooks={chosenBooks}
+                  className={s.book}
+                  deleteBook={deleteBook}
+                />
+              )}
               {!!chosenBooks.length && !isMobile && (
                 <Button
                   type="submit"
@@ -153,12 +165,13 @@ AddTraining.propTypes = {
     })
   ),
   chooseBook: PropTypes.func,
-  dates: PropTypes.shape({
-    start: PropTypes.object,
-    end: PropTypes.object,
-  }),
-  setDates: PropTypes.func,
+  start: PropTypes.oneOfType([PropTypes.instanceOf(Date), PropTypes.string]),
+  end: PropTypes.oneOfType([PropTypes.instanceOf(Date), PropTypes.string]),
+  setStart: PropTypes.func,
+  setEnd: PropTypes.func,
   setRefetch: PropTypes.func,
+  isActiveTraining: PropTypes.bool,
+  deleteBook: PropTypes.func,
   className: PropTypes.string,
 };
 
