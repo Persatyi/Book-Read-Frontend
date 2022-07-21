@@ -8,13 +8,17 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import DatePickerField from "components/DatePickerField";
 import dayjs from "dayjs";
 import { toast } from "react-toastify";
+import useRefreshToken from "hooks/useRefreshToken";
 
 const AddPages = ({ data = {}, className, updateResults, setUpdate }) => {
   const { data: sets, start } = data;
   const parsedStart = Date.parse(start);
 
+  const checkRefreshToken = useRefreshToken();
+
   const onSubmit = async (values) => {
     try {
+      await checkRefreshToken();
       await updateResults(values);
       setUpdate();
     } catch (error) {
