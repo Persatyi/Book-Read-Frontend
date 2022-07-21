@@ -39,9 +39,7 @@ function App() {
   }, [currentToken, dispatch]);
 
   useEffect(() => {
-    // if (error) {
     checkRefreshToken();
-    // }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [error]);
 

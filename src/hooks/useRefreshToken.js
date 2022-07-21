@@ -19,7 +19,8 @@ const useRefreshToken = () => {
     if (!refreshToken) return;
 
     try {
-      const isExpired = new Date() > new Date(jwt_decode(currentToken).exp);
+      const { exp } = jwt_decode(currentToken);
+      const isExpired = Date.now() >= exp * 1000;
       if (!isExpired) return;
       const tokens = await updateTokens({ refreshToken }).unwrap();
       dispatch(resetTokens(tokens));
