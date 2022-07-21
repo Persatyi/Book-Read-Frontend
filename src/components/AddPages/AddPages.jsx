@@ -2,6 +2,7 @@ import s from "./AddPages.module.scss";
 import spriteSvg from "assets/images/sprite.svg";
 import { schema } from "assets/schemas/addPagesValidation";
 import Button from "components/Button";
+import { ModalTrainingDone } from "components/Modals";
 
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import DatePickerField from "components/DatePickerField";
@@ -14,9 +15,7 @@ const AddPages = ({ data = {}, className, updateResults, setUpdate }) => {
 
   const onSubmit = async (values) => {
     try {
-      console.log("Sending result");
       await updateResults(values);
-      console.log("Result sent");
       setUpdate();
     } catch (error) {
       toast.error("Something went wrong please try again");
@@ -29,8 +28,8 @@ const AddPages = ({ data = {}, className, updateResults, setUpdate }) => {
       onSubmit={onSubmit}
       validationSchema={schema}
     >
-      {({ values, handleSubmit, isValid, dirty }) => (
-        <Form onSubmit={handleSubmit} className={`${s.form} ${className}`}>
+      {({ values, isValid, dirty }) => (
+        <Form className={`${s.form} ${className}`}>
           <h2 className={s.title}>Result</h2>
           <div className={s.wrapper}>
             <div className={s.fieldWrapper}>
@@ -83,6 +82,7 @@ const AddPages = ({ data = {}, className, updateResults, setUpdate }) => {
           )}
         </Form>
       )}
+      {<ModalTrainingDone open={false} onNew={() => {}} onClose={() => {}} />}
     </Formik>
   );
 };

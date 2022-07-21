@@ -1,5 +1,6 @@
 import s from "./Chart.module.scss";
 import useWindowSize from "hooks/useWindowSize";
+
 import "chart.js/auto";
 import { Chart } from "react-chartjs-2";
 import dayjs from "dayjs";
@@ -50,6 +51,8 @@ const LineChart = ({ data = [], className = "" }) => {
         };
       });
 
+      let fullAmount = 0;
+
       for (let i = 0; i < daysGone; i += 1) {
         const day = dayjs(startDate).add(i, "day");
         const element = dataSet.find(
@@ -57,9 +60,13 @@ const LineChart = ({ data = [], className = "" }) => {
         );
 
         if (element) {
-          finalDataSet.push(element);
+          fullAmount += element.y;
+          finalDataSet.push({ x: element.x, y: fullAmount });
         } else {
-          finalDataSet.push({ x: dayjs(day).format("DD.MM.YYYY"), y: 0 });
+          finalDataSet.push({
+            x: dayjs(day).format("DD.MM.YYYY"),
+            y: fullAmount,
+          });
         }
       }
     }
@@ -71,10 +78,11 @@ const LineChart = ({ data = [], className = "" }) => {
     const finalDataSet = [];
 
     const cycle = (range) => {
+      const averageAmount = Math.ceil(totalPages / range);
       for (let i = 0; i < range; i += 1) {
         finalDataSet.push({
           x: getDates()[i],
-          y: Math.ceil((totalPages - addedPages) / (getDates().length - i)),
+          y: averageAmount * (i + 1),
         });
       }
     };

@@ -58,7 +58,6 @@ const reducer = (state, { type, payload }) => {
     case ACTION_TYPES.SET_END:
       return { ...state, end: payload };
     case ACTION_TYPES.UPDATE:
-      console.log("Reducer");
       return { ...state, updateStats: !state.updateStats };
     default:
       return state;
@@ -86,7 +85,7 @@ const Training = () => {
     return result;
   };
 
-  const { mutate } = useMutation(addResults);
+  const { mutateAsync } = useMutation(addResults);
 
   async function getTraining() {
     const { data } = await axios.get("/trainings");
@@ -217,7 +216,7 @@ const Training = () => {
         <LineChart data={response} className={s.chart} />
         {isActiveTraining && (
           <AddPages
-            updateResults={mutate}
+            updateResults={mutateAsync}
             setUpdate={setUpdate}
             data={response}
             className={s.addPages}
