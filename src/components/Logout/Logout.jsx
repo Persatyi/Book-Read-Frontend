@@ -47,7 +47,7 @@ const Logout = () => {
           toggleModal();
         }}
       >
-        {t.logout}
+        {t.text}
       </button>
       <ModalLogout
         open={openModal}

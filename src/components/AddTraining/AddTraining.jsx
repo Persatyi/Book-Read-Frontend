@@ -49,6 +49,7 @@ const AddTraining = ({
     [data, bookIds]
   );
   const addBook = (values, setFieldValue) => {
+    if (!values.book) return;
     const newBook = data.find(({ _id }) => _id === values.book);
     chooseBook(newBook);
     setFieldValue("book", "");

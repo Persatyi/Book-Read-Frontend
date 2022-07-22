@@ -10,9 +10,10 @@ import s from "./Goal.module.scss";
 function Goal({ training, isActiveTraining, className = "" }) {
   const { t } = useTranslation("Goal");
   const booksNumber = training?.books?.length ?? 0;
-  const daysNumber = training?.end
-    ? (new Date(training?.end) - new Date(training?.start)) / 86400000
-    : 0;
+  const daysNumber =
+    training?.end && training?.start
+      ? (new Date(training?.end) - new Date(training?.start)) / 86400000
+      : 0;
   const booksLeft = training?.books?.reduce(
     (acc, book) => (book.status !== "read" ? acc + 1 : acc),
     0

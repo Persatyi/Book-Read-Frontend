@@ -7,14 +7,6 @@
   transform: translateY(-50%);
   display: flex;
   gap: 10px;
-
-  @include mq(tablet-only) {
-    text-align: start;
-  }
-
-  @include mq(desktop) {
-    width: 10vw;
-  }
 }
 
 .btn {
