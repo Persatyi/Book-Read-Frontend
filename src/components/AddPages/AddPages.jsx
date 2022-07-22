@@ -59,7 +59,7 @@ const AddPages = ({
       <Formik
         initialValues={{ date: new Date(), pages: "" }}
         onSubmit={onSubmit}
-        validationSchema={schema}
+        validationSchema={schema(t)}
       >
         {({ values, isValid, dirty }) => (
           <Form className={`${s.form} ${className}`}>
@@ -72,7 +72,7 @@ const AddPages = ({
                   name="date"
                   minDate={parsedStart}
                   maxDate={new Date()}
-                  dateFormat={dateFormat}
+                  dateFormat={dateFormat.datepicker}
                   closeOnScroll={true}
                   value={values.date}
                   locale={language}
@@ -104,7 +104,7 @@ const AddPages = ({
                   .map(({ _id: id, pages, date }) => (
                     <li className={s.item} key={id} id={id}>
                       <span className={s.day}>
-                        {dayjs(date).format(dateFormat)}
+                        {dayjs(date).format(dateFormat.dayjs)}
                       </span>
                       <span className={s.data}>
                         {dayjs(date).format("HH:mm:ss")}

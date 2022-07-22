@@ -93,7 +93,7 @@ const AddTraining = ({
                   className={s.date}
                   minDate={new Date()}
                   onChangeCb={(value) => setStart(value)}
-                  dateFormat={dateFormat}
+                  dateFormat={dateFormat.datepicker}
                   placeholderText={t.start}
                   autoComplete="off"
                   required
@@ -111,7 +111,7 @@ const AddTraining = ({
                   className={s.date}
                   minDate={values.start || new Date()}
                   onChangeCb={(value) => setEnd(value)}
-                  dateFormat={dateFormat}
+                  dateFormat={dateFormat.datepicker}
                   placeholderText={t.end}
                   autoComplete="off"
                   required

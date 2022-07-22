@@ -9,19 +9,19 @@ import LANGUAGES from "assets/constants/LANGUAGES";
 const useTranslation = (key) => {
   const language = useSelector(languageSelector);
   let translation;
-  let dateFormat;
+  let dateFormat = { datepicker: "", dayjs: "" };
   switch (language) {
     case LANGUAGES.EN:
       translation = translationEn;
-      dateFormat = "MM.dd.yyyy";
+      dateFormat = { datepicker: "MM.dd.yyyy", dayjs: "MM.DD.YYYY" };
       break;
     case LANGUAGES.UA:
       translation = translationUa;
-      dateFormat = "dd.MM.yyyy";
+      dateFormat = { datepicker: "dd.MM.yyyy", dayjs: "DD.MM.YYYY" };
       break;
     default:
       translation = translationEn;
-      dateFormat = "MM.dd.yyyy";
+      dateFormat = { datepicker: "MM.dd.yyyy", dayjs: "MM.DD.YYYY" };
   }
   const t = key ? translation[key] : translation;
   return {
