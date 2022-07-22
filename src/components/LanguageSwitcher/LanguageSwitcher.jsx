@@ -15,7 +15,7 @@ import s from "./LanguageSwitcher.module.scss";
 
 const LanguageSwitcher = () => {
   const userLocale = getUserLocale();
-  const { t, language } = useTranslation("switcher");
+  const { t, language } = useTranslation("LanguageSwitcher");
   const dispatch = useDispatch();
 
   const changeLanguage = (lang) => {

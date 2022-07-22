@@ -1,5 +1,28 @@
 {
-  "switcher": {
+  "AddBook": {
+    "success": "Book added",
+    "add": "Add"
+  },
+  "AddBookSchema": {
+    "required": "Enter this field",
+    "title": {
+      "min": "Title is short",
+      "max": "Title is long"
+    },
+    "author": {
+      "min": "Author name is short",
+      "max": "Author name is long"
+    },
+    "year": {
+      "min": "Enter the real date",
+      "max": "Are you from the future?"
+    },
+    "pages": {
+      "min": "There must be more than 1 page",
+      "max": "Must be less than 4999 pages"
+    }
+  },
+  "LanguageSwitcher": {
     "label": "English"
   }
 }
