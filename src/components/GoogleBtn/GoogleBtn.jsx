@@ -1,7 +1,5 @@
 import s from "./GoogleBtn.module.scss";
-import { useState, useEffect, useCallback } from "react";
-import jwt_decode from "jwt-decode";
-// import {GoogleLogin} from "react-google-login";
+import { useEffect } from "react";
 import { toast } from "react-toastify";
 import { useGoogleLoginMutation } from "redux/api/bookAPI";
 import { useDispatch } from "react-redux";
@@ -23,7 +21,11 @@ const GoogleBtn = () => {
         googleLoginUser(googleObj).unwrap().then((response) => dispatch(loggedIn({
             token: response.token,
             refreshToken: response.refreshToken
-        }))).catch(error => console.log(error))
+        }))).catch(error => {
+            if (error.status === 409) {
+                toast.error("Account with this email was ceated with a different signup method!");
+            }
+        })
     }
     
 
@@ -37,6 +39,7 @@ const GoogleBtn = () => {
             document.getElementById("signInBtn"),
             { theme: "outline", size: "large" }
         );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     return (<div >
