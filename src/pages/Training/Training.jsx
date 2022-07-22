@@ -2,11 +2,11 @@ import { useReducer } from "react";
 import { useMediaQuery } from "react-responsive";
 import { useQuery, useMutation } from "react-query";
 import { toast } from "react-toastify";
-
 import axios from "axios";
 
 import { useAddTrainingMutation } from "redux/api/bookAPI";
 
+import useTranslation from "hooks/useTranslation";
 import useRefreshToken from "hooks/useRefreshToken";
 import { MOBILE_ONLY } from "assets/constants/MEDIA";
 
@@ -18,11 +18,9 @@ import IconButton, { TYPES } from "components/IconButton";
 import Button from "components/Button";
 import LineChart from "components/LineChart/LineChart";
 import AddPages from "components/AddPages";
-// import Statistics from "components/Statistics";
+import Timer from "components/Timer";
 
 import s from "./Training.module.scss";
-import Timer from "components/Timer";
-import useTranslation from "hooks/useTranslation";
 
 const ACTION_TYPES = {
   REFETCH: "refetch",
