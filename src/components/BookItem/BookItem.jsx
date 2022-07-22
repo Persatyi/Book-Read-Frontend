@@ -3,6 +3,7 @@ import { useMediaQuery } from "react-responsive";
 
 import IconButton, { TYPES } from "components/IconButton";
 
+import useTranslation from "hooks/useTranslation";
 import { MOBILE_ONLY } from "assets/constants/MEDIA";
 import sprite from "assets/images/sprite.svg";
 
@@ -21,6 +22,7 @@ function BookItem({ book = {}, isActiveTraining, chosenBooks, deleteBook }) {
   const onDeleteClick = () => {
     deleteBook(_id);
   };
+  const { t } = useTranslation("BookItem");
 
   return (
     <li className={s.item}>
@@ -42,22 +44,22 @@ function BookItem({ book = {}, isActiveTraining, chosenBooks, deleteBook }) {
       {!isActiveTraining && (
         <IconButton
           onClick={onDeleteClick}
-          label="Видалити книгу"
+          label={t.delete}
           type={TYPES.DELETE}
           className={s.delete}
         />
       )}
       <p className={s.title}>{title}</p>
       <p>
-        {isMobile && <span className={s.subtitle}>Автор:</span>}
+        {isMobile && <span className={s.subtitle}>{t.author}:</span>}
         {author}
       </p>
       <p>
-        {isMobile && <span className={s.subtitle}>Рік:</span>}
+        {isMobile && <span className={s.subtitle}>{t.year}:</span>}
         {year}
       </p>
       <p>
-        {isMobile && <span className={s.subtitle}>Стор.:</span>}
+        {isMobile && <span className={s.subtitle}>{t.pages}:</span>}
         {pages}
       </p>
     </li>

@@ -9,6 +9,7 @@ import DatePickerField from "components/DatePickerField";
 import dayjs from "dayjs";
 import { toast } from "react-toastify";
 import useRefreshToken from "hooks/useRefreshToken";
+import useTranslation from "hooks/useTranslation";
 import { useState } from "react";
 
 const AddPages = ({
@@ -39,6 +40,7 @@ const AddPages = ({
   };
 
   const checkRefreshToken = useRefreshToken();
+  const { t, language, dateFormat } = useTranslation("AddPages");
 
   const onSubmit = async (values) => {
     try {
@@ -48,7 +50,7 @@ const AddPages = ({
       setModalTrainingDone(result.data.finish);
       setBookReadModal(result.data.isBookRead);
     } catch (error) {
-      toast.error("Something went wrong please try again");
+      toast.error(t.error);
     }
   };
 
@@ -70,16 +72,17 @@ const AddPages = ({
                   name="date"
                   minDate={parsedStart}
                   maxDate={new Date()}
-                  dateFormat="MM.dd.yyyy"
+                  dateFormat={dateFormat}
                   closeOnScroll={true}
                   value={values.date}
+                  locale={language}
                 />
                 <svg className={s.iconSvg} style={{ width: "24px" }}>
                   <use href={`${spriteSvg}#icon-polygon`}></use>
                 </svg>
               </div>
               <div className={s.fieldWrapper}>
-                <p className={s.name}>Amount of pages</p>
+                <p className={s.name}>{t.pages}</p>
                 <Field className={s.input} type="number" name="pages" />
                 <span className={s.error}>
                   <ErrorMessage name="pages" />
@@ -90,7 +93,7 @@ const AddPages = ({
               disabled={!isValid && !dirty}
               type="submit"
               className={s.button}
-              text="Add result"
+              text={t.button}
             />
             <h2 className={s.statisticsTitle}>STATISTICS</h2>
             {!!sets && (
@@ -101,12 +104,14 @@ const AddPages = ({
                   .map(({ _id: id, pages, date }) => (
                     <li className={s.item} key={id} id={id}>
                       <span className={s.day}>
-                        {dayjs(date).format("DD.MM.YYYY")}
+                        {dayjs(date).format(dateFormat)}
                       </span>
                       <span className={s.data}>
                         {dayjs(date).format("HH:mm:ss")}
                       </span>
-                      <span className={s.pages}>{pages} pages</span>
+                      <span className={s.pages}>
+                        {pages} {t.pagesShort}
+                      </span>
                     </li>
                   ))}
               </ul>

@@ -1,60 +1,55 @@
-import s from "./Info.module.scss";
+import useTranslation from "hooks/useTranslation";
 import sprite from "../../assets/images/sprite.svg";
+import s from "./Info.module.scss";
+
 const Info = () => {
+  const { t } = useTranslation("Info");
   return (
     <div className={s.wrapper}>
       <h1 className={s.title}>Books Reading</h1>
       <div className={s.listWrapper}>
-        <p className={s.listTitle}>Will help you to</p>
+        <p className={s.listTitle}>{t.help}</p>
         <ul className={s.list}>
           <li className={s.item}>
             <svg className={s.itemSvg}>
               <use href={`${sprite}#icon-item`}></use>
             </svg>
-            <p className={s.itemText}>
-              Create your goal faster and proceed to read
-            </p>
+            <p className={s.itemText}>{t.goal}</p>
           </li>
           <li className={s.item}>
             <svg className={s.itemSvg}>
               <use href={`${sprite}#icon-item`}></use>
             </svg>
-            <p className={s.itemText}>
-              Divide process proportionally for each day
-            </p>
+            <p className={s.itemText}>{t.divide}</p>
           </li>
           <li className={s.item}>
             <svg className={s.itemSvg}>
               <use href={`${sprite}#icon-item`}></use>
             </svg>
-            <p className={s.itemText}>Track your success</p>
+            <p className={s.itemText}>{t.track}</p>
           </li>
         </ul>
       </div>
       <div>
-        <p className={s.listTitle}>You may also</p>
+        <p className={s.listTitle}>{t.also}</p>
         <ul className={s.list}>
           <li className={s.item}>
             <svg className={s.itemSvg}>
               <use href={`${sprite}#icon-item`}></use>
             </svg>
-            <p className={s.itemText}>
-              Pose your own independent point of view
-            </p>
+            <p className={s.itemText}>{t.pose}</p>
           </li>
           <li className={s.item}>
             <svg className={s.itemSvg}>
               <use href={`${sprite}#icon-item`}></use>
             </svg>
-            <p className={s.itemText}>
-              Improve your professional skills according to new knowledge
-            </p>
+            <p className={s.itemText}>{t.improve}</p>
           </li>
           <li className={s.item}>
             <svg className={s.itemSvg}>
               <use href={`${sprite}#icon-item`}></use>
             </svg>
-            <p className={s.itemText}>Become an interesting interlocutor</p>
+            <p className={s.itemText}>{t.become}</p>
           </li>
         </ul>
       </div>

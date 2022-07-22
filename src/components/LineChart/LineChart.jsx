@@ -1,13 +1,15 @@
-import s from "./Chart.module.scss";
-import useWindowSize from "hooks/useWindowSize";
-
-import "chart.js/auto";
 import { Chart } from "react-chartjs-2";
+import "chart.js/auto";
 import dayjs from "dayjs";
 
+import useWindowSize from "hooks/useWindowSize";
+import s from "./LineChart.module.scss";
+import useTranslation from "hooks/useTranslation";
+
 const LineChart = ({ data = [], className = "" }) => {
-  const { start, end, data: sets, added: addedPages, total: totalPages } = data;
   const size = useWindowSize();
+  const { t, dateFormat } = useTranslation("LineChart");
+  const { start, end, data: sets, added: addedPages, total: totalPages } = data;
 
   const parsedStartDate = Date.parse(start);
   const parcedEndDate = Date.parse(end);
@@ -17,9 +19,9 @@ const LineChart = ({ data = [], className = "" }) => {
   const daysGone = Math.ceil(dayjs(dayjs()).diff(startDate, "day", true));
 
   function getDates() {
-    const dateArray = [dayjs(startDate).format("DD.MM.YYYY")];
+    const dateArray = [dayjs(startDate).format(dateFormat)];
     for (let i = 1; i <= trainingDays; i += 1) {
-      const currentDate = dayjs(startDate).add(i, "day").format("DD.MM.YYYY");
+      const currentDate = dayjs(startDate).add(i, "day").format(dateFormat);
       dateArray.push(currentDate);
     }
     return dateArray; // Отримуєм масив дат
@@ -36,7 +38,7 @@ const LineChart = ({ data = [], className = "" }) => {
 
   const middleware = () => {
     const stats = sets?.reduce((acc, el) => {
-      const day = dayjs(el.date).format("DD.MM.YYYY");
+      const day = dayjs(el.date).format(dateFormat);
       const pages = acc[day] ? acc[day] : [];
       return { ...acc, [day]: [...pages, el.pages] };
     }, {});
@@ -56,7 +58,7 @@ const LineChart = ({ data = [], className = "" }) => {
       for (let i = 0; i < daysGone; i += 1) {
         const day = dayjs(startDate).add(i, "day");
         const element = dataSet.find(
-          (el) => el.x === dayjs(day).format("DD.MM.YYYY")
+          (el) => el.x === dayjs(day).format(dateFormat)
         );
 
         if (element) {
@@ -64,7 +66,7 @@ const LineChart = ({ data = [], className = "" }) => {
           finalDataSet.push({ x: element.x, y: fullAmount });
         } else {
           finalDataSet.push({
-            x: dayjs(day).format("DD.MM.YYYY"),
+            x: dayjs(day).format(dateFormat),
             y: fullAmount,
           });
         }
@@ -101,7 +103,7 @@ const LineChart = ({ data = [], className = "" }) => {
             borderColor: "#091E3F",
             borderWidth: 2,
             data: averageValue(),
-            label: "PLAN",
+            label: t.plan,
             pointRadius: 5,
             tension: 0.4,
           },
@@ -110,7 +112,7 @@ const LineChart = ({ data = [], className = "" }) => {
             backgroundColor: "#FF6B08",
             borderColor: "#FF6B08",
             borderWidth: 2,
-            label: "ACT",
+            label: t.act,
             pointRadius: 5,
             tension: 0.4,
             data: middleware(),
@@ -132,7 +134,7 @@ const LineChart = ({ data = [], className = "" }) => {
                 title: {
                   color: "#091E3F",
                   display: true,
-                  text: "TIME",
+                  text: t.time,
                   align: "end",
                   font: {
                     family: "'Montserrat', sans-serif",
@@ -168,7 +170,7 @@ const LineChart = ({ data = [], className = "" }) => {
                 display: true,
                 position: "top",
                 align: "start",
-                text: `AMOUNT OF PAGES / DAY  ${averagePerDay()}`,
+                text: `${t.amount}  ${averagePerDay()}`,
                 color: "#242A37",
                 padding: 20,
                 fullSize: false,

@@ -13,19 +13,29 @@ import {
 import storage from "redux-persist/lib/storage";
 import { sessionReducer } from "./auth";
 import { bookApi } from "./api/bookAPI";
+import { localeReducer } from "./locale";
 
 const authConfig = {
   key: "bookReader/token",
   storage,
   blacklist: ["isAuth"],
 };
+const localePersistConfig = {
+  key: "bookReader/locale",
+  storage,
+};
 
 const persistedReducer = persistReducer(authConfig, sessionReducer);
+const persistedLocaleReducer = persistReducer(
+  localePersistConfig,
+  localeReducer
+);
 
 const store = configureStore({
   reducer: {
     auth: persistedReducer,
     [bookApi.reducerPath]: bookApi.reducer,
+    locale: persistedLocaleReducer,
   },
 
   middleware: (getDefaultMiddleware) => [

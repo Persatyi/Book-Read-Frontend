@@ -9,14 +9,15 @@ import { useAddTrainingMutation, useBooksQuery } from "redux/api/bookAPI";
 import Title from "components/Title";
 import DatePickerField from "components/DatePickerField";
 import Select from "components/Select";
+import BookList from "components/BookList";
 import Button from "components/Button";
 
 import useRefreshToken from "hooks/useRefreshToken";
+import useTranslation from "hooks/useTranslation";
 import { MOBILE_ONLY } from "assets/constants/MEDIA";
 import sprite from "assets/images/sprite.svg";
 
 import s from "./AddTraining.module.scss";
-import BookList from "components/BookList";
 
 const AddTraining = ({
   chosenBooks,
@@ -35,6 +36,7 @@ const AddTraining = ({
   const [addTraining] = useAddTrainingMutation();
   const checkRefreshToken = useRefreshToken();
   const isMobile = useMediaQuery(MOBILE_ONLY);
+  const { t, dateFormat } = useTranslation("AddTraining");
 
   const bookIds = useMemo(
     () => chosenBooks.map(({ _id }) => _id),
@@ -48,6 +50,7 @@ const AddTraining = ({
     [data, bookIds]
   );
   const addBook = (values, setFieldValue) => {
+    if (!values.book) return;
     const newBook = data.find(({ _id }) => _id === values.book);
     chooseBook(newBook);
     setFieldValue("book", "");
@@ -55,7 +58,7 @@ const AddTraining = ({
 
   const onSubmit = async ({ start, end }) => {
     if (!chosenBooks.length) {
-      toast.error("Додайте хоч одну книгу");
+      toast.error(t.bookError);
       return;
     }
     const training = { start, end, books: bookIds };
@@ -65,7 +68,7 @@ const AddTraining = ({
       setRefetch();
       setUpdate();
     } catch (error) {
-      toast.error("Не можу додати тренування, спробуйте ще раз");
+      toast.error(t.trainingError);
     }
   };
 
@@ -73,7 +76,7 @@ const AddTraining = ({
   if (isSuccess)
     return (
       <div className={className}>
-        <Title text="Моє тренування" className={s.title} />
+        <Title text={t.title} className={s.title} />
         <Formik
           initialValues={{
             start: start ?? "",
@@ -90,9 +93,9 @@ const AddTraining = ({
                   className={s.date}
                   minDate={new Date()}
                   onChangeCb={(value) => setStart(value)}
-                  dateFormat="dd.MM.yyyy"
-                  placeholderText="Початок"
-                  autocomplete="off"
+                  dateFormat={dateFormat}
+                  placeholderText={t.start}
+                  autoComplete="off"
                   required
                 />
                 <svg className={s.icon} width="17" height="17">
@@ -106,11 +109,11 @@ const AddTraining = ({
                 <DatePickerField
                   name="end"
                   className={s.date}
-                  minDate={values.start}
+                  minDate={values.start || new Date()}
                   onChangeCb={(value) => setEnd(value)}
-                  dateFormat="dd.MM.yyyy"
-                  placeholderText="Завершення"
-                  autocomplete="off"
+                  dateFormat={dateFormat}
+                  placeholderText={t.end}
+                  autoComplete="off"
                   required
                 />
                 <svg className={s.icon} width="17" height="17">
@@ -125,14 +128,14 @@ const AddTraining = ({
                   options={allBooks}
                   name="book"
                   containerClassName={s.select}
-                  placeholder="Обрати книгу з бібліотеки"
+                  placeholder={t.select}
                 />
                 <svg className={s.polygon} width="13" height="7">
                   <use href={`${sprite}#icon-polygon`}></use>
                 </svg>
               </div>
               <Button
-                text="Додати"
+                text={t.add}
                 className={s.bookButton}
                 onClick={() => addBook(values, setFieldValue)}
               />
@@ -146,11 +149,7 @@ const AddTraining = ({
                 />
               )}
               {!!chosenBooks.length && !isMobile && (
-                <Button
-                  type="submit"
-                  text="Почати тренування"
-                  className={s.button}
-                />
+                <Button type="submit" text={t.button} className={s.button} />
               )}
             </Form>
           )}

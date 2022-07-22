@@ -1,0 +1,212 @@
+{
+  "AddBookSchema": {
+    "required": "Enter this field",
+    "title": {
+      "min": "Title is short",
+      "max": "Title is long"
+    },
+    "author": {
+      "min": "Author name is short",
+      "max": "Author name is long"
+    },
+    "year": {
+      "min": "Enter the real date",
+      "max": "Are you from the future?"
+    },
+    "pages": {
+      "min": "There must be more than 1 page",
+      "max": "Must be less than 4999 pages"
+    }
+  },
+  "AddPagesValidation": {
+    "min": "At least 1",
+    "required": "Enter this field"
+  },
+  "authFormValidation": {
+    "required": "This field is required",
+    "name": {
+      "min": "Please enter more than 1 character",
+      "max": "Please enter not more than 30 character"
+    },
+    "email": {
+      "correct": "Please enter correct email",
+      "min": "Please enter more than 9 character",
+      "max": "Max 63"
+    },
+    "password": {
+      "min": "Please enter more than 5 character",
+      "max": "Please enter not more than 16 character",
+      "matches": "Password must contain one number,uppercase and lowercase character"
+    },
+    "confirmPassword": {
+      "oneOf": "Passwords must match"
+    }
+  },
+  "reviewFormValidation": { "required": "This field is required" },
+  "AddBook": {
+    "title": "Book title",
+    "author": "Author",
+    "date": "Publication date",
+    "pages": "Amount of pages",
+    "success": "Book added",
+    "add": "Add"
+  },
+  "AddPages": {
+    "button": "Add result",
+    "error": "Something went wrong! Try again!",
+    "pages": "Amount of pages",
+    "pagesShort": "pages"
+  },
+  "AddTraining": {
+    "bookError": "Add at least 1 book",
+    "trainingError": "Can't add training. Try again",
+    "title": "My training",
+    "start": "Start",
+    "end": "Finish",
+    "select": "Choose books from the library ",
+    "add": "Add",
+    "button": "Start training"
+  },
+  "AuthForm": {
+    "error": {
+      "409": "There is an account with this email",
+      "400": "Something went wrong. Please check your data and try again.",
+      "401": "Invalid credentials. Please check your data and try again.",
+      "default": "Something went wrong. Please try again."
+    },
+    "name": "Name",
+    "email": "Email",
+    "password": "Password",
+    "confirm": "Confirm Password",
+    "register": "Register",
+    "login": "Log in",
+    "isRegister": "Already have an account? "
+  },
+  "BookItem": {
+    "delete": "Delete book",
+    "author": "Author",
+    "year": "Year",
+    "pages": "Pages"
+  },
+  "BookList": {
+    "title": "Book title",
+    "author": "Author",
+    "year": "Year",
+    "pages": "Pages"
+  },
+  "BookListLibrary": {
+    "read": "Already read",
+    "author": "Author",
+    "year": "Year",
+    "pages": "Pages",
+    "rating": "Rating",
+    "resume": "Resume",
+    "reading": "Reading now",
+    "going": "Going to read",
+    "training": "My training"
+  },
+  "TitleRead": {
+    "title": "Book title",
+    "author": "Author",
+    "year": "Year",
+    "pages": "Pages",
+    "rating": "Rating"
+  },
+  "Countdowns": {
+    "years": "Years countdown",
+    "goals": "Goals countdown"
+  },
+  "Goal": {
+    "title": "My goals",
+    "books": "Amount of books",
+    "days": "Amount of days",
+    "left": "Books left"
+  },
+  "Info": {
+    "help": "Will help you to",
+    "goal": "Create your goal faster and proceed to read",
+    "divide": "Divide process proportionally for each day",
+    "track": "Track your success",
+    "also": "You may also",
+    "pose": "Pose your own independent point of view",
+    "improve": "Improve your professional skills according to new knowledge",
+    "become": "Become an interesting interlocutor"
+  },
+  "InfoPage": {
+    "login": "Log in",
+    "register": "Register"
+  },
+  "LanguageSwitcher": {
+    "label": "English"
+  },
+  "LibraryEmpty": {
+    "step1": "Step 1.",
+    "library": "Create your own library",
+    "add": "Add there books which you are going to read.",
+    "step2": "Step 2.",
+    "training": "Create your first training",
+    "goal": "Set a goal, choose period, start training.",
+    "button": "Ok"
+  },
+  "LineChart": {
+    "plan": "PLAN",
+    "act": "ACT",
+    "time": "TIME",
+    "amount": "AMOUNT OF PAGES / DAY"
+  },
+  "Loader": {
+    "label": "Loading"
+  },
+  "Logout": {
+    "error": "Something went wrong! Try again!",
+    "text": "Logout"
+  },
+  "ModalBookRead": {
+    "grats": "Congratulations!",
+    "another": "Another book read.",
+    "button": "Done"
+  },
+  "ModalLogout": {
+    "text": "The changes you made will be lost if you navigate away from this application",
+    "cancel": "Cancel",
+    "exit": "Leave this app"
+  },
+  "ModalBookReview": {
+    "400": "Please check your data and try again.",
+    "default": "Something went wrong. Please try again.",
+    "rating": "Choose rating of the book",
+    "resume": "Resume",
+    "back": "Back",
+    "save": "Save"
+  },
+  "ModalTrainingDone": {
+    "well": "Well done!",
+    "faster": "But you need to be a little bit faster.",
+    "can": "You can do it)",
+    "training": "New training",
+    "back": "Back"
+  },
+  "Navigation": {
+    "training": "Training",
+    "library": "Library"
+  },
+  "Quote": {
+    "text": "Books are the ships of thoughts, wandering through the waves of time.",
+    "author": "Francis Bacon"
+  },
+  "Timer": {
+    "days": "days",
+    "hours": "hrs",
+    "minutes": "mins",
+    "seconds": "sec"
+  },
+  "Training": {
+    "bookError": "Add at least 1 book",
+    "error": "Can't add a training. Please try again",
+    "back": "Back",
+    "tillNextYear": "Years countdown",
+    "tillEnd": "Goals countdown",
+    "button": "Start training",
+    "addBook": "Add a book"
+  }
+}

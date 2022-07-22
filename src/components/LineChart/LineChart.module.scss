@@ -18,6 +18,7 @@
     padding-right: 50px;
     padding-left: 50px;
   }
+
   @include mq(desktop) {
     width: 928px;
     height: 340px;

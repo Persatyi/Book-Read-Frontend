@@ -1,14 +1,16 @@
-import React from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { toast } from "react-toastify";
 import s from "./AddBook.module.scss";
 import { useAddBookMutation } from "redux/api/bookAPI";
-import addBookSchema from "./addBookSchema";
+import addBookSchema from "assets/schemas/addBookSchema";
 import useRefreshToken from "hooks/useRefreshToken";
+import useTranslation from "hooks/useTranslation";
 
 export default function AddBook() {
   const [addBook] = useAddBookMutation();
   const checkRefreshToken = useRefreshToken();
+  const { t: translation } = useTranslation();
+  const t = translation["AddBook"];
   return (
     <Formik
       initialValues={{
@@ -17,19 +19,19 @@ export default function AddBook() {
         year: "",
         pages: "",
       }}
-      validationSchema={addBookSchema}
+      validationSchema={addBookSchema(translation["AddBookSchema"])}
       validateOnBlur
       onSubmit={async (values, actions) => {
         await checkRefreshToken();
         await addBook(values);
-        toast.success("Book added");
+        toast.success(t.success);
         actions.resetForm();
       }}
     >
       {({ isValid }) => (
         <Form className={s.form}>
           <label htmlFor="title" className={s.form__label}>
-            Book title
+            {t.title}
             <Field
               id="title"
               autoComplete="off"
@@ -45,7 +47,7 @@ export default function AddBook() {
             />
           </label>
           <label htmlFor="author" className={s.form__label}>
-            Author
+            {t.author}
             <Field
               id="author"
               autoComplete="off"
@@ -61,7 +63,7 @@ export default function AddBook() {
             />
           </label>
           <label htmlFor="year" className={s.form__label}>
-            Publication date
+            {t.date}
             <Field
               id="year"
               autoComplete="off"
@@ -77,7 +79,7 @@ export default function AddBook() {
             />
           </label>
           <label htmlFor="pages" className={s.form__label}>
-            Amount of pages
+            {t.pages}
             <Field
               id="pages"
               autoComplete="off"
@@ -93,7 +95,7 @@ export default function AddBook() {
             />
           </label>
           <button type="submit" disabled={!isValid} className={s.form__button}>
-            Add
+            {t.add}
           </button>
         </Form>
       )}

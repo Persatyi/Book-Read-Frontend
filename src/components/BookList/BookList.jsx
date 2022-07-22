@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 
 import BookItem from "components/BookItem";
 
+import useTranslation from "hooks/useTranslation";
 import { MOBILE_ONLY } from "assets/constants/MEDIA";
 
 import s from "./BookList.module.scss";
@@ -15,14 +16,16 @@ const BookList = ({
   deleteBook,
 }) => {
   const isMobile = useMediaQuery(MOBILE_ONLY);
+  const { t } = useTranslation("BookList");
+
   return (
     <ul className={`${s.list} ${className}`}>
       {!isMobile && (
         <div className={s.head}>
-          <span className={s.subtitle}>Назва книги:</span>
-          <span className={s.subtitle}>Автор:</span>
-          <span className={s.subtitle}>Рік:</span>
-          <span className={s.subtitle}>Стор.:</span>
+          <span className={s.subtitle}>{t.title}:</span>
+          <span className={s.subtitle}>{t.author}:</span>
+          <span className={s.subtitle}>{t.year}:</span>
+          <span className={s.subtitle}>{t.pages}:</span>
         </div>
       )}
       {books.map((book) => (

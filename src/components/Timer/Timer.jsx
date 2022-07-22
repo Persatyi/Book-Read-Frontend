@@ -1,27 +1,31 @@
-import s from "./Timer.module.scss";
 import Countdown, { zeroPad } from "react-countdown";
 
+import useTranslation from "hooks/useTranslation";
+import s from "./Timer.module.scss";
+
 const Timer = ({ date, title }) => {
+  const { t } = useTranslation("Timer");
+
   const renderer = ({ days, hours, minutes, seconds }) => (
     <div className={s.timer}>
       <div className={s.block}>
         <span>{zeroPad(days)}</span>
-        <span className={s.measurement}>days</span>
+        <span className={s.measurement}>{t.days}</span>
       </div>
       <span className={s.split}>:</span>
       <div className={s.block}>
         <span>{zeroPad(hours)}</span>
-        <span className={s.measurement}>hrs</span>
+        <span className={s.measurement}>{t.hours}</span>
       </div>
       <span className={s.split}>:</span>
       <div className={s.block}>
         <span>{zeroPad(minutes)}</span>
-        <span className={s.measurement}>mins</span>
+        <span className={s.measurement}>{t.minutes}</span>
       </div>
       <span className={s.split}>:</span>
       <div className={s.block}>
         <span>{zeroPad(seconds)}</span>
-        <span className={s.measurement}>sec</span>
+        <span className={s.measurement}>{t.seconds}</span>
       </div>
     </div>
   );

@@ -8,9 +8,16 @@ export const TYPES = {
   ADD: "add",
   BACK: "back",
   DELETE: "delete",
+  HOC: "hoc",
 };
 
-const IconButton = ({ onClick, label, className = "", type = TYPES.ADD }) => {
+const IconButton = ({
+  onClick,
+  label,
+  className = "",
+  type = TYPES.ADD,
+  children,
+}) => {
   if (type === TYPES.ADD)
     return (
       <button
@@ -50,12 +57,24 @@ const IconButton = ({ onClick, label, className = "", type = TYPES.ADD }) => {
         </svg>
       </button>
     );
+  if (type === TYPES.HOC)
+    return (
+      <button
+        className={`${s.icon} ${className}`}
+        type="button"
+        onClick={onClick}
+        aria-label={label}
+      >
+        {children}
+      </button>
+    );
 };
 IconButton.propTypes = {
   onClick: PropTypes.func.isRequired,
   label: PropTypes.string.isRequired,
   className: PropTypes.string,
   type: PropTypes.string,
+  children: PropTypes.node,
 };
 
 export default IconButton;
