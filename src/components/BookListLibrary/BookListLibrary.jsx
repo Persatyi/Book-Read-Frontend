@@ -1,15 +1,20 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { isAuth } from "redux/auth";
-import {useBooksQuery} from 'redux/api/bookAPI'
+import { useBooksQuery } from 'redux/api/bookAPI';
+import { useToggle } from "hooks";
+import { ModalBookReview } from 'components/Modals';
 import TitleRead from './TitleRead/TitleRead'
 import TitleReading from './TitleReading/TitleReading'
 import s from './BookListLibrary.module.scss';
 import spriteSvg from "assets/images/sprite.svg";
+import Rating from "components/Rating";
 
 
-export default function BookListLibrary({ onClick }) {
+export default function BookListLibrary() {
+   const [book, setBook] = useState('');
+   const [openModal, toggleModal] = useToggle();
    const auth = useSelector(isAuth);
    const { data = [], isLoading } = useBooksQuery(null, { skip: !auth });
    if (isLoading) return <div className={s.loadingWrapper}>
@@ -27,11 +32,11 @@ export default function BookListLibrary({ onClick }) {
                <TitleRead />
             <ul>
                   {data.map(item => (item.status === 'read' &&
-                  <li
+                     <li
                      key={item._id}
                      className={s.readItem}>
                      <ul className={s.readBookList}>
-                        <li className={s.readBookItem}>
+                           <li className={s.readBookItem}>
                            <svg className={s.readBookIcon}>
                               <use href={`${spriteSvg}#icon-read`} />
                            </svg>
@@ -45,17 +50,23 @@ export default function BookListLibrary({ onClick }) {
                         </li>
                         <li className={s.readBookItem}>
                            <span>Rating:</span>
-                           <svg style={{ width: "101px", height: "17px" }}>
-                              <use href={`${spriteSvg}#icon-rating`} />
-                           </svg>
+                              <Rating
+                                 mark={item.rating}
+                                 onChange={toggleModal}
+                              />
                         </li>
-                        <li className={s.readBookButton} onClick={onClick}>Resume</li>
-                     </ul>
-                  </li>
+                           <li className={s.readBookButton} onClick={() => {
+                              setBook(item);
+                           toggleModal()
+                           }}>Resume
+                           </li>
+                        </ul>
+                     </li>
                ))}
                </ul>
-               </div>
+            </div>
          )}
+
          {status('reading') && (
          <div className={s.booksWrapper}>
             <h2 className={s.booksTitle}>Reading now</h2>
@@ -112,6 +123,14 @@ export default function BookListLibrary({ onClick }) {
             </ul>
          </div>
          )}
+         <ModalBookReview
+            book={book}
+            open={openModal}
+            onClose={toggleModal}
+            onClick={() => {
+               setTimeout(toggleModal, 1000)
+            }}
+            />
          {data.length > 0 &&
             <div className={s.linkWrapper}>
                <NavLink className={s.link} to='/training'>

@@ -44,7 +44,7 @@ const AuthForm = ({ type }) => {
           const callFunction = isRegister ? registerUser : loginUser;
           const response = await callFunction(data).unwrap();
 
-          dispatch(loggedIn(response.token));
+          dispatch(loggedIn(response));
         } catch (error) {
           let message = "";
           switch (error.status) {

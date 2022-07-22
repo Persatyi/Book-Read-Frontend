@@ -1,19 +1,22 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-// https://persatyi-book-read-backend.herokuapp.com/api
+const BASE_URL = "https://persatyi-book-read-backend.herokuapp.com/api";
+// const BASE_URL = "http://localhost:4444/api";
+
+const baseQuery = fetchBaseQuery({
+  baseUrl: BASE_URL,
+  prepareHeaders: (headers, { getState }) => {
+    const token = getState().auth.token;
+    if (token) {
+      headers.set("authorization", `Bearer ${token}`);
+    }
+    return headers;
+  },
+});
 
 export const bookApi = createApi({
   reducerPath: "bookApi",
-  baseQuery: fetchBaseQuery({
-    baseUrl: "http://localhost:3001/api",
-    prepareHeaders: (headers, { getState }) => {
-      const token = getState().auth.token;
-      if (token) {
-        headers.set("Authorization", `Bearer ${token}`);
-      }
-      return headers;
-    },
-  }),
+  baseQuery,
   tagTypes: ["User", "Books", "Results"],
   endpoints: (build) => ({
     register: build.mutation({
@@ -28,6 +31,10 @@ export const bookApi = createApi({
       query: (data) => ({ url: "/users/login-google", method: "POST", body: data }),
       invalidatesTags: ["User"],
     }),
+    refreshToken: build.mutation({
+      query: (data) => ({ url: "/users/refresh", method: "POST", body: data }),
+      invalidatesTags: ["User"],
+    }),
     addPage: build.mutation({
       query: (data) => ({ url: "/results", method: "PATCH", body: data }),
       invalidatesTags: ["Results"],
@@ -38,7 +45,6 @@ export const bookApi = createApi({
     }),
     logout: build.mutation({
       query: () => ({ url: "/users/logout", method: "POST" }),
-      invalidatesTags: ["User"],
     }),
     current: build.query({
       query: () => "/users/current",
@@ -59,8 +65,16 @@ export const bookApi = createApi({
       query: (data) => ({ url: "/books", method: "POST", body: data }),
       invalidatesTags: ["Books"],
     }),
+    addReview: build.mutation({
+      query: ({id, ...data}) => ({
+        url: `/books/${id}`,
+        method: 'PATCH',
+        body: data,
+      }),
+      invalidatesTags: ["Books"],
+    })
   }),
-  // refetchOnFocus: true,
+  refetchOnFocus: true,
   // refetchOnReconnect: true,
 });
 
@@ -68,6 +82,7 @@ export const {
   useRegisterMutation,
   useLoginMutation,
   useGoogleLoginMutation,
+  useRefreshTokenMutation,
   useAddPageMutation,
   useLogoutMutation,
   useCurrentQuery,
@@ -76,4 +91,5 @@ export const {
   useAddTrainingMutation,
   useGetTrainingQuery,
   useAddBookMutation,
+  useAddReviewMutation
 } = bookApi;
