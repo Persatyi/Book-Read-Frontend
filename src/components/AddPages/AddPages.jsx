@@ -11,6 +11,7 @@ import { toast } from "react-toastify";
 import useRefreshToken from "hooks/useRefreshToken";
 import useTranslation from "hooks/useTranslation";
 import { useState } from "react";
+import PropTypes from "prop-types";
 
 const AddPages = ({
   data = {},
@@ -127,6 +128,18 @@ const AddPages = ({
       <ModalBookRead open={bookReadModal} onClose={closeReadModal} />
     </>
   );
+};
+
+AddPages.propTypes = {
+  data: PropTypes.shape({
+    data: PropTypes.arrayOf(PropTypes.object),
+    start: PropTypes.string,
+  }),
+  updateResults: PropTypes.func,
+  setUpdate: PropTypes.func,
+  resetState: PropTypes.func,
+  setRefetch: PropTypes.func,
+  className: PropTypes.string,
 };
 
 export default AddPages;
