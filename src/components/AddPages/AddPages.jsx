@@ -2,7 +2,7 @@ import s from "./AddPages.module.scss";
 import spriteSvg from "assets/images/sprite.svg";
 import { schema } from "assets/schemas/addPagesValidation";
 import Button from "components/Button";
-import { ModalTrainingDone } from "components/Modals";
+import { ModalBookRead, ModalTrainingDone } from "components/Modals";
 
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import DatePickerField from "components/DatePickerField";
@@ -11,48 +11,42 @@ import { toast } from "react-toastify";
 import useRefreshToken from "hooks/useRefreshToken";
 import { useState } from "react";
 
-const AddPages = ({ data = {}, className, updateResults, setUpdate }) => {
-  const { data: sets, start, added: addedPages, end, total: totalPages } = data;
-
+const AddPages = ({
+  data = {},
+  className,
+  updateResults,
+  setUpdate,
+  setRefetch,
+  resetState,
+}) => {
+  const { data: sets, start } = data;
   const parsedStart = Date.parse(start);
-  const parsedEnd = Date.parse(end);
-  const trainingDays = dayjs(parsedEnd).diff(parsedStart, "hour", true) / 24;
 
-  function getDates() {
-    const dateArray = [dayjs(parsedStart).format("DD.MM.YYYY")];
-    for (let i = 1; i <= trainingDays; i += 1) {
-      const currentDate = dayjs(parsedStart).add(i, "day").format("DD.MM.YYYY");
-      dateArray.push(currentDate);
-    }
-    return dateArray; // Отримуєм масив дат
-  }
+  const [bookReadModal, setBookReadModal] = useState(false);
+  const [modalTrainingDone, setModalTrainingDone] = useState(false);
 
-  const [openModal, setOpenModal] = useState(false);
+  const closeModalTrainingDone = () => {
+    setModalTrainingDone(false);
+    resetState();
+    setUpdate();
+    setRefetch();
+  };
+
+  const closeReadModal = () => {
+    setBookReadModal(false);
+    setUpdate();
+    setRefetch();
+  };
+
   const checkRefreshToken = useRefreshToken();
-
-  const isLessThenAverage = (range) => {
-    const averageAmount = Math.ceil(totalPages / range);
-    let averagePerDay = 0;
-    for (let i = 0; i < range; i += 1) {
-      averagePerDay = averageAmount * (i + 1);
-      if (getDates()[i] === dayjs().format("DD.MM.YYYY")) {
-        if (addedPages < averagePerDay) {
-          setOpenModal(true);
-        }
-      }
-    }
-  };
-
-  const closeModal = () => {
-    setOpenModal(false);
-  };
 
   const onSubmit = async (values) => {
     try {
       await checkRefreshToken();
-      await updateResults(values);
+      const result = await updateResults(values);
       setUpdate();
-      isLessThenAverage(getDates().length);
+      setModalTrainingDone(result.data.finish);
+      setBookReadModal(result.data.isBookRead);
     } catch (error) {
       toast.error("Something went wrong please try again");
     }
@@ -105,7 +99,7 @@ const AddPages = ({ data = {}, className, updateResults, setUpdate }) => {
                   .slice(0)
                   .reverse()
                   .map(({ _id: id, pages, date }) => (
-                    <li className={s.item} key={id}>
+                    <li className={s.item} key={id} id={id}>
                       <span className={s.day}>
                         {dayjs(date).format("DD.MM.YYYY")}
                       </span>
@@ -121,10 +115,11 @@ const AddPages = ({ data = {}, className, updateResults, setUpdate }) => {
         )}
       </Formik>
       <ModalTrainingDone
-        open={openModal}
+        open={modalTrainingDone}
+        onClose={closeModalTrainingDone}
         onNew={() => {}}
-        onClose={closeModal}
       />
+      <ModalBookRead open={bookReadModal} onClose={closeReadModal} />
     </>
   );
 };

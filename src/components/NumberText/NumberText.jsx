@@ -1,7 +1,12 @@
 import PropTypes from "prop-types";
 import s from "./NumberText.module.scss";
 
-function NumberText({ number, text, isActiveTraining, numberClassName = "" }) {
+function NumberText({
+  number = 0,
+  text,
+  isActiveTraining,
+  numberClassName = "",
+}) {
   return (
     <div className={isActiveTraining ? s.activeWrapper : s.wrapper}>
       <span
@@ -16,7 +21,7 @@ function NumberText({ number, text, isActiveTraining, numberClassName = "" }) {
   );
 }
 NumberText.propTypes = {
-  number: PropTypes.number.isRequired,
+  number: PropTypes.number,
   text: PropTypes.string.isRequired,
   numberClassName: PropTypes.string,
 };

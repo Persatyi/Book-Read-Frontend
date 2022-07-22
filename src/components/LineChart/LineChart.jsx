@@ -186,4 +186,5 @@ const LineChart = ({ data = [], className = "" }) => {
     )
   );
 };
+
 export default LineChart;

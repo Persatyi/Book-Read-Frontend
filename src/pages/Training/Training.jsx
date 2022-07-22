@@ -31,6 +31,7 @@ const ACTION_TYPES = {
   SET_START: "setStart",
   SET_END: "setEnd",
   UPDATE: "update",
+  RESET: "reset",
 };
 
 const initialState = {
@@ -44,7 +45,7 @@ const initialState = {
 const reducer = (state, { type, payload }) => {
   switch (type) {
     case ACTION_TYPES.REFETCH:
-      return { ...state, isRefetch: true };
+      return { ...state, isRefetch: !state.isRefetch };
     case ACTION_TYPES.ADD:
       return { ...state, isAdd: payload };
     case ACTION_TYPES.CHOOSE_BOOK:
@@ -60,6 +61,8 @@ const reducer = (state, { type, payload }) => {
       return { ...state, end: payload };
     case ACTION_TYPES.UPDATE:
       return { ...state, updateStats: !state.updateStats };
+    case ACTION_TYPES.RESET:
+      return { ...initialState };
     default:
       return state;
   }
@@ -71,10 +74,15 @@ const Training = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const { chosenBooks, start, end, isAdd, isRefetch, updateStats } = state;
   const isMobile = useMediaQuery(MOBILE_ONLY);
-  const { isLoading, data } = useQuery(["training", isRefetch], getTraining, {
-    enabled: isToken,
-    retry: false,
-  });
+  const { isLoading, data = {} } = useQuery(
+    ["training", isRefetch],
+    getTraining,
+    {
+      enabled: isToken,
+      retry: false,
+    }
+  );
+
   const checkRefreshToken = useRefreshToken();
 
   const { data: response } = useQuery(["results", updateStats], getResults, {
@@ -110,13 +118,17 @@ const Training = () => {
     dispatch({ type: ACTION_TYPES.REFETCH, payload: true });
   const setUpdate = () => dispatch({ type: ACTION_TYPES.UPDATE });
 
-  const isActiveTraining = !!data;
+  const isActiveTraining = Object.keys(data).length !== 0;
+
   const books = isActiveTraining ? data.books : chosenBooks;
   const onAddButtonClick = () => {
     dispatch({ type: ACTION_TYPES.ADD, payload: true });
   };
   const onBackButtonClick = () => {
     dispatch({ type: ACTION_TYPES.ADD, payload: false });
+  };
+  const resetState = () => {
+    dispatch({ type: ACTION_TYPES.RESET });
   };
   const onAddTrainingClick = async () => {
     if (!chosenBooks.length) {
@@ -136,7 +148,8 @@ const Training = () => {
     try {
       await checkRefreshToken();
       await addTraining(training);
-      setRefetch(true);
+      resetState();
+      setRefetch();
     } catch (error) {
       toast.error("Не можу додати тренування, спробуйте ще раз");
     }
@@ -198,6 +211,7 @@ const Training = () => {
             isActiveTraining={isActiveTraining}
             deleteBook={deleteBook}
             className={s.addTraining}
+            setUpdate={setUpdate}
           />
         )}
         {(isActiveTraining || isMobile) && (
@@ -221,8 +235,10 @@ const Training = () => {
           <AddPages
             updateResults={mutateAsync}
             setUpdate={setUpdate}
+            setRefetch={setRefetch}
             data={response}
             className={s.addPages}
+            resetState={resetState}
           />
         )}
         {isMobile && !isActiveTraining && (
