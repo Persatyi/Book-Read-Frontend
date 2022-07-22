@@ -150,5 +150,8 @@
     "act": "ACT",
     "time": "TIME",
     "amount": "AMOUNT OF PAGES / DAY"
+  },
+  "Loader": {
+    "label": "Loading"
   }
 }
