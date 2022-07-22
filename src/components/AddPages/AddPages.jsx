@@ -15,7 +15,7 @@ const AddPages = (props) => {
 
   const [addPage] = useAddPageMutation();
   const checkRefreshToken = useRefreshToken();
-  const { t } = useTranslation("AddPages");
+  const { t, language, dateFormat } = useTranslation("AddPages");
 
   const onSubmit = async (values) => {
     await checkRefreshToken();
@@ -39,10 +39,11 @@ const AddPages = (props) => {
                 name="date"
                 // minDate={}
                 maxDate={new Date()}
-                dateFormat="MM.dd.yyyy"
+                dateFormat={dateFormat}
                 closeOnScroll={true}
                 value={values.date}
                 onChange={handleChange}
+                locale={language}
               />
               <svg className={s.iconSvg} style={{ width: "24px" }}>
                 <use href={`${spriteSvg}#icon-polygon`}></use>
@@ -60,7 +61,7 @@ const AddPages = (props) => {
             disabled={!isValid && !dirty}
             type="submit"
             className={s.button}
-            text="Add result"
+            text={t.button}
           />
           <h2 className={s.statisticsTitle}>STATISTICS</h2>
           {data?.data && (
@@ -71,7 +72,7 @@ const AddPages = (props) => {
                 .map(({ _id: id, pages, date }) => (
                   <li className={s.item} key={id}>
                     <span className={s.day}>
-                      {dayjs(date).format("DD.MM.YYYY")}
+                      {dayjs(date).format(dateFormat)}
                     </span>
                     <span className={s.data}>
                       {dayjs(date).format("HH:mm:ss")}

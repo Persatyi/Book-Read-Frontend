@@ -1,6 +1,12 @@
-import DatePicker from "react-datepicker";
+import DatePicker, { registerLocale } from "react-datepicker";
 import { useField, useFormikContext } from "formik";
 import "react-datepicker/dist/react-datepicker.css";
+
+import uk from "date-fns/locale/uk";
+import us from "date-fns/locale/en-US";
+
+registerLocale("uk-UA", uk);
+registerLocale("en-US", us);
 
 const DatePickerField = ({ onChangeCb, ...props }) => {
   const { setFieldValue } = useFormikContext();

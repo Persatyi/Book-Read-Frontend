@@ -47,7 +47,9 @@
     "success": "Книгу додано",
     "add": "Додати"
   },
-  "AddPages": {},
+  "AddPages": {
+    "button": "Додати результат"
+  },
 
   "LanguageSwitcher": {
     "label": "Українська"

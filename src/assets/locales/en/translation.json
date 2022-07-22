@@ -47,7 +47,9 @@
     "success": "Book added",
     "add": "Add"
   },
-  "AddPages": {},
+  "AddPages": {
+    "button": "Add result"
+  },
 
   "LanguageSwitcher": {
     "label": "English"
