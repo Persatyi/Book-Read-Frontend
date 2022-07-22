@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
+// axios.defaults.baseURL = "http://localhost:4444/api";
 axios.defaults.baseURL = "https://persatyi-book-read-backend.herokuapp.com/api";
 
 const token = {
@@ -17,24 +18,35 @@ const sessionSlice = createSlice({
   initialState: {
     isAuth: false,
     token: null,
+    refreshToken: null,
   },
   reducers: {
     loggedIn(state, { payload }) {
-      state.token = payload;
+      state.token = payload.token;
+      state.refreshToken = payload.refreshToken;
       state.isAuth = true;
-      token.set(payload);
+      // token.set(payload);
     },
     loggedOff(state) {
       state.isAuth = false;
       state.token = null;
+      state.refreshToken = null;
       token.unset();
     },
-    setToken(_, { payload }) {
+    resetTokens(state, { payload }) {
+      state.token = payload.token;
+      state.refreshToken = payload.refreshToken;
+    },
+    setToken(state, { payload }) {
       token.set(payload);
+    },
+    setIsAuth(state, { payload }) {
+      state.isAuth = payload;
     },
   },
 });
 
-export const { loggedIn, loggedOff, setToken } = sessionSlice.actions;
+export const { loggedIn, loggedOff, resetTokens, setToken, setIsAuth } =
+  sessionSlice.actions;
 
 export const sessionReducer = sessionSlice.reducer;
