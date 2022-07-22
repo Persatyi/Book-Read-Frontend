@@ -80,16 +80,16 @@
     "isRegister": "Already have an account? "
   },
   "BookItem": {
-    "delete": "Видалити книгу",
-    "author": "Автор",
-    "year": "Рік",
-    "pages": "Стор."
+    "delete": "Delete book",
+    "author": "Author",
+    "year": "Year",
+    "pages": "Pages"
   },
   "BookList": {
-    "title": "Назва книги",
-    "author": "Автор",
-    "year": "Рік",
-    "pages": "Стор."
+    "title": "Book title",
+    "author": "Author",
+    "year": "Year",
+    "pages": "Pages"
   },
   "LanguageSwitcher": {
     "label": "English"

@@ -80,7 +80,13 @@
     "isRegister": "Вже зарєстровані?"
   },
   "BookItem": {
-    "delete": "Delete book",
+    "delete": "Видалити книгу",
+    "author": "Автор",
+    "year": "Рік",
+    "pages": "Стор."
+  },
+  "BookList": {
+    "title": "Назва книги",
     "author": "Автор",
     "year": "Рік",
     "pages": "Стор."
