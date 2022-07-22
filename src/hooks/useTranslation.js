@@ -13,15 +13,15 @@ const useTranslation = (key) => {
   switch (language) {
     case LANGUAGES.EN:
       translation = translationEn;
-      dateFormat = "MM.DD.YYYY";
+      dateFormat = "MM.dd.yyyy";
       break;
     case LANGUAGES.UA:
       translation = translationUa;
-      dateFormat = "DD.MM.YYYY";
+      dateFormat = "dd.MM.yyyy";
       break;
     default:
       translation = translationEn;
-      dateFormat = "MM.DD.YYYY";
+      dateFormat = "MM.dd.yyyy";
   }
   const t = key ? translation[key] : translation;
   return {

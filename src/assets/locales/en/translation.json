@@ -79,6 +79,18 @@
     "login": "Log in",
     "isRegister": "Already have an account? "
   },
+  "BookItem": {
+    "delete": "Видалити книгу",
+    "author": "Автор",
+    "year": "Рік",
+    "pages": "Стор."
+  },
+  "BookList": {
+    "title": "Назва книги",
+    "author": "Автор",
+    "year": "Рік",
+    "pages": "Стор."
+  },
   "LanguageSwitcher": {
     "label": "English"
   }

@@ -79,6 +79,12 @@
     "login": "Увійти",
     "isRegister": "Вже зарєстровані?"
   },
+  "BookItem": {
+    "delete": "Delete book",
+    "author": "Автор",
+    "year": "Рік",
+    "pages": "Стор."
+  },
   "LanguageSwitcher": {
     "label": "Українська"
   }
