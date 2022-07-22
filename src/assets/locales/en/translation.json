@@ -153,5 +153,34 @@
   },
   "Loader": {
     "label": "Loading"
+  },
+  "Logout": {
+    "error": "Something went wrong! Try again!",
+    "text": "Logout"
+  },
+  "ModalBookRead": {
+    "grats": "Congratulations!",
+    "another": "Another book read.",
+    "button": "Done"
+  },
+  "ModalLogout": {
+    "text": "The changes you made will be lost if you navigate away from this application",
+    "cancel": "Cancel",
+    "exit": "Leave this app"
+  },
+  "ModalBookReview": {
+    "400": "Please check your data and try again.",
+    "default": "Something went wrong. Please try again.",
+    "rating": "Choose rating of the book",
+    "resume": "Resume",
+    "back": "Back",
+    "save": "Save"
+  },
+  "ModalTrainingDone": {
+    "well": "Well done!",
+    "faster": "But you need to be a little bit faster.",
+    "can": "You can do it)",
+    "training": "New training",
+    "back": "Back"
   }
 }

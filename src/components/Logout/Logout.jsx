@@ -1,18 +1,23 @@
 import { useEffect } from "react";
 import { useLogoutMutation } from "redux/api/bookAPI";
 import { useDispatch } from "react-redux";
-import { loggedOff } from "redux/auth";
 import { toast } from "react-toastify";
-import { useToggle } from "hooks";
+
+import { loggedOff } from "redux/auth";
+
 import { ModalLogout } from "components/Modals";
-import s from "./Logout.module.scss";
+
+import { useToggle } from "hooks";
 import useRefreshToken from "hooks/useRefreshToken";
+import useTranslation from "hooks/useTranslation";
+import s from "./Logout.module.scss";
 
 const Logout = () => {
   const dispatch = useDispatch();
   const [logout, { isSuccess, isError }] = useLogoutMutation();
   const [openModal, toggleModal] = useToggle();
   const checkRefreshToken = useRefreshToken();
+  const { t } = useTranslation("Logout");
 
   useEffect(() => {
     if (isSuccess) {
@@ -22,9 +27,9 @@ const Logout = () => {
 
   useEffect(() => {
     if (isError) {
-      toast.error("Something went wrong! Try again!");
+      toast.error(t.error);
     }
-  }, [isError]);
+  }, [isError, t.error]);
 
   const logoutFunc = () => {
     logout();
@@ -42,7 +47,7 @@ const Logout = () => {
           toggleModal();
         }}
       >
-        Logout
+        {t.logout}
       </button>
       <ModalLogout
         open={openModal}
