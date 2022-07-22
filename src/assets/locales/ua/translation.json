@@ -91,6 +91,24 @@
     "year": "Рік",
     "pages": "Стор."
   },
+  "BookListLibrary": {
+    "read": "Прочитано",
+    "author": "Автор",
+    "year": "Рік",
+    "pages": "Стор.",
+    "rating": "Рейтинг",
+    "resume": "Резюме",
+    "reading": "Читаю",
+    "going": "Маю намір прочитати",
+    "training": "Моє тренування"
+  },
+  "TitleRead": {
+    "title": "Назва книги",
+    "author": "Автор",
+    "year": "Рік",
+    "pages": "Стор.",
+    "rating": "Рейтинг"
+  },
   "LanguageSwitcher": {
     "label": "Українська"
   }

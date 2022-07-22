@@ -91,6 +91,24 @@
     "year": "Year",
     "pages": "Pages"
   },
+  "BookListLibrary": {
+    "read": "Already read",
+    "author": "Author",
+    "year": "Year",
+    "pages": "Pages",
+    "rating": "Rating",
+    "resume": "Resume",
+    "reading": "Reading now",
+    "going": "Going to read",
+    "training": "My training"
+  },
+  "TitleRead": {
+    "title": "Book title",
+    "author": "Author",
+    "year": "Year",
+    "pages": "Pages",
+    "rating": "Rating"
+  },
   "LanguageSwitcher": {
     "label": "English"
   }
