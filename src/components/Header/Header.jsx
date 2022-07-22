@@ -1,3 +1,4 @@
+import LanguageSwitcher from "components/LanguageSwitcher";
 import Logout from "components/Logout/Logout";
 import Navigation from "components/Navigation";
 import UserBar from "components/UserBar";
@@ -18,7 +19,7 @@ const Header = () => {
     <header className={s.header}>
       <div className={headerCls.join(" ")}>
         <span className={s.logo}>BR</span>
-
+        <LanguageSwitcher />
         {isLoggedIn && (
           <>
             <UserBar />

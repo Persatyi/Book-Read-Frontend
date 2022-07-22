@@ -1,0 +1,29 @@
+@import "stylesheet/mixin.scss";
+
+.wrapBtn {
+  position: absolute;
+  top: 50%;
+  left: 100px;
+  transform: translateY(-50%);
+  display: flex;
+  gap: 10px;
+
+  @include mq(tablet-only) {
+    text-align: start;
+  }
+
+  @include mq(desktop) {
+    width: 10vw;
+  }
+}
+
+.btn {
+  width: 25px;
+  height: 25px;
+  transition: transform 250ms linear;
+
+  &:focus,
+  &:hover {
+    transform: scale(1.2);
+  }
+}

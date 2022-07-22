@@ -11,6 +11,7 @@
     "chart.js": "^3.8.0",
     "dayjs": "^1.11.3",
     "formik": "^2.2.9",
+    "get-user-locale": "^1.4.0",
     "jwt-decode": "^3.1.2",
     "modern-normalize": "^1.1.0",
     "react": "^18.2.0",
