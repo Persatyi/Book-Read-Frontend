@@ -50,7 +50,16 @@
   "AddPages": {
     "button": "Add result"
   },
-
+  "AddTraining": {
+    "bookError": "Add at least 1 book",
+    "trainingError": "Can't add training. Try again",
+    "title": "My training",
+    "start": "Start",
+    "end": "Finish",
+    "select": "Choose books from the library ",
+    "add": "Add",
+    "button": "Start training"
+  },
   "LanguageSwitcher": {
     "label": "English"
   }
