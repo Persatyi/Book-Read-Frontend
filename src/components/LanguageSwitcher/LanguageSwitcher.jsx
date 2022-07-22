@@ -24,7 +24,10 @@ const LanguageSwitcher = () => {
 
   useEffect(() => {
     if (language) return;
-    changeLanguage(userLocale);
+    const locales = Object.values(LANGUAGES);
+    const locale =
+      locales.find((locale) => locale === userLocale) ?? LANGUAGES.EN;
+    changeLanguage(locale);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

@@ -19,9 +19,11 @@ const LineChart = ({ data = [], className = "" }) => {
   const daysGone = Math.ceil(dayjs(dayjs()).diff(startDate, "day", true));
 
   function getDates() {
-    const dateArray = [dayjs(startDate).format(dateFormat)];
+    const dateArray = [dayjs(startDate).format(dateFormat.dayjs)];
     for (let i = 1; i <= trainingDays; i += 1) {
-      const currentDate = dayjs(startDate).add(i, "day").format(dateFormat);
+      const currentDate = dayjs(startDate)
+        .add(i, "day")
+        .format(dateFormat.dayjs);
       dateArray.push(currentDate);
     }
     return dateArray; // Отримуєм масив дат
@@ -38,7 +40,7 @@ const LineChart = ({ data = [], className = "" }) => {
 
   const middleware = () => {
     const stats = sets?.reduce((acc, el) => {
-      const day = dayjs(el.date).format(dateFormat);
+      const day = dayjs(el.date).format(dateFormat.dayjs);
       const pages = acc[day] ? acc[day] : [];
       return { ...acc, [day]: [...pages, el.pages] };
     }, {});
@@ -58,7 +60,7 @@ const LineChart = ({ data = [], className = "" }) => {
       for (let i = 0; i < daysGone; i += 1) {
         const day = dayjs(startDate).add(i, "day");
         const element = dataSet.find(
-          (el) => el.x === dayjs(day).format(dateFormat)
+          (el) => el.x === dayjs(day).format(dateFormat.dayjs)
         );
 
         if (element) {
@@ -66,7 +68,7 @@ const LineChart = ({ data = [], className = "" }) => {
           finalDataSet.push({ x: element.x, y: fullAmount });
         } else {
           finalDataSet.push({
-            x: dayjs(day).format(dateFormat),
+            x: dayjs(day).format(dateFormat.dayjs),
             y: fullAmount,
           });
         }
