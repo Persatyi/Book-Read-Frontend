@@ -109,6 +109,16 @@
     "pages": "Pages",
     "rating": "Rating"
   },
+  "Countdowns": {
+    "years": "Years countdown",
+    "goals": "Goals countdown"
+  },
+  "Goal": {
+    "title": "Моя мета прочитати",
+    "books": "Кількість книжок",
+    "days": "Кількість днів",
+    "left": "Залишилось книжок"
+  },
   "LanguageSwitcher": {
     "label": "English"
   }

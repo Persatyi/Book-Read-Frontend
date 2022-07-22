@@ -3,9 +3,12 @@ import PropTypes from "prop-types";
 import NumberText from "components/NumberText";
 import Title from "components/Title";
 
+import useTranslation from "hooks/useTranslation";
+
 import s from "./Goal.module.scss";
 
 function Goal({ training, isActiveTraining, className = "" }) {
+  const { t } = useTranslation("Goal");
   const booksNumber = training?.books?.length ?? 0;
   const daysNumber = training?.end
     ? (new Date(training?.end) - new Date(training?.start)) / 86400000
@@ -16,19 +19,19 @@ function Goal({ training, isActiveTraining, className = "" }) {
   );
   return (
     <div className={`${s.container} ${className}`}>
-      <Title text="Моя мета прочитати" className={s.title} />
+      <Title text={t.title} className={s.title} />
       <ul className={isActiveTraining ? s.activeNumbers : s.numbers}>
         <li>
           <NumberText
             number={booksNumber}
-            text="Кількість книжок"
+            text={t.books}
             isActiveTraining={isActiveTraining}
           />
         </li>
         <li>
           <NumberText
             number={daysNumber}
-            text="Кількість днів"
+            text={t.days}
             isActiveTraining={isActiveTraining}
           />
         </li>
@@ -36,7 +39,7 @@ function Goal({ training, isActiveTraining, className = "" }) {
           <li>
             <NumberText
               number={booksLeft}
-              text="Залишилось книжок"
+              text={t.left}
               isActiveTraining={isActiveTraining}
               numberClassName={s.accent}
             />

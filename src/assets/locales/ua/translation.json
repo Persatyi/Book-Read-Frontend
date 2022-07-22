@@ -109,6 +109,16 @@
     "pages": "Стор.",
     "rating": "Рейтинг"
   },
+  "Countdowns": {
+    "years": "До закінчення року залишилось",
+    "goals": "До досягнення мети залишилось"
+  },
+  "Goal": {
+    "title": "My goals",
+    "books": "Amount of books",
+    "days": "Amount of days",
+    "left": "Books left"
+  },
   "LanguageSwitcher": {
     "label": "Українська"
   }
