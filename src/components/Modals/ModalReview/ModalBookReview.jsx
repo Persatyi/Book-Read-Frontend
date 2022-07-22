@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import {useAddReviewMutation} from 'redux/api/bookAPI'
 import { reviewFormValidation } from "assets/schemas";
 import { toast } from "react-toastify";
 import { Formik } from "formik";
@@ -8,29 +9,27 @@ import Button from "components/Button";
 import ModalWrapper from "components/ModalWrapper";
 import s from "./ModalBookReview.module.scss";
 
-const saveReview = async (payload) => {
-  /* TODO: make PUT query to save review information */
-  console.log("save =>", payload);
-};
 
-const init = { rating: 0, resume: "" };
-
-const handleSubmit = async (payload) => {
-  try {
-    await saveReview(payload);
-  } catch (error) {
-    switch (error.status) {
-      case 400:
-        toast.error("Please check your data and try again.");
-        break;
-      default:
-        toast.error("Something went wrong. Please try again.");
-        break;
-    }
-  }
-};
-
-const ModalBookReview = (props) => (
+const ModalBookReview = (props) => {
+  const init = { rating: 0, resume: "" };
+  const book = props.book;
+  const [addReview] = useAddReviewMutation();
+  const handleSubmit = async (payload) => {
+    try {
+      const id = book._id;
+      await addReview({ id, ...payload });
+    } catch (error) {
+      switch (error.status) {
+        case 400:
+          toast.error("Please check your data and try again.");
+          break;
+          default:
+            toast.error("Something went wrong. Please try again.");
+            break;
+          }
+        }
+      };
+return(
   <ModalWrapper size={"large"} open={props.open} onClose={props.onClose}>
     <Formik
       initialValues={init}
@@ -51,20 +50,21 @@ const ModalBookReview = (props) => (
             <label className={s.label} htmlFor={"rating"}>
               Choose rating of the book
             </label>
-            <Rating
-              mark={values.rating}
-              onChange={(value) => setFieldValue("rating", value)}
-              id={"rating"}
-            />
+              <Rating
+                mark={values.rating || book.rating}
+                onChange={(value) => setFieldValue("rating", value)}
+                id={"rating"}
+              />
           </div>
           <div className={s.field}>
             <label className={s.label} htmlFor={"resume"}>
               Resume
             </label>
             <textarea
+              placeholder="..."
               id={"resume"}
               name={"resume"}
-              value={values.resume}
+              value={values.resume || book.resume || ""}
               onChange={handleChange}
               className={s.resume}
             />
@@ -79,17 +79,20 @@ const ModalBookReview = (props) => (
               type={"submit"}
               disabled={!(isValid && dirty)}
               text={"Save"}
+              onClick={props.onClick}
             />
           </div>
         </form>
       )}
     </Formik>
-  </ModalWrapper>
-);
+    </ModalWrapper>
+  )
+};
 
 ModalBookReview.propTypes = {
   open: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
+  onClick: PropTypes.func.isRequired,
 };
 
 export default ModalBookReview;

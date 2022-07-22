@@ -18,6 +18,7 @@ import { localeReducer } from "./locale";
 const authConfig = {
   key: "bookReader/token",
   storage,
+  blacklist: ["isAuth"],
 };
 const localePersistConfig = {
   key: "bookReader/locale",
