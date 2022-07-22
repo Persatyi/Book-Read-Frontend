@@ -20,7 +20,10 @@ const GoogleBtn = () => {
         const googleObj = {
             googleToken
         }
-        googleLoginUser(googleObj).unwrap().then((response) => dispatch(loggedIn(response.token))).catch(error => console.log(error))
+        googleLoginUser(googleObj).unwrap().then((response) => dispatch(loggedIn({
+            token: response.token,
+            refreshToken: response.refreshToken
+        }))).catch(error => console.log(error))
     }
     
 
