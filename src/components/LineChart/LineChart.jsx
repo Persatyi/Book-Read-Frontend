@@ -1,11 +1,14 @@
-import s from "./Chart.module.scss";
-import useWindowSize from "hooks/useWindowSize";
-import "chart.js/auto";
 import { Chart } from "react-chartjs-2";
+import "chart.js/auto";
 import dayjs from "dayjs";
+
+import useWindowSize from "hooks/useWindowSize";
+import s from "./LineChart.module.scss";
+import useTranslation from "hooks/useTranslation";
 
 const LineChart = ({ data, className = "" }) => {
   const size = useWindowSize();
+  const { t, dateFormat } = useTranslation("LineChart");
   const { start, end, totalPages, addedPages, data: sets = [] } = data;
 
   const parsedStartDate = Date.parse(start);
@@ -15,9 +18,9 @@ const LineChart = ({ data, className = "" }) => {
     dayjs(parcedEndDate).diff(parsedStartDate, "hour", true) / 24;
 
   function getDates() {
-    const dateArray = [dayjs(startDate).format("DD.MM.YYYY")];
+    const dateArray = [dayjs(startDate).format(dateFormat)];
     for (let i = 1; i <= trainingDays; i += 1) {
-      const currentDate = dayjs(startDate).add(i, "day").format("DD.MM.YYYY");
+      const currentDate = dayjs(startDate).add(i, "day").format(dateFormat);
       dateArray.push(currentDate);
     }
     return dateArray; // Отримуєм масив дат
@@ -38,7 +41,7 @@ const LineChart = ({ data, className = "" }) => {
 
   const middleware = () => {
     const stats = sets?.reduce((acc, el) => {
-      const day = dayjs(el.date).format("DD.MM.YYYY");
+      const day = dayjs(el.date).format(dateFormat);
       const pages = acc[day] ? acc[day] : [];
       return { ...acc, [day]: [...pages, el.pages] };
     }, {});
@@ -56,13 +59,13 @@ const LineChart = ({ data, className = "" }) => {
       for (let i = 0; i < dataSet.length; i += 1) {
         const day = dayjs(startDate).add(i, "day");
         const element = dataSet.find(
-          (el) => el.x === dayjs(day).format("DD.MM.YYYY")
+          (el) => el.x === dayjs(day).format(dateFormat)
         );
 
         if (element) {
           finalDataSet.push(element);
         } else {
-          finalDataSet.push({ x: dayjs(day).format("DD.MM.YYYY"), y: 0 });
+          finalDataSet.push({ x: dayjs(day).format(dateFormat), y: 0 });
         }
       }
     }
@@ -78,16 +81,15 @@ const LineChart = ({ data, className = "" }) => {
         const day = dayjs(startDate).add(i, "day");
 
         if (
-          dayjs(day).format("DD.MM.YYYY") ===
-          dayjs(startDate).format("DD.MM.YYYY")
+          dayjs(day).format(dateFormat) === dayjs(startDate).format(dateFormat)
         ) {
           finalDataSet.push({
-            x: dayjs(day).format("DD.MM.YYYY"),
+            x: dayjs(day).format(dateFormat),
             y: Math.ceil((totalPages - addedPages) / getDates().length),
           });
         } else {
           finalDataSet.push({
-            x: dayjs(day).format("DD.MM.YYYY"),
+            x: dayjs(day).format(dateFormat),
             y: Math.ceil((totalPages - addedPages) / (getDates().length - i)),
           });
         }
@@ -108,7 +110,7 @@ const LineChart = ({ data, className = "" }) => {
             borderColor: "#091E3F",
             borderWidth: 2,
             data: averageValue(),
-            label: "PLAN",
+            label: t.plan,
             pointRadius: 5,
             tension: 0.4,
           },
@@ -117,7 +119,7 @@ const LineChart = ({ data, className = "" }) => {
             backgroundColor: "#FF6B08",
             borderColor: "#FF6B08",
             borderWidth: 2,
-            label: "ACT",
+            label: t.act,
             pointRadius: 5,
             tension: 0.4,
             data: middleware(),
@@ -139,7 +141,7 @@ const LineChart = ({ data, className = "" }) => {
                 title: {
                   color: "#091E3F",
                   display: true,
-                  text: "TIME",
+                  text: t.time,
                   align: "end",
                   font: {
                     family: "'Montserrat', sans-serif",
@@ -175,7 +177,7 @@ const LineChart = ({ data, className = "" }) => {
                 display: true,
                 position: "top",
                 align: "start",
-                text: `AMOUNT OF PAGES / DAY  ${averagePerDay()}`,
+                text: `${t.amount}  ${averagePerDay()}`,
                 color: "#242A37",
                 padding: 20,
                 fullSize: false,

@@ -135,5 +135,20 @@
   },
   "LanguageSwitcher": {
     "label": "English"
+  },
+  "LibraryEmpty": {
+    "step1": "Step 1.",
+    "library": "Create your own library",
+    "add": "Add there books which you are going to read.",
+    "step2": "Step 2.",
+    "training": "Create your first training",
+    "goal": "Set a goal, choose period, start training.",
+    "button": "Ok"
+  },
+  "LineChart": {
+    "plan": "PLAN",
+    "act": "ACT",
+    "time": "TIME",
+    "amount": "AMOUNT OF PAGES / DAY"
   }
 }
