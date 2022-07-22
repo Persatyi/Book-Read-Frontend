@@ -61,6 +61,14 @@ export const bookApi = createApi({
       query: (data) => ({ url: "/books", method: "POST", body: data }),
       invalidatesTags: ["Books"],
     }),
+    addReview: build.mutation({
+      query: ({id, ...data}) => ({
+        url: `/books/${id}`,
+        method: 'PATCH',
+        body: data,
+      }),
+      invalidatesTags: ["Books"],
+    })
   }),
   refetchOnFocus: true,
   // refetchOnReconnect: true,
@@ -78,6 +86,7 @@ export const {
   useAddTrainingMutation,
   useGetTrainingQuery,
   useAddBookMutation,
+  useAddReviewMutation
 } = bookApi;
 
 // const baseQueryWithReauth = async (args, api, extraOptions) => {
