@@ -52,7 +52,10 @@
     "add": "Add"
   },
   "AddPages": {
-    "button": "Add result"
+    "button": "Add result",
+    "error": "Something went wrong! Try again!",
+    "pages": "Amount of pages",
+    "pagesShort": "pages"
   },
   "AddTraining": {
     "bookError": "Add at least 1 book",

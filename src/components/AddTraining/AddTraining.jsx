@@ -30,6 +30,7 @@ const AddTraining = ({
   isActiveTraining,
   deleteBook,
   className = "",
+  setUpdate,
 }) => {
   const { data, isSuccess, isFetching } = useBooksQuery();
   const [addTraining] = useAddTrainingMutation();
@@ -64,7 +65,8 @@ const AddTraining = ({
     try {
       await checkRefreshToken();
       await addTraining(training).unwrap();
-      setRefetch(true);
+      setRefetch();
+      setUpdate();
     } catch (error) {
       toast.error(t.trainingError);
     }
@@ -175,6 +177,7 @@ AddTraining.propTypes = {
   isActiveTraining: PropTypes.bool,
   deleteBook: PropTypes.func,
   className: PropTypes.string,
+  setUpdate: PropTypes.func,
 };
 
 export default AddTraining;

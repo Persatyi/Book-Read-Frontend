@@ -6,16 +6,17 @@ import useWindowSize from "hooks/useWindowSize";
 import s from "./LineChart.module.scss";
 import useTranslation from "hooks/useTranslation";
 
-const LineChart = ({ data, className = "" }) => {
+const LineChart = ({ data = [], className = "" }) => {
   const size = useWindowSize();
   const { t, dateFormat } = useTranslation("LineChart");
-  const { start, end, totalPages, addedPages, data: sets = [] } = data;
+  const { start, end, data: sets, added: addedPages, total: totalPages } = data;
 
   const parsedStartDate = Date.parse(start);
   const parcedEndDate = Date.parse(end);
   const startDate = dayjs(parsedStartDate);
   const trainingDays =
     dayjs(parcedEndDate).diff(parsedStartDate, "hour", true) / 24;
+  const daysGone = Math.ceil(dayjs(dayjs()).diff(startDate, "day", true));
 
   function getDates() {
     const dateArray = [dayjs(startDate).format(dateFormat)];
@@ -27,12 +28,8 @@ const LineChart = ({ data, className = "" }) => {
   }
 
   const averagePerDay = () => {
-    const trainingRange = Math.ceil(
-      dayjs(dayjs()).diff(startDate, "day", true)
-    );
-
     if (addedPages) {
-      const total = Math.ceil(addedPages / trainingRange);
+      const total = Math.ceil(addedPages / daysGone);
       return total === undefined ? 0 : total;
     } else {
       return 0;
@@ -56,16 +53,22 @@ const LineChart = ({ data, className = "" }) => {
         };
       });
 
-      for (let i = 0; i < dataSet.length; i += 1) {
+      let fullAmount = 0;
+
+      for (let i = 0; i < daysGone; i += 1) {
         const day = dayjs(startDate).add(i, "day");
         const element = dataSet.find(
           (el) => el.x === dayjs(day).format(dateFormat)
         );
 
         if (element) {
-          finalDataSet.push(element);
+          fullAmount += element.y;
+          finalDataSet.push({ x: element.x, y: fullAmount });
         } else {
-          finalDataSet.push({ x: dayjs(day).format(dateFormat), y: 0 });
+          finalDataSet.push({
+            x: dayjs(day).format(dateFormat),
+            y: fullAmount,
+          });
         }
       }
     }
@@ -77,22 +80,12 @@ const LineChart = ({ data, className = "" }) => {
     const finalDataSet = [];
 
     const cycle = (range) => {
+      const averageAmount = Math.ceil(totalPages / range);
       for (let i = 0; i < range; i += 1) {
-        const day = dayjs(startDate).add(i, "day");
-
-        if (
-          dayjs(day).format(dateFormat) === dayjs(startDate).format(dateFormat)
-        ) {
-          finalDataSet.push({
-            x: dayjs(day).format(dateFormat),
-            y: Math.ceil((totalPages - addedPages) / getDates().length),
-          });
-        } else {
-          finalDataSet.push({
-            x: dayjs(day).format(dateFormat),
-            y: Math.ceil((totalPages - addedPages) / (getDates().length - i)),
-          });
-        }
+        finalDataSet.push({
+          x: getDates()[i],
+          y: averageAmount * (i + 1),
+        });
       }
     };
 
@@ -195,4 +188,5 @@ const LineChart = ({ data, className = "" }) => {
     )
   );
 };
+
 export default LineChart;

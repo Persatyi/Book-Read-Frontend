@@ -19,7 +19,7 @@ const DatePickerField = ({ onChangeCb, ...props }) => {
       selected={(field.value && new Date(field.value)) || null}
       onChange={(value) => {
         setFieldValue(field.name, value);
-        onChangeCb(value);
+        onChangeCb && onChangeCb(value);
       }}
     />
   );
