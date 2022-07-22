@@ -1,8 +1,4 @@
 {
-  "AddBook": {
-    "success": "Book added",
-    "add": "Add"
-  },
   "AddBookSchema": {
     "required": "Enter this field",
     "title": {
@@ -22,6 +18,37 @@
       "max": "Must be less than 4999 pages"
     }
   },
+  "AddPagesValidation": {
+    "min": "At least 1",
+    "required": "Enter this field"
+  },
+  "authFormValidation": {
+    "required": "This field is required",
+    "name": {
+      "min": "Please enter more than 1 character",
+      "max": "Please enter not more than 30 character"
+    },
+    "email": {
+      "correct": "Please enter correct email",
+      "min": "Please enter more than 9 character",
+      "max": "Max 63"
+    },
+    "password": {
+      "min": "Please enter more than 5 character",
+      "max": "Please enter not more than 16 character",
+      "matches": "Password must contain one number,uppercase and lowercase character"
+    },
+    "confirmPassword": {
+      "oneOf": "Passwords must match"
+    }
+  },
+  "reviewFormValidation": { "required": "This field is required" },
+  "AddBook": {
+    "success": "Book added",
+    "add": "Add"
+  },
+  "AddPages": {},
+
   "LanguageSwitcher": {
     "label": "English"
   }

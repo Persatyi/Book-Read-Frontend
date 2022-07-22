@@ -2,7 +2,7 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import { toast } from "react-toastify";
 import s from "./AddBook.module.scss";
 import { useAddBookMutation } from "redux/api/bookAPI";
-import addBookSchema from "./addBookSchema";
+import addBookSchema from "assets/schemas/addBookSchema";
 import useRefreshToken from "hooks/useRefreshToken";
 import useTranslation from "hooks/useTranslation";
 

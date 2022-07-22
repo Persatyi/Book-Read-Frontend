@@ -8,12 +8,14 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import DatePickerField from "components/DatePickerField";
 import dayjs from "dayjs";
 import useRefreshToken from "hooks/useRefreshToken";
+import useTranslation from "hooks/useTranslation";
 
 const AddPages = (props) => {
   const { data, className } = props;
 
   const [addPage] = useAddPageMutation();
   const checkRefreshToken = useRefreshToken();
+  const { t } = useTranslation("AddPages");
 
   const onSubmit = async (values) => {
     await checkRefreshToken();
