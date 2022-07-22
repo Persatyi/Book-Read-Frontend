@@ -58,10 +58,10 @@ Goal.propTypes = {
         pages: PropTypes.number.isRequired,
         status: PropTypes.string.isRequired,
         rating: PropTypes.number.isRequired,
-        resume: PropTypes.string.isRequired,
+        resume: PropTypes.string,
       })
-    ).isRequired,
-  }).isRequired,
+    ),
+  }),
 };
 
 export default Goal;

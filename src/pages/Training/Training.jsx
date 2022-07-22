@@ -1,15 +1,11 @@
 import { useReducer } from "react";
 import { useMediaQuery } from "react-responsive";
-import { useQuery } from "react-query";
+import { useQuery, useMutation } from "react-query";
 import { toast } from "react-toastify";
 
 import axios from "axios";
 
-import {
-  useAddTrainingMutation,
-  useGetResultsQuery,
-  useGetTrainingQuery,
-} from "redux/api/bookAPI";
+import { useAddTrainingMutation } from "redux/api/bookAPI";
 
 import useRefreshToken from "hooks/useRefreshToken";
 import { MOBILE_ONLY } from "assets/constants/MEDIA";
@@ -34,6 +30,8 @@ const ACTION_TYPES = {
   DELETE_BOOK: "deleteBook",
   SET_START: "setStart",
   SET_END: "setEnd",
+  UPDATE: "update",
+  RESET: "reset",
 };
 
 const initialState = {
@@ -42,11 +40,12 @@ const initialState = {
   end: null,
   isAdd: false,
   isRefetch: false,
+  updateStats: false,
 };
 const reducer = (state, { type, payload }) => {
   switch (type) {
     case ACTION_TYPES.REFETCH:
-      return { ...state, isRefetch: true };
+      return { ...state, isRefetch: !state.isRefetch };
     case ACTION_TYPES.ADD:
       return { ...state, isAdd: payload };
     case ACTION_TYPES.CHOOSE_BOOK:
@@ -60,6 +59,10 @@ const reducer = (state, { type, payload }) => {
       return { ...state, start: payload };
     case ACTION_TYPES.SET_END:
       return { ...state, end: payload };
+    case ACTION_TYPES.UPDATE:
+      return { ...state, updateStats: !state.updateStats };
+    case ACTION_TYPES.RESET:
+      return { ...initialState };
     default:
       return state;
   }
@@ -69,29 +72,41 @@ const Training = () => {
   const isToken = !!axios.defaults.headers.common.Authorization;
   const [addTraining] = useAddTrainingMutation();
   const [state, dispatch] = useReducer(reducer, initialState);
-  const { chosenBooks, start, end, isAdd, isRefetch } = state;
+  const { chosenBooks, start, end, isAdd, isRefetch, updateStats } = state;
   const isMobile = useMediaQuery(MOBILE_ONLY);
-  const { isLoading, data } = useQuery(["training", isRefetch], getTraining, {
+  const { isLoading, data = {} } = useQuery(
+    ["training", isRefetch],
+    getTraining,
+    {
+      enabled: isToken,
+      retry: false,
+    }
+  );
+
+  const checkRefreshToken = useRefreshToken();
+
+  const { data: response } = useQuery(["results", updateStats], getResults, {
     enabled: isToken,
     retry: false,
   });
-  const checkRefreshToken = useRefreshToken();
 
-  const { data: trainings = {} } = useGetTrainingQuery();
-  const { data: statistic = {} } = useGetResultsQuery();
-
-  const chartData = {
-    start: trainings?.start,
-    end: trainings?.end,
-    totalPages: statistic?.total,
-    addedPages: statistic?.added,
-    data: statistic?.data,
+  const addResults = async (data) => {
+    const result = await axios.post("/results", data);
+    return result;
   };
+
+  const { mutateAsync } = useMutation(addResults);
 
   async function getTraining() {
     const { data } = await axios.get("/trainings");
     return data;
   }
+
+  async function getResults() {
+    const { data } = await axios.get("/results");
+    return data;
+  }
+
   const chooseBook = (payload) =>
     dispatch({ type: ACTION_TYPES.CHOOSE_BOOK, payload });
   const deleteBook = (payload) =>
@@ -101,14 +116,19 @@ const Training = () => {
   const setEnd = (payload) => dispatch({ type: ACTION_TYPES.SET_END, payload });
   const setRefetch = () =>
     dispatch({ type: ACTION_TYPES.REFETCH, payload: true });
+  const setUpdate = () => dispatch({ type: ACTION_TYPES.UPDATE });
 
-  const isActiveTraining = !!data;
+  const isActiveTraining = Object.keys(data).length !== 0;
+
   const books = isActiveTraining ? data.books : chosenBooks;
   const onAddButtonClick = () => {
     dispatch({ type: ACTION_TYPES.ADD, payload: true });
   };
   const onBackButtonClick = () => {
     dispatch({ type: ACTION_TYPES.ADD, payload: false });
+  };
+  const resetState = () => {
+    dispatch({ type: ACTION_TYPES.RESET });
   };
   const onAddTrainingClick = async () => {
     if (!chosenBooks.length) {
@@ -128,7 +148,8 @@ const Training = () => {
     try {
       await checkRefreshToken();
       await addTraining(training);
-      setRefetch(true);
+      resetState();
+      setRefetch();
     } catch (error) {
       toast.error("Не можу додати тренування, спробуйте ще раз");
     }
@@ -190,6 +211,7 @@ const Training = () => {
             isActiveTraining={isActiveTraining}
             deleteBook={deleteBook}
             className={s.addTraining}
+            setUpdate={setUpdate}
           />
         )}
         {(isActiveTraining || isMobile) && (
@@ -208,9 +230,16 @@ const Training = () => {
             onClick={onAddTrainingClick}
           />
         )}
-        <LineChart data={chartData} className={s.chart} />
+        <LineChart data={response} className={s.chart} />
         {isActiveTraining && (
-          <AddPages data={statistic} className={s.addPages} />
+          <AddPages
+            updateResults={mutateAsync}
+            setUpdate={setUpdate}
+            setRefetch={setRefetch}
+            data={response}
+            className={s.addPages}
+            resetState={resetState}
+          />
         )}
         {isMobile && !isActiveTraining && (
           <IconButton onClick={onAddButtonClick} label="Додати книгу" />

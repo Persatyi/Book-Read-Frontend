@@ -39,10 +39,6 @@ export const bookApi = createApi({
       query: (data) => ({ url: "/results", method: "PATCH", body: data }),
       invalidatesTags: ["Results"],
     }),
-    getResults: build.query({
-      query: () => "/results",
-      providesTags: ["Results"],
-    }),
     logout: build.mutation({
       query: () => ({ url: "/users/logout", method: "POST" }),
     }),
@@ -66,13 +62,13 @@ export const bookApi = createApi({
       invalidatesTags: ["Books"],
     }),
     addReview: build.mutation({
-      query: ({id, ...data}) => ({
+      query: ({ id, ...data }) => ({
         url: `/books/${id}`,
-        method: 'PATCH',
+        method: "PATCH",
         body: data,
       }),
       invalidatesTags: ["Books"],
-    })
+    }),
   }),
   refetchOnFocus: true,
   // refetchOnReconnect: true,
@@ -86,10 +82,9 @@ export const {
   useAddPageMutation,
   useLogoutMutation,
   useCurrentQuery,
-  useGetResultsQuery,
   useBooksQuery,
   useAddTrainingMutation,
   useGetTrainingQuery,
   useAddBookMutation,
-  useAddReviewMutation
+  useAddReviewMutation,
 } = bookApi;
