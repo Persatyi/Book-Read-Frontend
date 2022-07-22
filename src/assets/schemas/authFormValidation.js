@@ -55,11 +55,11 @@ const loginFormValidation = (t) =>
       .required(t.required),
   });
 
-export function validationSchema(type) {
+export function validationSchema(type, t) {
   if (type === "registration") {
-    return registerFormValidation;
+    return registerFormValidation(t);
   } else {
-    return loginFormValidation;
+    return loginFormValidation(t);
   }
 }
 

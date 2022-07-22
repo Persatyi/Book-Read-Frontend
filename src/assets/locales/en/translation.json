@@ -44,6 +44,10 @@
   },
   "reviewFormValidation": { "required": "This field is required" },
   "AddBook": {
+    "title": "Book title",
+    "author": "Author",
+    "date": "Publication date",
+    "pages": "Amount of pages",
     "success": "Book added",
     "add": "Add"
   },
@@ -59,6 +63,21 @@
     "select": "Choose books from the library ",
     "add": "Add",
     "button": "Start training"
+  },
+  "AuthForm": {
+    "error": {
+      "409": "There is an account with this email",
+      "400": "Something went wrong. Please check your data and try again.",
+      "401": "Invalid credentials. Please check your data and try again.",
+      "default": "Something went wrong. Please try again."
+    },
+    "name": "Name",
+    "email": "Email",
+    "password": "Password",
+    "confirm": "Confirm Password",
+    "register": "Register",
+    "login": "Log in",
+    "isRegister": "Already have an account? "
   },
   "LanguageSwitcher": {
     "label": "English"

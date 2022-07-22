@@ -9,7 +9,8 @@ import useTranslation from "hooks/useTranslation";
 export default function AddBook() {
   const [addBook] = useAddBookMutation();
   const checkRefreshToken = useRefreshToken();
-  const { t } = useTranslation("AddBook");
+  const { t: translation } = useTranslation();
+  const t = translation["AddBook"];
   return (
     <Formik
       initialValues={{
@@ -18,7 +19,7 @@ export default function AddBook() {
         year: "",
         pages: "",
       }}
-      validationSchema={addBookSchema(t?.AddBookSchema)}
+      validationSchema={addBookSchema(translation["AddBookSchema"])}
       validateOnBlur
       onSubmit={async (values, actions) => {
         await checkRefreshToken();
@@ -30,7 +31,7 @@ export default function AddBook() {
       {({ isValid }) => (
         <Form className={s.form}>
           <label htmlFor="title" className={s.form__label}>
-            Book title
+            {t.title}
             <Field
               id="title"
               autoComplete="off"
@@ -46,7 +47,7 @@ export default function AddBook() {
             />
           </label>
           <label htmlFor="author" className={s.form__label}>
-            Author
+            {t.author}
             <Field
               id="author"
               autoComplete="off"
@@ -62,7 +63,7 @@ export default function AddBook() {
             />
           </label>
           <label htmlFor="year" className={s.form__label}>
-            Publication date
+            {t.date}
             <Field
               id="year"
               autoComplete="off"
@@ -78,7 +79,7 @@ export default function AddBook() {
             />
           </label>
           <label htmlFor="pages" className={s.form__label}>
-            Amount of pages
+            {t.pages}
             <Field
               id="pages"
               autoComplete="off"

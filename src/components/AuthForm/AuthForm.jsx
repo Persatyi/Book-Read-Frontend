@@ -10,6 +10,7 @@ import { loggedIn } from "redux/auth/sliceAuth";
 
 import Button from "components/Button";
 import GoogleBtn from "components/GoogleBtn";
+import useTranslation from "hooks/useTranslation";
 
 const AuthForm = ({ type }) => {
   const dispatch = useDispatch();
@@ -28,11 +29,12 @@ const AuthForm = ({ type }) => {
 
   const [registerUser] = useRegisterMutation();
   const [loginUser] = useLoginMutation();
-
+  const { t: translation } = useTranslation();
+  const t = translation["AuthForm"];
   return (
     <Formik
       initialValues={initialValues}
-      validationSchema={validationSchema(type)}
+      validationSchema={validationSchema(type, translation.authFormValidation)}
       validateOnBlur
       onSubmit={async (values) => {
         try {
@@ -49,18 +51,16 @@ const AuthForm = ({ type }) => {
           let message = "";
           switch (error.status) {
             case 409:
-              message = "There is an account with this email";
+              message = t.error[409];
               break;
             case 400:
-              message =
-                "Something went wrong. Please check your data and try again.";
+              message = t.error[400];
               break;
             case 401:
-              message =
-                "Invalid credentials. Please check your data and try again.";
+              message = t.error[401];
               break;
             default:
-              message = "Something went wrong. Please try again.";
+              message = t.error.default;
           }
           toast.error(message);
         }
@@ -82,7 +82,7 @@ const AuthForm = ({ type }) => {
             <>
               <div className={s.inputWrapper}>
                 <label className={s.label} htmlFor="name">
-                  Name <span className={s.required}>*</span>
+                  {t.name} <span className={s.required}>*</span>
                 </label>
                 <input
                   className={s.input}
@@ -105,7 +105,7 @@ const AuthForm = ({ type }) => {
           ) : null}
           <div className={s.inputWrapper}>
             <label className={s.label} htmlFor="email">
-              Email <span className={s.required}>*</span>
+              {t.email} <span className={s.required}>*</span>
             </label>
             <input
               className={s.input}
@@ -127,7 +127,7 @@ const AuthForm = ({ type }) => {
           </div>
           <div className={s.inputWrapper}>
             <label className={s.label} htmlFor="password">
-              Password <span className={s.required}>*</span>
+              {t.password} <span className={s.required}>*</span>
             </label>
             <input
               className={s.input}
@@ -151,7 +151,7 @@ const AuthForm = ({ type }) => {
             <>
               <div className={s.inputWrapper}>
                 <label className={s.label} htmlFor="confirmPassword">
-                  Confirm Password <span className={s.required}>*</span>
+                  {t.confirm} <span className={s.required}>*</span>
                 </label>
                 <input
                   className={s.input}
@@ -178,17 +178,17 @@ const AuthForm = ({ type }) => {
             className={s.authBtn}
             type="submit"
             disabled={!(isValid && dirty)}
-            text={isRegister ? "Register" : "Login"}
+            text={isRegister ? t.register : t.login}
           />
           <p className={s.navigate}>
-            {isRegister && "Already have an account? "}
+            {isRegister && t.isRegister}{" "}
             {isRegister ? (
               <Link className={s.link} to="/login">
-                Log in
+                {t.login}
               </Link>
             ) : (
               <Link className={s.link} to="/register">
-                Register
+                {t.register}
               </Link>
             )}
           </p>
