@@ -92,7 +92,7 @@ const AddTraining = ({
                   onChangeCb={(value) => setStart(value)}
                   dateFormat={dateFormat}
                   placeholderText={t.start}
-                  autocomplete="off"
+                  autoComplete="off"
                   required
                 />
                 <svg className={s.icon} width="17" height="17">
@@ -106,11 +106,11 @@ const AddTraining = ({
                 <DatePickerField
                   name="end"
                   className={s.date}
-                  minDate={values.start}
+                  minDate={values.start || new Date()}
                   onChangeCb={(value) => setEnd(value)}
                   dateFormat={dateFormat}
                   placeholderText={t.end}
-                  autocomplete="off"
+                  autoComplete="off"
                   required
                 />
                 <svg className={s.icon} width="17" height="17">

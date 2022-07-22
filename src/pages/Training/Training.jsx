@@ -26,6 +26,7 @@ import AddPages from "components/AddPages";
 
 import s from "./Training.module.scss";
 import Timer from "components/Timer";
+import useTranslation from "hooks/useTranslation";
 
 const ACTION_TYPES = {
   REFETCH: "refetch",
@@ -71,11 +72,16 @@ const Training = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const { chosenBooks, start, end, isAdd, isRefetch } = state;
   const isMobile = useMediaQuery(MOBILE_ONLY);
-  const { isLoading, data } = useQuery(["training", isRefetch], getTraining, {
-    enabled: isToken,
-    retry: false,
-  });
+  const { isLoading, data = {} } = useQuery(
+    ["training", isRefetch],
+    getTraining,
+    {
+      enabled: isToken,
+      retry: false,
+    }
+  );
   const checkRefreshToken = useRefreshToken();
+  const { t } = useTranslation("Training");
 
   const { data: trainings = {} } = useGetTrainingQuery();
   const { data: statistic = {} } = useGetResultsQuery();
@@ -102,7 +108,7 @@ const Training = () => {
   const setRefetch = () =>
     dispatch({ type: ACTION_TYPES.REFETCH, payload: true });
 
-  const isActiveTraining = !!data;
+  const isActiveTraining = !!Object.keys(data).length;
   const books = isActiveTraining ? data.books : chosenBooks;
   const onAddButtonClick = () => {
     dispatch({ type: ACTION_TYPES.ADD, payload: true });
@@ -112,15 +118,7 @@ const Training = () => {
   };
   const onAddTrainingClick = async () => {
     if (!chosenBooks.length) {
-      toast.error("Додайте хоч одну книгу");
-      return;
-    }
-    if (!start) {
-      toast.error("Виберіть дату початку тренування");
-      return;
-    }
-    if (!end) {
-      toast.error("Виберіть дату закінчення тренування");
+      toast.error(t.bookError);
       return;
     }
     const bookIds = chosenBooks.map(({ _id }) => _id);
@@ -130,7 +128,7 @@ const Training = () => {
       await addTraining(training);
       setRefetch(true);
     } catch (error) {
-      toast.error("Не можу додати тренування, спробуйте ще раз");
+      toast.error(t.error);
     }
   };
   const date = new Date();
@@ -146,7 +144,7 @@ const Training = () => {
         <Container className={s.container}>
           <IconButton
             onClick={onBackButtonClick}
-            label="Назад"
+            label={t.back}
             type={TYPES.BACK}
             className={s.back}
           />
@@ -167,8 +165,8 @@ const Training = () => {
       <Container className={s.container}>
         {isActiveTraining && (
           <div className={s.timers}>
-            <Timer title="До закінчення року залишилось" date={nextYear} />
-            <Timer title="До досягнення мети залишилось" date={data.end} />
+            <Timer title={t.tillNextYear} date={nextYear} />
+            <Timer title={t.tillEnd} date={data.end} />
           </div>
         )}
         <Goal
@@ -203,7 +201,7 @@ const Training = () => {
         {isMobile && !!chosenBooks?.length && (
           <Button
             type="button"
-            text="Почати тренування"
+            text={t.button}
             className={s.button}
             onClick={onAddTrainingClick}
           />
@@ -213,7 +211,7 @@ const Training = () => {
           <AddPages data={statistic} className={s.addPages} />
         )}
         {isMobile && !isActiveTraining && (
-          <IconButton onClick={onAddButtonClick} label="Додати книгу" />
+          <IconButton onClick={onAddButtonClick} label={t.addBook} />
         )}
       </Container>
     </section>

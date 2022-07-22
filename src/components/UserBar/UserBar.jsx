@@ -6,7 +6,6 @@ import s from "./UserBar.module.scss";
 const UserBar = () => {
   const auth = useSelector(isAuth);
   const { data } = useCurrentQuery(null, { skip: !auth });
-  //   const data = "";
 
   let userName = "Somename";
   if (data) {

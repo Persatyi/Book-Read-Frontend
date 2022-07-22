@@ -13,7 +13,7 @@ const Navigation = () => {
         to="/training"
         className={s.nav_link}
         activeclassname={s.activeLink}
-        ariaLabel={t.training}
+        aria-label={t.training}
       >
         <svg className={s.navSvg}>
           <use href={`${sprite}#icon-flat`}></use>
@@ -24,7 +24,7 @@ const Navigation = () => {
         to="/library"
         className={s.nav_link}
         activeclassname={s.activeLink}
-        ariaLabel={t.library}
+        aria-label={t.library}
       >
         <svg className={s.navSvg}>
           <use href={`${sprite}#icon-home`}></use>

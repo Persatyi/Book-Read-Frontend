@@ -196,5 +196,14 @@
     "hours": "hrs",
     "minutes": "mins",
     "seconds": "sec"
+  },
+  "Training": {
+    "bookError": "Add at least 1 book",
+    "error": "Can't add a training. Please try again",
+    "back": "Back",
+    "tillNextYear": "Years countdown",
+    "tillEnd": "Goals countdown",
+    "button": "Start training",
+    "addBook": "Add a book"
   }
 }
