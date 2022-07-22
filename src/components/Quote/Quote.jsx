@@ -1,11 +1,13 @@
+import useTranslation from "hooks/useTranslation";
 import s from "./Quote.module.scss";
+
 const Quote = () => {
+  const { t } = useTranslation("Quote");
+
   return (
     <div className={s.quoteWrapper}>
-      <blockquote className={s.quote}>
-        Books are the ships of thoughts, wandering through the waves of time.
-      </blockquote>
-      <p className={s.author}>Francis Bacon</p>
+      <blockquote className={s.quote}>{t.text}</blockquote>
+      <p className={s.author}>{t.author}</p>
     </div>
   );
 };

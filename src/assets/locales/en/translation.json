@@ -182,5 +182,19 @@
     "can": "You can do it)",
     "training": "New training",
     "back": "Back"
+  },
+  "Navigation": {
+    "training": "Training",
+    "library": "Library"
+  },
+  "Quote": {
+    "text": "Books are the ships of thoughts, wandering through the waves of time.",
+    "author": "Francis Bacon"
+  },
+  "Timer": {
+    "days": "days",
+    "hours": "hrs",
+    "minutes": "mins",
+    "seconds": "sec"
   }
 }
