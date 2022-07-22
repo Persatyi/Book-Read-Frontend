@@ -11,41 +11,40 @@ const GoogleBtn = () => {
     const [googleLoginUser] = useGoogleLoginMutation();
 
     function handleCallback(resp) {
-        
         const googleToken = resp.credential;
         console.log("google Token:", googleToken)
         
         const googleObj = {
             googleToken
         }
-        googleLoginUser(googleObj).unwrap().then((response) => dispatch(loggedIn({
-            token: response.token,
-            refreshToken: response.refreshToken
-        }))).catch(error => {
-            if (error.status === 409) {
-                toast.error("Account with this email was ceated with a different signup method!");
-            }
-        })
+        googleLoginUser(googleObj).unwrap()
+            .then((response) => dispatch(loggedIn({
+                token: response.token,
+                refreshToken: response.refreshToken
+            })))
+            .catch(error => {
+                if (error.status === 409) {
+                    toast.error("Account with this email was ceated with a different signup method!");
+                }
+            });
     }
     
 
     useEffect(() => {
         window.google.accounts.id.initialize({
             client_id: process.env.REACT_APP_GOOGLE_CLIENT_ID,
-            callback: handleCallback 
+            callback: handleCallback
         });
 
         window.google.accounts.id.renderButton(
             document.getElementById("signInBtn"),
-            { theme: "outline", size: "large" }
+            { type: "standard", theme: "outline", size: "medium", width: "40", height: "50", locale: "en",  }
         );
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
-    return (<div >
+    return (
         <div id="signInBtn" className={s.signInBtn}></div>
-        
-        </div>
     )
 }
 

@@ -77,7 +77,7 @@ const AuthForm = ({ type }) => {
         handleSubmit,
       }) => (
         <form onSubmit={handleSubmit} className={s.form}>
-          {/* <GoogleBtn /> */}
+          <GoogleBtn />
           {isRegister ? (
             <>
               <div className={s.inputWrapper}>
