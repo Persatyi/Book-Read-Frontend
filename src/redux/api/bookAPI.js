@@ -27,6 +27,10 @@ export const bookApi = createApi({
       query: (data) => ({ url: "/users/login", method: "POST", body: data }),
       invalidatesTags: ["User"],
     }),
+    googleLogin: build.mutation({
+      query: (data) => ({ url: "/users/login-google", method: "POST", body: data }),
+      invalidatesTags: ["User"],
+    }),
     refreshToken: build.mutation({
       query: (data) => ({ url: "/users/refresh", method: "POST", body: data }),
       invalidatesTags: ["User"],
@@ -77,6 +81,7 @@ export const bookApi = createApi({
 export const {
   useRegisterMutation,
   useLoginMutation,
+  useGoogleLoginMutation,
   useRefreshTokenMutation,
   useAddPageMutation,
   useLogoutMutation,
@@ -88,28 +93,3 @@ export const {
   useAddBookMutation,
   useAddReviewMutation
 } = bookApi;
-
-// const baseQueryWithReauth = async (args, api, extraOptions) => {
-//   let result = await baseQuery(args, api, extraOptions);
-
-//   if (result.error && result.error.status === 401) {
-//     const refreshResult = await baseQuery(
-//       {
-//         url: "users/refresh/",
-//         method: "POST",
-//       },
-//       api,
-//       extraOptions
-//     );
-
-//     if (refreshResult.data) {
-//       api.dispatch(updateToken(refreshResult.data));
-
-//       // retry the initial query
-//       result = await baseQuery(args, api, extraOptions);
-//     } else {
-//       api.dispatch(logout());
-//     }
-//   }
-//   return result;
-// };
