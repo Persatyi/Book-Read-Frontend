@@ -1,9 +1,13 @@
-import s from "./InfoPage.module.scss";
 import { Link } from "react-router-dom";
+
 import Info from "components/Info/Info";
 import Container from "components/Container";
 
+import useTranslation from "hooks/useTranslation";
+import s from "./InfoPage.module.scss";
+
 const InfoPage = () => {
+  const { t } = useTranslation("InfoPage");
   return (
     <div>
       <Container>
@@ -11,11 +15,11 @@ const InfoPage = () => {
           <Info />
           <nav className={s.nav}>
             <Link to="/login" className={s.login}>
-              Log in
+              {t.login}
             </Link>
 
             <Link to="/register" className={s.register}>
-              Register
+              {t.register}
             </Link>
           </nav>
         </div>

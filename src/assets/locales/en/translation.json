@@ -114,10 +114,24 @@
     "goals": "Goals countdown"
   },
   "Goal": {
-    "title": "Моя мета прочитати",
-    "books": "Кількість книжок",
-    "days": "Кількість днів",
-    "left": "Залишилось книжок"
+    "title": "My goals",
+    "books": "Amount of books",
+    "days": "Amount of days",
+    "left": "Books left"
+  },
+  "Info": {
+    "help": "Will help you to",
+    "goal": "Create your goal faster and proceed to read",
+    "divide": "Divide process proportionally for each day",
+    "track": "Track your success",
+    "also": "You may also",
+    "pose": "Pose your own independent point of view",
+    "improve": "Improve your professional skills according to new knowledge",
+    "become": "Become an interesting interlocutor"
+  },
+  "InfoPage": {
+    "login": "Log in",
+    "register": "Register"
   },
   "LanguageSwitcher": {
     "label": "English"
