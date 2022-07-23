@@ -1,14 +1,17 @@
 import { useReducer } from "react";
-import { useMediaQuery } from "react-responsive";
+import { useSelector } from "react-redux";
 import { useQuery, useMutation } from "react-query";
+import { useMediaQuery } from "react-responsive";
 import { toast } from "react-toastify";
 import axios from "axios";
 
 import { useAddTrainingMutation } from "redux/api/bookAPI";
+import { isAuth } from "redux/auth";
 
 import useTranslation from "hooks/useTranslation";
 import useRefreshToken from "hooks/useRefreshToken";
 import { MOBILE_ONLY } from "assets/constants/MEDIA";
+import { getResults, getTraining } from "services";
 
 import Container from "components/Container";
 import Goal from "components/Goal";
@@ -69,6 +72,7 @@ const reducer = (state, { type, payload }) => {
 
 const Training = () => {
   const isToken = !!axios.defaults.headers.common.Authorization;
+  const auth = useSelector(isAuth);
   const [addTraining] = useAddTrainingMutation();
   const [state, dispatch] = useReducer(reducer, initialState);
   const { chosenBooks, start, end, isAdd, isRefetch, updateStats } = state;
@@ -77,7 +81,7 @@ const Training = () => {
     ["training", isRefetch],
     getTraining,
     {
-      enabled: isToken,
+      enabled: isToken && auth,
       retry: false,
     }
   );
@@ -85,7 +89,7 @@ const Training = () => {
   const { t } = useTranslation("Training");
 
   const { data: response } = useQuery(["results", updateStats], getResults, {
-    enabled: isToken,
+    enabled: isToken && auth,
     retry: false,
   });
 
@@ -95,16 +99,6 @@ const Training = () => {
   };
 
   const { mutateAsync } = useMutation(addResults);
-
-  async function getTraining() {
-    const { data } = await axios.get("/trainings");
-    return data;
-  }
-
-  async function getResults() {
-    const { data } = await axios.get("/results");
-    return data;
-  }
 
   const chooseBook = (payload) =>
     dispatch({ type: ACTION_TYPES.CHOOSE_BOOK, payload });
