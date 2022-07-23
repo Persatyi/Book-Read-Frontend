@@ -28,7 +28,11 @@
       display: flex;
       align-items: center;
       margin-bottom: 8px;
+      @include mq(mobile){
+         justify-content: center;
+      }
       @include mq(tablet){
+      justify-content: start;
       padding: 0px 20px;
       height: 62px;
       }
@@ -127,11 +131,13 @@
             }
          }
          &:nth-child(5){
+            display: flex;
             margin-bottom: 20px;
             & span{
                   margin-right:37px;
                }
             @include mq(tablet){
+               display: block;
                margin-bottom: 0px;
                width: 129px;
             }
@@ -174,7 +180,11 @@
       display: flex;
       align-items: center;
       margin-bottom: 8px;
+      @include mq(mobile){
+         justify-content: center;
+      }
       @include mq(tablet){
+      justify-content: start;
       padding: 0px 20px;
       height: 62px;
       }
