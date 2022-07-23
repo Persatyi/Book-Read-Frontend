@@ -39,7 +39,7 @@ const LanguageSwitcher = () => {
         label={t.label}
         type={TYPES.HOC}
       >
-        <img src={english} alt="English" />
+        <img src={english} alt="English" className={s.img} />
       </IconButton>
       <IconButton
         onClick={() => changeLanguage(LANGUAGES.UA)}
@@ -47,7 +47,7 @@ const LanguageSwitcher = () => {
         label={t.label}
         type={TYPES.HOC}
       >
-        <img src={ukraine} alt="Ukrainian" />
+        <img src={ukraine} alt="Ukrainian" className={s.img} />
       </IconButton>
     </div>
   );

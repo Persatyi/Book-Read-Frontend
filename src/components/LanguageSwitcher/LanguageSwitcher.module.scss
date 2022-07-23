@@ -13,6 +13,16 @@
   }
 }
 
+.img {
+  width: 20px;
+  height: 20px;
+
+  @include mq(tablet) {
+    width: 25px;
+    height: 25px;
+  }
+}
+
 .btn {
   width: 20px;
   height: 20px;
