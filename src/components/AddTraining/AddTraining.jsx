@@ -32,7 +32,7 @@ const AddTraining = ({
   className = "",
   setUpdate,
 }) => {
-  const { data, isSuccess, isFetching } = useBooksQuery();
+  const { data, isSuccess } = useBooksQuery();
   const [addTraining] = useAddTrainingMutation();
   const checkRefreshToken = useRefreshToken();
   const isMobile = useMediaQuery(MOBILE_ONLY);
@@ -72,7 +72,6 @@ const AddTraining = ({
     }
   };
 
-  if (isFetching) return <div>Loading</div>;
   if (isSuccess)
     return (
       <div className={className}>
