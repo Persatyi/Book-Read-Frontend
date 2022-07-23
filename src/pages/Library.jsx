@@ -9,7 +9,6 @@ import MoreBtn from "components/MoreBtn/MoreBtn";
 import BackBtn from "components/BackBtn/BackBtn";
 import LibraryEmpty from "components/LibraryEmpty";
 import AddBook from "components/AddBook";
-// import { ModalBookReview } from "components/Modals";
 
 export default function LibraryPage() {
   const auth = useSelector(isAuth);
@@ -17,7 +16,6 @@ export default function LibraryPage() {
   const size = useWindowSize();
   const [plus, togglePlus] = useToggle();
   const [openPlaceholder, setOpenPlaceholder] = useState(false);
-  // const [openModal, toggleModal] = useToggle();
   useEffect(() => {
     if (!data.length) {
       setOpenPlaceholder(true);
@@ -54,8 +52,6 @@ export default function LibraryPage() {
             open={openPlaceholder}
             onClose={() => setOpenPlaceholder(false)}
           />
-          {/* <ModalBookReview open={openModal} onClose={toggleModal}
-          /> */}
         </>
       )}
     </Container>
