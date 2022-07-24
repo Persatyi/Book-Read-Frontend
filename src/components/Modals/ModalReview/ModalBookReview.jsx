@@ -3,23 +3,24 @@ import PropTypes from "prop-types";
 import { useAddReviewMutation } from "redux/api/bookAPI";
 import { reviewFormValidation } from "assets/schemas";
 import { toast } from "react-toastify";
-import { Formik } from "formik";
+import { Formik, Form, Field } from "formik";
 import Rating from "components/Rating";
 import Button from "components/Button";
 import ModalWrapper from "components/ModalWrapper";
 import s from "./ModalBookReview.module.scss";
 import useTranslation from "hooks/useTranslation";
 
-const ModalBookReview = (props) => {
-  const init = { rating: 0, resume: "" };
-  const book = props.book;
+const ModalBookReview = ({ book, open, onClose }) => {
+  const { rating, resume } = book;
+  const init = { rating, resume };
   const [addReview] = useAddReviewMutation();
   const { t } = useTranslation("ModalBookReview");
 
-  const handleSubmit = async (payload) => {
+  const handleSubmit = async ({ rating, resume }) => {
     try {
       const id = book._id;
-      await addReview({ id, ...payload });
+      await addReview({ id, rating, resume: resume.trim() || " " });
+      onClose();
     } catch (error) {
       switch (error.status) {
         case 400:
@@ -32,29 +33,24 @@ const ModalBookReview = (props) => {
     }
   };
   return (
-    <ModalWrapper size={"large"} open={props.open} onClose={props.onClose}>
+    <ModalWrapper size={"large"} open={open} onClose={onClose}>
       <Formik
         initialValues={init}
-        validationSchema={reviewFormValidation}
+        validationSchema={reviewFormValidation(t)}
         validateOnBlur
         onSubmit={handleSubmit}
       >
-        {({
-          values,
-          dirty,
-          isValid,
-          handleChange,
-          handleSubmit,
-          setFieldValue,
-        }) => (
-          <form onSubmit={handleSubmit} className={s.form}>
+        {({ values, dirty, setFieldValue }) => (
+          <Form className={s.form}>
             <div className={s.field}>
               <label className={s.label} htmlFor={"rating"}>
                 {t.rating}
               </label>
               <Rating
                 mark={values.rating || book.rating}
-                onChange={(value) => setFieldValue("rating", value)}
+                onChange={(value) => {
+                  setFieldValue("rating", value);
+                }}
                 id={"rating"}
               />
             </div>
@@ -62,12 +58,11 @@ const ModalBookReview = (props) => {
               <label className={s.label} htmlFor={"resume"}>
                 {t.resume}
               </label>
-              <textarea
+              <Field
+                component="textarea"
                 placeholder="..."
-                id={"resume"}
-                name={"resume"}
-                value={values.resume || book.resume || ""}
-                onChange={handleChange}
+                id="resume"
+                name="resume"
                 className={s.resume}
               />
             </div>
@@ -75,16 +70,11 @@ const ModalBookReview = (props) => {
               <Button
                 styleType={"transparent"}
                 text={t.back}
-                onClick={props.onClose}
+                onClick={onClose}
               />
-              <Button
-                type={"submit"}
-                disabled={!(isValid && dirty)}
-                text={t.save}
-                onClick={props.onClick}
-              />
+              <Button type="submit" disabled={!dirty} text={t.save} />
             </div>
-          </form>
+          </Form>
         )}
       </Formik>
     </ModalWrapper>
@@ -92,9 +82,16 @@ const ModalBookReview = (props) => {
 };
 
 ModalBookReview.propTypes = {
+  book: PropTypes.shape({
+    _id: PropTypes.string,
+    title: PropTypes.string,
+    author: PropTypes.string,
+    year: PropTypes.number,
+    pages: PropTypes.number,
+    status: PropTypes.string,
+  }).isRequired,
   open: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
-  onClick: PropTypes.func.isRequired,
 };
 
 export default ModalBookReview;

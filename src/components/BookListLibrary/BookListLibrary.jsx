@@ -62,7 +62,7 @@ export default function BookListLibrary() {
                       </li>
                       <li className={s.readBookItem}>
                         <span>{t.rating}:</span>
-                        <Rating mark={item.rating} onChange={toggleModal} />
+                        <Rating mark={item.rating} />
                       </li>
                       <li
                         className={s.readBookButton}
@@ -151,14 +151,9 @@ export default function BookListLibrary() {
           </ul>
         </div>
       )}
-      <ModalBookReview
-        book={book}
-        open={openModal}
-        onClose={toggleModal}
-        onClick={() => {
-          setTimeout(toggleModal, 1000);
-        }}
-      />
+      {book && (
+        <ModalBookReview book={book} open={openModal} onClose={toggleModal} />
+      )}
       {data.length > 0 && (
         <div className={s.linkWrapper}>
           <NavLink className={s.link} to="/training">
