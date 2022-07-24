@@ -113,8 +113,7 @@ const Training = () => {
   const setStart = (payload) =>
     dispatch({ type: ACTION_TYPES.SET_START, payload });
   const setEnd = (payload) => dispatch({ type: ACTION_TYPES.SET_END, payload });
-  const setRefetch = () =>
-    dispatch({ type: ACTION_TYPES.REFETCH, payload: true });
+  const setRefetch = () => dispatch({ type: ACTION_TYPES.REFETCH });
   const setUpdate = () => dispatch({ type: ACTION_TYPES.UPDATE });
 
   const isActiveTraining = !!Object.keys(data).length;

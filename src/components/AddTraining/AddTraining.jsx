@@ -137,6 +137,7 @@ const AddTraining = ({
                 text={t.add}
                 className={s.bookButton}
                 onClick={() => addBook(values, setFieldValue)}
+                styleType="secondary"
               />
               {!isMobile && (
                 <BookList

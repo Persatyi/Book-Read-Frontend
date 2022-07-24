@@ -1,114 +1,109 @@
 @import "stylesheet/_mixin.scss";
 
 .title {
-    margin-bottom: 20px;
+  margin-bottom: 20px;
 
-    @include mq(tablet-only) {
-        margin-top: 40px;
-    }
+  @include mq(tablet-only) {
+    margin-top: 40px;
+  }
 }
 
 .form {
-    display: grid;
-    gap: 20px;
+  display: grid;
+  gap: 20px;
 
-    @include mq(tablet) {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 40px;
-    }
+  @include mq(tablet) {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+  }
 
-    @include mq(desktop) {
-        justify-content: center;
-        gap: 32px;
-    }
+  @include mq(desktop) {
+    justify-content: center;
+    gap: 32px;
+  }
 }
 
 .wrapper {
-    position: relative;
+  position: relative;
 
-    @include mq(tablet) {
-        width: 250px;
-    }
+  @include mq(tablet) {
+    width: 250px;
+  }
 }
 
 .date {
-    padding-left: 41px;
-    height: 42px;
-    width: 100%;
-    border: 1px solid var(--placeholder-cl);
+  padding-left: 41px;
+  height: 42px;
+  width: 100%;
+  border: 1px solid var(--placeholder-cl);
 }
 
 .icon {
-    position: absolute;
-    top: 50%;
-    left: 12px;
-    transform: translateY(-50%);
-    pointer-events: none;
+  position: absolute;
+  top: 50%;
+  left: 12px;
+  transform: translateY(-50%);
+  pointer-events: none;
 }
 
 .polygon {
-    position: absolute;
-    top: 50%;
-    right: 12px;
-    transform: translateY(-50%);
-    pointer-events: none;
+  position: absolute;
+  top: 50%;
+  right: 12px;
+  transform: translateY(-50%);
+  pointer-events: none;
 }
 
 .relative {
-    position: relative;
+  position: relative;
 }
 
 .select {
-    position: relative;
-    padding-left: 12px;
-    height: 42px;
-    display: flex;
-    align-items: center;
-    font-weight: 500;
-    font-size: 14px;
-    line-height: 1.21;
-    color: var(--placeholder-cl);
-    box-shadow: inset 0px 1px 2px rgba(29, 29, 27, 0.15);
+  position: relative;
+  padding-left: 12px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 1.21;
+  color: var(--placeholder-cl);
+  box-shadow: inset 0px 1px 2px rgba(29, 29, 27, 0.15);
 
-    @include mq(tablet) {
-        width: 483px;
-    }
+  @include mq(tablet) {
+    width: 483px;
+  }
 
-    @include mq(desktop) {
-        width: 715px;
-    }
+  @include mq(desktop) {
+    width: 715px;
+  }
 }
 
 .button {
-    min-height: 42px;
-    padding-left: 13px;
-    padding-right: 13px;
-    margin-left: auto;
-    margin-right: auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  min-height: 42px;
+  padding-left: 13px;
+  padding-right: 13px;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .bookButton {
-    composes: button;
-    margin-top: 12px;
-    max-width: 141px;
-    color: var(--main-text-cl);
-    background-color: var(--secondary-bg-cl);
-    border-color: var(--main-text-cl);
-    transition: color 250ms linear, background-color 250ms linear, scale 250ms linear, box-shadow 250ms linear;
+  composes: button;
+  margin-top: 12px;
+  max-width: 141px;
+  color: var(--main-text-cl);
+  background-color: var(--secondary-bg-cl);
+  border-color: var(--main-text-cl);
+  transition: color 250ms linear, background-color 250ms linear,
+    scale 250ms linear, box-shadow 250ms linear;
 
-    &:hover:not(:disabled),
-    &:focus:not(:disabled) {
-        color: var(--main-bg-cl);
-        background-color: var(--btn-cl);
-    }
-
-    @include mq(tablet) {
-        margin: 0;
-        min-width: 171px;
-        margin-left: 10px;
-    }
+  @include mq(tablet) {
+    margin: 0;
+    min-width: 171px;
+    margin-left: 10px;
+  }
 }
