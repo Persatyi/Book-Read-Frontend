@@ -3,13 +3,20 @@
   border: none;
 }
 
+.noClick {
+  composes: btn;
+  cursor: default;
+}
+
 .star {
   width: 17px;
   height: 17px;
   margin-right: 4px;
+
   &.active {
     stroke: var(--accent-cl);
   }
+
   &.inactive {
     stroke: var(--placeholder-cl);
   }

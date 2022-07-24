@@ -11,8 +11,8 @@ import s from "./ModalBookReview.module.scss";
 import useTranslation from "hooks/useTranslation";
 
 const ModalBookReview = (props) => {
-  const init = { rating: 0, resume: "" };
   const book = props.book;
+  const init = { rating: 0, resume: book?.resume || "" };
   const [addReview] = useAddReviewMutation();
   const { t } = useTranslation("ModalBookReview");
 
@@ -35,18 +35,11 @@ const ModalBookReview = (props) => {
     <ModalWrapper size={"large"} open={props.open} onClose={props.onClose}>
       <Formik
         initialValues={init}
-        validationSchema={reviewFormValidation}
+        validationSchema={reviewFormValidation(t)}
         validateOnBlur
         onSubmit={handleSubmit}
       >
-        {({
-          values,
-          dirty,
-          isValid,
-          handleChange,
-          handleSubmit,
-          setFieldValue,
-        }) => (
+        {({ values, dirty, handleChange, handleSubmit, setFieldValue }) => (
           <form onSubmit={handleSubmit} className={s.form}>
             <div className={s.field}>
               <label className={s.label} htmlFor={"rating"}>
@@ -54,7 +47,9 @@ const ModalBookReview = (props) => {
               </label>
               <Rating
                 mark={values.rating || book.rating}
-                onChange={(value) => setFieldValue("rating", value)}
+                onChange={(value) => {
+                  setFieldValue("rating", value);
+                }}
                 id={"rating"}
               />
             </div>
@@ -66,7 +61,7 @@ const ModalBookReview = (props) => {
                 placeholder="..."
                 id={"resume"}
                 name={"resume"}
-                value={values.resume || book.resume || ""}
+                value={values.resume}
                 onChange={handleChange}
                 className={s.resume}
               />
@@ -79,7 +74,7 @@ const ModalBookReview = (props) => {
               />
               <Button
                 type={"submit"}
-                disabled={!(isValid && dirty)}
+                disabled={!dirty}
                 text={t.save}
                 onClick={props.onClick}
               />
