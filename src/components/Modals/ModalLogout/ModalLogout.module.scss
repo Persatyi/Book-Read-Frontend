@@ -1,52 +1,53 @@
 @import "stylesheet/mixin.scss";
 
 .modal {
-    width: 280px;
-    height: 222px;
-    padding: 48px 22px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+  width: 280px;
+  height: 222px;
+  padding: 48px 22px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 10px 10px 20px rgba(9, 30, 63, 0.2);
 
-    @include mq(tablet) {
-        width: 394px;
-        height: 204px;
-        padding-left: 53px;
-        padding-right: 53px;
-    }
+  @include mq(tablet) {
+    width: 394px;
+    height: 204px;
+    padding-left: 53px;
+    padding-right: 53px;
+  }
 }
 
 .text {
-    font-family: 'Montserrat';
-    font-weight: 500;
-    font-size: 16px;
-    line-height: 1.38;
-    text-align: center;
-    color: var(--secondary-black-cl);
-    margin-bottom: 20px;
+  font-family: "Montserrat";
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.38;
+  text-align: center;
+  color: var(--secondary-black-cl);
+  margin-bottom: 20px;
 
-    @include mq(tablet) {
-        margin-bottom: 24px;
-    }
+  @include mq(tablet) {
+    margin-bottom: 24px;
+  }
 }
 
 .btnBox {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .button {
-    min-width: 98px;
-    &:first-child {
-        margin-right: 20px;
-        @include mq(tablet) {
-            margin-right: 24px;
-        }
-    }
-
+  min-width: 98px;
+  &:first-child {
+    margin-right: 20px;
     @include mq(tablet) {
-        min-width: 130px;
+      margin-right: 24px;
     }
+  }
+
+  @include mq(tablet) {
+    min-width: 130px;
+  }
 }

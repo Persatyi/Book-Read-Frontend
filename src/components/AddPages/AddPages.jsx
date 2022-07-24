@@ -27,17 +27,17 @@ const AddPages = ({
   const [bookReadModal, setBookReadModal] = useState(false);
   const [modalTrainingDone, setModalTrainingDone] = useState(false);
 
-  const closeModalTrainingDone = () => {
+  const closeModalTrainingDone = async () => {
     setModalTrainingDone(false);
-    resetState();
-    setUpdate();
     setRefetch();
+    setUpdate();
+    resetState();
   };
 
   const closeReadModal = () => {
     setBookReadModal(false);
-    setUpdate();
     setRefetch();
+    setUpdate();
   };
 
   const checkRefreshToken = useRefreshToken();
@@ -49,7 +49,9 @@ const AddPages = ({
       const result = await updateResults(values);
       setUpdate();
       setModalTrainingDone(result.data.finish);
-      setBookReadModal(result.data.isBookRead);
+      if (!result.data.finish) {
+        setBookReadModal(result.data.isBookRead);
+      }
     } catch (error) {
       toast.error(t.error);
     }
@@ -123,7 +125,7 @@ const AddPages = ({
       <ModalTrainingDone
         open={modalTrainingDone}
         onClose={closeModalTrainingDone}
-        onNew={() => {}}
+        onNew={closeModalTrainingDone}
       />
       <ModalBookRead open={bookReadModal} onClose={closeReadModal} />
     </>
