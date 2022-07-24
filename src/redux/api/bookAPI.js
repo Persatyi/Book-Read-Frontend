@@ -21,15 +21,19 @@ export const bookApi = createApi({
   endpoints: (build) => ({
     register: build.mutation({
       query: (data) => ({ url: "/users/register", method: "POST", body: data }),
-      invalidatesTags: ["User"],
+      invalidatesTags: ["User", "Books"],
     }),
     login: build.mutation({
       query: (data) => ({ url: "/users/login", method: "POST", body: data }),
-      invalidatesTags: ["User"],
+      invalidatesTags: ["User", "Books"],
     }),
     googleLogin: build.mutation({
-      query: (data) => ({ url: "/users/login-google", method: "POST", body: data }),
-      invalidatesTags: ["User"],
+      query: (data) => ({
+        url: "/users/login-google",
+        method: "POST",
+        body: data,
+      }),
+      invalidatesTags: ["User", "Books"],
     }),
     refreshToken: build.mutation({
       query: (data) => ({ url: "/users/refresh", method: "POST", body: data }),
@@ -53,10 +57,6 @@ export const bookApi = createApi({
     addTraining: build.mutation({
       query: (data) => ({ url: "/trainings", method: "POST", body: data }),
     }),
-    getTraining: build.query({
-      query: () => "/trainings",
-      providesTags: ["Results", "Books"],
-    }),
     addBook: build.mutation({
       query: (data) => ({ url: "/books", method: "POST", body: data }),
       invalidatesTags: ["Books"],
@@ -70,7 +70,7 @@ export const bookApi = createApi({
       invalidatesTags: ["Books"],
     }),
   }),
-  refetchOnFocus: true,
+  // refetchOnFocus: true,
   // refetchOnReconnect: true,
 });
 
@@ -84,7 +84,6 @@ export const {
   useCurrentQuery,
   useBooksQuery,
   useAddTrainingMutation,
-  useGetTrainingQuery,
   useAddBookMutation,
   useAddReviewMutation,
 } = bookApi;

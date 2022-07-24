@@ -7,9 +7,9 @@ import { loggedIn } from "redux/auth";
 import useTranslation from "hooks/useTranslation";
 
 const GoogleBtn = () => {
-    const dispatch = useDispatch();
-    const [googleLoginUser] = useGoogleLoginMutation();
-    const {language} = useTranslation();
+  const dispatch = useDispatch();
+  const [googleLoginUser] = useGoogleLoginMutation();
+  const { language } = useTranslation();
 
   function handleCallback(resp) {
     const googleToken = resp.credential;
@@ -34,38 +34,31 @@ const GoogleBtn = () => {
           );
         }
       });
-    }
-    
-    const [locale] = language.split("-");
+  }
 
-    useEffect(() => {
-        window.google.accounts.id.initialize({
-          client_id: process.env.REACT_APP_GOOGLE_CLIENT_ID,
-        callback: handleCallback,
-        });
+  const [locale] = language.split("-");
 
-        console.log(window.google.accounts.id.initialize({
-            client_id: process.env.REACT_APP_GOOGLE_CLIENT_ID,
-            callback: handleCallback,
-        }))
+  useEffect(() => {
+    window.google.accounts.id.initialize({
+      client_id: process.env.REACT_APP_GOOGLE_CLIENT_ID,
+      callback: handleCallback,
+    });
 
-        window.google.accounts.id.renderButton(
-            document.getElementById("signInBtn"),
-            {
-            type: "standard",
-            theme: "outline",
-            size: "medium",
-            width: "40",
-            height: "50",
-            locale: `${locale}`,
-            }
-        );
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [language]);
-
-    return (
-        <div id="signInBtn" className={s.signInBtn}></div>
+    window.google.accounts.id.renderButton(
+      document.getElementById("signInBtn"),
+      {
+        type: "standard",
+        theme: "outline",
+        size: "medium",
+        width: "40",
+        height: "50",
+        locale: `${locale}`,
+      }
     );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [language]);
+
+  return <div id="signInBtn" className={s.signInBtn}></div>;
 };
 
 export default GoogleBtn;

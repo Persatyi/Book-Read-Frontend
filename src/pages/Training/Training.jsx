@@ -13,6 +13,7 @@ import useRefreshToken from "hooks/useRefreshToken";
 import { MOBILE_ONLY } from "assets/constants/MEDIA";
 import { getResults, getTraining } from "services";
 
+import Loader from "components/Loader";
 import Container from "components/Container";
 import Goal from "components/Goal";
 import AddTraining from "components/AddTraining";
@@ -73,7 +74,8 @@ const reducer = (state, { type, payload }) => {
 const Training = () => {
   const isToken = !!axios.defaults.headers.common.Authorization;
   const auth = useSelector(isAuth);
-  const [addTraining] = useAddTrainingMutation();
+  const [addTraining, { isLoading: isLoadingAddTraining }] =
+    useAddTrainingMutation();
   const [state, dispatch] = useReducer(reducer, initialState);
   const { chosenBooks, start, end, isAdd, isRefetch, updateStats } = state;
   const isMobile = useMediaQuery(MOBILE_ONLY);
@@ -88,10 +90,14 @@ const Training = () => {
   const checkRefreshToken = useRefreshToken();
   const { t } = useTranslation("Training");
 
-  const { data: response } = useQuery(["results", updateStats], getResults, {
-    enabled: isToken && auth,
-    retry: false,
-  });
+  const { data: response, isLoading: isLoadingResults } = useQuery(
+    ["results", updateStats],
+    getResults,
+    {
+      enabled: isToken && auth,
+      retry: false,
+    }
+  );
 
   const addResults = async (data) => {
     const result = await axios.post("/results", data);
@@ -144,7 +150,7 @@ const Training = () => {
       date.getTimezoneOffset() * 60 * 1000
   );
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading || isLoadingAddTraining) return <Loader />;
   if (isAdd)
     return (
       <section className={s.section}>
@@ -214,16 +220,22 @@ const Training = () => {
             onClick={onAddTrainingClick}
           />
         )}
-        <LineChart data={response} className={s.chart} />
-        {isActiveTraining && (
-          <AddPages
-            updateResults={mutateAsync}
-            setUpdate={setUpdate}
-            setRefetch={setRefetch}
-            data={response}
-            className={s.addPages}
-            resetState={resetState}
-          />
+        {isLoadingResults ? (
+          <Loader />
+        ) : (
+          <>
+            <LineChart data={response} className={s.chart} />
+            {isActiveTraining && (
+              <AddPages
+                updateResults={mutateAsync}
+                setUpdate={setUpdate}
+                setRefetch={setRefetch}
+                data={response}
+                className={s.addPages}
+                resetState={resetState}
+              />
+            )}
+          </>
         )}
         {isMobile && !isActiveTraining && (
           <IconButton onClick={onAddButtonClick} label={t.addBook} />

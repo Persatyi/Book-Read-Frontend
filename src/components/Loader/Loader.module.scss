@@ -1,4 +1,4 @@
-.backdrop {
+.fullscreen {
   position: absolute;
   top: 0;
   right: 0;
@@ -8,4 +8,10 @@
   justify-content: center;
   align-items: center;
   background-color: var(--secondary-bg-cl);
+}
+
+.local {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
