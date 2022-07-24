@@ -106,7 +106,7 @@ export default function BookListLibrary() {
                         <svg className={s.readingBookIcon}>
                           <use href={`${spriteSvg}#icon-reading`} />
                         </svg>
-                        <p>{item.title}</p>
+                        <p className={s.readingBookItemTitle}>{item.title}</p>
                       </li>
                       <li className={s.readingBookItem}>
                         <span>{t.author}:</span>
