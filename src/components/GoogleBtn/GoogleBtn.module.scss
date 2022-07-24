@@ -1,19 +1,6 @@
 @import "stylesheet/_mixin.scss";
 
-.signInBtn {
-    width: 100%;
-    height: 53px;
-    margin-bottom: 28px;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-iframe {
-    width: 243px !important;
-    height: 49px !important;
-    // & #container {
-    //     padding: 0;
-    // }
+.wrapper {
+  display: block;
+  padding-left: 23%;
 }
