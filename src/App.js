@@ -22,6 +22,7 @@ const Home = lazy(() => import("pages/Home"));
 const Training = lazy(() => import("pages/Training"));
 const Library = lazy(() => import("pages/Library"));
 const Header = lazy(() => import("components/Header"));
+const NotFoundPage = lazy(() => import("pages/NotFoundPage"));
 
 function App() {
   const dispatch = useDispatch();
@@ -47,6 +48,7 @@ function App() {
             <Route path="/library" element={<Library />} />
             <Route path="/training" element={<Training />} />
           </Route>
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
         <ToastContainer
           position="top-right"
