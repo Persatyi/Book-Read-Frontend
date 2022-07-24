@@ -47,7 +47,7 @@ export default function LibraryPage() {
       {size.width >= 768 && (
         <>
           <AddBook />
-          <BookListLibrary/>
+          <BookListLibrary />
           <LibraryEmpty
             open={openPlaceholder}
             onClose={() => setOpenPlaceholder(false)}
