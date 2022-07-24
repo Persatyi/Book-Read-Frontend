@@ -10,6 +10,7 @@ import { ModalBookReview } from "components/Modals";
 import TitleRead from "./TitleRead/TitleRead";
 import TitleReading from "./TitleReading/TitleReading";
 import Rating from "components/Rating";
+import Button from "components/Button";
 
 import spriteSvg from "assets/images/sprite.svg";
 import s from "./BookListLibrary.module.scss";
@@ -46,32 +47,42 @@ export default function BookListLibrary() {
                         <svg className={s.readBookIcon}>
                           <use href={`${spriteSvg}#icon-read`} />
                         </svg>
-                        <p>{item.title}</p>
+                        <p className={s.readBookItemTitle}>{item.title}</p>
                       </li>
                       <li className={s.readBookItem}>
-                        <span>{t.author}:</span>
-                        {item.author}
+                        <span className={s.readBookItemCategory}>
+                          {t.author}:
+                        </span>
+                        <p className={s.readBookItemText}>{item.author}</p>
                       </li>
                       <li className={s.readBookItem}>
-                        <span>{t.year}:</span>
-                        {item.year}
+                        <span className={s.readBookItemCategory}>
+                          {t.year}:
+                        </span>
+                        <p className={s.readBookItemText}>{item.year}</p>
                       </li>
                       <li className={s.readBookItem}>
-                        <span>{t.pages}:</span>
-                        {item.pages}
+                        <span className={s.readBookItemCategory}>
+                          {t.pages}:
+                        </span>
+                        <p className={s.readBookItemText}>{item.pages}</p>
                       </li>
                       <li className={s.readBookItem}>
-                        <span>{t.rating}:</span>
+                        <span className={s.readBookItemCategory}>
+                          {t.rating}:
+                        </span>
                         <Rating mark={item.rating} onChange={toggleModal} />
                       </li>
-                      <li
-                        className={s.readBookButton}
-                        onClick={() => {
-                          setBook(item);
-                          toggleModal();
-                        }}
-                      >
-                        {t.resume}
+                      <li>
+                        <Button
+                          onClick={() => {
+                            setBook(item);
+                            toggleModal();
+                          }}
+                          className={s.readBookButton}
+                          styleType="secondary"
+                          text={t.resume}
+                        />
                       </li>
                     </ul>
                   </li>
@@ -99,7 +110,7 @@ export default function BookListLibrary() {
                       </li>
                       <li className={s.readingBookItem}>
                         <span>{t.author}:</span>
-                        {item.author}
+                        <p className={s.readingAuthorText}>{item.author}</p>
                       </li>
                       <li className={s.readingBookItem}>
                         <span>{t.year}:</span>
