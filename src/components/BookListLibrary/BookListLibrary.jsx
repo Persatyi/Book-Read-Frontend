@@ -71,7 +71,7 @@ export default function BookListLibrary() {
                         <span className={s.readBookItemCategory}>
                           {t.rating}:
                         </span>
-                        <Rating mark={item.rating} onChange={toggleModal} />
+                        <Rating mark={item.rating} />
                       </li>
                       <li>
                         <Button
