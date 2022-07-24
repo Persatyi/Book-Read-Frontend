@@ -5,7 +5,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { useSelector, useDispatch } from "react-redux";
 import { token, setToken, setIsAuth } from "redux/auth";
 
-import Loader from "components/Loader";
+import Loader, { TYPES as LOADER_TYPES } from "components/Loader";
 // import Header from "components/Header";
 // import Register from "pages/Register";
 // import Login from "pages/Login";
@@ -22,6 +22,7 @@ const Home = lazy(() => import("pages/Home"));
 const Training = lazy(() => import("pages/Training"));
 const Library = lazy(() => import("pages/Library"));
 const Header = lazy(() => import("components/Header"));
+const NotFoundPage = lazy(() => import("pages/NotFoundPage"));
 
 function App() {
   const dispatch = useDispatch();
@@ -35,7 +36,7 @@ function App() {
 
   return (
     <>
-      <Suspense fallback={<Loader />}>
+      <Suspense fallback={<Loader type={LOADER_TYPES.FULLSCREEN} />}>
         <Header />
         <Routes>
           <Route element={<PublicRoute />}>
@@ -47,6 +48,7 @@ function App() {
             <Route path="/library" element={<Library />} />
             <Route path="/training" element={<Training />} />
           </Route>
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
         <ToastContainer
           position="top-right"
