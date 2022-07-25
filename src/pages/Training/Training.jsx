@@ -209,6 +209,7 @@ const Training = () => {
             isActiveTraining={isActiveTraining}
             chosenBooks={chosenBooks}
             deleteBook={deleteBook}
+            className={s.book}
           />
         )}
         {isMobile && !!chosenBooks?.length && (
