@@ -43,7 +43,8 @@ const AddPages = ({
   };
 
   const checkRefreshToken = useRefreshToken();
-  const { t, language, dateFormat } = useTranslation("AddPages");
+  const { t: translation, language, dateFormat } = useTranslation();
+  const t = translation["AddPages"];
 
   const onSubmit = async (values) => {
     try {
@@ -64,7 +65,7 @@ const AddPages = ({
       <Formik
         initialValues={{ date: new Date(), pages: "" }}
         onSubmit={onSubmit}
-        validationSchema={schema(t)}
+        validationSchema={schema(translation["AddPagesValidation"])}
       >
         {({ values, isValid, dirty }) => (
           <Form className={`${s.form} ${className}`}>
