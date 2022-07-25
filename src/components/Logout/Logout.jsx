@@ -14,16 +14,16 @@ import s from "./Logout.module.scss";
 
 const Logout = () => {
   const dispatch = useDispatch();
-  const [logout, { isSuccess, isError }] = useLogoutMutation();
+  const [logout, { isError }] = useLogoutMutation();
   const [openModal, toggleModal] = useToggle();
   const checkRefreshToken = useRefreshToken();
   const { t } = useTranslation("Logout");
 
-  useEffect(() => {
-    if (isSuccess) {
-      dispatch(loggedOff());
-    }
-  }, [isSuccess, dispatch]);
+  // useEffect(() => {
+  //   if (isSuccess) {
+  //     dispatch(loggedOff());
+  //   }
+  // }, [isSuccess, dispatch]);
 
   useEffect(() => {
     if (isError) {
@@ -31,9 +31,9 @@ const Logout = () => {
     }
   }, [isError, t.error]);
 
-  const logoutFunc = () => {
-    logout();
-
+  const logoutFunc = async () => {
+    await logout();
+    dispatch(loggedOff());
     toggleModal();
   };
 
