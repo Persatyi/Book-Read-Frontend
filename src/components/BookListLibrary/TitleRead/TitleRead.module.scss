@@ -1,48 +1,48 @@
 @import "stylesheet/mixin.scss";
-.titleList{
-   display: none;
-   @include mq(tablet){
-      display: flex;
-      margin-bottom: 8px;
-   }
-   &Item{
-      font-family: 'Montserrat';
-      font-style: normal;
-      font-weight: 500;
-      font-size: 14px;
-      line-height: 1.2;
-      color: var(--secondary-text-cl);
-      &:nth-child(1){
-         @include mq(tablet){
-            margin-right: 147px;
-         }
-         @include mq(desktop){
-            margin-right: 292px;
-         }
+.titleList {
+  display: none;
+  @include mq(tablet) {
+    display: flex;
+    margin-bottom: 8px;
+  }
+  &Item {
+    font-family: "Montserrat";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 1.2;
+    color: var(--secondary-text-cl);
+    &:nth-child(1) {
+      @include mq(tablet) {
+        width: 185px;
       }
-      &:nth-child(2){
-         @include mq(tablet){
-            margin-right: 79px;
-         }
-         @include mq(desktop){
-            margin-right: 218px;
-         }
+      @include mq(desktop) {
+        margin-right: 292px;
       }
-      &:nth-child(3){
-        @include mq(tablet){
-            margin-right: 28px;
-         }
-         @include mq(desktop){
-            margin-right: 65px;
-         }
+    }
+    &:nth-child(2) {
+      @include mq(tablet) {
+        width: 105px;
       }
-      &:nth-child(4){
-        @include mq(tablet){
-            margin-right: 27px;
-         }
-         @include mq(desktop){
-            margin-right: 105px;
-         }
+      @include mq(desktop) {
+        margin-right: 218px;
       }
-   }
+    }
+    &:nth-child(3) {
+      @include mq(tablet) {
+        width: 60px;
+      }
+      @include mq(desktop) {
+        margin-right: 65px;
+      }
+    }
+    &:nth-child(4) {
+      @include mq(tablet) {
+        width: 70px;
+      }
+      @include mq(desktop) {
+        margin-right: 105px;
+      }
+    }
+  }
 }

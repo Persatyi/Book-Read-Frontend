@@ -37,7 +37,7 @@ export default function BookListLibrary() {
         <div className={s.booksWrapper}>
           <h2 className={s.booksTitle}>{t.read}</h2>
           <TitleRead />
-          <ul>
+          <ul className={s.readList}>
             {data.map(
               (item) =>
                 item.status === "read" && (
@@ -109,16 +109,26 @@ export default function BookListLibrary() {
                         <p className={s.readingBookItemTitle}>{item.title}</p>
                       </li>
                       <li className={s.readingBookItem}>
-                        <span>{t.author}:</span>
-                        <p className={s.readingAuthorText}>{item.author}</p>
+                        <span className={s.readingBookItemCategory}>
+                          {t.author}:
+                        </span>
+                        <p className={s.readingBookItemText}>{item.author}</p>
                       </li>
                       <li className={s.readingBookItem}>
-                        <span>{t.year}:</span>
-                        {item.year}
+                        <span className={s.readingBookItemCategory}>
+                          {t.year}:
+                        </span>
+                        <span className={s.readingBookItemText}>
+                          {item.year}
+                        </span>
                       </li>
                       <li className={s.readingBookItem}>
-                        <span>{t.pages}:</span>
-                        {item.pages}
+                        <span className={s.readingBookItemCategory}>
+                          {t.pages}:
+                        </span>
+                        <span className={s.readingBookItemText}>
+                          {item.pages}
+                        </span>
                       </li>
                     </ul>
                   </li>
@@ -131,29 +141,41 @@ export default function BookListLibrary() {
         <div className={s.booksWrapper}>
           <h2 className={s.booksTitle}>{t.going}</h2>
           <TitleReading />
-          <ul className={s.goingList}>
+          <ul className={s.goingToReadList}>
             {data.map(
               (item) =>
                 item.status === "goingToRead" && (
-                  <li key={item._id} className={s.readingItem}>
-                    <ul className={s.readingBookList}>
-                      <li className={s.readingBookItem}>
-                        <svg className={s.readingBookIcon}>
+                  <li key={item._id} className={s.goingToReadItem}>
+                    <ul className={s.goingToReadBookList}>
+                      <li className={s.goingToReadBookItem}>
+                        <svg className={s.goingToReadBookIcon}>
                           <use href={`${spriteSvg}#icon-flat`} />
                         </svg>
-                        <p>{item.title}</p>
+                        <p className={s.goingToReadBookTitle}>{item.title}</p>
                       </li>
-                      <li className={s.readingBookItem}>
-                        <span>{t.author}:</span>
-                        <p className={s.readingBookItemAuthor}>{item.author}</p>
+                      <li className={s.goingToReadBookItem}>
+                        <span className={s.goingToReadBookItemCategory}>
+                          {t.author}:
+                        </span>
+                        <p className={s.goingToReadBookItemText}>
+                          {item.author}
+                        </p>
                       </li>
-                      <li className={s.readingBookItem}>
-                        <span>{t.year}:</span>
-                        {item.year}
+                      <li className={s.goingToReadBookItem}>
+                        <span className={s.goingToReadBookItemCategory}>
+                          {t.year}:
+                        </span>
+                        <span className={s.goingToReadBookItemText}>
+                          {item.year}
+                        </span>
                       </li>
-                      <li className={s.readingBookItem}>
-                        <span>{t.pages}:</span>
-                        {item.pages}
+                      <li className={s.goingToReadBookItem}>
+                        <span className={s.goingToReadBookItemCategory}>
+                          {t.pages}:
+                        </span>
+                        <span className={s.goingToReadBookItemText}>
+                          {item.pages}
+                        </span>
                       </li>
                     </ul>
                   </li>
