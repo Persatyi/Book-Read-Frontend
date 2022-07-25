@@ -1,11 +1,11 @@
 import { useReducer } from "react";
 import { useSelector } from "react-redux";
-import { useQuery, useMutation } from "react-query";
+import { useQuery } from "react-query";
 import { useMediaQuery } from "react-responsive";
 import { toast } from "react-toastify";
 import axios from "axios";
 
-import { useAddTrainingMutation } from "redux/api/bookAPI";
+import { useAddTrainingMutation, useAddPageMutation } from "redux/api/bookAPI";
 import { isAuth } from "redux/auth";
 
 import useTranslation from "hooks/useTranslation";
@@ -99,12 +99,12 @@ const Training = () => {
     }
   );
 
-  const addResults = async (data) => {
-    const result = await axios.post("/results", data);
-    return result;
-  };
+  // const addResults = async (data) => {
+  //   const result = await axios.post("/results", data);
+  //   return result;
+  // };
 
-  const { mutateAsync } = useMutation(addResults);
+  const [mutateAsync] = useAddPageMutation();
 
   const chooseBook = (payload) =>
     dispatch({ type: ACTION_TYPES.CHOOSE_BOOK, payload });
@@ -113,8 +113,7 @@ const Training = () => {
   const setStart = (payload) =>
     dispatch({ type: ACTION_TYPES.SET_START, payload });
   const setEnd = (payload) => dispatch({ type: ACTION_TYPES.SET_END, payload });
-  const setRefetch = () =>
-    dispatch({ type: ACTION_TYPES.REFETCH, payload: true });
+  const setRefetch = () => dispatch({ type: ACTION_TYPES.REFETCH });
   const setUpdate = () => dispatch({ type: ACTION_TYPES.UPDATE });
 
   const isActiveTraining = !!Object.keys(data).length;
@@ -210,6 +209,7 @@ const Training = () => {
             isActiveTraining={isActiveTraining}
             chosenBooks={chosenBooks}
             deleteBook={deleteBook}
+            className={s.book}
           />
         )}
         {isMobile && !!chosenBooks?.length && (

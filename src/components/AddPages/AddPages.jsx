@@ -3,6 +3,7 @@ import spriteSvg from "assets/images/sprite.svg";
 import { schema } from "assets/schemas/addPagesValidation";
 import Button from "components/Button";
 import { ModalBookRead, ModalTrainingDone } from "components/Modals";
+import { useNavigate } from "react-router-dom";
 
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import DatePickerField from "components/DatePickerField";
@@ -23,33 +24,37 @@ const AddPages = ({
 }) => {
   const { data: sets, start } = data;
   const parsedStart = Date.parse(start);
+  const navigate = useNavigate();
 
   const [bookReadModal, setBookReadModal] = useState(false);
   const [modalTrainingDone, setModalTrainingDone] = useState(false);
 
-  const closeModalTrainingDone = () => {
+  const closeModalTrainingDone = async () => {
     setModalTrainingDone(false);
-    resetState();
-    setUpdate();
     setRefetch();
+    setUpdate();
+    resetState();
   };
 
   const closeReadModal = () => {
     setBookReadModal(false);
-    setUpdate();
     setRefetch();
+    setUpdate();
   };
 
   const checkRefreshToken = useRefreshToken();
-  const { t, language, dateFormat } = useTranslation("AddPages");
+  const { t: translation, language, dateFormat } = useTranslation();
+  const t = translation["AddPages"];
 
   const onSubmit = async (values) => {
     try {
       await checkRefreshToken();
-      const result = await updateResults(values);
+      const result = await updateResults(values).unwrap();
       setUpdate();
-      setModalTrainingDone(result.data.finish);
-      setBookReadModal(result.data.isBookRead);
+      setModalTrainingDone(result.finish);
+      if (!result.finish) {
+        setBookReadModal(result.isBookRead);
+      }
     } catch (error) {
       toast.error(t.error);
     }
@@ -60,7 +65,7 @@ const AddPages = ({
       <Formik
         initialValues={{ date: new Date(), pages: "" }}
         onSubmit={onSubmit}
-        validationSchema={schema(t)}
+        validationSchema={schema(translation["AddPagesValidation"])}
       >
         {({ values, isValid, dirty }) => (
           <Form className={`${s.form} ${className}`}>
@@ -122,8 +127,8 @@ const AddPages = ({
       </Formik>
       <ModalTrainingDone
         open={modalTrainingDone}
-        onClose={closeModalTrainingDone}
-        onNew={() => {}}
+        onClose={() => navigate("/library")}
+        onNew={closeModalTrainingDone}
       />
       <ModalBookRead open={bookReadModal} onClose={closeReadModal} />
     </>
