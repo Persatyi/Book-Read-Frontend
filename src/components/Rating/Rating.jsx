@@ -18,7 +18,7 @@ const Rating = ({ mark, onChange }) => {
   const stars = [...solid, ...hollow];
 
   return (
-    <div role="radiogroup">
+    <div className={s.wrapper} role="radiogroup">
       {stars.map((star, idx) => (
         <button
           key={idx}

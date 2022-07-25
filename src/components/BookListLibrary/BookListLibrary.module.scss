@@ -26,9 +26,8 @@
     padding: 20px 30px 28px 20px;
     height: 100%;
     background-color: var(--main-bg-cl);
-    display: flex;
-    align-items: center;
     margin-bottom: 8px;
+    display: flex;
     @include mq(mobile) {
       justify-content: center;
     }
@@ -58,6 +57,24 @@
         line-height: 1.2;
         margin-bottom: 0px;
       }
+      &Author{
+      color: var(--main-text-cl);
+      width: 120px;
+      word-wrap:break-word;
+      @include mq(mobile){
+        width: 280px;
+      }
+      @include mq(tablet){
+      width: 100px;
+      word-wrap: normal;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+      }
+      @include mq(desktop){
+      width: 233px;
+      }
+      }
       & span {
         font-family: "Montserrat";
         font-weight: 500;
@@ -81,21 +98,28 @@
           width: 197px;
         }
         & p {
-          max-height: 45px;
-          text-overflow: ellipsis;
-          overflow: hidden;
+          width: 200px;
+          word-wrap:break-word;
+          @include mq(mobile){
+          width: 350px;
+        }
           @include mq(tablet) {
+            word-wrap: normal;
+            text-overflow: ellipsis;
+            overflow: hidden;
             max-height: 34px;
             white-space: nowrap;
           }
         }
       }
       &:nth-child(2) {
+        display: flex;
         margin-bottom: 14px;
         & span {
           margin-right: 35px;
         }
         @include mq(tablet) {
+          display: block;
           margin-bottom: 0px;
           width: 116px;
           margin-left: 32px;
@@ -135,7 +159,7 @@
         display: flex;
         margin-bottom: 20px;
         & span {
-          margin-right: 37px;
+          margin-right: 30px;
         }
         @include mq(tablet) {
           display: block;
@@ -178,10 +202,9 @@
     padding: 20px 30px 28px 20px;
     height: 100%;
     background-color: var(--main-bg-cl);
-    display: flex;
-    align-items: center;
     margin-bottom: 8px;
     box-shadow: 0px 2px 3px rgba(9, 30, 63, 0.1);
+    display: flex;
     @include mq(mobile) {
       justify-content: center;
     }
@@ -206,11 +229,30 @@
       font-size: 12px;
       line-height: 1.25;
       color: var(--main-text-cl);
+      word-wrap:break-word;
       @include mq(tablet) {
         font-size: 14px;
         line-height: 1.2;
         margin-bottom: 0px;
         width: 193px;
+      }
+      &Author{
+      color: var(--main-text-cl);
+      width: 120px;
+      word-wrap:break-word;
+      @include mq(mobile){
+        width: 280px;
+      }
+      @include mq(tablet){
+      width: 168px;
+      word-wrap: normal;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+      }
+      @include mq(desktop){
+      width: 233px;
+      }
       }
       & span {
         font-family: "Montserrat";
@@ -235,10 +277,15 @@
           width: 509px;
         }
         & p {
-          max-height: 45px;
-          text-overflow: ellipsis;
-          overflow: hidden;
+          width: 200px;
+          word-wrap:break-word;
+          @include mq(mobile){
+          width: 350px;
+        }
           @include mq(tablet) {
+            word-wrap: normal;
+            text-overflow: ellipsis;
+            overflow: hidden;
             max-height: 34px;
             white-space: nowrap;
           }
@@ -249,7 +296,9 @@
         & span {
           margin-right: 35px;
         }
+        display: flex;
         @include mq(tablet) {
+          display: block;
           margin-bottom: 0px;
           width: 206px;
           margin-left: 32px;

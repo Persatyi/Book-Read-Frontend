@@ -50,7 +50,7 @@ export default function BookListLibrary() {
                       </li>
                       <li className={s.readBookItem}>
                         <span>{t.author}:</span>
-                        {item.author}
+                         <p className={s.readBookItemAuthor}>{item.author}</p>
                       </li>
                       <li className={s.readBookItem}>
                         <span>{t.year}:</span>
@@ -99,7 +99,7 @@ export default function BookListLibrary() {
                       </li>
                       <li className={s.readingBookItem}>
                         <span>{t.author}:</span>
-                        {item.author}
+                        <p className={s.readingBookItemAuthor}>{item.author}</p>
                       </li>
                       <li className={s.readingBookItem}>
                         <span>{t.year}:</span>
@@ -134,7 +134,7 @@ export default function BookListLibrary() {
                       </li>
                       <li className={s.readingBookItem}>
                         <span>{t.author}:</span>
-                        {item.author}
+                        <p className={s.readingBookItemAuthor}>{item.author}</p>
                       </li>
                       <li className={s.readingBookItem}>
                         <span>{t.year}:</span>
