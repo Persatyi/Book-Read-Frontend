@@ -56,6 +56,7 @@ export const bookApi = createApi({
     }),
     addTraining: build.mutation({
       query: (data) => ({ url: "/trainings", method: "POST", body: data }),
+      invalidatesTags: ["Books"],
     }),
     addBook: build.mutation({
       query: (data) => ({ url: "/books", method: "POST", body: data }),

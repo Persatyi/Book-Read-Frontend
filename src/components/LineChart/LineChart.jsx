@@ -91,17 +91,7 @@ const LineChart = ({ data = [], className = "" }) => {
       }
     };
 
-    if (getDates().length <= 7) {
-      cycle(getDates().length);
-    }
-
-    if (getDates().length > 7) {
-      if (daysGone > 7) {
-        cycle(daysGone);
-      } else {
-        cycle(7);
-      }
-    }
+    cycle(getDates().length);
 
     return finalDataSet;
   };
