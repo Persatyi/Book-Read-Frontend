@@ -58,6 +58,7 @@
     "pagesShort": "pages"
   },
   "AddTraining": {
+    "success": "Book added",
     "bookError": "Add at least 1 book",
     "trainingError": "Can't add training. Try again",
     "title": "My training",

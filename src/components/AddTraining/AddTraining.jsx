@@ -31,6 +31,7 @@ const AddTraining = ({
   deleteBook,
   className = "",
   setUpdate,
+  resetState,
 }) => {
   const { data, isSuccess } = useBooksQuery();
   const [addTraining] = useAddTrainingMutation();
@@ -54,6 +55,7 @@ const AddTraining = ({
     const newBook = data.find(({ _id }) => _id === values.book);
     chooseBook(newBook);
     setFieldValue("book", "");
+    toast.success(t.success);
   };
 
   const onSubmit = async ({ start, end }) => {
@@ -65,6 +67,7 @@ const AddTraining = ({
     try {
       await checkRefreshToken();
       await addTraining(training).unwrap();
+      resetState();
       setRefetch();
       setUpdate();
     } catch (error) {
@@ -168,16 +171,17 @@ AddTraining.propTypes = {
       status: PropTypes.string,
     })
   ),
-  chooseBook: PropTypes.func,
+  chooseBook: PropTypes.func.isRequired,
   start: PropTypes.oneOfType([PropTypes.instanceOf(Date), PropTypes.string]),
   end: PropTypes.oneOfType([PropTypes.instanceOf(Date), PropTypes.string]),
-  setStart: PropTypes.func,
-  setEnd: PropTypes.func,
-  setRefetch: PropTypes.func,
+  setStart: PropTypes.func.isRequired,
+  setEnd: PropTypes.func.isRequired,
+  setRefetch: PropTypes.func.isRequired,
   isActiveTraining: PropTypes.bool,
   deleteBook: PropTypes.func,
   className: PropTypes.string,
   setUpdate: PropTypes.func,
+  resetState: PropTypes.func,
 };
 
 export default AddTraining;
