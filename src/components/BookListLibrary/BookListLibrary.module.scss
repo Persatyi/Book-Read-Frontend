@@ -1,25 +1,31 @@
 @import "stylesheet/mixin.scss";
+
 .books {
   &Wrapper {
     padding-top: 20px;
+
     @include mq(tablet) {
       padding-top: 40px;
     }
   }
+
   &Title {
     font-family: "Montserrat";
     font-weight: 600;
     font-size: 19px;
     line-height: 1.2;
     margin-bottom: 24px;
+
     @include mq(tablet) {
       margin-bottom: 20px;
     }
+
     @include mq(desktop) {
       margin-bottom: 24px;
     }
   }
 }
+
 .read {
   &Item {
     box-shadow: 0px 2px 3px rgba(9, 30, 63, 0.1);
@@ -28,53 +34,65 @@
     background-color: var(--main-bg-cl);
     margin-bottom: 8px;
     display: flex;
+    cursor: pointer;
+
     @include mq(mobile) {
       justify-content: center;
     }
+
     @include mq(tablet) {
       justify-content: start;
       padding: 0px 20px;
       height: 62px;
     }
   }
+
   &Book {
     &List {
       display: flex;
       flex-direction: column;
+
       @include mq(tablet) {
         align-items: center;
         flex-direction: row;
       }
     }
+
     &Item {
       font-family: "Montserrat";
       font-weight: 500;
       font-size: 12px;
       line-height: 1.25;
       color: var(--main-text-cl);
+
       @include mq(tablet) {
         font-size: 14px;
         line-height: 1.2;
         margin-bottom: 0px;
       }
-      &Author{
-      color: var(--main-text-cl);
-      width: 120px;
-      word-wrap:break-word;
-      @include mq(mobile){
-        width: 280px;
+
+      &Author {
+        color: var(--main-text-cl);
+        width: 120px;
+        word-wrap: break-word;
+
+        @include mq(mobile) {
+          width: 280px;
+        }
+
+        @include mq(tablet) {
+          width: 100px;
+          word-wrap: normal;
+          text-overflow: ellipsis;
+          overflow: hidden;
+          white-space: nowrap;
+        }
+
+        @include mq(desktop) {
+          width: 233px;
+        }
       }
-      @include mq(tablet){
-      width: 100px;
-      word-wrap: normal;
-      text-overflow: ellipsis;
-      overflow: hidden;
-      white-space: nowrap;
-      }
-      @include mq(desktop){
-      width: 233px;
-      }
-      }
+
       & span {
         font-family: "Montserrat";
         font-weight: 500;
@@ -82,27 +100,34 @@
         line-height: 1.25;
         color: var(--secondary-text-cl);
         margin-left: 34px;
+
         @include mq(tablet) {
           display: none;
         }
       }
+
       &:nth-child(1) {
         display: flex;
         align-items: center;
         margin-bottom: 12px;
+
         @include mq(tablet) {
           margin-bottom: 0px;
           width: 164px;
         }
+
         @include mq(desktop) {
           width: 197px;
         }
+
         & p {
           width: 200px;
-          word-wrap:break-word;
-          @include mq(mobile){
-          width: 350px;
-        }
+          word-wrap: break-word;
+
+          @include mq(mobile) {
+            width: 350px;
+          }
+
           @include mq(tablet) {
             word-wrap: normal;
             text-overflow: ellipsis;
@@ -112,70 +137,88 @@
           }
         }
       }
+
       &:nth-child(2) {
         display: flex;
         margin-bottom: 14px;
+
         & span {
           margin-right: 35px;
         }
+
         @include mq(tablet) {
           display: block;
           margin-bottom: 0px;
           width: 116px;
           margin-left: 32px;
         }
+
         @include mq(desktop) {
           width: 266px;
           margin-left: 144px;
         }
       }
+
       &:nth-child(3) {
         margin-bottom: 14px;
+
         & span {
           margin-right: 51px;
         }
+
         @include mq(tablet) {
           margin-bottom: 0px;
           width: 88px;
         }
+
         @include mq(desktop) {
           width: 117px;
         }
       }
+
       &:nth-child(4) {
         margin-bottom: 14px;
+
         & span {
           margin-right: 40px;
         }
+
         @include mq(tablet) {
           margin-bottom: 0px;
           width: 55px;
         }
+
         @include mq(desktop) {
           width: 133px;
         }
       }
+
       &:nth-child(5) {
         display: flex;
         margin-bottom: 20px;
+
         & span {
           margin-right: 30px;
         }
+
         @include mq(tablet) {
           display: block;
           margin-bottom: 0px;
           width: 129px;
         }
+
         @include mq(desktop) {
           width: 161px;
         }
       }
     }
+
     &Icon {
       margin-right: 12px;
       height: 17px;
       max-width: 22px;
     }
+
     &Button {
       margin: 0 auto;
       display: block;
@@ -188,15 +231,18 @@
       box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
       cursor: pointer;
       padding: 11px 33px 12px 35px;
+
       @include mq(tablet) {
         padding: 11px 11px 12px 10px;
       }
+
       @include mq(desktop) {
         padding: 11px 35px 12px 36px;
       }
     }
   }
 }
+
 .reading {
   &Item {
     padding: 20px 30px 28px 20px;
@@ -205,55 +251,67 @@
     margin-bottom: 8px;
     box-shadow: 0px 2px 3px rgba(9, 30, 63, 0.1);
     display: flex;
+    cursor: pointer;
+
     @include mq(mobile) {
       justify-content: center;
     }
+
     @include mq(tablet) {
       justify-content: start;
       padding: 0px 20px;
       height: 62px;
     }
   }
+
   &Book {
     &List {
       display: flex;
       flex-direction: column;
+
       @include mq(tablet) {
         align-items: center;
         flex-direction: row;
       }
     }
+
     &Item {
       font-family: "Montserrat";
       font-weight: 500;
       font-size: 12px;
       line-height: 1.25;
       color: var(--main-text-cl);
-      word-wrap:break-word;
+      word-wrap: break-word;
+
       @include mq(tablet) {
         font-size: 14px;
         line-height: 1.2;
         margin-bottom: 0px;
         width: 193px;
       }
-      &Author{
-      color: var(--main-text-cl);
-      width: 120px;
-      word-wrap:break-word;
-      @include mq(mobile){
-        width: 280px;
+
+      &Author {
+        color: var(--main-text-cl);
+        width: 120px;
+        word-wrap: break-word;
+
+        @include mq(mobile) {
+          width: 280px;
+        }
+
+        @include mq(tablet) {
+          width: 168px;
+          word-wrap: normal;
+          text-overflow: ellipsis;
+          overflow: hidden;
+          white-space: nowrap;
+        }
+
+        @include mq(desktop) {
+          width: 233px;
+        }
       }
-      @include mq(tablet){
-      width: 168px;
-      word-wrap: normal;
-      text-overflow: ellipsis;
-      overflow: hidden;
-      white-space: nowrap;
-      }
-      @include mq(desktop){
-      width: 233px;
-      }
-      }
+
       & span {
         font-family: "Montserrat";
         font-weight: 500;
@@ -261,27 +319,34 @@
         line-height: 1.25;
         color: var(--secondary-text-cl);
         margin-left: 34px;
+
         @include mq(tablet) {
           display: none;
         }
       }
+
       &:nth-child(1) {
         display: flex;
         margin-bottom: 12px;
         align-items: center;
+
         @include mq(tablet) {
           margin-bottom: 0px;
           width: 316px;
         }
+
         @include mq(desktop) {
           width: 509px;
         }
+
         & p {
           width: 200px;
-          word-wrap:break-word;
-          @include mq(mobile){
-          width: 350px;
-        }
+          word-wrap: break-word;
+
+          @include mq(mobile) {
+            width: 350px;
+          }
+
           @include mq(tablet) {
             word-wrap: normal;
             text-overflow: ellipsis;
@@ -291,45 +356,57 @@
           }
         }
       }
+
       &:nth-child(2) {
         margin-bottom: 14px;
+
         & span {
           margin-right: 35px;
         }
+
         display: flex;
+
         @include mq(tablet) {
           display: block;
           margin-bottom: 0px;
           width: 206px;
           margin-left: 32px;
         }
+
         @include mq(desktop) {
           width: 381px;
           margin-left: 111px;
         }
       }
+
       &:nth-child(3) {
         margin-bottom: 14px;
+
         & span {
           margin-right: 51px;
         }
+
         @include mq(tablet) {
           margin-bottom: 0px;
           width: 84px;
         }
+
         @include mq(desktop) {
           width: 124px;
         }
       }
+
       &:nth-child(4) {
         & span {
           margin-right: 40px;
         }
+
         @include mq(tablet) {
           margin-bottom: 0px;
         }
       }
     }
+
     &Icon {
       margin-right: 12px;
       height: 17px;
@@ -337,6 +414,7 @@
     }
   }
 }
+
 .link {
   font-family: "Montserrat";
   font-weight: 600;
@@ -347,32 +425,39 @@
   margin-bottom: 40px;
   margin-top: 20px;
   padding: 11px 38px 11px 38px;
+
   @include mq(tablet) {
     padding: 10px 53px 10px 52px;
     margin-top: 32px;
   }
+
   &Wrapper {
     display: flex;
     justify-content: center;
+
     @include mq(desktop) {
       display: none;
     }
   }
 }
+
 @keyframes spinner {
   0% {
     transform: rotate(0deg);
   }
+
   100% {
     transform: rotate(360deg);
   }
 }
+
 .loading {
   &Wrapper {
     margin-top: 100px;
     display: flex;
     justify-content: center;
   }
+
   &Spinner {
     width: 150px;
     height: 150px;

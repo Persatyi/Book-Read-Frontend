@@ -1,32 +1,45 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { toast } from "react-toastify";
-import s from "./AddBook.module.scss";
-import { useAddBookMutation } from "redux/api/bookAPI";
+import PropTypes from "prop-types";
+
+import { useAddBookMutation, useEditBookMutation } from "redux/api/bookAPI";
+
 import addBookSchema from "assets/schemas/addBookSchema";
 import useRefreshToken from "hooks/useRefreshToken";
 import useTranslation from "hooks/useTranslation";
+import s from "./AddBook.module.scss";
 
-export default function AddBook() {
+export default function AddBook({ book }) {
   const [addBook] = useAddBookMutation();
+  const [editBook] = useEditBookMutation();
   const checkRefreshToken = useRefreshToken();
   const { t: translation } = useTranslation();
   const t = translation["AddBook"];
+
+  const initialValues = {
+    title: book ? book.title : "",
+    author: book ? book.author : "",
+    year: book ? book.year : "",
+    pages: book ? book.pages : "",
+  };
+
+  const onSubmit = async (values, actions) => {
+    const mutation = book ? editBook : addBook;
+    const successMessage = book ? t.editSuccess : t.success;
+    const data = book ? { ...values, id: book._id } : values;
+
+    await checkRefreshToken();
+    await mutation(data);
+    toast.success(successMessage);
+    actions.resetForm();
+  };
+
   return (
     <Formik
-      initialValues={{
-        title: "",
-        author: "",
-        year: "",
-        pages: "",
-      }}
+      initialValues={initialValues}
       validationSchema={addBookSchema(translation["AddBookSchema"])}
       validateOnBlur
-      onSubmit={async (values, actions) => {
-        await checkRefreshToken();
-        await addBook(values);
-        toast.success(t.success);
-        actions.resetForm();
-      }}
+      onSubmit={onSubmit}
     >
       {({ isValid }) => (
         <Form className={s.form}>
@@ -95,10 +108,20 @@ export default function AddBook() {
             />
           </label>
           <button type="submit" disabled={!isValid} className={s.form__button}>
-            {t.add}
+            {book ? t.edit : t.add}
           </button>
         </Form>
       )}
     </Formik>
   );
 }
+AddBook.propTypes = {
+  book: PropTypes.shape({
+    _id: PropTypes.string,
+    title: PropTypes.string,
+    author: PropTypes.string,
+    year: PropTypes.number,
+    pages: PropTypes.number,
+    status: PropTypes.string,
+  }),
+};
