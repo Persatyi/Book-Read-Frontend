@@ -16,6 +16,11 @@ const ModalBookReview = ({ book, open, onClose }) => {
   const [addReview] = useAddReviewMutation();
   const { t } = useTranslation("ModalBookReview");
 
+  const onRatingChange = ({ value, setFieldValue, values }) => {
+    const valueToSet = value === values.rating ? 0 : value;
+    setFieldValue("rating", valueToSet);
+  };
+
   const handleSubmit = async ({ rating, resume }) => {
     try {
       const id = book._id;
@@ -47,10 +52,10 @@ const ModalBookReview = ({ book, open, onClose }) => {
                 {t.rating}
               </label>
               <Rating
-                mark={values.rating || book.rating}
-                onChange={(value) => {
-                  setFieldValue("rating", value);
-                }}
+                mark={values.rating}
+                onChange={(value) =>
+                  onRatingChange({ value, setFieldValue, values })
+                }
                 id={"rating"}
               />
             </div>
