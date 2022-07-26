@@ -7,6 +7,8 @@ import { useBooksQuery } from "redux/api/bookAPI";
 import { useToggle } from "hooks";
 import useTranslation from "hooks/useTranslation";
 import { ModalBookReview } from "components/Modals";
+
+import Loader from "components/Loader";
 import TitleRead from "./TitleRead/TitleRead";
 import TitleReading from "./TitleReading/TitleReading";
 import Rating from "components/Rating";
@@ -19,14 +21,12 @@ export default function BookListLibrary() {
   const [book, setBook] = useState("");
   const [openModal, toggleModal] = useToggle();
   const auth = useSelector(isAuth);
-  const { data = [], isLoading } = useBooksQuery(null, { skip: !auth });
+  const { data = [], isFetching } = useBooksQuery(null, { skip: !auth });
   const { t } = useTranslation("BookListLibrary");
-  if (isLoading)
-    return (
-      <div className={s.loadingWrapper}>
-        <div className={s.loadingSpinner} />
-      </div>
-    );
+  if (isFetching) return <Loader />;
+  // <div className={s.loadingWrapper}>
+  //   <div className={s.loadingSpinner} />
+  // </div>
   const status = (e) => {
     const status = data.some((item) => item.status === e);
     return status;

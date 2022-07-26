@@ -76,6 +76,7 @@ const Training = () => {
   const auth = useSelector(isAuth);
   const [addTraining, { isLoading: isLoadingAddTraining }] =
     useAddTrainingMutation();
+  const [mutateAsync] = useAddPageMutation();
   const [state, dispatch] = useReducer(reducer, initialState);
   const { chosenBooks, start, end, isAdd, isRefetch, updateStats } = state;
   const isMobile = useMediaQuery(MOBILE_ONLY);
@@ -87,9 +88,6 @@ const Training = () => {
       retry: false,
     }
   );
-  const checkRefreshToken = useRefreshToken();
-  const { t } = useTranslation("Training");
-
   const { data: response, isLoading: isLoadingResults } = useQuery(
     ["results", updateStats],
     getResults,
@@ -98,13 +96,8 @@ const Training = () => {
       retry: false,
     }
   );
-
-  // const addResults = async (data) => {
-  //   const result = await axios.post("/results", data);
-  //   return result;
-  // };
-
-  const [mutateAsync] = useAddPageMutation();
+  const checkRefreshToken = useRefreshToken();
+  const { t } = useTranslation("Training");
 
   const chooseBook = (payload) =>
     dispatch({ type: ACTION_TYPES.CHOOSE_BOOK, payload });
@@ -201,6 +194,7 @@ const Training = () => {
             deleteBook={deleteBook}
             className={s.addTraining}
             setUpdate={setUpdate}
+            resetState={resetState}
           />
         )}
         {(isActiveTraining || isMobile) && (
