@@ -70,6 +70,13 @@ export const bookApi = createApi({
       }),
       invalidatesTags: ["Books"],
     }),
+    deleteBook: build.mutation({
+      query: (id) => ({
+        url: `/books/${id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["Books"],
+    }),
   }),
   // refetchOnFocus: true,
   // refetchOnReconnect: true,
@@ -87,4 +94,5 @@ export const {
   useAddTrainingMutation,
   useAddBookMutation,
   useAddReviewMutation,
+  useDeleteBookMutation,
 } = bookApi;
