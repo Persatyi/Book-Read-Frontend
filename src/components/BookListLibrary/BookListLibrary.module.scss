@@ -596,6 +596,23 @@
   }
 }
 
+.deleteIcon {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 14px;
+  height: 18px;
+  cursor: pointer;
+
+  @include mq(tablet) {
+    right: 10px;
+  }
+
+  @include mq(desktop) {
+    right: 30px;
+  }
+}
+
 .link {
   font-family: "Montserrat";
   font-weight: 600;

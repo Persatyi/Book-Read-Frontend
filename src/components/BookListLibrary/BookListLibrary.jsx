@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 import { isAuth } from "redux/auth";
-import { useBooksQuery } from "redux/api/bookAPI";
+import { useBooksQuery, useDeleteBookMutation } from "redux/api/bookAPI";
 import { useToggle } from "hooks";
 import useTranslation from "hooks/useTranslation";
-import { ModalBookReview } from "components/Modals";
+import { ModalBookReview, ModalRemoveBook } from "components/Modals";
 
 import Loader from "components/Loader";
 import TitleRead from "./TitleRead/TitleRead";
@@ -19,9 +20,12 @@ import s from "./BookListLibrary.module.scss";
 
 export default function BookListLibrary() {
   const [book, setBook] = useState("");
+  const [id, setId] = useState("");
   const [openModal, toggleModal] = useToggle();
+  const [removeModal, setRemoveModal] = useToggle();
   const auth = useSelector(isAuth);
   const { data = [], isFetching } = useBooksQuery(null, { skip: !auth });
+  const [deleteBook] = useDeleteBookMutation();
   const { t } = useTranslation("BookListLibrary");
   const navigate = useNavigate();
 
@@ -178,11 +182,37 @@ export default function BookListLibrary() {
                         </span>
                       </li>
                     </ul>
+                    <svg
+                      className={s.deleteIcon}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setId(item._id);
+                        setRemoveModal(true);
+                      }}
+                    >
+                      <use href={`${spriteSvg}#icon-delete`} />
+                    </svg>
                   </li>
                 )
             )}
           </ul>
         </div>
+      )}
+      {removeModal && (
+        <ModalRemoveBook
+          open={removeModal}
+          onClose={() => {
+            setRemoveModal(false);
+          }}
+          continueFunc={async () => {
+            try {
+              await deleteBook(id).unwrap();
+              toast.success(t.success);
+            } catch (error) {
+              toast.error(t.error);
+            }
+          }}
+        />
       )}
       {book && (
         <ModalBookReview book={book} open={openModal} onClose={toggleModal} />
