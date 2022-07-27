@@ -237,7 +237,7 @@
   color: var(--main-bg-cl);
   background: var(--library-btn-cl);
   padding: 11px 33px 12px 35px;
-  border: 1px solid var(--library-btn-cl);
+  border: 1px solid transparent !important;
 
   @include mq(mobile) {
     margin-left: 20%;
