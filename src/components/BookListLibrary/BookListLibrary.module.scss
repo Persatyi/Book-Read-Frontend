@@ -607,6 +607,10 @@
   @include mq(tablet) {
     right: 10px;
   }
+
+  @include mq(desktop) {
+    right: 30px;
+  }
 }
 
 .link {

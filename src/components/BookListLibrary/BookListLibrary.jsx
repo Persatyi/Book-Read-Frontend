@@ -184,7 +184,8 @@ export default function BookListLibrary() {
                     </ul>
                     <svg
                       className={s.deleteIcon}
-                      onClick={() => {
+                      onClick={(e) => {
+                        e.stopPropagation();
                         setId(item._id);
                         setRemoveModal(true);
                       }}
@@ -197,7 +198,7 @@ export default function BookListLibrary() {
           </ul>
         </div>
       )}
-      {
+      {removeModal && (
         <ModalRemoveBook
           open={removeModal}
           onClose={() => {
@@ -212,7 +213,7 @@ export default function BookListLibrary() {
             }
           }}
         />
-      }
+      )}
       {book && (
         <ModalBookReview book={book} open={openModal} onClose={toggleModal} />
       )}
