@@ -51,7 +51,8 @@
     "success": "Книгу додано",
     "editSuccess": "Книгу змінено",
     "add": "Додати",
-    "edit": "Oк"
+    "edit": "Oк",
+    "cancel": "Відміна"
   },
   "AddPages": {
     "button": "Додати результат",

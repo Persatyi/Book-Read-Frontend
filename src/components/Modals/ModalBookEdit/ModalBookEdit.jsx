@@ -6,7 +6,7 @@ import PropTypes from "prop-types";
 const ModalBookEdit = ({ open, onClose, book = {} }) => {
   return (
     <ModalWrapper open={open} onClose={onClose} size="large">
-      <AddBook book={book} />
+      <AddBook book={book} closeModal={onClose} />
     </ModalWrapper>
   );
 };

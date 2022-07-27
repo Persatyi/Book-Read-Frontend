@@ -11,7 +11,7 @@ import useRefreshToken from "hooks/useRefreshToken";
 import useTranslation from "hooks/useTranslation";
 import s from "./AddBook.module.scss";
 
-export default function AddBook({ book }) {
+export default function AddBook({ book, closeModal }) {
   const [addBook] = useAddBookMutation();
   const [editBook] = useEditBookMutation();
   const checkRefreshToken = useRefreshToken();
@@ -137,13 +137,23 @@ export default function AddBook({ book }) {
               className={s.form__error}
             />
           </label>
-          <Button
-            type="submit"
-            disabled={!isValid}
-            className={book ? s.form__button_edit : s.form__button}
-            text={book ? t.edit : t.add}
-            styleType="secondary"
-          />
+          <div className={s.buttonWrapper}>
+            <Button
+              type="submit"
+              disabled={!isValid}
+              className={book ? s.form__button_edit : s.form__button}
+              text={book ? t.edit : t.add}
+              styleType={book ? "main" : "secondary"}
+            />
+            {book && (
+              <Button
+                onClick={closeModal}
+                styleType="secondary"
+                text={t.cancel}
+                className={s.cancel}
+              />
+            )}
+          </div>
         </Form>
       )}
     </Formik>
@@ -158,4 +168,5 @@ AddBook.propTypes = {
     pages: PropTypes.number,
     status: PropTypes.string,
   }),
+  closeModal: PropTypes.func,
 };

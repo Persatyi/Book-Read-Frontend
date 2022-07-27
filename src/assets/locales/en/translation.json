@@ -51,7 +51,8 @@
     "success": "Book added",
     "editSuccess": "Book edited",
     "add": "Add",
-    "edit": "Ok"
+    "edit": "Ok",
+    "cancel": "Cancel"
   },
   "AddPages": {
     "button": "Add result",

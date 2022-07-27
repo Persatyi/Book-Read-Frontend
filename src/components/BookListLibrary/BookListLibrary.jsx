@@ -207,16 +207,20 @@ export default function BookListLibrary() {
       )}
       {book && (
         <>
-          <ModalBookReview
-            book={book}
-            open={openReviewModal}
-            onClose={toggleReviewModal}
-          />
-          <ModalBookEdit
-            book={book}
-            open={openEditModal}
-            onClose={toggleEditModal}
-          />
+          {openReviewModal && (
+            <ModalBookReview
+              book={book}
+              open={openReviewModal}
+              onClose={toggleReviewModal}
+            />
+          )}
+          {openEditModal && (
+            <ModalBookEdit
+              book={book}
+              open={openEditModal}
+              onClose={toggleEditModal}
+            />
+          )}
         </>
       )}
       {data.length > 0 && (

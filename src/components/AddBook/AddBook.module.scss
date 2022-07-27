@@ -196,3 +196,20 @@ input:-webkit-autofill {
   -webkit-background-clip: text;
   -webkit-text-fill-color: black;
 }
+
+.buttonWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 16px;
+
+  @include mq(tablet) {
+    flex-direction: row-reverse;
+    gap: 32px;
+  }
+
+}
+
+.cancel {
+  width: 173px;
+}
