@@ -1,417 +1,598 @@
 @import "stylesheet/mixin.scss";
 
-.books {
-  &Wrapper {
-    padding-top: 20px;
+.librarySection {
+  padding-bottom: 20px;
 
-    @include mq(tablet) {
+  @include mq(tablet) {
+    padding-bottom: 40px;
+  }
+
+  @include mq(desktop) {
+    padding-top: 40px;
+  }
+}
+
+.booksWrapper {
+  padding-top: 20px;
+
+  @include mq(tablet) {
+    padding-top: 0px;
+
+    &:not(:first-child) {
       padding-top: 40px;
     }
   }
 
-  &Title {
-    font-family: "Montserrat";
-    font-weight: 600;
-    font-size: 19px;
-    line-height: 1.2;
+  @include mq(desktop) {
+    &:not(:first-child) {
+      padding-top: 32px;
+    }
+  }
+}
+
+.booksTitle {
+  font-family: "Montserrat";
+  font-weight: 600;
+  font-size: 19px;
+  line-height: 1.2;
+  margin-bottom: 20px;
+
+  @include mq(tablet) {
     margin-bottom: 24px;
+  }
 
-    @include mq(tablet) {
-      margin-bottom: 20px;
+  @include mq(desktop) {
+    margin-bottom: 24px;
+  }
+}
+
+.readList {
+  @include mq(tablet) {
+    max-height: 350px;
+    overflow-x: hidden;
+  }
+}
+
+.readItem {
+  position: relative;
+  padding: 20px 20px 28px 54px;
+  height: 100%;
+  background-color: var(--main-bg-cl);
+  box-shadow: 0px 2px 3px rgba(9, 30, 63, 0.1);
+
+  &:not(:last-child) {
+    margin-bottom: 8px;
+  }
+
+  @include mq(mobile) {
+    padding: 20px 20px 28px 80px;
+  }
+
+  @include mq(tablet) {
+    justify-content: start;
+    padding: 11px 20px 11px 60px;
+    min-height: 62px;
+  }
+
+  @include mq(desktop) {
+    padding: 11px 80px 11px 60px;
+    min-height: 62px;
+  }
+}
+
+.readBookList {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+  @include mq(tablet) {
+    align-items: center;
+    flex-direction: row;
+  }
+}
+
+.readBookItem {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 14px;
+
+  &:nth-child(1) {
+    margin-bottom: 25px;
+  }
+
+  &:nth-last-child(2) {
+    margin-bottom: 20px;
+  }
+
+  @include mq(tablet) {
+    display: block;
+    font-size: 14px;
+    line-height: 1.2;
+    margin-bottom: 0;
+
+    &:nth-child(1) {
+      width: 124px;
+      margin-bottom: 0;
+      padding-right: 10px;
     }
 
-    @include mq(desktop) {
-      margin-bottom: 24px;
+    &:nth-child(2) {
+      width: 105px;
+      margin-bottom: 0;
+      padding-right: 10px;
+    }
+
+    &:nth-child(3) {
+      width: 60px;
+      margin-bottom: 0;
+    }
+
+    &:nth-child(4) {
+      width: 50px;
+    }
+
+    &:nth-child(5) {
+      margin-left: auto;
+      margin-right: 32px;
+      margin-bottom: 0;
+    }
+  }
+
+  @include mq(desktop) {
+    margin-bottom: 0;
+
+    &:nth-child(1) {
+      width: 280px;
+      margin-bottom: 0;
+      padding-right: 10px;
+    }
+
+    &:nth-child(2) {
+      width: 260px;
+      margin-bottom: 0;
+      padding-right: 10px;
+    }
+
+    &:nth-child(3) {
+      width: 100px;
+      margin-bottom: 0;
+    }
+
+    &:nth-child(4) {
+      width: 50px;
+    }
+
+    &:nth-child(5) {
+      margin-left: auto;
+      margin-right: 60px;
+      margin-bottom: 0;
     }
   }
 }
 
-.read {
-  &Item {
-    box-shadow: 0px 2px 3px rgba(9, 30, 63, 0.1);
-    padding: 20px 30px 28px 20px;
-    height: 100%;
-    background-color: var(--main-bg-cl);
-    margin-bottom: 8px;
-    display: flex;
-    cursor: pointer;
+.readBookItemTitle {
+  font-family: "Montserrat";
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.25;
+  color: var(--main-text-cl);
 
-    @include mq(mobile) {
-      justify-content: center;
+  @include mq(tablet) {
+    font-size: 14px;
+    line-height: 1.21;
+  }
+}
+
+.readBookIcon {
+  position: absolute;
+  top: 22px;
+  left: 20px;
+  height: 17px;
+  max-width: 22px;
+
+  @include mq(mobile) {
+    left: 30px;
+  }
+
+  @include mq(tablet) {
+    left: 20px;
+  }
+}
+
+.readBookItemCategory {
+  display: block;
+  width: 70px;
+
+  font-family: "Montserrat";
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.25;
+  color: var(--secondary-text-cl);
+
+  @include mq(tablet) {
+    display: none;
+  }
+}
+
+.readBookItemText {
+  font-family: "Montserrat";
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.25;
+
+  @include mq(tablet) {
+    font-size: 14px;
+    line-height: 1.21;
+  }
+}
+
+.readBookButton {
+  margin-left: 9%;
+  display: block;
+  font-family: "Montserrat";
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 1.2;
+  color: var(--main-bg-cl);
+  background: var(--library-btn-cl);
+  padding: 11px 33px 12px 35px;
+  border: 1px solid transparent;
+
+  @include mq(mobile) {
+    margin-left: 20%;
+  }
+
+  @include mq(tablet) {
+    margin-left: unset;
+    padding: 11px 11px 12px 10px;
+  }
+
+  @include mq(desktop) {
+    padding: 11px 35px 12px 36px;
+  }
+}
+
+// ============== Reading books =============== //
+
+.readingList {
+  display: flex;
+  flex-direction: column;
+
+  @include mq(tablet) {
+    max-height: 350px;
+    overflow-x: hidden;
+  }
+}
+
+.readingItem {
+  position: relative;
+  padding: 20px 20px 28px 54px;
+  height: 100%;
+  background-color: var(--main-bg-cl);
+  box-shadow: 0px 2px 3px rgba(9, 30, 63, 0.1);
+
+  &:not(:last-child) {
+    margin-bottom: 8px;
+  }
+
+  @include mq(mobile) {
+    padding: 20px 20px 28px 80px;
+  }
+
+  @include mq(tablet) {
+    padding: 11px 20px 11px 60px;
+    min-height: 62px;
+  }
+
+  @include mq(desktop) {
+    padding: 22px 77px 22px 60px;
+  }
+}
+
+.readingBookList {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+  @include mq(tablet) {
+    flex-direction: row;
+    align-items: center;
+    min-height: 40px;
+  }
+
+  @include mq(desktop) {
+    min-height: 20px;
+  }
+}
+
+.readingBookItem {
+  display: flex;
+  align-items: flex-start;
+
+  &:not(:last-child) {
+    margin-bottom: 14px;
+  }
+
+  @include mq(tablet) {
+    display: block;
+    font-size: 14px;
+    line-height: 1.2;
+
+    &:not(:last-child) {
+      margin-bottom: unset;
     }
 
-    @include mq(tablet) {
-      justify-content: start;
-      padding: 0px 20px;
-      height: 62px;
+    &:nth-child(1) {
+      width: 300px;
+
+      padding-right: 10px;
+    }
+
+    &:nth-child(2) {
+      width: 225px;
+
+      padding-right: 10px;
+    }
+
+    &:nth-child(3) {
+      width: 40px;
+    }
+
+    &:nth-child(4) {
+      text-align: end;
+      width: 50px;
     }
   }
 
-  &Book {
-    &List {
-      display: flex;
-      flex-direction: column;
-
-      @include mq(tablet) {
-        align-items: center;
-        flex-direction: row;
-      }
+  @include mq(desktop) {
+    &:nth-child(1) {
+      width: 540px;
+      padding-right: 10px;
     }
 
-    &Item {
-      font-family: "Montserrat";
-      font-weight: 500;
-      font-size: 12px;
-      line-height: 1.25;
-      color: var(--main-text-cl);
+    &:nth-child(2) {
+      width: 390px;
 
-      @include mq(tablet) {
-        font-size: 14px;
-        line-height: 1.2;
-        margin-bottom: 0px;
-      }
-
-      &Author {
-        color: var(--main-text-cl);
-        width: 120px;
-        word-wrap: break-word;
-
-        @include mq(mobile) {
-          width: 280px;
-        }
-
-        @include mq(tablet) {
-          width: 100px;
-          word-wrap: normal;
-          text-overflow: ellipsis;
-          overflow: hidden;
-          white-space: nowrap;
-        }
-
-        @include mq(desktop) {
-          width: 233px;
-        }
-      }
-
-      & span {
-        font-family: "Montserrat";
-        font-weight: 500;
-        font-size: 12px;
-        line-height: 1.25;
-        color: var(--secondary-text-cl);
-        margin-left: 34px;
-
-        @include mq(tablet) {
-          display: none;
-        }
-      }
-
-      &:nth-child(1) {
-        display: flex;
-        align-items: center;
-        margin-bottom: 12px;
-
-        @include mq(tablet) {
-          margin-bottom: 0px;
-          width: 164px;
-        }
-
-        @include mq(desktop) {
-          width: 197px;
-        }
-
-        & p {
-          width: 200px;
-          word-wrap: break-word;
-
-          @include mq(mobile) {
-            width: 350px;
-          }
-
-          @include mq(tablet) {
-            word-wrap: normal;
-            text-overflow: ellipsis;
-            overflow: hidden;
-            max-height: 34px;
-            white-space: nowrap;
-          }
-        }
-      }
-
-      &:nth-child(2) {
-        display: flex;
-        margin-bottom: 14px;
-
-        & span {
-          margin-right: 35px;
-        }
-
-        @include mq(tablet) {
-          display: block;
-          margin-bottom: 0px;
-          width: 116px;
-          margin-left: 32px;
-        }
-
-        @include mq(desktop) {
-          width: 266px;
-          margin-left: 144px;
-        }
-      }
-
-      &:nth-child(3) {
-        margin-bottom: 14px;
-
-        & span {
-          margin-right: 51px;
-        }
-
-        @include mq(tablet) {
-          margin-bottom: 0px;
-          width: 88px;
-        }
-
-        @include mq(desktop) {
-          width: 117px;
-        }
-      }
-
-      &:nth-child(4) {
-        margin-bottom: 14px;
-
-        & span {
-          margin-right: 40px;
-        }
-
-        @include mq(tablet) {
-          margin-bottom: 0px;
-          width: 55px;
-        }
-
-        @include mq(desktop) {
-          width: 133px;
-        }
-      }
-
-      &:nth-child(5) {
-        display: flex;
-        margin-bottom: 20px;
-
-        & span {
-          margin-right: 30px;
-        }
-
-        @include mq(tablet) {
-          display: block;
-          margin-bottom: 0px;
-          width: 129px;
-        }
-
-        @include mq(desktop) {
-          width: 161px;
-        }
-      }
+      padding-right: 10px;
     }
 
-    &Icon {
-      margin-right: 12px;
-      height: 17px;
-      max-width: 22px;
+    &:nth-child(3) {
+      width: 80px;
     }
 
-    &Button {
-      margin: 0 auto;
-      display: block;
-      font-family: "Montserrat";
-      font-weight: 500;
-      font-size: 14px;
-      line-height: 1.2;
-      color: var(--main-bg-cl);
-      background: var(--library-btn-cl);
-      box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
-      cursor: pointer;
-      padding: 11px 33px 12px 35px;
-
-      @include mq(tablet) {
-        padding: 11px 11px 12px 10px;
-      }
-
-      @include mq(desktop) {
-        padding: 11px 35px 12px 36px;
-      }
+    &:nth-child(4) {
+      text-align: end;
+      width: 75px;
     }
   }
 }
 
-.reading {
-  &Item {
-    padding: 20px 30px 28px 20px;
-    height: 100%;
-    background-color: var(--main-bg-cl);
-    margin-bottom: 8px;
-    box-shadow: 0px 2px 3px rgba(9, 30, 63, 0.1);
-    display: flex;
-    cursor: pointer;
+.readingBookIcon {
+  position: absolute;
+  top: 22px;
+  left: 20px;
+  height: 17px;
+  max-width: 22px;
 
-    @include mq(mobile) {
-      justify-content: center;
+  @include mq(mobile) {
+    left: 30px;
+  }
+
+  @include mq(tablet) {
+    left: 20px;
+  }
+}
+
+.readingBookItemTitle {
+  font-family: "Montserrat";
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.25;
+  color: var(--main-text-cl);
+
+  @include mq(tablet) {
+    font-size: 14px;
+    line-height: 1.21;
+  }
+}
+
+.readingBookItemCategory {
+  display: block;
+  width: 70px;
+
+  font-family: "Montserrat";
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.25;
+  color: var(--secondary-text-cl);
+
+  @include mq(tablet) {
+    width: unset;
+    display: none;
+  }
+}
+
+.readingBookItemText {
+  font-family: "Montserrat";
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.25;
+
+  @include mq(tablet) {
+    font-size: 14px;
+    line-height: 1.21;
+  }
+}
+
+// =========== Going to read ============= //
+
+.goingToReadList {
+  display: flex;
+  flex-direction: column;
+
+  @include mq(tablet) {
+    max-height: 350px;
+    overflow-x: hidden;
+  }
+}
+
+.goingToReadItem {
+  position: relative;
+  padding: 20px 20px 28px 54px;
+  height: 100%;
+  background-color: var(--main-bg-cl);
+  box-shadow: 0px 2px 3px rgba(9, 30, 63, 0.1);
+
+  &:not(:last-child) {
+    margin-bottom: 8px;
+  }
+
+  @include mq(mobile) {
+    padding: 20px 20px 28px 80px;
+  }
+
+  @include mq(tablet) {
+    justify-content: start;
+    padding: 11px 20px 11px 60px;
+    min-height: 62px;
+  }
+
+  @include mq(desktop) {
+    padding: 22px 77px 22px 60px;
+  }
+}
+
+.goingToReadBookList {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+  @include mq(tablet) {
+    align-items: center;
+    flex-direction: row;
+    min-height: 40px;
+  }
+
+  @include mq(desktop) {
+    min-height: 20px;
+  }
+}
+
+.goingToReadBookItem {
+  display: flex;
+  align-items: flex-start;
+
+  &:not(:last-child) {
+    margin-bottom: 14px;
+  }
+
+  @include mq(tablet) {
+    display: block;
+    font-size: 14px;
+    line-height: 1.2;
+
+    &:not(:last-child) {
+      margin-bottom: unset;
     }
 
-    @include mq(tablet) {
-      justify-content: start;
-      padding: 0px 20px;
-      height: 62px;
+    &:nth-child(1) {
+      width: 300px;
+
+      padding-right: 10px;
+    }
+
+    &:nth-child(2) {
+      width: 225px;
+
+      padding-right: 10px;
+    }
+
+    &:nth-child(3) {
+      width: 40px;
+    }
+
+    &:nth-child(4) {
+      text-align: end;
+      width: 50px;
     }
   }
 
-  &Book {
-    &List {
-      display: flex;
-      flex-direction: column;
-
-      @include mq(tablet) {
-        align-items: center;
-        flex-direction: row;
-      }
+  @include mq(desktop) {
+    &:nth-child(1) {
+      width: 540px;
+      padding-right: 10px;
     }
 
-    &Item {
-      font-family: "Montserrat";
-      font-weight: 500;
-      font-size: 12px;
-      line-height: 1.25;
-      color: var(--main-text-cl);
-      word-wrap: break-word;
+    &:nth-child(2) {
+      width: 390px;
 
-      @include mq(tablet) {
-        font-size: 14px;
-        line-height: 1.2;
-        margin-bottom: 0px;
-        width: 193px;
-      }
-
-      &Author {
-        color: var(--main-text-cl);
-        width: 120px;
-        word-wrap: break-word;
-
-        @include mq(mobile) {
-          width: 280px;
-        }
-
-        @include mq(tablet) {
-          width: 168px;
-          word-wrap: normal;
-          text-overflow: ellipsis;
-          overflow: hidden;
-          white-space: nowrap;
-        }
-
-        @include mq(desktop) {
-          width: 233px;
-        }
-      }
-
-      & span {
-        font-family: "Montserrat";
-        font-weight: 500;
-        font-size: 12px;
-        line-height: 1.25;
-        color: var(--secondary-text-cl);
-        margin-left: 34px;
-
-        @include mq(tablet) {
-          display: none;
-        }
-      }
-
-      &:nth-child(1) {
-        display: flex;
-        margin-bottom: 12px;
-        align-items: center;
-
-        @include mq(tablet) {
-          margin-bottom: 0px;
-          width: 316px;
-        }
-
-        @include mq(desktop) {
-          width: 509px;
-        }
-
-        & p {
-          width: 200px;
-          word-wrap: break-word;
-
-          @include mq(mobile) {
-            width: 350px;
-          }
-
-          @include mq(tablet) {
-            word-wrap: normal;
-            text-overflow: ellipsis;
-            overflow: hidden;
-            max-height: 34px;
-            white-space: nowrap;
-          }
-        }
-      }
-
-      &:nth-child(2) {
-        margin-bottom: 14px;
-
-        & span {
-          margin-right: 35px;
-        }
-
-        display: flex;
-
-        @include mq(tablet) {
-          display: block;
-          margin-bottom: 0px;
-          width: 206px;
-          margin-left: 32px;
-        }
-
-        @include mq(desktop) {
-          width: 381px;
-          margin-left: 111px;
-        }
-      }
-
-      &:nth-child(3) {
-        margin-bottom: 14px;
-
-        & span {
-          margin-right: 51px;
-        }
-
-        @include mq(tablet) {
-          margin-bottom: 0px;
-          width: 84px;
-        }
-
-        @include mq(desktop) {
-          width: 124px;
-        }
-      }
-
-      &:nth-child(4) {
-        & span {
-          margin-right: 40px;
-        }
-
-        @include mq(tablet) {
-          margin-bottom: 0px;
-        }
-      }
+      padding-right: 10px;
     }
 
-    &Icon {
-      margin-right: 12px;
-      height: 17px;
-      max-width: 22px;
+    &:nth-child(3) {
+      width: 80px;
     }
+
+    &:nth-child(4) {
+      text-align: end;
+      width: 75px;
+    }
+  }
+}
+
+.goingToReadBookIcon {
+  position: absolute;
+  top: 22px;
+  left: 20px;
+  height: 17px;
+  max-width: 22px;
+
+  @include mq(mobile) {
+    left: 30px;
+  }
+
+  @include mq(tablet) {
+    left: 20px;
+  }
+}
+
+.goingToReadBookTitle {
+  font-family: "Montserrat";
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.25;
+  color: var(--main-text-cl);
+
+  @include mq(tablet) {
+    font-size: 14px;
+    line-height: 1.21;
+  }
+}
+
+.goingToReadBookItemCategory {
+  display: block;
+  width: 70px;
+
+  font-family: "Montserrat";
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.25;
+  color: var(--secondary-text-cl);
+
+  @include mq(tablet) {
+    display: none;
+  }
+}
+
+.goingToReadBookItemText {
+  font-family: "Montserrat";
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.25;
+
+  @include mq(tablet) {
+    font-size: 14px;
+    line-height: 1.21;
   }
 }
 
@@ -422,48 +603,12 @@
   line-height: 1.25;
   background-color: var(--btn-cl);
   color: var(--main-bg-cl);
-  margin-bottom: 40px;
-  margin-top: 20px;
+  margin: 28px auto 0 auto;
+
   padding: 11px 38px 11px 38px;
 
   @include mq(tablet) {
     padding: 10px 53px 10px 52px;
-    margin-top: 32px;
-  }
-
-  &Wrapper {
-    display: flex;
-    justify-content: center;
-
-    @include mq(desktop) {
-      display: none;
-    }
-  }
-}
-
-@keyframes spinner {
-  0% {
-    transform: rotate(0deg);
-  }
-
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
-.loading {
-  &Wrapper {
-    margin-top: 100px;
-    display: flex;
-    justify-content: center;
-  }
-
-  &Spinner {
-    width: 150px;
-    height: 150px;
-    border: 10px solid #f3f3f3;
-    border-top: 10px solid #383636;
-    border-radius: 50%;
-    animation: spinner 1.5s linear infinite;
+    margin-top: 40px;
   }
 }

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 import { isAuth } from "redux/auth";
 import { useBooksQuery } from "redux/api/bookAPI";
@@ -12,6 +12,7 @@ import Loader from "components/Loader";
 import TitleRead from "./TitleRead/TitleRead";
 import TitleReading from "./TitleReading/TitleReading";
 import Rating from "components/Rating";
+import Button from "components/Button";
 
 import spriteSvg from "assets/images/sprite.svg";
 import s from "./BookListLibrary.module.scss";
@@ -24,6 +25,10 @@ export default function BookListLibrary() {
   const auth = useSelector(isAuth);
   const { data = [], isFetching } = useBooksQuery(null, { skip: !auth });
   const { t } = useTranslation("BookListLibrary");
+  const navigate = useNavigate();
+
+  if (isFetching) return <Loader />;
+
   const status = (e) => {
     const status = data.some((item) => item.status === e);
     return status;
@@ -39,12 +44,12 @@ export default function BookListLibrary() {
   };
   if (isFetching) return <Loader />;
   return (
-    <>
+    <section className={s.librarySection}>
       {status("read") && (
         <div className={s.booksWrapper}>
           <h2 className={s.booksTitle}>{t.read}</h2>
           <TitleRead />
-          <ul>
+          <ul className={s.readList}>
             {data.map(
               (item) =>
                 item.status === "read" && (
@@ -58,29 +63,39 @@ export default function BookListLibrary() {
                         <svg className={s.readBookIcon}>
                           <use href={`${spriteSvg}#icon-read`} />
                         </svg>
-                        <p>{item.title}</p>
+                        <p className={s.readBookItemTitle}>{item.title}</p>
                       </li>
                       <li className={s.readBookItem}>
-                        <span>{t.author}:</span>
-                        <p className={s.readBookItemAuthor}>{item.author}</p>
+                        <span className={s.readBookItemCategory}>
+                          {t.author}:
+                        </span>
+                        <p className={s.readBookItemText}>{item.author}</p>
                       </li>
                       <li className={s.readBookItem}>
-                        <span>{t.year}:</span>
-                        {item.year}
+                        <span className={s.readBookItemCategory}>
+                          {t.year}:
+                        </span>
+                        <p className={s.readBookItemText}>{item.year}</p>
                       </li>
                       <li className={s.readBookItem}>
-                        <span>{t.pages}:</span>
-                        {item.pages}
+                        <span className={s.readBookItemCategory}>
+                          {t.pages}:
+                        </span>
+                        <p className={s.readBookItemText}>{item.pages}</p>
                       </li>
                       <li className={s.readBookItem}>
-                        <span>{t.rating}:</span>
+                        <span className={s.readBookItemCategory}>
+                          {t.rating}:
+                        </span>
                         <Rating mark={item.rating} />
                       </li>
-                      <li
-                        className={s.readBookButton}
-                        onClick={(event) => onResumeClick(event, item)}
-                      >
-                        {t.resume}
+                      <li>
+                        <Button
+                          onClick={(event) => onResumeClick(event, item)}
+                          className={s.readBookButton}
+                          styleType="secondary"
+                          text={t.resume}
+                        />
                       </li>
                     </ul>
                   </li>
@@ -108,19 +123,29 @@ export default function BookListLibrary() {
                         <svg className={s.readingBookIcon}>
                           <use href={`${spriteSvg}#icon-reading`} />
                         </svg>
-                        <p>{item.title}</p>
+                        <p className={s.readingBookItemTitle}>{item.title}</p>
                       </li>
                       <li className={s.readingBookItem}>
-                        <span>{t.author}:</span>
-                        <p className={s.readingBookItemAuthor}>{item.author}</p>
+                        <span className={s.readingBookItemCategory}>
+                          {t.author}:
+                        </span>
+                        <p className={s.readingBookItemText}>{item.author}</p>
                       </li>
                       <li className={s.readingBookItem}>
-                        <span>{t.year}:</span>
-                        {item.year}
+                        <span className={s.readingBookItemCategory}>
+                          {t.year}:
+                        </span>
+                        <span className={s.readingBookItemText}>
+                          {item.year}
+                        </span>
                       </li>
                       <li className={s.readingBookItem}>
-                        <span>{t.pages}:</span>
-                        {item.pages}
+                        <span className={s.readingBookItemCategory}>
+                          {t.pages}:
+                        </span>
+                        <span className={s.readingBookItemText}>
+                          {item.pages}
+                        </span>
                       </li>
                     </ul>
                   </li>
@@ -133,33 +158,45 @@ export default function BookListLibrary() {
         <div className={s.booksWrapper}>
           <h2 className={s.booksTitle}>{t.going}</h2>
           <TitleReading />
-          <ul className={s.goingList}>
+          <ul className={s.goingToReadList}>
             {data.map(
               (item) =>
                 item.status === "goingToRead" && (
                   <li
                     key={item._id}
-                    className={s.readingItem}
+                    className={s.goingToReadItem}
                     onClick={() => onEditBookClick(item)}
                   >
-                    <ul className={s.readingBookList}>
-                      <li className={s.readingBookItem}>
-                        <svg className={s.readingBookIcon}>
+                    <ul className={s.goingToReadBookList}>
+                      <li className={s.goingToReadBookItem}>
+                        <svg className={s.goingToReadBookIcon}>
                           <use href={`${spriteSvg}#icon-flat`} />
                         </svg>
-                        <p>{item.title}</p>
+                        <p className={s.goingToReadBookTitle}>{item.title}</p>
                       </li>
-                      <li className={s.readingBookItem}>
-                        <span>{t.author}:</span>
-                        <p className={s.readingBookItemAuthor}>{item.author}</p>
+                      <li className={s.goingToReadBookItem}>
+                        <span className={s.goingToReadBookItemCategory}>
+                          {t.author}:
+                        </span>
+                        <p className={s.goingToReadBookItemText}>
+                          {item.author}
+                        </p>
                       </li>
-                      <li className={s.readingBookItem}>
-                        <span>{t.year}:</span>
-                        {item.year}
+                      <li className={s.goingToReadBookItem}>
+                        <span className={s.goingToReadBookItemCategory}>
+                          {t.year}:
+                        </span>
+                        <span className={s.goingToReadBookItemText}>
+                          {item.year}
+                        </span>
                       </li>
-                      <li className={s.readingBookItem}>
-                        <span>{t.pages}:</span>
-                        {item.pages}
+                      <li className={s.goingToReadBookItem}>
+                        <span className={s.goingToReadBookItemCategory}>
+                          {t.pages}:
+                        </span>
+                        <span className={s.goingToReadBookItemText}>
+                          {item.pages}
+                        </span>
                       </li>
                     </ul>
                   </li>
@@ -183,12 +220,12 @@ export default function BookListLibrary() {
         </>
       )}
       {data.length > 0 && (
-        <div className={s.linkWrapper}>
-          <NavLink className={s.link} to="/training">
-            {t.training}
-          </NavLink>
-        </div>
+        <Button
+          className={s.link}
+          text={t.training}
+          onClick={() => navigate("/training")}
+        />
       )}
-    </>
+    </section>
   );
 }

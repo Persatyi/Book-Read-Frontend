@@ -4,6 +4,8 @@ import PropTypes from "prop-types";
 
 import { useAddBookMutation, useEditBookMutation } from "redux/api/bookAPI";
 
+import Button from "components/Button";
+
 import addBookSchema from "assets/schemas/addBookSchema";
 import useRefreshToken from "hooks/useRefreshToken";
 import useTranslation from "hooks/useTranslation";
@@ -107,9 +109,13 @@ export default function AddBook({ book }) {
               className={s.form__error}
             />
           </label>
-          <button type="submit" disabled={!isValid} className={s.form__button}>
-            {book ? t.edit : t.add}
-          </button>
+          <Button
+            type="submit"
+            disabled={!isValid}
+            className={s.form__button}
+            text={book ? t.edit : t.add}
+            styleType="secondary"
+          />
         </Form>
       )}
     </Formik>
