@@ -5,6 +5,7 @@ import { useAddBookMutation } from "redux/api/bookAPI";
 import addBookSchema from "assets/schemas/addBookSchema";
 import useRefreshToken from "hooks/useRefreshToken";
 import useTranslation from "hooks/useTranslation";
+import Button from "components/Button";
 
 export default function AddBook() {
   const [addBook] = useAddBookMutation();
@@ -94,9 +95,13 @@ export default function AddBook() {
               className={s.form__error}
             />
           </label>
-          <button type="submit" disabled={!isValid} className={s.form__button}>
-            {t.add}
-          </button>
+          <Button
+            type="submit"
+            disabled={!isValid}
+            className={s.form__button}
+            text={t.add}
+            styleType="secondary"
+          />
         </Form>
       )}
     </Formik>
