@@ -20,9 +20,9 @@ import s from "./BookListLibrary.module.scss";
 
 export default function BookListLibrary() {
   const [book, setBook] = useState("");
-  const [removeModal, setRemoveModal] = useState(false);
   const [id, setId] = useState("");
   const [openModal, toggleModal] = useToggle();
+  const [removeModal, setRemoveModal] = useToggle();
   const auth = useSelector(isAuth);
   const { data = [], isFetching } = useBooksQuery(null, { skip: !auth });
   const [deleteBook] = useDeleteBookMutation();
