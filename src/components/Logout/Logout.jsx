@@ -49,11 +49,13 @@ const Logout = () => {
       >
         {t.text}
       </button>
-      <ModalLogout
-        open={openModal}
-        onClose={toggleModal}
-        logoutFunc={logoutFunc}
-      />
+      {openModal && (
+        <ModalLogout
+          open={openModal}
+          onClose={toggleModal}
+          logoutFunc={logoutFunc}
+        />
+      )}
     </>
   );
 };

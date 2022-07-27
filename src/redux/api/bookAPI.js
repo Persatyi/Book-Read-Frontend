@@ -70,6 +70,13 @@ export const bookApi = createApi({
       }),
       invalidatesTags: ["Books"],
     }),
+    editBook: build.mutation({
+      query: ({ id, ...data }) => ({
+        url: `/books/${id}`,
+        method: "PUT",
+        body: data,
+      }),
+    }),
     deleteBook: build.mutation({
       query: (id) => ({
         url: `/books/${id}`,
@@ -94,5 +101,6 @@ export const {
   useAddTrainingMutation,
   useAddBookMutation,
   useAddReviewMutation,
+  useEditBookMutation,
   useDeleteBookMutation,
 } = bookApi;

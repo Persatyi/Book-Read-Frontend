@@ -17,11 +17,12 @@ import Button from "components/Button";
 
 import spriteSvg from "assets/images/sprite.svg";
 import s from "./BookListLibrary.module.scss";
+import ModalBookEdit from "components/Modals/ModalBookEdit";
 
 export default function BookListLibrary() {
-  const [book, setBook] = useState("");
-  const [id, setId] = useState("");
-  const [openModal, toggleModal] = useToggle();
+  const [book, setBook] = useState(null);
+  const [openReviewModal, toggleReviewModal] = useToggle();
+  const [openEditModal, toggleEditModal] = useToggle();
   const [removeModal, setRemoveModal] = useToggle();
   const auth = useSelector(isAuth);
   const { data = [], isFetching } = useBooksQuery(null, { skip: !auth });
@@ -35,6 +36,16 @@ export default function BookListLibrary() {
     const status = data.some((item) => item.status === e);
     return status;
   };
+  const onEditBookClick = (clickedBook) => {
+    setBook(clickedBook);
+    toggleEditModal();
+  };
+  const onResumeClick = (event, clickedBook) => {
+    event.stopPropagation();
+    setBook(clickedBook);
+    toggleReviewModal();
+  };
+  if (isFetching) return <Loader />;
   return (
     <section className={s.librarySection}>
       {status("read") && (
@@ -45,7 +56,11 @@ export default function BookListLibrary() {
             {data.map(
               (item) =>
                 item.status === "read" && (
-                  <li key={item._id} className={s.readItem}>
+                  <li
+                    key={item._id}
+                    className={s.readItem}
+                    onClick={() => onEditBookClick(item)}
+                  >
                     <ul className={s.readBookList}>
                       <li className={s.readBookItem}>
                         <svg className={s.readBookIcon}>
@@ -79,10 +94,7 @@ export default function BookListLibrary() {
                       </li>
                       <li>
                         <Button
-                          onClick={() => {
-                            setBook(item);
-                            toggleModal();
-                          }}
+                          onClick={(event) => onResumeClick(event, item)}
                           className={s.readBookButton}
                           styleType="secondary"
                           text={t.resume}
@@ -104,7 +116,11 @@ export default function BookListLibrary() {
             {data.map(
               (item) =>
                 item.status === "reading" && (
-                  <li key={item._id} className={s.readingItem}>
+                  <li
+                    key={item._id}
+                    className={s.readingItem}
+                    onClick={() => onEditBookClick(item)}
+                  >
                     <ul className={s.readingBookList}>
                       <li className={s.readingBookItem}>
                         <svg className={s.readingBookIcon}>
@@ -149,7 +165,11 @@ export default function BookListLibrary() {
             {data.map(
               (item) =>
                 item.status === "goingToRead" && (
-                  <li key={item._id} className={s.goingToReadItem}>
+                  <li
+                    key={item._id}
+                    className={s.goingToReadItem}
+                    onClick={() => onEditBookClick(item)}
+                  >
                     <ul className={s.goingToReadBookList}>
                       <li className={s.goingToReadBookItem}>
                         <svg className={s.goingToReadBookIcon}>
@@ -186,7 +206,7 @@ export default function BookListLibrary() {
                       className={s.deleteIcon}
                       onClick={(e) => {
                         e.stopPropagation();
-                        setId(item._id);
+                        setBook(item);
                         setRemoveModal(true);
                       }}
                     >
@@ -206,7 +226,7 @@ export default function BookListLibrary() {
           }}
           continueFunc={async () => {
             try {
-              await deleteBook(id).unwrap();
+              await deleteBook(book._id);
               toast.success(t.success);
             } catch (error) {
               toast.error(t.error);
@@ -215,7 +235,22 @@ export default function BookListLibrary() {
         />
       )}
       {book && (
-        <ModalBookReview book={book} open={openModal} onClose={toggleModal} />
+        <>
+          {openReviewModal && (
+            <ModalBookReview
+              book={book}
+              open={openReviewModal}
+              onClose={toggleReviewModal}
+            />
+          )}
+          {openEditModal && (
+            <ModalBookEdit
+              book={book}
+              open={openEditModal}
+              onClose={toggleEditModal}
+            />
+          )}
+        </>
       )}
       {data.length > 0 && (
         <Button

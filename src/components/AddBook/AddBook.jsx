@@ -1,44 +1,65 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { toast } from "react-toastify";
-import s from "./AddBook.module.scss";
-import { useAddBookMutation } from "redux/api/bookAPI";
+import PropTypes from "prop-types";
+
+import { useAddBookMutation, useEditBookMutation } from "redux/api/bookAPI";
+
+import Button from "components/Button";
+
 import addBookSchema from "assets/schemas/addBookSchema";
 import useRefreshToken from "hooks/useRefreshToken";
 import useTranslation from "hooks/useTranslation";
-import Button from "components/Button";
+import s from "./AddBook.module.scss";
 
-export default function AddBook() {
+export default function AddBook({ book, closeModal }) {
   const [addBook] = useAddBookMutation();
+  const [editBook] = useEditBookMutation();
   const checkRefreshToken = useRefreshToken();
   const { t: translation } = useTranslation();
   const t = translation["AddBook"];
+
+  const initialValues = {
+    title: book ? book.title : "",
+    author: book ? book.author : "",
+    year: book ? book.year : "",
+    pages: book ? book.pages : "",
+  };
+
+  const onSubmit = async (values, actions) => {
+    const mutation = book ? editBook : addBook;
+    const successMessage = book ? t.editSuccess : t.success;
+    const data = book ? { ...values, id: book._id } : values;
+
+    await checkRefreshToken();
+    await mutation(data);
+    toast.success(successMessage);
+    actions.resetForm();
+  };
+
   return (
     <Formik
-      initialValues={{
-        title: "",
-        author: "",
-        year: "",
-        pages: "",
-      }}
+      initialValues={initialValues}
       validationSchema={addBookSchema(translation["AddBookSchema"])}
       validateOnBlur
-      onSubmit={async (values, actions) => {
-        await checkRefreshToken();
-        await addBook(values);
-        toast.success(t.success);
-        actions.resetForm();
-      }}
+      onSubmit={onSubmit}
     >
       {({ isValid }) => (
-        <Form className={s.form}>
-          <label htmlFor="title" className={s.form__label}>
+        <Form className={book ? s.formEdit : s.form}>
+          <label
+            htmlFor="title"
+            className={book ? s.form__label_edit : s.form__label}
+          >
             {t.title}
             <Field
               id="title"
               autoComplete="off"
               type="text"
               name="title"
-              className={`${s.form__input} ${s.form__input_title}`}
+              className={
+                book
+                  ? s.form__input_edit
+                  : `${s.form__input} ${s.form__input_title}`
+              }
               placeholder="..."
             />
             <ErrorMessage
@@ -47,14 +68,21 @@ export default function AddBook() {
               className={`${s.form__error} ${s.form__error_title}`}
             />
           </label>
-          <label htmlFor="author" className={s.form__label}>
+          <label
+            htmlFor="author"
+            className={book ? s.form__label_edit : s.form__label}
+          >
             {t.author}
             <Field
               id="author"
               autoComplete="off"
               type="text"
               name="author"
-              className={`${s.form__input} ${s.form__input_author}`}
+              className={
+                book
+                  ? s.form__input_edit
+                  : `${s.form__input} ${s.form__input_author}`
+              }
               placeholder="..."
             />
             <ErrorMessage
@@ -63,14 +91,21 @@ export default function AddBook() {
               className={s.form__error}
             />
           </label>
-          <label htmlFor="year" className={s.form__label}>
+          <label
+            htmlFor="year"
+            className={book ? s.form__label_edit : s.form__label}
+          >
             {t.date}
             <Field
               id="year"
               autoComplete="off"
               type="number"
               name="year"
-              className={`${s.form__input} ${s.form__input_year}`}
+              className={
+                book
+                  ? s.form__input_edit
+                  : `${s.form__input} ${s.form__input_year}`
+              }
               placeholder="..."
             />
             <ErrorMessage
@@ -79,14 +114,21 @@ export default function AddBook() {
               className={s.form__error}
             />
           </label>
-          <label htmlFor="pages" className={s.form__label}>
+          <label
+            htmlFor="pages"
+            className={book ? s.form__label_edit : s.form__label}
+          >
             {t.pages}
             <Field
               id="pages"
               autoComplete="off"
               type="number"
               name="pages"
-              className={`${s.form__input} ${s.form__input_pages}`}
+              className={
+                book
+                  ? s.form__input_edit
+                  : `${s.form__input} ${s.form__input_pages}`
+              }
               placeholder="..."
             />
             <ErrorMessage
@@ -95,15 +137,36 @@ export default function AddBook() {
               className={s.form__error}
             />
           </label>
-          <Button
-            type="submit"
-            disabled={!isValid}
-            className={s.form__button}
-            text={t.add}
-            styleType="secondary"
-          />
+          <div className={s.buttonWrapper}>
+            <Button
+              type="submit"
+              disabled={!isValid}
+              className={book ? s.form__button_edit : s.form__button}
+              text={book ? t.edit : t.add}
+              styleType={book ? "main" : "secondary"}
+            />
+            {book && (
+              <Button
+                onClick={closeModal}
+                styleType="secondary"
+                text={t.cancel}
+                className={s.cancel}
+              />
+            )}
+          </div>
         </Form>
       )}
     </Formik>
   );
 }
+AddBook.propTypes = {
+  book: PropTypes.shape({
+    _id: PropTypes.string,
+    title: PropTypes.string,
+    author: PropTypes.string,
+    year: PropTypes.number,
+    pages: PropTypes.number,
+    status: PropTypes.string,
+  }),
+  closeModal: PropTypes.func,
+};

@@ -49,7 +49,10 @@
     "date": "Publication date",
     "pages": "Amount of pages",
     "success": "Book added",
-    "add": "Add"
+    "editSuccess": "Book edited",
+    "add": "Add",
+    "edit": "Ok",
+    "cancel": "Cancel"
   },
   "AddPages": {
     "button": "Add result",

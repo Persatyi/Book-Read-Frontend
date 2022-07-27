@@ -1,7 +1,9 @@
 @import "stylesheet/_mixin.scss";
-.wrapper{
+
+.wrapper {
   min-width: 105px;
 }
+
 .btn {
   background-color: transparent;
   border: none;
@@ -9,7 +11,7 @@
 
 .noClick {
   composes: btn;
-  cursor: default;
+  pointer-events: none;
 }
 
 .star {

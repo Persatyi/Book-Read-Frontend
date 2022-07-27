@@ -12,7 +12,7 @@ import useTranslation from "hooks/useTranslation";
 
 const ModalBookReview = ({ book, open, onClose }) => {
   const { rating, resume } = book;
-  const init = { rating, resume };
+  const init = { rating, resume: resume ?? "" };
   const [addReview] = useAddReviewMutation();
   const { t } = useTranslation("ModalBookReview");
 
@@ -24,7 +24,7 @@ const ModalBookReview = ({ book, open, onClose }) => {
   const handleSubmit = async ({ rating, resume }) => {
     try {
       const id = book._id;
-      await addReview({ id, rating, resume: resume.trim() || " " });
+      await addReview({ id, rating, resume: resume?.trim() || " " });
       onClose();
     } catch (error) {
       switch (error.status) {
