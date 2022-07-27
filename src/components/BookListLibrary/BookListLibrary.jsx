@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 import { isAuth } from "redux/auth";
 import { useBooksQuery } from "redux/api/bookAPI";
@@ -23,16 +23,16 @@ export default function BookListLibrary() {
   const auth = useSelector(isAuth);
   const { data = [], isFetching } = useBooksQuery(null, { skip: !auth });
   const { t } = useTranslation("BookListLibrary");
+  const navigate = useNavigate();
+
   if (isFetching) return <Loader />;
-  // <div className={s.loadingWrapper}>
-  //   <div className={s.loadingSpinner} />
-  // </div>
+
   const status = (e) => {
     const status = data.some((item) => item.status === e);
     return status;
   };
   return (
-    <>
+    <section className={s.librarySection}>
       {status("read") && (
         <div className={s.booksWrapper}>
           <h2 className={s.booksTitle}>{t.read}</h2>
@@ -188,12 +188,12 @@ export default function BookListLibrary() {
         <ModalBookReview book={book} open={openModal} onClose={toggleModal} />
       )}
       {data.length > 0 && (
-        <div className={s.linkWrapper}>
-          <NavLink className={s.link} to="/training">
-            {t.training}
-          </NavLink>
-        </div>
+        <Button
+          className={s.link}
+          text={t.training}
+          onClick={() => navigate("/training")}
+        />
       )}
-    </>
+    </section>
   );
 }

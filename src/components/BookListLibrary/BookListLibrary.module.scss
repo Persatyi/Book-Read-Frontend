@@ -1,10 +1,32 @@
 @import "stylesheet/mixin.scss";
 
+.librarySection {
+  padding-bottom: 20px;
+
+  @include mq(tablet) {
+    padding-bottom: 40px;
+  }
+
+  @include mq(desktop) {
+    padding-top: 40px;
+  }
+}
+
 .booksWrapper {
   padding-top: 20px;
 
   @include mq(tablet) {
-    padding-top: 40px;
+    padding-top: 0px;
+
+    &:not(:first-child) {
+      padding-top: 40px;
+    }
+  }
+
+  @include mq(desktop) {
+    &:not(:first-child) {
+      padding-top: 32px;
+    }
   }
 }
 
@@ -51,6 +73,11 @@
     padding: 11px 20px 11px 60px;
     min-height: 62px;
   }
+
+  @include mq(desktop) {
+    padding: 11px 80px 11px 60px;
+    min-height: 62px;
+  }
 }
 
 .readBookList {
@@ -78,7 +105,7 @@
   }
 
   @include mq(tablet) {
-    // display: block;
+    display: block;
     font-size: 14px;
     line-height: 1.2;
     margin-bottom: 0;
@@ -96,14 +123,48 @@
     }
 
     &:nth-child(3) {
-      width: 70px;
+      width: 60px;
       margin-bottom: 0;
-      padding-right: 10px;
+    }
+
+    &:nth-child(4) {
+      width: 50px;
     }
 
     &:nth-child(5) {
       margin-left: auto;
       margin-right: 32px;
+      margin-bottom: 0;
+    }
+  }
+
+  @include mq(desktop) {
+    margin-bottom: 0;
+
+    &:nth-child(1) {
+      width: 280px;
+      margin-bottom: 0;
+      padding-right: 10px;
+    }
+
+    &:nth-child(2) {
+      width: 260px;
+      margin-bottom: 0;
+      padding-right: 10px;
+    }
+
+    &:nth-child(3) {
+      width: 100px;
+      margin-bottom: 0;
+    }
+
+    &:nth-child(4) {
+      width: 50px;
+    }
+
+    &:nth-child(5) {
+      margin-left: auto;
+      margin-right: 60px;
       margin-bottom: 0;
     }
   }
@@ -222,6 +283,10 @@
     padding: 11px 20px 11px 60px;
     min-height: 62px;
   }
+
+  @include mq(desktop) {
+    padding: 22px 77px 22px 60px;
+  }
 }
 
 .readingBookList {
@@ -231,6 +296,12 @@
 
   @include mq(tablet) {
     flex-direction: row;
+    align-items: center;
+    min-height: 40px;
+  }
+
+  @include mq(desktop) {
+    min-height: 20px;
   }
 }
 
@@ -246,24 +317,52 @@
     display: block;
     font-size: 14px;
     line-height: 1.2;
-    margin-bottom: 0;
+
+    &:not(:last-child) {
+      margin-bottom: unset;
+    }
 
     &:nth-child(1) {
       width: 300px;
-      margin-bottom: 0;
+
       padding-right: 10px;
     }
 
     &:nth-child(2) {
       width: 225px;
-      margin-bottom: 0;
+
       padding-right: 10px;
     }
 
     &:nth-child(3) {
-      width: 60px;
-      margin-bottom: 0;
+      width: 40px;
+    }
+
+    &:nth-child(4) {
+      text-align: end;
+      width: 50px;
+    }
+  }
+
+  @include mq(desktop) {
+    &:nth-child(1) {
+      width: 540px;
       padding-right: 10px;
+    }
+
+    &:nth-child(2) {
+      width: 390px;
+
+      padding-right: 10px;
+    }
+
+    &:nth-child(3) {
+      width: 80px;
+    }
+
+    &:nth-child(4) {
+      text-align: end;
+      width: 75px;
     }
   }
 }
@@ -284,7 +383,6 @@
   }
 }
 
-//
 .readingBookItemTitle {
   font-family: "Montserrat";
   font-weight: 500;
@@ -333,8 +431,8 @@
   flex-direction: column;
 
   @include mq(tablet) {
-    align-items: center;
-    flex-direction: row;
+    max-height: 350px;
+    overflow-x: hidden;
   }
 }
 
@@ -352,10 +450,15 @@
   @include mq(mobile) {
     padding: 20px 20px 28px 80px;
   }
+
   @include mq(tablet) {
     justify-content: start;
-    padding: 0px 20px;
-    height: 62px;
+    padding: 11px 20px 11px 60px;
+    min-height: 62px;
+  }
+
+  @include mq(desktop) {
+    padding: 22px 77px 22px 60px;
   }
 }
 
@@ -367,6 +470,11 @@
   @include mq(tablet) {
     align-items: center;
     flex-direction: row;
+    min-height: 40px;
+  }
+
+  @include mq(desktop) {
+    min-height: 20px;
   }
 }
 
@@ -379,10 +487,56 @@
   }
 
   @include mq(tablet) {
+    display: block;
     font-size: 14px;
     line-height: 1.2;
-    margin-bottom: 0px;
-    width: 193px;
+
+    &:not(:last-child) {
+      margin-bottom: unset;
+    }
+
+    &:nth-child(1) {
+      width: 300px;
+
+      padding-right: 10px;
+    }
+
+    &:nth-child(2) {
+      width: 225px;
+
+      padding-right: 10px;
+    }
+
+    &:nth-child(3) {
+      width: 40px;
+    }
+
+    &:nth-child(4) {
+      text-align: end;
+      width: 50px;
+    }
+  }
+
+  @include mq(desktop) {
+    &:nth-child(1) {
+      width: 540px;
+      padding-right: 10px;
+    }
+
+    &:nth-child(2) {
+      width: 390px;
+
+      padding-right: 10px;
+    }
+
+    &:nth-child(3) {
+      width: 80px;
+    }
+
+    &:nth-child(4) {
+      text-align: end;
+      width: 75px;
+    }
   }
 }
 
@@ -396,6 +550,10 @@
   @include mq(mobile) {
     left: 30px;
   }
+
+  @include mq(tablet) {
+    left: 20px;
+  }
 }
 
 .goingToReadBookTitle {
@@ -404,6 +562,11 @@
   font-size: 12px;
   line-height: 1.25;
   color: var(--main-text-cl);
+
+  @include mq(tablet) {
+    font-size: 14px;
+    line-height: 1.21;
+  }
 }
 
 .goingToReadBookItemCategory {
@@ -415,6 +578,10 @@
   font-size: 12px;
   line-height: 1.25;
   color: var(--secondary-text-cl);
+
+  @include mq(tablet) {
+    display: none;
+  }
 }
 
 .goingToReadBookItemText {
@@ -422,50 +589,26 @@
   font-weight: 500;
   font-size: 12px;
   line-height: 1.25;
+
+  @include mq(tablet) {
+    font-size: 14px;
+    line-height: 1.21;
+  }
 }
 
-// .link {
-//   font-family: "Montserrat";
-//   font-weight: 600;
-//   font-size: 16px;
-//   line-height: 1.25;
-//   background-color: var(--btn-cl);
-//   color: var(--main-bg-cl);
-//   margin-bottom: 40px;
-//   margin-top: 20px;
-//   padding: 11px 38px 11px 38px;
-//   @include mq(tablet) {
-//     padding: 10px 53px 10px 52px;
-//     margin-top: 32px;
-//   }
-//   &Wrapper {
-//     display: flex;
-//     justify-content: center;
-//     @include mq(desktop) {
-//       display: none;
-//     }
-//   }
-// }
-// @keyframes spinner {
-//   0% {
-//     transform: rotate(0deg);
-//   }
-//   100% {
-//     transform: rotate(360deg);
-//   }
-// }
-// .loading {
-//   &Wrapper {
-//     margin-top: 100px;
-//     display: flex;
-//     justify-content: center;
-//   }
-//   &Spinner {
-//     width: 150px;
-//     height: 150px;
-//     border: 10px solid #f3f3f3;
-//     border-top: 10px solid #383636;
-//     border-radius: 50%;
-//     animation: spinner 1.5s linear infinite;
-//   }
-// }
+.link {
+  font-family: "Montserrat";
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 1.25;
+  background-color: var(--btn-cl);
+  color: var(--main-bg-cl);
+  margin: 28px auto 0 auto;
+
+  padding: 11px 38px 11px 38px;
+
+  @include mq(tablet) {
+    padding: 10px 53px 10px 52px;
+    margin-top: 40px;
+  }
+}

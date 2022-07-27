@@ -17,7 +17,7 @@
         width: 360px;
       }
       @include mq(desktop) {
-        margin-right: 571px;
+        width: 600px;
       }
     }
     &:nth-child(2) {
@@ -25,7 +25,7 @@
         width: 220px;
       }
       @include mq(desktop) {
-        margin-right: 339px;
+        width: 390px;
       }
     }
     &:nth-child(3) {
@@ -33,7 +33,7 @@
         width: 60px;
       }
       @include mq(desktop) {
-        margin-right: 72px;
+        width: 110px;
       }
     }
   }
