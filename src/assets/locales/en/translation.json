@@ -107,7 +107,9 @@
     "resume": "Resume",
     "reading": "Reading now",
     "going": "Going to read",
-    "training": "My training"
+    "training": "My training",
+    "success": "Book was successfully removed",
+    "error": "Something went wrong, please try again"
   },
   "TitleRead": {
     "title": "Book title",
@@ -212,5 +214,10 @@
     "tillEnd": "Goals countdown",
     "button": "Start training",
     "addBook": "Add a book"
+  },
+  "ModalRemoveBook": {
+    "text": "Please confirm deletion",
+    "cancel": "Cancel",
+    "continue": "Continue"
   }
 }

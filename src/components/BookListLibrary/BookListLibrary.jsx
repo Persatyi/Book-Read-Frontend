@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 import { isAuth } from "redux/auth";
-import { useBooksQuery } from "redux/api/bookAPI";
+import { useBooksQuery, useDeleteBookMutation } from "redux/api/bookAPI";
 import { useToggle } from "hooks";
 import useTranslation from "hooks/useTranslation";
-import { ModalBookReview } from "components/Modals";
+import { ModalBookReview, ModalRemoveBook } from "components/Modals";
 
 import Loader from "components/Loader";
 import TitleRead from "./TitleRead/TitleRead";
@@ -22,8 +23,10 @@ export default function BookListLibrary() {
   const [book, setBook] = useState(null);
   const [openReviewModal, toggleReviewModal] = useToggle();
   const [openEditModal, toggleEditModal] = useToggle();
+  const [removeModal, setRemoveModal] = useToggle();
   const auth = useSelector(isAuth);
   const { data = [], isFetching } = useBooksQuery(null, { skip: !auth });
+  const [deleteBook] = useDeleteBookMutation();
   const { t } = useTranslation("BookListLibrary");
   const navigate = useNavigate();
 
@@ -199,11 +202,37 @@ export default function BookListLibrary() {
                         </span>
                       </li>
                     </ul>
+                    <svg
+                      className={s.deleteIcon}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setBook(item);
+                        setRemoveModal(true);
+                      }}
+                    >
+                      <use href={`${spriteSvg}#icon-delete`} />
+                    </svg>
                   </li>
                 )
             )}
           </ul>
         </div>
+      )}
+      {removeModal && (
+        <ModalRemoveBook
+          open={removeModal}
+          onClose={() => {
+            setRemoveModal(false);
+          }}
+          continueFunc={async () => {
+            try {
+              await deleteBook(book._id);
+              toast.success(t.success);
+            } catch (error) {
+              toast.error(t.error);
+            }
+          }}
+        />
       )}
       {book && (
         <>
