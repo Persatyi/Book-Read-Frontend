@@ -168,7 +168,7 @@
     background-color: transparent;
     outline-color: var(--primary-black-cl);
     padding: 12px 76px 12px 75px;
-    border: 1px solid transparent !important;
+    border: 1px solid var(--main-text-cl);
 
     @include mq(tablet) {
       margin-top: 40px;
