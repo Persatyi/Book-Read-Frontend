@@ -56,3 +56,15 @@
     }
   }
 }
+
+.backBtn {
+  color: var(--main-text-cl);
+  background-color: var(--primary-white-cl);
+  border-color: var(--main-text-cl);
+}
+
+.saveBtn {
+  color: var(--primary-white-cl);
+  background-color: var(--btn-cl);
+  border-color: transparent;
+}

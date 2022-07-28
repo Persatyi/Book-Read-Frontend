@@ -40,7 +40,14 @@
 
 .button {
   min-width: 98px;
+  color: var(--primary-white-cl);
+  background-color: var(--btn-cl);
+  border-color: transparent;
+
   &:first-child {
+    color: var(--main-text-cl);
+    background-color: var(--primary-white-cl);
+    border-color: var(--main-text-cl);
     margin-right: 20px;
     @include mq(tablet) {
       margin-right: 24px;

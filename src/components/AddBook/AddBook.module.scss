@@ -168,7 +168,7 @@
     background-color: var(--secondary-bg-cl);
     outline-color: var(--primary-black-cl);
     padding: 12px 76px 12px 75px;
-    border: 1px solid var(--main-text-cl);
+    border-color: var(--main-text-cl);
 
     @include mq(tablet) {
       margin-top: 40px;
@@ -181,6 +181,9 @@
 
     &_edit {
       composes: form__button;
+      background-color: var(--btn-cl);
+      color: var(--primary-white-cl);
+      border-color: transparent;
       margin: 0;
     }
   }
@@ -210,5 +213,6 @@ input:-webkit-autofill {
 }
 
 .cancel {
+  color: var(--main-text-cl);
   width: 173px;
 }

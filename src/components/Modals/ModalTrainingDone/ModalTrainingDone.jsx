@@ -24,8 +24,13 @@ const ModalTrainingDone = ({ open, onClose, onNew }) => {
           {t.can}
         </p>
         <div className={s.btnGroup}>
-          <Button text={t.training} onClick={onNew} />
-          <Button styleType={"transparent"} text={t.back} onClick={onClose} />
+          <Button className={s.newBtn} text={t.training} onClick={onNew} />
+          <Button
+            className={s.backBtn}
+            styleType={"secondary"}
+            text={t.back}
+            onClick={onClose}
+          />
         </div>
       </div>
     </ModalWrapper>
