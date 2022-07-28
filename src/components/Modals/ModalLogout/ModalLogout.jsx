@@ -17,7 +17,7 @@ const ModalLogout = ({ open, onClose, logoutFunc }) => {
           <Button
             className={s.button}
             type={"button"}
-            styleType="transparent"
+            styleType="secondary"
             text={t.cancel}
             onClick={onClose}
           />

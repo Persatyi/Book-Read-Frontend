@@ -73,11 +73,17 @@ const ModalBookReview = ({ book, open, onClose }) => {
             </div>
             <div className={s.btnGroup}>
               <Button
-                styleType={"transparent"}
+                styleType={"secondary"}
                 text={t.back}
                 onClick={onClose}
+                className={s.backBtn}
               />
-              <Button type="submit" disabled={!dirty} text={t.save} />
+              <Button
+                className={s.saveBtn}
+                type="submit"
+                disabled={!dirty}
+                text={t.save}
+              />
             </div>
           </Form>
         )}
