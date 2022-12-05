@@ -2,7 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
 // axios.defaults.baseURL = "http://localhost:4444/api";
-axios.defaults.baseURL = "https://persatyi-book-read-backend.herokuapp.com/api";
+axios.defaults.baseURL =
+  "https://book-read-backend-production.up.railway.app/api";
 
 const token = {
   set(token) {

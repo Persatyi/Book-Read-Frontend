@@ -1,5 +1,5 @@
 import { Rings } from "react-loader-spinner";
-import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
+// import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 
 import useTranslation from "hooks/useTranslation";
 import s from "./Loader.module.scss";
