@@ -2,8 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
 // axios.defaults.baseURL = "http://localhost:4444/api";
-axios.defaults.baseURL =
-  "https://book-read-backend-production.up.railway.app/api";
+axios.defaults.baseURL = "https://important-neckerchief-ant.cyclic.cloud/api";
 
 const token = {
   set(token) {
